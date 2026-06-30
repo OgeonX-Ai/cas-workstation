@@ -7,11 +7,11 @@ configured AI-native coding workstation.
 ## Commands
 
 ```powershell
-.\setup.ps1
-.\doctor.ps1
-.\start.ps1
-.\upgrade.ps1
-.\uninstall.ps1
+.\cas.ps1 setup
+.\cas.ps1 doctor
+.\cas.ps1 start
+.\cas.ps1 upgrade
+.\cas.ps1 uninstall
 ```
 
 ## What It Manages
@@ -20,6 +20,7 @@ configured AI-native coding workstation.
   Azure CLI, WSL
 - AI coder CLIs: Codex, Claude Code, Gemini CLI
 - Coding-Autopilot-System component repos
+- Loop-engineering repositories under `C:\PersonalRepo\portfolio\`
 - Shared runtime paths under `C:\Users\KimHarjamaki\.cas\`
 - Generated MCP client configuration fragments
 
@@ -33,7 +34,7 @@ configured AI-native coding workstation.
 ## Typical Flow
 
 ```powershell
-.\setup.ps1 -NonInteractive
-.\doctor.ps1
-.\start.ps1
+.\cas.ps1 setup -NonInteractive
+.\cas.ps1 doctor
+.\cas.ps1 start
 ```
