@@ -1,0 +1,18 @@
+{
+  "source_path": "/mnt/c/PersonalRepo/worktrees/loop-engineering/docs/support-matrix.md",
+  "type": "DOC",
+  "confidence": "high",
+  "manifest_override": true,
+  "title": "Support Matrix",
+  "summary": "Defines supported operating systems, required toolchain versions, and CAS component profiles for the workstation bundle.",
+  "scope": [
+    "operating system platforms",
+    "developer toolchain",
+    "CAS components",
+    "component profiles"
+  ],
+  "cross_refs": [],
+  "locked": false,
+  "precedence": 3,
+  "notes": ""
+}

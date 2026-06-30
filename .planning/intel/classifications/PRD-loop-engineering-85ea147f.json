@@ -1,0 +1,23 @@
+{
+  "source_path": "/mnt/c/PersonalRepo/worktrees/loop-engineering/docs/prd/PRD-loop-engineering.md",
+  "type": "PRD",
+  "confidence": "high",
+  "manifest_override": true,
+  "title": "Product Requirements: CAS Loop Engineering v1",
+  "summary": "Defines v1 requirements and release evidence for safe, bounded, verifiable CAS engineering loops on a Windows-first workstation.",
+  "scope": [
+    "CAS workstation",
+    "goal contracts",
+    "durable scheduling",
+    "isolated agent execution",
+    "verification",
+    "Promptimprover learning",
+    "operations",
+    "Azure Foundry Next Gen",
+    "pilot scenarios"
+  ],
+  "cross_refs": [],
+  "locked": false,
+  "precedence": 2,
+  "notes": ""
+}
