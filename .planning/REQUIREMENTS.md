@@ -24,56 +24,56 @@
 
 ### Durable Scheduling
 
-- [ ] **SCHED-01** — Goals, work items, dependencies, attempts, leases, budgets, evidence, and transitions are durably persisted.
+- [x] **SCHED-01** — Goals, work items, dependencies, attempts, leases, budgets, evidence, and transitions are durably persisted.
   - Acceptance: restart reconstructs equivalent authoritative state.
-- [ ] **SCHED-02** — Only dependency-ready work is leased under atomic global, provider, and repository limits.
+- [x] **SCHED-02** — Only dependency-ready work is leased under atomic global, provider, and repository limits.
   - Acceptance: incomplete dependencies and exhausted concurrency prevent leasing.
-- [ ] **SCHED-03** — Expired leases are recoverable without duplicate side effects.
+- [x] **SCHED-03** — Expired leases are recoverable without duplicate side effects.
   - Acceptance: idempotency prevents duplicate commits, comments, PRs, or external actions.
-- [ ] **SCHED-04** — Retry decisions classify transient, deterministic, policy, cancellation, and unrecoverable failures.
+- [x] **SCHED-04** — Retry decisions classify transient, deterministic, policy, cancellation, and unrecoverable failures.
   - Acceptance: every retry decision records its class and consumed budget.
-- [ ] **SCHED-05** — Goal outcomes expose explicit stop reasons and supporting evidence.
+- [x] **SCHED-05** — Goal outcomes expose explicit stop reasons and supporting evidence.
   - Acceptance: pass, exhaustion, cancellation, denial, approval wait, deadlock, unrecoverable fault, and no-progress are distinct.
 
 ### Isolated Agent Execution
 
-- [ ] **WORK-01** — Every mutating item runs in a distinct worktree or ephemeral sandbox.
+- [x] **WORK-01** — Every mutating item runs in a distinct worktree or ephemeral sandbox.
   - Acceptance: it has an idempotency key, deadline, path allowlist, artifacts, and leaves the default branch unchanged before integration.
-- [ ] **WORK-02** — MAF supports bounded parallel specialists and typed fan-in.
+- [x] **WORK-02** — MAF supports bounded parallel specialists and typed fan-in.
   - Acceptance: three specialists overlap and aggregation waits for all required terminal results.
-- [ ] **WORK-03** — Repository mutation has exactly one implementation owner per worktree.
+- [x] **WORK-03** — Repository mutation has exactly one implementation owner per worktree.
   - Acceptance: research, architecture, security, test, and review specialists remain read-only.
-- [ ] **WORK-04** — Destructive and externally visible actions require deterministic approval.
+- [x] **WORK-04** — Destructive and externally visible actions require deterministic approval.
   - Acceptance: push, deploy, delete, messages, and production mutation cannot run before approval.
 
 ### Verification and Learning
 
-- [ ] **VER-01** — Each repository declares native build, test, lint, security, and evaluation checks.
+- [x] **VER-01** — Each repository declares native build, test, lint, security, and evaluation checks.
   - Acceptance: a missing required check is `inconclusive`, never `passed`.
-- [ ] **VER-02** — Mandatory failures block completion and create only policy- and budget-approved repair work.
+- [x] **VER-02** — Mandatory failures block completion and create only policy- and budget-approved repair work.
   - Acceptance: no failed mandatory check can coexist with `Completed`.
-- [ ] **VER-03** — Artifact, verification, and evaluation outputs are schema-valid and evidence-backed.
+- [x] **VER-03** — Artifact, verification, and evaluation outputs are schema-valid and evidence-backed.
   - Acceptance: each result validates and includes evidence URIs.
-- [ ] **VER-04** — Promptimprover learning is terminal, deduplicated, candidate-based, and approval-gated.
+- [x] **VER-04** — Promptimprover learning is terminal, deduplicated, candidate-based, and approval-gated.
   - Acceptance: terminal output is recorded once and only approved lessons affect later goals.
 
 ### Operations and Cloud
 
-- [ ] **OPS-01** — Operators can inspect goal state, DAG, leases, attempts, budget, evidence, and stop reason.
+- [x] **OPS-01** — Operators can inspect goal state, DAG, leases, attempts, budget, evidence, and stop reason.
   - Acceptance: the operator surface exposes every listed item for one run.
-- [ ] **OPS-02** — OpenTelemetry correlates control plane, worker, tool, verifier, and Foundry without content capture by default.
+- [x] **OPS-02** — OpenTelemetry correlates control plane, worker, tool, verifier, and Foundry without content capture by default.
   - Acceptance: traces share context and omit raw prompts/outputs.
-- [ ] **CLOUD-01** — Azure reasoning uses Foundry Next Gen agent references and system-assigned managed identity.
+- [x] **CLOUD-01** — Azure reasoning uses Foundry Next Gen agent references and system-assigned managed identity.
   - Acceptance: authentication has no application secret and RBAC is project-scoped.
-- [ ] **CLOUD-02** — Event-driven Functions use Flex Consumption Linux and delegate long-running/sandboxed execution.
+- [x] **CLOUD-02** — Event-driven Functions use Flex Consumption Linux and delegate long-running/sandboxed execution.
   - Acceptance: ingress never performs long-running repo execution in-process.
 
 ### Pilot Evidence
 
-- [ ] **PILOT-01** — A feature pilot proves parallel analysis, isolated implementation, deterministic verification, and completion.
-- [ ] **PILOT-02** — A failing-test pilot proves bounded repair and re-verification.
-- [ ] **PILOT-03** — A restart pilot proves lease recovery without duplicate commit, comment, or PR.
-- [ ] **PILOT-04** — A policy pilot proves `.env` denial and approval waits for push/deploy.
+- [x] **PILOT-01** — A feature pilot proves parallel analysis, isolated implementation, deterministic verification, and completion.
+- [x] **PILOT-02** — A failing-test pilot proves bounded repair and re-verification.
+- [x] **PILOT-03** — A restart pilot proves lease recovery without duplicate commit, comment, or PR.
+- [x] **PILOT-04** — A policy pilot proves `.env` denial and approval waits for push/deploy.
 
 ## Deferred Requirements
 
@@ -92,27 +92,26 @@
 | GOAL-01 | Phase 2 | Complete |
 | GOAL-02 | Phase 2 | Complete |
 | GOAL-03 | Phase 2 | Complete |
-| SCHED-01 | Phase 3 | Pending |
-| SCHED-02 | Phase 3 | Pending |
-| SCHED-03 | Phase 3 | Pending |
-| SCHED-04 | Phase 3 | Pending |
-| SCHED-05 | Phase 3 | Pending |
-| WORK-01 | Phase 4 | Pending |
-| WORK-02 | Phase 4 | Pending |
-| WORK-03 | Phase 4 | Pending |
-| WORK-04 | Phase 4 | Pending |
-| VER-01 | Phase 5 | Pending |
-| VER-02 | Phase 5 | Pending |
-| VER-03 | Phase 5 | Pending |
-| VER-04 | Phase 5 | Pending |
-| OPS-01 | Phase 6 | Pending |
-| OPS-02 | Phase 6 | Pending |
-| CLOUD-01 | Phase 6 | Pending |
-| CLOUD-02 | Phase 6 | Pending |
-| PILOT-01 | Phase 7 | Pending |
-| PILOT-02 | Phase 7 | Pending |
-| PILOT-03 | Phase 7 | Pending |
-| PILOT-04 | Phase 7 | Pending |
+| SCHED-01 | Phase 3 | Complete |
+| SCHED-02 | Phase 3 | Complete |
+| SCHED-03 | Phase 3 | Complete |
+| SCHED-04 | Phase 3 | Complete |
+| SCHED-05 | Phase 3 | Complete |
+| WORK-01 | Phase 4 | Complete |
+| WORK-02 | Phase 4 | Complete |
+| WORK-03 | Phase 4 | Complete |
+| WORK-04 | Phase 4 | Complete |
+| VER-01 | Phase 5 | Complete |
+| VER-02 | Phase 5 | Complete |
+| VER-03 | Phase 5 | Complete |
+| VER-04 | Phase 5 | Complete |
+| OPS-01 | Phase 6 | Complete |
+| OPS-02 | Phase 6 | Complete |
+| CLOUD-01 | Phase 6 | Complete |
+| CLOUD-02 | Phase 6 | Complete |
+| PILOT-01 | Phase 8 | Complete |
+| PILOT-02 | Phase 8 | Complete |
+| PILOT-03 | Phase 8 | Complete |
+| PILOT-04 | Phase 8 | Complete |
 
 **Coverage:** 28/28 requirements mapped exactly once.
-

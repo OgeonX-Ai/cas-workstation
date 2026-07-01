@@ -15,11 +15,12 @@ boundaries, and finally four reproducible end-to-end pilot proofs.
 
 - [x] **Phase 1: Stable Workstation and Recovery** - Existing CAS paths, health checks, watch mode, and resume behavior become reliable. (completed 2026-06-30)
 - [x] **Phase 2: Typed Goal and Lifecycle Contract** - Every run starts from one measurable, bounded, traceable contract. (completed 2026-06-30)
-- [ ] **Phase 3: Durable Goal Scheduler** - Goals execute through dependency-aware leases, budgets, retries, and stop rules.
-- [ ] **Phase 4: Isolated MAF Fan-Out Workers** - Bounded specialists execute in isolated workspaces with one mutation owner.
-- [ ] **Phase 5: Evidence-Gated Verification and Learning** - Native checks and CAS Evals become the only completion authority.
-- [ ] **Phase 6: Operator Observability and Azure Boundaries** - Operators can inspect runs, and Foundry/Azure boundaries are identity-first and traceable.
-- [ ] **Phase 7: Reproducible Pilot Evidence** - Feature, repair, restart, and policy scenarios prove the complete loop.
+- [x] **Phase 3: Durable Goal Scheduler** - Goals execute through dependency-aware leases, budgets, retries, and stop rules. (completed 2026-06-30)
+- [x] **Phase 4: Isolated MAF Fan-Out Workers** - Bounded specialists execute in isolated workspaces with one mutation owner. (completed 2026-06-30)
+- [x] **Phase 5: Evidence-Gated Verification and Learning** - Native checks and CAS Evals become the only completion authority. (completed 2026-07-01)
+- [x] **Phase 6: Operator Observability and Azure Boundaries** - Operators can inspect runs, and Foundry/Azure boundaries are identity-first and traceable. (completed 2026-07-01)
+- [x] **Phase 7: Reproducible Pilot Evidence** - Feature, repair, restart, and policy scenarios prove the complete loop. (completed 2026-07-01)
+- [x] **Phase 8: Executable Loop Integration** - Close audit gaps with one runnable coordinator and generated pilot evidence. (completed 2026-07-01)
 
 ## Phase Details
 
@@ -75,7 +76,7 @@ boundaries, and finally four reproducible end-to-end pilot proofs.
   2. A failed mandatory check blocks completion and creates repair work only when policy and budget permit.
   3. Artifact, verification, and evaluation records validate against CAS contracts and link to durable evidence.
   4. Promptimprover records one terminal outcome and only approved candidate lessons influence later goals.
-**Plans**: TBD
+**Plans**: 3 plans
 
 ### Phase 6: Operator Observability and Azure Boundaries
 **Goal**: The developer can inspect the complete loop, while Azure reasoning and execution boundaries remain identity-first, traceable, and non-blocking.
@@ -100,17 +101,29 @@ boundaries, and finally four reproducible end-to-end pilot proofs.
   4. The policy pilot denies `.env` access and holds push/deploy until approval.
 **Plans**: TBD
 
+### Phase 8: Executable Loop Integration
+**Goal**: One authoritative coordinator executes scheduler lease, MAF worker fan-out, native verification and bounded repair, approval/idempotency policy, and terminal learning publication.
+**Depends on**: Phase 7
+**Requirements**: PILOT-01, PILOT-02, PILOT-03, PILOT-04
+**Gap Closure**: Closes the executable integration and flow gaps from the v1 milestone audit.
+**Success Criteria** (what must be TRUE):
+  1. A runnable local coordinator invokes explicit worker, verifier, policy, and learning ports under one correlation ID.
+  2. Feature and repair evidence is generated from actual coordinator transitions.
+  3. Restart recovery uses durable scheduler state and idempotency to prevent duplicate external effects.
+  4. Policy execution denies `.env` and leaves push/deploy waiting for approval.
+**Plans**: 3 plans
+
 ## Progress
 
-**Execution Order:** Phase 1 -> Phase 2 -> Phase 3 -> Phase 4 -> Phase 5 -> Phase 6 -> Phase 7
+**Execution Order:** Phase 1 -> Phase 2 -> Phase 3 -> Phase 4 -> Phase 5 -> Phase 6 -> Phase 7 -> Phase 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Stable Workstation and Recovery | 4/4 | Complete    | 2026-06-30 |
 | 2. Typed Goal and Lifecycle Contract | 2/2 | Complete    | 2026-06-30 |
-| 3. Durable Goal Scheduler | 0/TBD | Not started | - |
-| 4. Isolated MAF Fan-Out Workers | 0/TBD | Not started | - |
-| 5. Evidence-Gated Verification and Learning | 0/TBD | Not started | - |
-| 6. Operator Observability and Azure Boundaries | 0/TBD | Not started | - |
-| 7. Reproducible Pilot Evidence | 0/TBD | Not started | - |
-
+| 3. Durable Goal Scheduler | 3/3 | Complete    | 2026-06-30 |
+| 4. Isolated MAF Fan-Out Workers | 2/2 | Complete    | 2026-06-30 |
+| 5. Evidence-Gated Verification and Learning | 3/3 | Complete    | 2026-07-01 |
+| 6. Operator Observability and Azure Boundaries | 3/3 | Complete    | 2026-07-01 |
+| 7. Reproducible Pilot Evidence | 2/2 | Complete    | 2026-07-01 |
+| 8. Executable Loop Integration | 3/3 | Complete    | 2026-07-01 |
