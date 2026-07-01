@@ -20,6 +20,24 @@ A developer can run the four v1 pilot scenarios and receive reproducible,
 schema-valid evidence. No goal reaches `Completed` unless every mandatory
 verifier and acceptance criterion passes.
 
+## Current State
+
+**v1.0 Loop Engineering shipped 2026-07-01.** The workstation, contracts,
+durable scheduler, bounded MAF fan-out, deterministic verification, operator
+telemetry, identity-first Azure boundary, and four executable pilot scenarios
+are implemented and verified across their owning repositories.
+
+The milestone delivered 8 phases, 22 plans, and 28 validated requirements.
+Default-branch CI passed after integration in every repository with configured
+checks. Azure resources were not deployed as part of this milestone.
+
+## Next Milestone Goals
+
+Fresh requirements have not been selected. Candidate work remains deliberately
+deferred: multi-machine scheduling, Kubernetes delivery, and automatic
+production deployment. The next milestone must reassess these candidates
+against actual operator needs before promoting any of them.
+
 ## Target Runtime
 
 - Windows 11 and PowerShell under `C:\PersonalRepo`
@@ -32,17 +50,17 @@ verifier and acceptance criterion passes.
 
 ### Validated
 
-None yet. This milestone begins with stabilization and regression proof.
+- ✓ Stable Windows workstation paths, health checks, multi-repository watch, and failed-step recovery — v1.0
+- ✓ Typed, measurable, bounded goal admission and lifecycle contracts — v1.0
+- ✓ Durable dependency-aware scheduling, leases, budgets, retries, and stop rules — v1.0
+- ✓ Bounded MAF specialist fan-out/fan-in with isolated mutation ownership — v1.0
+- ✓ Deterministic evidence-gated verification, bounded repair, and approved learning — v1.0
+- ✓ Operator state, correlated telemetry, Foundry Next Gen identity, and Flex Consumption boundaries — v1.0
+- ✓ Reproducible feature, repair, restart, and policy pilot evidence — v1.0
 
 ### Active
 
-- [ ] Stabilize workstation paths, health checks, multi-repo watch, and failed-step recovery.
-- [ ] Admit only typed, measurable, bounded engineering goals.
-- [ ] Persist goal state, dependencies, attempts, leases, budgets, and evidence durably.
-- [ ] Run bounded MAF specialist fan-out/fan-in in isolated workspaces.
-- [ ] Make deterministic verification the only completion authority.
-- [ ] Expose safe operational state, traces, Foundry identity, and Azure worker boundaries.
-- [ ] Publish reproducible evidence for feature, repair, recovery, and policy pilots.
+None. The next milestone will define a fresh requirement set.
 
 ### Out of Scope
 
@@ -55,14 +73,13 @@ None yet. This milestone begins with stabilization and regression proof.
 
 ## Context
 
-The portfolio already contains the necessary building blocks, but ownership is
-fragmented. `gsd-orchestrator` has a durable state machine but no goal DAG or
-fan-out scheduler. `autogen` has manager-led execution, approvals, validation,
-and a worker boundary but its specialist workflow is sequential.
-Promptimprover has governance, event history, and learning but must not become a
-second executor. CAS Contracts and CAS Evals provide the portable evidence
-boundary, while the reference product and platform already establish Foundry
-Next Gen, managed identity, and OpenTelemetry patterns.
+The portfolio now has explicit ownership boundaries and an executable local
+coordination loop. `gsd-orchestrator` owns authoritative goal state and durable
+scheduling; `autogen` owns bounded task-attempt execution; Promptimprover owns
+governance and review-gated learning; CAS Contracts owns portable schemas; and
+the reference product demonstrates identity-first ingress, telemetry, and
+Foundry Next Gen boundaries. Remaining scale and delivery work is deferred
+until a new milestone establishes measurable demand.
 
 ## Constraints
 
@@ -82,12 +99,12 @@ Next Gen, managed identity, and OpenTelemetry patterns.
 
 | Decision | Rationale | Status |
 |----------|-----------|--------|
-| `gsd-orchestrator` owns goal DAGs, leases, budgets, integration, stop rules, and terminal state | Cross-repository work requires one durable completion authority | Locked by ADR-0001 |
-| `autogen`/MAF owns one leased task attempt and task-local specialist fan-out/fan-in | Reuses existing agent execution and worker capabilities without duplicating global scheduling | Locked by ADR-0001 |
-| Promptimprover owns governance and review-gated learning only | Prompt heuristics and self-heal output are not execution evidence | Locked by ADR-0001 |
-| CAS Contracts, CAS Evals, reference product, and platform retain their existing boundaries | Keeps contracts, verification, Foundry adapter, and infrastructure modular | Locked by ADR-0001 |
-| Do not add Ray, Prefect, Dagster, Celery, Redis, or another scheduler in v1 | The local MVP does not need a second scheduler or distributed queue | Locked by ADR-0001 |
-| Completion requires deterministic verification evidence | Model confidence cannot satisfy machine-verifiable criteria | Locked by ADR-0001 |
+| `gsd-orchestrator` owns goal DAGs, leases, budgets, integration, stop rules, and terminal state | Cross-repository work requires one durable completion authority | ✓ Validated in v1.0 |
+| `autogen`/MAF owns one leased task attempt and task-local specialist fan-out/fan-in | Reuses existing agent execution and worker capabilities without duplicating global scheduling | ✓ Validated in v1.0 |
+| Promptimprover owns governance and review-gated learning only | Prompt heuristics and self-heal output are not execution evidence | ✓ Validated in v1.0 |
+| CAS Contracts, CAS Evals, reference product, and platform retain their existing boundaries | Keeps contracts, verification, Foundry adapter, and infrastructure modular | ✓ Validated in v1.0 |
+| Do not add Ray, Prefect, Dagster, Celery, Redis, or another scheduler in v1 | The local MVP does not need a second scheduler or distributed queue | ✓ Validated in v1.0 |
+| Completion requires deterministic verification evidence | Model confidence cannot satisfy machine-verifiable criteria | ✓ Validated in v1.0 |
 
 ## Evolution
 
@@ -96,5 +113,4 @@ and update STATE.md with the exact evidence and remaining blockers. Architectura
 ownership changes require a superseding ADR.
 
 ---
-*Initialized: 2026-06-30 via GSD document ingest*
-
+*Last updated: 2026-07-02 after v1.0 milestone*
