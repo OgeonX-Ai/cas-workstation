@@ -13,4 +13,4 @@ verified_at: 2026-07-01
 | PILOT-03 | Temporary SQLite recovered one expired lease and rejected second reservations for commit, comment, and PR effects | passed |
 | PILOT-04 | Executed policy guard denied `.env`; push and deploy returned waiting-approval | passed |
 
-.NET Release build: zero warnings, 207 tests passed. MAF: 119 tests passed. Promptimprover: build and 399 tests passed. Root workstation and 4/4 pilot contracts passed. Pilot evidence source revisions include `5cef5ef`, `9f57bac`, and `e24a328`.
+.NET Release build: zero warnings, 207 tests passed. MAF: 119 tests passed. Promptimprover: build and 399 tests passed. Root workstation and 4/4 pilot contracts passed. Regenerated pilot evidence cites publishable branch revisions `8ff9035`, `54fd535`, and `9057fa0`.
