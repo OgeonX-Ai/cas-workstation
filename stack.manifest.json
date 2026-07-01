@@ -3,7 +3,7 @@
   "bundleName": "CAS Workstation",
   "bundleId": "cas-workstation",
   "defaults": {
-    "rootPath": "C:\\CodingAutopilotSystem",
+    "rootPath": "C:\\PersonalRepo",
     "configPath": "C:\\Users\\KimHarjamaki\\.cas",
     "profile": "full"
   },
@@ -56,6 +56,10 @@
         "Promptimprover",
         "autogen",
         "gsd-orchestrator",
+        "cas-contracts",
+        "cas-evals",
+        "cas-reference-product",
+        "cas-platform",
         "autopilot-core",
         "ci-autopilot"
       ],
@@ -66,7 +70,7 @@
     }
   },
   "paths": {
-    "reposRoot": "repos",
+    "reposRoot": "portfolio",
     "logs": "logs",
     "state": "state",
     "memory": "memory",
@@ -323,6 +327,26 @@
       "defaultBranch": "main"
     },
     {
+      "id": "cas-contracts",
+      "url": "https://github.com/Coding-Autopilot-System/cas-contracts.git",
+      "defaultBranch": "main"
+    },
+    {
+      "id": "cas-evals",
+      "url": "https://github.com/Coding-Autopilot-System/cas-evals.git",
+      "defaultBranch": "main"
+    },
+    {
+      "id": "cas-reference-product",
+      "url": "https://github.com/Coding-Autopilot-System/cas-reference-product.git",
+      "defaultBranch": "main"
+    },
+    {
+      "id": "cas-platform",
+      "url": "https://github.com/Coding-Autopilot-System/cas-platform.git",
+      "defaultBranch": "main"
+    },
+    {
       "id": "autopilot-core",
       "url": "https://github.com/Coding-Autopilot-System/autopilot-core.git",
       "defaultBranch": "main"
@@ -352,7 +376,7 @@
     "transport": "stdio",
     "command": "node",
     "args": [
-      "C:\\CodingAutopilotSystem\\repos\\Promptimprover\\dist\\index.js"
+      "C:\\PersonalRepo\\portfolio\\Promptimprover\\universal-refiner\\dist\\src\\index.js"
     ]
   }
 }

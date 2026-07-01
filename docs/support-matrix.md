@@ -34,5 +34,12 @@
 | Promptimprover | Prompt middleware and MCP server | core, full |
 | autogen | Local multi-agent runtime | core, full |
 | gsd-orchestrator | Autonomous GitHub issue-to-PR engine | core, full |
+| cas-contracts | Shared goal, task, evidence, and event contracts | full |
+| cas-evals | Deterministic loop evaluation profiles and fixtures | full |
+| cas-reference-product | Foundry Next Gen reference product | full |
+| cas-platform | Shared CAS platform and deployment boundaries | full |
 | autopilot-core | Org-level issue intake and repair automation | full |
 | ci-autopilot | CI repair control plane | full |
+
+All managed repositories resolve beneath `C:\PersonalRepo\portfolio\`. Run
+`.\cas.ps1 doctor` for a read-only workstation and MCP runtime health report.

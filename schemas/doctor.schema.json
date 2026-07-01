@@ -13,6 +13,7 @@
     "tools",
     "services",
     "repos",
+    "mcpServer",
     "recommendations"
   ],
   "properties": {
@@ -57,6 +58,9 @@
       "items": {
         "$ref": "#/$defs/repoStatus"
       }
+    },
+    "mcpServer": {
+      "$ref": "#/$defs/mcpServerStatus"
     },
     "recommendations": {
       "type": "array",
@@ -157,6 +161,24 @@
         "path": {
           "type": "string"
         }
+      }
+    },
+    "mcpServerStatus": {
+      "type": "object",
+      "required": [
+        "id",
+        "status",
+        "path",
+        "message"
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["ready", "missing", "invalid"]
+        },
+        "path": { "type": ["string", "null"] },
+        "message": { "type": "string" }
       }
     }
   }

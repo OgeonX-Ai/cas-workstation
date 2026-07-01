@@ -105,6 +105,10 @@ function Invoke-CasCommandCapture {
     $previousPreference = $ErrorActionPreference
     try {
         $ErrorActionPreference = "Continue"
+        # PowerShell command shims such as npm.ps1 may read this automatic
+        # variable before launching a native process. Strict mode requires it
+        # to exist before the shim is invoked.
+        $global:LASTEXITCODE = 0
         $output = & $FilePath @ArgumentList 2>$null
         [string]::Join([Environment]::NewLine, @($output))
     }
@@ -223,11 +227,12 @@ function Test-CasDockerDaemon {
     try {
         $ErrorActionPreference = "Continue"
         $output = & $docker.Source info --format "{{.ServerVersion}}" 2>$null
+        $nativeCommandSucceeded = $?
     }
     finally {
         $ErrorActionPreference = $previousPreference
     }
-    if ($LASTEXITCODE -eq 0) {
+    if ($nativeCommandSucceeded) {
         return [pscustomobject]@{
             id = "docker-daemon"
             status = "ready"
@@ -256,11 +261,12 @@ function Test-CasGhAuth {
     try {
         $ErrorActionPreference = "Continue"
         & $gh.Source auth status 1>$null 2>$null
+        $nativeCommandSucceeded = $?
     }
     finally {
         $ErrorActionPreference = $previousPreference
     }
-    if ($LASTEXITCODE -eq 0) {
+    if ($nativeCommandSucceeded) {
         return [pscustomobject]@{
             id = "gh-auth"
             status = "ready"
@@ -277,11 +283,12 @@ function Test-CasGhAuth {
 
 function Get-CasServiceStatuses {
     param(
-        [string]$Profile = "full"
+        [string]$Profile = "full",
+        [pscustomobject]$Manifest = (Get-CasManifest)
     )
 
     $statuses = @()
-    $profileServices = @((Get-CasProfile -Name $Profile).services)
+    $profileServices = @((Get-CasProfile -Name $Profile -Manifest $Manifest).services)
     foreach ($service in $profileServices) {
         switch ($service) {
             "docker-daemon" { $statuses += Test-CasDockerDaemon }
@@ -299,11 +306,47 @@ function Get-CasServiceStatuses {
     $statuses
 }
 
+function Get-CasMcpServerStatus {
+    param(
+        [pscustomobject]$Manifest = (Get-CasManifest)
+    )
+
+    $args = @($Manifest.sharedMcpServer.args)
+    if ($args.Count -ne 1 -or -not [IO.Path]::IsPathRooted([string]$args[0])) {
+        return [pscustomobject]@{
+            id = $Manifest.sharedMcpServer.name
+            status = "invalid"
+            path = if ($args.Count -gt 0) { [string]$args[0] } else { $null }
+            message = "The shared MCP server must declare exactly one absolute script path."
+        }
+    }
+
+    $scriptPath = [IO.Path]::GetFullPath([string]$args[0])
+    $rootPath = [IO.Path]::GetFullPath([string]$Manifest.defaults.rootPath).TrimEnd('\') + '\'
+    if (-not $scriptPath.StartsWith($rootPath, [StringComparison]::OrdinalIgnoreCase)) {
+        return [pscustomobject]@{
+            id = $Manifest.sharedMcpServer.name
+            status = "invalid"
+            path = $scriptPath
+            message = "The shared MCP script path must remain under the CAS workspace root."
+        }
+    }
+
+    $exists = Test-Path -LiteralPath $scriptPath -PathType Leaf
+    [pscustomobject]@{
+        id = $Manifest.sharedMcpServer.name
+        status = if ($exists) { "ready" } else { "missing" }
+        path = $scriptPath
+        message = if ($exists) { "The shared MCP runtime is available." } else { "The shared MCP runtime script was not found." }
+    }
+}
+
 function Get-CasOverallStatus {
     param(
         [object[]]$ToolStatuses,
         [object[]]$ServiceStatuses,
-        [object[]]$RepoStatuses
+        [object[]]$RepoStatuses,
+        [pscustomobject]$McpServerStatus
     )
 
     if ($ToolStatuses.status -contains "missing" -or $ToolStatuses.status -contains "out-of-date") {
@@ -318,6 +361,10 @@ function Get-CasOverallStatus {
         return "degraded"
     }
 
+    if ($McpServerStatus -and $McpServerStatus.status -ne "ready") {
+        return "degraded"
+    }
+
     "ready"
 }
 
@@ -325,7 +372,8 @@ function Get-CasRecommendations {
     param(
         [object[]]$ToolStatuses,
         [object[]]$ServiceStatuses,
-        [object[]]$RepoStatuses
+        [object[]]$RepoStatuses,
+        [pscustomobject]$McpServerStatus
     )
 
     $messages = New-Object System.Collections.Generic.List[string]
@@ -350,6 +398,10 @@ function Get-CasRecommendations {
         $messages.Add("Clone or install the managed repo '$($repo.id)'.")
     }
 
+    if ($McpServerStatus -and $McpServerStatus.status -ne "ready") {
+        $messages.Add($McpServerStatus.message)
+    }
+
     $messages.ToArray()
 }
 
@@ -364,12 +416,13 @@ function Get-CasDoctorReport {
     $toolStatuses = @(Get-CasProfileToolDefinitions -Profile $Profile -Manifest $Manifest | ForEach-Object {
         Get-CasToolStatus -Tool $_
     })
-    $serviceStatuses = @(Get-CasServiceStatuses -Profile $Profile)
+    $serviceStatuses = @(Get-CasServiceStatuses -Profile $Profile -Manifest $Manifest)
     $repoStatuses = @(Get-CasProfileRepos -Profile $Profile -Manifest $Manifest | ForEach-Object {
         Get-CasRepoStatus -Repo $_ -RootPath $RootPath -Manifest $Manifest
     })
-    $overallStatus = Get-CasOverallStatus -ToolStatuses $toolStatuses -ServiceStatuses $serviceStatuses -RepoStatuses $repoStatuses
-    $recommendations = @(Get-CasRecommendations -ToolStatuses $toolStatuses -ServiceStatuses $serviceStatuses -RepoStatuses $repoStatuses)
+    $mcpServerStatus = Get-CasMcpServerStatus -Manifest $Manifest
+    $overallStatus = Get-CasOverallStatus -ToolStatuses $toolStatuses -ServiceStatuses $serviceStatuses -RepoStatuses $repoStatuses -McpServerStatus $mcpServerStatus
+    $recommendations = @(Get-CasRecommendations -ToolStatuses $toolStatuses -ServiceStatuses $serviceStatuses -RepoStatuses $repoStatuses -McpServerStatus $mcpServerStatus)
 
     [pscustomobject]@{
         bundleId = $Manifest.bundleId
@@ -381,6 +434,7 @@ function Get-CasDoctorReport {
         tools = $toolStatuses
         services = $serviceStatuses
         repos = $repoStatuses
+        mcpServer = $mcpServerStatus
         recommendations = $recommendations
     }
 }
@@ -487,12 +541,11 @@ function New-CasClientConfigs {
         New-Item -ItemType Directory -Path $clientRoot -Force | Out-Null
     }
 
-    $promptImproverEntry = Join-Path (Join-Path (Join-Path $RootPath $Manifest.paths.reposRoot) "Promptimprover") "dist\index.js"
     $sharedServer = [ordered]@{
         mcpServers = @{
             ($Manifest.sharedMcpServer.name) = @{
                 command = $Manifest.sharedMcpServer.command
-                args = @($promptImproverEntry)
+                args = @($Manifest.sharedMcpServer.args)
                 transport = $Manifest.sharedMcpServer.transport
             }
         }

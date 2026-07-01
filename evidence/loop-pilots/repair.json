@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0.0",
+  "scenario": "repair",
+  "status": "passed",
+  "bounded": true,
+  "sourceCommits": [
+    "8ff903545aad717fd117a0bd66b0cb8730625d1b",
+    "54fd535",
+    "9057fa0"
+  ],
+  "events": [
+    {
+      "sequence": 0,
+      "type": "worker.succeeded",
+      "outcome": "attempt-1"
+    },
+    {
+      "sequence": 1,
+      "type": "verification.completed",
+      "outcome": "failed"
+    },
+    {
+      "sequence": 2,
+      "type": "repair.created",
+      "outcome": "attempt-2"
+    },
+    {
+      "sequence": 3,
+      "type": "worker.succeeded",
+      "outcome": "attempt-2"
+    },
+    {
+      "sequence": 4,
+      "type": "verification.completed",
+      "outcome": "passed"
+    },
+    {
+      "sequence": 5,
+      "type": "goal.completed",
+      "outcome": "completed"
+    }
+  ],
+  "assertions": {
+    "initialVerification": "failed",
+    "repairCreated": true,
+    "repairAttempt": 2,
+    "repairLimit": 2,
+    "subsequentVerification": "passed",
+    "terminalLearningPublications": 1
+  },
+  "artifacts": [
+    "cas://evidence/worker/goal-repair/1/research",
+    "cas://evidence/worker/goal-repair/1/architecture",
+    "cas://evidence/worker/goal-repair/1/security",
+    "cas://evidence/worker/goal-repair/1/test",
+    "cas://evidence/verifier/failed",
+    "cas://evidence/worker/goal-repair/2/research",
+    "cas://evidence/worker/goal-repair/2/architecture",
+    "cas://evidence/worker/goal-repair/2/security",
+    "cas://evidence/worker/goal-repair/2/test",
+    "cas://evidence/verifier/passed"
+  ],
+  "reproduce": [
+    "dotnet run --project tools/LoopPilotRunner"
+  ]
+}

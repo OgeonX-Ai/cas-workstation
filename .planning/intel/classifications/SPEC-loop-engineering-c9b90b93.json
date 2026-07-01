@@ -1,0 +1,24 @@
+{
+  "source_path": "/mnt/c/PersonalRepo/worktrees/loop-engineering/docs/specs/SPEC-loop-engineering.md",
+  "type": "SPEC",
+  "confidence": "high",
+  "manifest_override": true,
+  "title": "Technical Specification: CAS Loop Engineering v1",
+  "summary": "Defines the bounded CAS engineering loop's control plane, worker isolation, verification, retry, security, observability, and lifecycle contracts.",
+  "scope": [
+    "CAS goal control plane",
+    "task-attempt workers",
+    "verifier loop",
+    "lifecycle contracts",
+    "fan-out and fan-in",
+    "worktree isolation",
+    "idempotency",
+    "security and identity",
+    "observability",
+    "operational budgets"
+  ],
+  "cross_refs": [],
+  "locked": false,
+  "precedence": 1,
+  "notes": ""
+}
