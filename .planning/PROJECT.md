@@ -31,12 +31,18 @@ The milestone delivered 8 phases, 22 plans, and 28 validated requirements.
 Default-branch CI passed after integration in every repository with configured
 checks. Azure resources were not deployed as part of this milestone.
 
-## Next Milestone Goals
+## Current Milestone: v1.1 Explicit SDLC Execution Engine
 
-Fresh requirements have not been selected. Candidate work remains deliberately
-deferred: multi-machine scheduling, Kubernetes delivery, and automatic
-production deployment. The next milestone must reassess these candidates
-against actual operator needs before promoting any of them.
+**Goal:** Turn the v1.0 bounded loop into a durable prompt-driven SDLC engine
+whose twelve logical phases are externally verified, dependency-aware, and
+operator-visible.
+
+**Target features:**
+
+- Versioned SDLC profiles and typed phase execution contracts.
+- Deterministic phase prompt compilation with durable verifier-owned transitions.
+- Bounded dependency rollback, escalation, and review-gated memory candidates.
+- MAF phase execution plus a local operator dashboard and six executable pilots.
 
 ## Target Runtime
 
@@ -60,7 +66,12 @@ against actual operator needs before promoting any of them.
 
 ### Active
 
-None. The next milestone will define a fresh requirement set.
+- [ ] Publish backward-compatible v1.1 SDLC profiles and lifecycle contracts.
+- [ ] Execute twelve logical SDLC phases through five bounded MAF batches.
+- [ ] Make external verification the only phase-transition authority.
+- [ ] Resume from the earliest invalid dependency after bounded verification failure.
+- [ ] Expose phase, verifier, rollback, evidence, budget, and human-gate state locally.
+- [ ] Produce review-gated memory candidates and six reproducible pilot proofs.
 
 ### Out of Scope
 
@@ -113,4 +124,4 @@ and update STATE.md with the exact evidence and remaining blockers. Architectura
 ownership changes require a superseding ADR.
 
 ---
-*Last updated: 2026-07-02 after v1.0 milestone*
+*Last updated: 2026-07-03 for v1.1 milestone start*
