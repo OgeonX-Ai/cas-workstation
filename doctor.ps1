@@ -1,4 +1,4 @@
-﻿[CmdletBinding()]
+[CmdletBinding()]
 param(
     [ValidateSet("core", "full")]
     [string]$Profile = "full",
@@ -8,9 +8,6 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$env:USERPROFILE = "C:\Users\KimHarjamäki"
-$env:HOME = "C:\Users\KimHarjamäki"
-$env:AZURE_CONFIG_DIR = "C:\Users\KimHarjamäki\.azure"
 
 Import-Module (Join-Path $PSScriptRoot "scripts\Cas.Workstation.psm1") -Force
 
