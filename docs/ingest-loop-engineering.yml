@@ -1,0 +1,16 @@
+docs:
+  - path: docs/adr/ADR-0001-loop-engineering-ownership.md
+    type: ADR
+    precedence: 0
+  - path: docs/specs/SPEC-loop-engineering.md
+    type: SPEC
+    precedence: 1
+  - path: docs/prd/PRD-loop-engineering.md
+    type: PRD
+    precedence: 2
+  - path: README.md
+    type: DOC
+    precedence: 3
+  - path: docs/support-matrix.md
+    type: DOC
+    precedence: 3

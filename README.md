@@ -6,8 +6,6 @@ configured AI-native coding workstation.
 
 ## Commands
 
-We now use a unified CLI wrapper `cas.ps1` to manage the workstation setup.
-
 ```powershell
 .\cas.ps1 setup
 .\cas.ps1 doctor
@@ -22,6 +20,7 @@ We now use a unified CLI wrapper `cas.ps1` to manage the workstation setup.
   Azure CLI, WSL
 - AI coder CLIs: Codex, Claude Code, Gemini CLI
 - Coding-Autopilot-System component repos
+- Loop-engineering repositories under `C:\PersonalRepo\portfolio\`
 - Shared runtime paths under `C:\Users\KimHarjamaki\.cas\`
 - Generated MCP client configuration fragments
 
@@ -31,12 +30,11 @@ We now use a unified CLI wrapper `cas.ps1` to manage the workstation setup.
 - `schemas/doctor.schema.json` - machine-readable readiness report schema
 - `scripts/Cas.Workstation.psm1` - shared implementation module
 - `docs/support-matrix.md` - supported platform and component matrix
-- `docs/architecture.md` - detailed architecture overview
-- `docs/gemini-nano.md` - gemini nano integration documentation
+
 ## Typical Flow
 
 ```powershell
-.\cas.ps1 setup
+.\cas.ps1 setup -NonInteractive
 .\cas.ps1 doctor
 .\cas.ps1 start
 ```

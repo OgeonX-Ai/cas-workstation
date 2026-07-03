@@ -1,0 +1,26 @@
+{
+  "source_path": "/mnt/c/PersonalRepo/worktrees/loop-engineering/README.md",
+  "type": "DOC",
+  "confidence": "high",
+  "manifest_override": true,
+  "title": "CAS Workstation",
+  "summary": "Overview and operating guide for the Windows-first CAS Workstation bootstrap bundle, managed tooling, configuration files, and typical setup workflow.",
+  "scope": [
+    "CAS Workstation",
+    "workstation bootstrap scripts",
+    "developer tooling",
+    "AI coder CLIs",
+    "CAS component repositories",
+    "shared runtime paths",
+    "MCP client configuration"
+  ],
+  "cross_refs": [
+    "stack.manifest.json",
+    "schemas/doctor.schema.json",
+    "scripts/Cas.Workstation.psm1",
+    "docs/support-matrix.md"
+  ],
+  "locked": false,
+  "precedence": 3,
+  "notes": ""
+}

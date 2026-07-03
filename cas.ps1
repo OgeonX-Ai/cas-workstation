@@ -1,32 +1,30 @@
-﻿param(
-    [Parameter(Mandatory=$true, Position=0)]
-    [ValidateSet('setup', 'doctor', 'start', 'upgrade', 'uninstall')]
-    [string]$Command
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory = $true, Position = 0)]
+    [ValidateSet("setup", "doctor", "start", "upgrade", "uninstall")]
+    [string]$Command,
+
+    [Parameter(ValueFromRemainingArguments = $true)]
+    [object[]]$CommandArguments
 )
 
-$ErrorActionPreference = 'Stop'
-$ScriptRoot = $PSScriptRoot
-
-switch ($Command) {
-    'setup' {
-        Write-Host "Running setup..."
-        & (Join-Path $ScriptRoot "setup.ps1")
-    }
-    'doctor' {
-        Write-Host "Running doctor..."
-        & (Join-Path $ScriptRoot "doctor.ps1")
-    }
-    'start' {
-        Write-Host "Running start..."
-        & (Join-Path $ScriptRoot "start.ps1")
-    }
-    'upgrade' {
-        Write-Host "Running upgrade..."
-        & (Join-Path $ScriptRoot "upgrade.ps1")
-    }
-    'uninstall' {
-        Write-Host "Running uninstall..."
-        & (Join-Path $ScriptRoot "uninstall.ps1")
-    }
+$ErrorActionPreference = "Stop"
+$entryPoints = @{
+    setup = "setup.ps1"
+    doctor = "doctor.ps1"
+    start = "start.ps1"
+    upgrade = "upgrade.ps1"
+    uninstall = "uninstall.ps1"
 }
 
+$scriptPath = Join-Path $PSScriptRoot $entryPoints[$Command]
+if (-not (Test-Path -LiteralPath $scriptPath -PathType Leaf)) {
+    throw "CAS command '$Command' is unavailable because '$scriptPath' was not found."
+}
+
+& $scriptPath @CommandArguments
+if (-not $?) {
+    exit 1
+}
+
+exit 0

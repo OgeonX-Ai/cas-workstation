@@ -43,6 +43,10 @@ foreach ($repo in $report.repos) {
     Write-Host (" - {0}: {1}" -f $repo.id, $repo.status)
 }
 
+Write-Host ""
+Write-Host "MCP runtime:"
+Write-Host (" - {0}: {1} ({2})" -f $report.mcpServer.id, $report.mcpServer.status, $report.mcpServer.path)
+
 if ($report.recommendations.Count -gt 0) {
     Write-Host ""
     Write-Host "Recommendations:"
