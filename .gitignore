@@ -1,9 +1,6 @@
 # Sub-project repos — each manages its own git history
-portfolio/gsd-orchestrator/
-portfolio/Promptimprover/
-portfolio/autogen/
-portfolio/cas-reference-product/
-portfolio/cloud-security-service-model/
+portfolio/
+worktrees/
 
 # Build artifacts
 bin/

@@ -6,12 +6,14 @@ configured AI-native coding workstation.
 
 ## Commands
 
+We now use a unified CLI wrapper `cas.ps1` to manage the workstation setup.
+
 ```powershell
-.\setup.ps1
-.\doctor.ps1
-.\start.ps1
-.\upgrade.ps1
-.\uninstall.ps1
+.\cas.ps1 setup
+.\cas.ps1 doctor
+.\cas.ps1 start
+.\cas.ps1 upgrade
+.\cas.ps1 uninstall
 ```
 
 ## What It Manages
@@ -29,11 +31,12 @@ configured AI-native coding workstation.
 - `schemas/doctor.schema.json` - machine-readable readiness report schema
 - `scripts/Cas.Workstation.psm1` - shared implementation module
 - `docs/support-matrix.md` - supported platform and component matrix
-
+- `docs/architecture.md` - detailed architecture overview
+- `docs/gemini-nano.md` - gemini nano integration documentation
 ## Typical Flow
 
 ```powershell
-.\setup.ps1 -NonInteractive
-.\doctor.ps1
-.\start.ps1
+.\cas.ps1 setup
+.\cas.ps1 doctor
+.\cas.ps1 start
 ```

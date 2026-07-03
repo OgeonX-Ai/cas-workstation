@@ -1,0 +1,11 @@
+{
+  "semantic": {
+    "localEnabled": true,
+    "mcpSamplingEnabled": false,
+    "baseUrl": "http://localhost:11434/v1",
+    "models": ["gemma3:12b"],
+    "timeoutMs": 120000,
+    "temperature": 0.2,
+    "allowNonLoopback": false
+  }
+}

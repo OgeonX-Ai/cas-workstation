@@ -3,8 +3,8 @@
   "bundleName": "CAS Workstation",
   "bundleId": "cas-workstation",
   "defaults": {
-    "rootPath": "C:\\CodingAutopilotSystem",
-    "configPath": "C:\\Users\\KimHarjamaki\\.cas",
+    "rootPath": "C:\\PersonalRepo",
+    "configPath": "C:\\Users\\KimHarjamäki\\.cas",
     "profile": "full"
   },
   "profiles": {
@@ -66,7 +66,7 @@
     }
   },
   "paths": {
-    "reposRoot": "repos",
+    "reposRoot": "portfolio",
     "logs": "logs",
     "state": "state",
     "memory": "memory",
@@ -352,7 +352,7 @@
     "transport": "stdio",
     "command": "node",
     "args": [
-      "C:\\CodingAutopilotSystem\\repos\\Promptimprover\\dist\\index.js"
+      "C:\\PersonalRepo\\portfolio\\Promptimprover\\mcp-server\\dist\\index.js"
     ]
   }
 }

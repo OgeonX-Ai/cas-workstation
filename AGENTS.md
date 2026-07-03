@@ -20,15 +20,15 @@ C:\PersonalRepo\
 
 ## Context Chain
 
-Each sub-project has its own `CLAUDE.md` (or `context.md`). Always read the nearest context file before making changes in a directory. Walk up to this root file for workspace-level rules.
+Each sub-project has its own `AGENTS.md` (or `context.md`). Always read the nearest context file before making changes in a directory. Walk up to this root file for workspace-level rules.
 
 | Project | Context file |
 |---|---|
-| gsd-orchestrator | `portfolio/gsd-orchestrator/CLAUDE.md` |
-| Promptimprover | `portfolio/Promptimprover/CLAUDE.md` → `context.md` tree |
-| autogen | `portfolio/autogen/CLAUDE.md` |
-| cas-reference-product | `portfolio/cas-reference-product/CLAUDE.md` |
-| gemini-nano | `gemini-nano/CLAUDE.md` |
+| gsd-orchestrator | `portfolio/gsd-orchestrator/AGENTS.md` |
+| Promptimprover | `portfolio/Promptimprover/AGENTS.md` → `context.md` tree |
+| autogen | `portfolio/autogen/AGENTS.md` |
+| cas-reference-product | `portfolio/cas-reference-product/AGENTS.md` |
+| gemini-nano | `gemini-nano/AGENTS.md` |
 
 ## Global Standards (from GLOBAL_AGENTS.md)
 

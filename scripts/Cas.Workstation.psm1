@@ -29,7 +29,7 @@ function Get-CasDefaultConfigPath {
         [pscustomobject]$Manifest = (Get-CasManifest)
     )
 
-    $Manifest.defaults.configPath
+    Join-Path $env:USERPROFILE ".cas"
 }
 
 function Get-CasProfile {
@@ -487,12 +487,11 @@ function New-CasClientConfigs {
         New-Item -ItemType Directory -Path $clientRoot -Force | Out-Null
     }
 
-    $promptImproverEntry = Join-Path (Join-Path (Join-Path $RootPath $Manifest.paths.reposRoot) "Promptimprover") "dist\index.js"
     $sharedServer = [ordered]@{
         mcpServers = @{
             ($Manifest.sharedMcpServer.name) = @{
                 command = $Manifest.sharedMcpServer.command
-                args = @($promptImproverEntry)
+                args = $Manifest.sharedMcpServer.args
                 transport = $Manifest.sharedMcpServer.transport
             }
         }
@@ -539,4 +538,28 @@ function Start-CasRuntime {
     }
 }
 
-Export-ModuleMember -Function *-Cas*
+function Write-CasLog {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$Message,
+        [string]$Level = "INFO",
+        [string]$ConfigPath = (Get-CasDefaultConfigPath),
+        [pscustomobject]$Manifest = (Get-CasManifest)
+    )
+
+    $logDir = Join-Path $ConfigPath $Manifest.paths.logs
+    if (-not (Test-Path -LiteralPath $logDir)) {
+        return
+    }
+
+    $logFile = Join-Path $logDir "cas.log"
+    $logEntry = [ordered]@{
+        timestamp = [DateTime]::UtcNow.ToString("o")
+        level = $Level
+        message = $Message
+    }
+
+    $logEntry | ConvertTo-Json -Compress | Out-File -FilePath $logFile -Append -Encoding UTF8
+}
+
+Export-ModuleMember -Function *-Cas*, Write-CasLog

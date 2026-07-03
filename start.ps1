@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [ValidateSet("core", "full")]
     [string]$Profile = "full",
@@ -6,9 +6,9 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$env:USERPROFILE = "C:\Users\KimHarjamaki"
-$env:HOME = "C:\Users\KimHarjamaki"
-$env:AZURE_CONFIG_DIR = "C:\Users\KimHarjamaki\.azure"
+$env:USERPROFILE = "C:\Users\KimHarjamäki"
+$env:HOME = "C:\Users\KimHarjamäki"
+$env:AZURE_CONFIG_DIR = "C:\Users\KimHarjamäki\.azure"
 
 Import-Module (Join-Path $PSScriptRoot "scripts\Cas.Workstation.psm1") -Force
 
@@ -19,3 +19,4 @@ Start-CasRuntime -Profile $Profile -RootPath $RootPath -Manifest $manifest
 
 Write-Host "CAS Workstation runtime checks completed."
 Write-Host "Use .\doctor.ps1 if you need a full readiness report."
+

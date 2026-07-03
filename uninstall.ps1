@@ -1,13 +1,13 @@
-[CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
+﻿[CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
 param(
     [string]$RootPath,
     [string]$ConfigPath
 )
 
 $ErrorActionPreference = "Stop"
-$env:USERPROFILE = "C:\Users\KimHarjamaki"
-$env:HOME = "C:\Users\KimHarjamaki"
-$env:AZURE_CONFIG_DIR = "C:\Users\KimHarjamaki\.azure"
+$env:USERPROFILE = "C:\Users\KimHarjamäki"
+$env:HOME = "C:\Users\KimHarjamäki"
+$env:AZURE_CONFIG_DIR = "C:\Users\KimHarjamäki\.azure"
 
 Import-Module (Join-Path $PSScriptRoot "scripts\Cas.Workstation.psm1") -Force
 
@@ -24,3 +24,4 @@ foreach ($target in @($RootPath, $ConfigPath)) {
 }
 
 Write-Host "CAS Workstation uninstall completed."
+
