@@ -22,4 +22,54 @@
 
 ## Next Milestone
 
-Not yet defined. Start with `$gsd-new-milestone` to establish fresh requirements and phases.
+### 🚧 v1.1 Portfolio Hardening (in progress — started 2026-07-03)
+
+Cross-repository hardening driven by verified findings in
+[`docs/improvement-backlog.md`](../docs/improvement-backlog.md).
+
+#### Phase 9: Systemic CI and Security Hardening
+
+- [x] Phase 9: Systemic CI and Security Hardening (completed 2026-07-04)
+
+**Goal:** Every active workflow uses bounded execution, least privilege, correct
+analysis configuration, and maintainable action-update policy.
+**Requirements:** CI-01, CI-02, CI-03
+**Success criteria:**
+1. No evidence-backed CodeQL language mismatch remains.
+2. Active workflows declare minimum permissions and bounded job runtimes.
+3. GitHub Actions dependencies are pinned or managed by an explicit update policy.
+
+#### Phase 10: Contract Registry Consumer Protection
+
+- [ ] Phase 10: Contract Registry Consumer Protection
+
+**Goal:** Published CAS contracts are reproducible and consumers detect registry
+or compatibility drift before merge.
+**Requirements:** REG-01, REG-02, REG-03
+**Success criteria:**
+1. Registry artifacts build and validate deterministically.
+2. Every genuine schema consumer validates the expected registry contract in CI.
+3. Registry unavailability or digest drift fails with actionable evidence.
+
+#### Phase 11: Infrastructure and Code Robustness Closure
+
+- [x] Phase 11: Infrastructure and Code Robustness Closure (completed 2026-07-04)
+
+**Goal:** Close only reproduced infrastructure and runtime robustness findings,
+while recording false positives without speculative refactors.
+**Requirements:** ROB-01, ROB-02, ROB-03
+**Success criteria:**
+1. Bicep security defaults and lint configuration pass repository validation.
+2. Each C3–C6 lead is reproduced and fixed with regression coverage or dismissed with evidence.
+3. No broad exception or input-limit change is introduced without a concrete failing boundary.
+
+#### Phase 12: Portfolio Hardening Integration and UAT
+
+- [ ] Phase 12: Portfolio Hardening Integration and UAT
+
+**Goal:** Prove v1.1 works across repository boundaries and is ready to archive.
+**Requirements:** VER-01, VER-02, VER-03
+**Success criteria:**
+1. Repository-native tests and security checks pass for every changed repository.
+2. Cross-repository registry and workflow flows pass end to end.
+3. Milestone audit and UAT contain no unresolved blocking item.

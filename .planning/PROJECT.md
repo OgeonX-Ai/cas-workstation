@@ -31,12 +31,17 @@ The milestone delivered 8 phases, 22 plans, and 28 validated requirements.
 Default-branch CI passed after integration in every repository with configured
 checks. Azure resources were not deployed as part of this milestone.
 
-## Next Milestone Goals
+## Current Milestone: v1.1 Portfolio Hardening
 
-Fresh requirements have not been selected. Candidate work remains deliberately
-deferred: multi-machine scheduling, Kubernetes delivery, and automatic
-production deployment. The next milestone must reassess these candidates
-against actual operator needs before promoting any of them.
+**Goal:** Close verified cross-repository CI, contract-distribution,
+infrastructure, and robustness gaps before starting the Shared AI Engineering
+OS milestone.
+
+**Target features:**
+- Least-privilege, bounded GitHub Actions across the active portfolio
+- Consumer-side validation of the published CAS contract registry
+- Verified closure of remaining Bicep and code-robustness findings
+- Milestone-level UAT, security, and integration evidence
 
 ## Target Runtime
 
@@ -60,7 +65,10 @@ against actual operator needs before promoting any of them.
 
 ### Active
 
-None. The next milestone will define a fresh requirement set.
+- Portfolio workflow permissions and timeout hardening
+- Contract-registry consumer drift detection
+- Evidence-led validation of remaining robustness findings
+- Cross-repository milestone audit and UAT
 
 ### Out of Scope
 
@@ -113,4 +121,4 @@ and update STATE.md with the exact evidence and remaining blockers. Architectura
 ownership changes require a superseding ADR.
 
 ---
-*Last updated: 2026-07-02 after v1.0 milestone*
+*Last updated: 2026-07-04 for v1.1 Portfolio Hardening*

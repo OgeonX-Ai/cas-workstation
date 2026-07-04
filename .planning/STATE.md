@@ -1,17 +1,17 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: Loop Engineering
-status: Awaiting next milestone
-stopped_at: Phase 8 complete (3/3) — milestone audit passed
-last_updated: "2026-07-02T00:00:00+03:00"
-last_activity: 2026-07-02 — Milestone v1.0 archived after merge
+milestone: v1.1
+milestone_name: Portfolio Hardening
+status: ready_to_plan
+last_updated: 2026-07-04T19:20:23.867Z
+last_activity: 2026-07-04
 progress:
-  total_phases: 8
-  completed_phases: 8
-  total_plans: 22
-  completed_plans: 22
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 7
+  percent: 0
+stopped_at: Phase 11 complete (1/1) — ready to discuss Phase 12
 ---
 
 # Project State
@@ -21,20 +21,20 @@ progress:
 See: `.planning/PROJECT.md` (updated 2026-07-02)
 
 **Core value:** A Windows-first developer can trust CAS to pursue repository goals in parallel without losing control of state, cost, safety, evidence, or completion.
-**Current focus:** Planning the next milestone
+**Current focus:** Phase 12 — portfolio hardening integration and uat
 
 ## Current Position
 
-Phase: Milestone v1.0 complete
-Plan: —
-Status: Awaiting next milestone
-Last activity: 2026-07-02 — Milestone v1.0 archived after merge
+Phase: 12
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-07-04
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 22
+- Total plans completed: 27
 - Average duration: -
 - Total execution time: 0 hours
 

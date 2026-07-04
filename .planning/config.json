@@ -1,8 +1,7 @@
 {
   "model_profile": "balanced",
-  "commit_docs": false,
+  "commit_docs": true,
   "search_gitignored": false,
-  "branching_strategy": "none",
   "phase_branch_template": "feat/phase-{phase}",
   "milestone_branch_template": "feat/{milestone}",
   "quick_branch_template": "fix/{slug}",
@@ -14,5 +13,8 @@
     "_auto_chain_active": false
   },
   "parallelization": 1,
-  "brave_search": false
+  "brave_search": false,
+  "git": {
+    "branching_strategy": "none"
+  }
 }
