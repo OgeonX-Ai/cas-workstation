@@ -1,12 +1,12 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.2
-milestone_name: Shared AI Engineering OS
+milestone: v1.3
+milestone_name: Bootstrapping
 status: planning
-last_updated: "2026-07-05T08:12:24.465Z"
+last_updated: "2026-07-05T14:00:00.000Z"
 last_activity: 2026-07-05
 progress:
-  total_phases: 9
+  total_phases: 0
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -17,17 +17,17 @@ progress:
 
 ## Project Reference
 
-See: `.planning/PROJECT.md` (updated 2026-07-02)
+See: `.planning/PROJECT.md` (updated 2026-07-05)
 
 **Core value:** A Windows-first developer can trust CAS to pursue repository goals in parallel without losing control of state, cost, safety, evidence, or completion.
-**Current focus:** Planning Shared AI Engineering OS milestone
+**Current focus:** Bootstrapping v1.3 milestone
 
 ## Current Position
 
-Phase: 13 — Live Tool Inventory and Compatibility Baseline
+Phase: —
 Plan: —
-Status: Ready to execute roadmap
-Last activity: 2026-07-05 — Milestone v1.2 roadmap created
+Status: Planning
+Last activity: 2026-07-05 — v1.2 Shared AI Engineering OS archived.
 
 ## Performance Metrics
 
@@ -49,12 +49,11 @@ Last activity: 2026-07-05 — Milestone v1.2 roadmap created
 
 ### Pending Todos
 
-- Execute phases 13–21 of the Shared AI Engineering OS milestone.
+- Run `/gsd-new-milestone` to begin planning v1.3 Bootstrapping.
 
 ### Blockers/Concerns
 
-- The root checkout contains unrelated user modifications; stage only milestone-owned files.
-- Azure deployment is not authorized by this milestone.
+- None.
 
 ## Deferred Items
 
@@ -67,9 +66,9 @@ Last activity: 2026-07-05 — Milestone v1.2 roadmap created
 ## Session Continuity
 
 Last session: 2026-07-05
-Stopped at: Milestone v1.1 archived; starting Shared AI Engineering OS
-Resume file: .planning/milestones/v1.1-MILESTONE-AUDIT.md
+Stopped at: Milestone v1.2 archived; preparing for v1.3
+Resume file: .planning/PROJECT.md
 
 ## Operator Next Steps
 
-- Execute Phase 13 compatibility baseline.
+- Define requirements and roadmap for v1.3 via `/gsd-new-milestone`.

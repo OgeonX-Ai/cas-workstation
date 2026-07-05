@@ -22,6 +22,14 @@ verifier and acceptance criterion passes.
 
 ## Current State
 
+**v1.2 Shared AI Engineering OS shipped 2026-07-05.** 
+A canonical cross-tool engineering OS was established with explicit invariant contracts across Antigravity, Claude, Codex, Gemini, and local tooling. Proportionate SDLC profiles, safe fan-out, tool adapters, and policy verifiers were deployed to replace unstructured planning. All requirement audits and E2E pilots succeeded without paid-API dependencies.
+
+Across v1.0 to v1.2, 21 phases are complete.
+
+<details>
+<summary>Archived State (v1.1)</summary>
+
 **v1.1 Portfolio Hardening shipped 2026-07-05.** The workstation, contracts,
 durable scheduler, bounded MAF fan-out, deterministic verification, operator
 telemetry, identity-first Azure boundary, and four executable pilot scenarios
@@ -32,14 +40,11 @@ canonical schema identity, and live consumer drift gates pass on merged `main`.
 Across v1.0 and v1.1, 12 phases are complete. The next milestone establishes a
 shared cross-tool engineering operating contract without paid API dependency.
 
-## Current Milestone: v1.2 Shared AI Engineering OS
+</details>
 
-**Goal:** Combine GSD lifecycle management with proportionate loop-engineering
-SDLC controls, model-role tiering, safe delegation, and cross-tool verification.
+## Next Milestone: v1.3 Bootstrapping
 
-**Target features:** canonical policy, quick/standard/critical SDLC profiles,
-tool compatibility matrix, deterministic routing, safe fan-out, role-based model
-tiering, optional benchmark-gated Ollama classification, and fresh-session pilots.
+**Goal:** TBD via `/gsd-new-milestone`.
 
 ## Target Runtime
 
@@ -67,9 +72,17 @@ Additional validated outcomes from v1.1:
 - Canonical contract identity with immutable v1.1.1 publication and live consumer drift gates.
 - Evidence-led robustness closure and cross-repository UAT.
 
+Additional validated outcomes from v1.2:
+
+- Canonical cross-tool engineering contract with automated drift verification.
+- Quick, standard, and critical SDLC profiles integrated with GSD.
+- Safe delegation, role-based model tiering, and collision controls.
+- Deterministic routing with local fallback.
+- Paid-API independent fresh session bootstrapping.
+
 ### Active
 
-- Shared AI Engineering OS requirements and implementation
+- TBD
 
 ### Out of Scope
 
@@ -122,4 +135,4 @@ and update STATE.md with the exact evidence and remaining blockers. Architectura
 ownership changes require a superseding ADR.
 
 ---
-*Last updated: 2026-07-05 after v1.1 Portfolio Hardening*
+*Last updated: 2026-07-05 after v1.2 Shared AI Engineering OS*

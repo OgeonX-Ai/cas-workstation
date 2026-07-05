@@ -1,5 +1,24 @@
 # Milestones
 
+## v1.2 Shared AI Engineering OS (Shipped: 2026-07-05)
+
+**Phases completed:** 9 phases
+
+**Key accomplishments:**
+
+- Established current, evidence-backed capabilities and constraints for Codex, Claude, Gemini, Antigravity, and Ollama.
+- Created one authoritative, version-controlled cross-tool engineering contract with automated verification and drift protection.
+- Integrated proportional quick, standard, and critical SDLC loops natively with GSD lifecycle management.
+- Defined efficient bounded fan-out, collision safety, and safe model-tiering for local and remote AI execution.
+- Set up compact context transfer, deterministic routing with optional local fallback, and robust telemetry disciplines.
+- Passed all requirement audits, cross-tool pilots, and E2E verifications without paid-API dependencies.
+
+**Verification:** All v1.2 requirements verified and UAT manually confirmed; pilots passed clean session bootstrapping.
+
+**Known deferred work:** Paid API-based routing, automatic tool provisioning, and distributed cross-machine scheduling remain out of scope.
+
+---
+
 ## v1.1 Portfolio Hardening (Shipped: 2026-07-05)
 
 **Phases completed:** 4 phases, 8 plans, 0 tasks
