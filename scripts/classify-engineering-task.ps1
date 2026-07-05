@@ -15,20 +15,23 @@ if (Test-Path $policyPath) {
 if ($ollamaPolicy -and $ollamaPolicy.enabled) {
     try {
         $prompt = @"
-Classify this engineering task. Return JSON only with taskClass, risk, sdlcProfile, roleAlias.
-Allowed taskClass: trivial, defect, substantial, security, ai, ui, documentation, operations.
-Allowed risk: low, medium, high, critical.
-Allowed sdlcProfile: quick, standard, critical.
-Allowed roleAlias: light, standard, strong, adjudicator.
+Classify this engineering task. Return JSON only with EXACTLY these keys: "taskClass", "risk", "sdlcProfile", "roleAlias".
+Rules:
+- "Fix a typo in README.md" -> {"taskClass":"trivial","risk":"low","sdlcProfile":"quick","roleAlias":"light"}
+- "Reproduce and fix intermittent null reference in scheduler" -> {"taskClass":"defect","risk":"medium","sdlcProfile":"standard","roleAlias":"strong"}
+- "Threat model authentication and rotate production identity" -> {"taskClass":"security","risk":"critical","sdlcProfile":"critical","roleAlias":"adjudicator"}
+- "Map repository architecture and summarize files" -> {"taskClass":"documentation","risk":"low","sdlcProfile":"quick","roleAlias":"light"}
+- "Design a cross-repository orchestration architecture" -> {"taskClass":"substantial","risk":"high","sdlcProfile":"critical","roleAlias":"strong"}
+
 Task: $Task
 "@
         $schema = @{
             type = "object"
             properties = @{
-                taskClass = @{ type = "string" }
-                risk = @{ type = "string" }
-                sdlcProfile = @{ type = "string" }
-                roleAlias = @{ type = "string" }
+                taskClass = @{ type = "string"; enum = @("trivial", "defect", "substantial", "security", "ai", "ui", "documentation", "operations") }
+                risk = @{ type = "string"; enum = @("low", "medium", "high", "critical") }
+                sdlcProfile = @{ type = "string"; enum = @("quick", "standard", "critical") }
+                roleAlias = @{ type = "string"; enum = @("light", "standard", "strong", "adjudicator") }
             }
             required = @("taskClass", "risk", "sdlcProfile", "roleAlias")
         }
@@ -37,7 +40,8 @@ Task: $Task
             prompt = $prompt
             format = $schema
             stream = $false
-            keep_alive = "5m"
+            options = @{ temperature = 0.0 }
+            keep_alive = "1h"
         } | ConvertTo-Json -Depth 6
         
         # Determine appropriate timeout if available, otherwise rely on standard Invoke-RestMethod handling

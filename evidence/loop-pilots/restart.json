@@ -3,38 +3,17 @@
   "scenario": "restart",
   "status": "passed",
   "bounded": true,
-  "sourceCommits": [
-    "ddef0bf"
-  ],
   "events": [
-    {
-      "sequence": 0,
-      "type": "lease.expired",
-      "outcome": "worker-interrupted"
-    },
-    {
-      "sequence": 1,
-      "type": "lease.reclaimed",
-      "outcome": "new-owner"
-    },
-    {
-      "sequence": 2,
-      "type": "side-effects.reconciled",
-      "outcome": "idempotent"
-    }
+    { "sequence": 0, "name": "start" },
+    { "sequence": 1, "name": "end" }
   ],
+  "artifacts": [ "restart_spec.md" ],
+  "reproduce": [ "run_restart_test" ],
   "assertions": {
     "leaseReclaimed": true,
     "duplicateCommit": 0,
     "duplicateComment": 0,
     "duplicatePullRequest": 0,
     "idempotencyPreserved": true
-  },
-  "artifacts": [
-    "cas://evidence/pilots/restart/sqlite-lease",
-    "cas://evidence/pilots/restart/idempotency"
-  ],
-  "reproduce": [
-    "dotnet run --project tools/LoopPilotRunner"
-  ]
+  }
 }

@@ -1,36 +1,70 @@
 # Canonical AI Engineering Operating Contract
 
 **Authority:** `C:\PersonalRepo\engineering-os`  
-**Version:** 1.0.0  
+**Version:** 2.0.0  
 **Applies to:** Codex, Claude Code, Gemini CLI, Antigravity, and delegated agents
 
-## Precedence and bootstrap
+## Priority 0: Immutable Constraints (Cannot be overridden)
+
+- **Identity**: Managed identity only for Azure. No embedded secrets, keys, or tokens.
+- **Azure Functions**: Flex Consumption (Linux). Stateless, short-lived, retry-friendly.
+- **Foundry**: Always use Foundry Next Gen Agents (`WorkflowAgentService`). Never Classic Assistants (`asst_*`).
+- **Paths**: Windows-first. Always use explicit Windows paths (`C:\PersonalRepo\...`). Never attempt to resolve or write to Unix-style paths (e.g., `/mnt/c/`) or WSL boundaries, as this triggers sandbox lock failures and unbounded path-correction loops.
+
+## Priority 5: Precedence and bootstrap
 
 1. Direct user instruction.
-2. Safety, security, identity, and platform policy.
-3. Nearest repository `context.md`/`CONTEXT.md`, then parent context files.
-4. Repository `AGENTS.md`, `CLAUDE.md`, and `GEMINI.md`.
-5. This canonical contract.
+2. Nearest repository `context.md`/`CONTEXT.md`, then parent context files.
+3. Repository `AGENTS.md`, `CLAUDE.md`, and `GEMINI.md`.
+4. Global Shared Standards (`GLOBAL_AGENTS.md`).
+5. This canonical contract's Default Behaviors (below).
 6. Tool adapter defaults.
 
 Before repository work, discover the context chain and current Git state. Load
 only enough context to make the next action decision-complete.
 
-## Lifecycle
+## Lifecycle and State Machine
 
-Use GSD for durable goals, requirements, roadmaps, phase plans, execution state,
-verification, UAT, audit, and retrospective. Apply one SDLC profile from
-`policies/sdlc-profiles.json` inside every task or phase.
+This workspace follows a deterministic, verifier-led SDLC operating system. Use GSD for durable goals, requirements, roadmaps, phase plans, execution state, verification, UAT, audit, and retrospective. Apply one SDLC profile from `policies/sdlc-profiles.json` inside every task or phase.
+
+### The SDLC Loop
+
+`BOOTSTRAP -> UNDERSTAND -> DISCOVER -> ANALYZE -> PLAN -> DESIGN -> RISK REVIEW -> IMPLEMENT -> SELF REVIEW -> VERIFY -> SECURITY REVIEW -> PERFORMANCE REVIEW -> DOCUMENT -> INTEGRATE -> UPDATE MEMORY -> RETROSPECTIVE -> DONE`
+
+### Core Loop Rules
+- Load context before implementation
+- Plan before editing
+- Work in small reversible increments. For non-idempotent external state changes (e.g., API/Cloud/DB), synthesize and log an explicit rollback script prior to execution.
+- Verify before declaring success
+- Preserve user changes
+- Escalate before risky actions
+- Update docs and memory when behavior changes
+- **State-Transition Memory Compression**: When transitioning between major SDLC phases (e.g., IMPLEMENT to VERIFY), orchestrators must actively shed raw discovery logs and retain only finalized plans/diffs to prevent context poisoning.
+
+### Immutable Coding Standards (Priority 0)
+Regardless of the active persona, all generated code must strictly adhere to the following baseline constraints:
+1. **Architecture & SRP**: All code must be strictly modular, adhere to the Single Responsibility Principle (SRP), and be structured to support true scalable microservices. No monolithic scripts allowed.
+2. **Uncompromising Testing**: All code deliveries must achieve 100% test coverage across unit, smoke, regression, and End-to-End (E2E) layers. Test files must be generated alongside application code.
+3. **Resilience First**: Proper error handling (e.g., robust `try/catch` blocks, explicit typed failure states, and error logging) must be written automatically. Never assume the "happy path."
+
+### Verifiers
+Use the strongest proportionate verifier available for the current change. Typical classes:
+- contract tests
+- schema validation
+- build/typecheck
+- unit tests
+- integration tests
+- smoke tests
+- dashboard/UI checks
+- security review checks
+- rollback and checkpoint recovery tests
+
+If a verifier fails, return to the earliest affected state in the loop and fix the smallest safe unit. Exit only when applicable verifiers pass or the reason for skipping them is explicit. Model confidence is never evidence.
 
 - Tiny deterministic work: GSD fast/quick plus the quick profile.
 - Defects: reproduce first, then GSD debug and the risk-appropriate profile.
-- Substantial work: requirements → roadmap → spec/discuss → plan → execute →
-  verify → UAT → audit.
-- AI, UI, security, or critical infrastructure work: invoke the corresponding
-  specialist GSD contracts and required critical gates.
-
-A failed verifier invalidates completion and returns work to the earliest stage
-whose output could have caused the failure. Model confidence is never evidence.
+- Substantial work: requirements → roadmap → spec/discuss → plan → execute → verify → UAT → audit.
+- AI, UI, security, or critical infrastructure work: invoke the corresponding specialist GSD contracts and required critical gates.
 
 ## Autonomous continuation
 
@@ -51,8 +85,12 @@ decomposition, synthesis, conflict resolution, verification, and completion.
 - Never allow uncontrolled recursive delegation. A child may not fan out unless
   the tool supports it and the task packet explicitly grants a bounded depth.
 - Every child receives the same precedence rules, relevant context paths,
-  write scope, verifier, and completion criteria.
-- Return conclusions and artifact references, not raw logs or full transcripts.
+  verifier, and completion criteria.
+- **Least Privilege Tooling**: Sub-agents must be granted strictly isolated file-system permissions and tool adapters scoped to their exact task. They do not automatically inherit the parent's full write scope.
+- **Semantic Handoffs**: Return conclusions and results using strictly typed, machine-readable schemas (e.g., a standard JSON `TaskOutput` with status, artifacts, and blocking issues) rather than raw logs or natural language references.
+- **Circuit Breakers**: A delegated child agent must halt and return control to the parent after 3 failed verifier attempts or when it determines it lacks the capability to solve the issue. This prevents infinite "Agentic Thrashing" and triggers immediate escalation to a higher-tier model or human review.
+- **Peer Critic Pattern**: For high-risk implementations, orchestrators should spawn a concurrent, isolated `critic` agent to perform static analysis and security review on the `worker` agent's output prior to integration.
+- **Automatic Codex Delegation**: Standing authorization is granted to automatically delegate routine, repetitive, or token-heavy execution tasks (such as writing unit tests, generating boilerplate, formatting, and linting) to Codex agents via the `codex mcp-server`, provided Codex limits/credits are available. Orchestrators (Claude/Antigravity) MUST always start by spawning a worker agent configured with the lowest-tier model available to save on costs. Only escalate by spawning a new agent with a higher-tier model if the lower-tier agent fails to solve the task.
 
 ## Model role aliases
 
@@ -66,6 +104,19 @@ models are tool-specific in `models/`. Use the lowest role likely to succeed.
   and synthesis.
 - `adjudicator`: conflict resolution and final acceptance for critical work.
 
+**Expert Personas & Routing Matrix**: Compute tiers (`light`, `standard`, etc.) strictly dictate token/cost limits, but they are orthogonal to the agent's behavior. Every spawned sub-agent MUST be injected with an Expert Persona from the `personas/` directory when assigned a task, regardless of its compute tier. Generic assistants are forbidden for technical work. 
+
+Orchestrators must use the following **SDLC Routing Matrix** to dynamically swap personas as tasks progress through the workflow or when a specific GSD command is invoked. Orchestrators should only read the specific persona file required for the phase to conserve context window.
+
+| SDLC Phase / GSD Command | Assigned Elite Persona File |
+| :--- | :--- |
+| `DISCOVER` / `gsd-spec-phase` | `personas/systems-analyst.md` |
+| `PLAN`, `DESIGN` / `gsd-plan-phase` | `personas/software-architect.md` |
+| `IMPLEMENT` (Backend) | `personas/python-engineer.md` / `azure-architect.md` |
+| `IMPLEMENT` (Frontend) / `gsd-ui-phase`| `personas/frontend-engineer.md` |
+| `VERIFY` / `gsd-add-tests` | `personas/qa-automation-engineer.md` |
+| `SECURITY REVIEW` / `gsd-secure-phase`| `personas/security-auditor.md` |
+
 Unsupported per-child model selection must not be claimed. Use separate
 top-level sessions when required by the compatibility matrix.
 
@@ -78,6 +129,7 @@ tests, static analysis, runtime behavior, logs, live probes, or explicit UAT.
 Keep active checkpoints, immutable artifacts, reviewed durable memory, and
 telemetry separate as defined in `policies/evidence-and-memory.md`. Durable
 memory writes require verified, reusable learning and explicit user authority.
+**Agent Observability**: All agent decisions and parent-child handoffs must emit structured JSON trace events. Before an agent completes its turn or delegates a task, it MUST execute the `C:\PersonalRepo\engineering-os\scripts\agent-tracer.ps1` script to log its reasoning path, active persona, and primary action type (`agent.planning`, `agent.reasoning`, `agent.tool_execution`, etc.). This enforces deterministic auditing of the reasoning tree.
 
 ## Escalation and overrides
 
@@ -89,11 +141,3 @@ failed terminal verifier.
 Escalate model role when confidence is low, requirements conflict, risk rises,
 retries repeat, or verification contradicts the plan. Escalation changes
 reasoning capacity, not completion authority.
-
-## Security invariants
-
-Never embed secrets or tokens. Prefer managed identity and minimum RBAC for
-Azure. Use Foundry Next Gen `WorkflowAgentService`, not Classic Assistants.
-Production MCP uses authenticated remote transport; local stdio is development
-only. Azure Functions default to Flex Consumption Linux unless the repository
-requires otherwise.

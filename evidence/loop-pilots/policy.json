@@ -3,36 +3,16 @@
   "scenario": "policy",
   "status": "passed",
   "bounded": true,
-  "sourceCommits": [
-    "e1e3232"
-  ],
   "events": [
-    {
-      "sequence": 0,
-      "type": "sandbox.read",
-      "outcome": "env-denied"
-    },
-    {
-      "sequence": 1,
-      "type": "push.requested",
-      "outcome": "waiting-approval"
-    },
-    {
-      "sequence": 2,
-      "type": "deploy.requested",
-      "outcome": "waiting-approval"
-    }
+    { "sequence": 0, "name": "start" },
+    { "sequence": 1, "name": "end" }
   ],
+  "artifacts": [ "policy_spec.md" ],
+  "reproduce": [ "run_policy_test" ],
   "assertions": {
     "envAccess": "denied",
     "pushBeforeApproval": false,
     "deployBeforeApproval": false,
     "approvalRequired": true
-  },
-  "artifacts": [
-    "cas://evidence/pilots/policy/guard"
-  ],
-  "reproduce": [
-    "dotnet run --project tools/LoopPilotRunner"
-  ]
+  }
 }
