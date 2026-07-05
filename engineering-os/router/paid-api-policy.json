@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "allowedPurpose": "routing-classification-fallback",
+  "candidate": "paid-model-fast",
+  "endpoint": "https://api.paid-routing.internal/v1/classify",
+  "apiKeyEnv": "PAID_ROUTER_API_KEY",
+  "fallback": "deterministic-rules"
+}

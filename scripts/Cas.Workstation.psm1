@@ -506,6 +506,26 @@ function Install-CasTool {
     throw "No supported installer was available for $($Tool.displayName)."
 }
 
+function Ensure-CasTool {
+    param(
+        [pscustomobject]$Tool
+    )
+
+    $status = Get-CasToolStatus -Tool $Tool
+    if ($status.status -ne "installed") {
+        Write-Host "[provision] Automatically provisioning $($Tool.displayName) on-the-fly..."
+        Install-CasTool -Tool $Tool
+        $postStatus = Get-CasToolStatus -Tool $Tool
+        if ($postStatus.status -ne "installed") {
+            Write-Warning "Auto-provisioning completed but $($Tool.displayName) is still not reporting as 'installed'."
+        } else {
+            Write-Host "[provision] Successfully provisioned $($Tool.displayName)."
+        }
+    } else {
+        Write-Host "[ok] $($Tool.displayName) already installed ($($status.installedVersion))."
+    }
+}
+
 function Sync-CasRepo {
     param(
         [pscustomobject]$Repo,

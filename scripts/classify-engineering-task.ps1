@@ -22,12 +22,23 @@ Allowed sdlcProfile: quick, standard, critical.
 Allowed roleAlias: light, standard, strong, adjudicator.
 Task: $Task
 "@
+        $schema = @{
+            type = "object"
+            properties = @{
+                taskClass = @{ type = "string" }
+                risk = @{ type = "string" }
+                sdlcProfile = @{ type = "string" }
+                roleAlias = @{ type = "string" }
+            }
+            required = @("taskClass", "risk", "sdlcProfile", "roleAlias")
+        }
         $body = @{
             model = $ollamaPolicy.candidate
             prompt = $prompt
+            format = $schema
             stream = $false
             keep_alive = "5m"
-        } | ConvertTo-Json
+        } | ConvertTo-Json -Depth 6
         
         # Determine appropriate timeout if available, otherwise rely on standard Invoke-RestMethod handling
         $resp = Invoke-RestMethod -Uri "http://localhost:11434/api/generate" -Method Post -Body $body -ContentType "application/json" -ErrorAction Stop
@@ -51,7 +62,51 @@ Task: $Task
             return $result
         }
     } catch {
-        # Fallback to deterministic regex rules
+        # Fallback to Paid API before deterministic rules
+        $paidPolicyPath = Join-Path (Split-Path -Parent $PSScriptRoot) 'engineering-os\router\paid-api-policy.json'
+        $paidPolicy = $null
+        if (Test-Path $paidPolicyPath) {
+            try { $paidPolicy = Get-Content $paidPolicyPath -Raw | ConvertFrom-Json } catch {}
+        }
+        
+        if ($paidPolicy -and $paidPolicy.enabled) {
+            try {
+                $headers = @{ "Content-Type" = "application/json" }
+                if ($paidPolicy.apiKeyEnv -and [Environment]::GetEnvironmentVariable($paidPolicy.apiKeyEnv)) {
+                    $headers["Authorization"] = "Bearer " + [Environment]::GetEnvironmentVariable($paidPolicy.apiKeyEnv)
+                }
+                
+                $body = @{
+                    model = $paidPolicy.candidate
+                    prompt = $prompt
+                    format = $schema
+                } | ConvertTo-Json -Depth 6
+                
+                $resp = Invoke-RestMethod -Uri $paidPolicy.endpoint -Method Post -Headers $headers -Body $body -ErrorAction Stop
+                
+                $raw = if ($resp.response) { $resp.response.Trim() } else { $resp.Trim() }
+                $candidate = [regex]::Match($raw, '\{[\s\S]*\}').Value
+                $parsed = $candidate | ConvertFrom-Json
+                
+                if ($parsed.taskClass -and $parsed.risk -and $parsed.sdlcProfile -and $parsed.roleAlias) {
+                    $decision = [ordered]@{
+                        taskClass = $parsed.taskClass
+                        risk = $parsed.risk
+                        complexity = if ($parsed.complexity) { $parsed.complexity } else { 'moderate' }
+                        parallelizable = if ($null -ne $parsed.parallelizable) { [bool]$parsed.parallelizable } else { $false }
+                        sdlcProfile = $parsed.sdlcProfile
+                        roleAlias = $parsed.roleAlias
+                        confidence = if ($parsed.confidence) { $parsed.confidence } else { 0.85 }
+                        escalationReason = if ($parsed.escalationReason) { $parsed.escalationReason } else { $null }
+                    }
+                    $result = [pscustomobject]$decision
+                    if ($AsJson) { return ($result | ConvertTo-Json -Depth 4 -Compress) }
+                    return $result
+                }
+            } catch {
+                # Fallback to deterministic regex rules
+            }
+        }
     }
 }
 
