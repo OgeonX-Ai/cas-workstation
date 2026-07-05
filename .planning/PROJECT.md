@@ -42,9 +42,9 @@ shared cross-tool engineering operating contract without paid API dependency.
 
 </details>
 
-## Next Milestone: v1.3 Bootstrapping
+## Current Milestone: v1.3 Bootstrapping
 
-**Goal:** TBD via `/gsd-new-milestone`.
+**Goal:** Scale the CAS engineering loop by resolving Ollama latency bottlenecks, implementing multi-machine distributed scheduling, and integrating automatic tool provisioning and paid API-based fallback routing.
 
 ## Target Runtime
 
@@ -82,7 +82,10 @@ Additional validated outcomes from v1.2:
 
 ### Active
 
-- TBD
+- Scale the CAS engineering loop (multi-machine scheduling, parallel handling)
+- Minimize Ollama latency and establish local fallback optimizations
+- Automatic tool provisioning
+- Optional paid API-based routing fallback
 
 ### Out of Scope
 
