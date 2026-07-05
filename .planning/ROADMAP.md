@@ -41,7 +41,7 @@ analysis configuration, and maintainable action-update policy.
 
 #### Phase 10: Contract Registry Consumer Protection
 
-- [ ] Phase 10: Contract Registry Consumer Protection
+- [x] Phase 10: Contract Registry Consumer Protection (completed 2026-07-05)
 
 **Goal:** Published CAS contracts are reproducible and consumers detect registry
 or compatibility drift before merge.
@@ -65,7 +65,7 @@ while recording false positives without speculative refactors.
 
 #### Phase 12: Portfolio Hardening Integration and UAT
 
-- [ ] Phase 12: Portfolio Hardening Integration and UAT
+- [x] Phase 12: Portfolio Hardening Integration and UAT (completed 2026-07-05)
 
 **Goal:** Prove v1.1 works across repository boundaries and is ready to archive.
 **Requirements:** VER-01, VER-02, VER-03

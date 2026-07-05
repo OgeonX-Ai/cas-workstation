@@ -15,7 +15,7 @@
 
 - [x] **REG-01**: CAS Contracts builds and validates a deterministic registry containing stable and immutable schema paths.
 - [x] **REG-02**: Genuine contract consumers verify the expected registry schema or manifest in CI without requiring secrets.
-- [ ] **REG-03**: Registry availability, digest, and compatibility failures produce actionable CI evidence.
+- [x] **REG-03**: Registry availability, digest, and compatibility failures produce actionable CI evidence.
 
 ### Robustness
 
@@ -26,8 +26,8 @@
 ### Verification
 
 - [x] **VER-01**: Every changed repository passes its native build, test, lint, and security checks.
-- [ ] **VER-02**: Contract publication and consumer validation work end to end from generated registry artifact to consumer gate.
-- [ ] **VER-03**: v1.1 milestone audit and UAT report no unresolved blocking requirement or integration flow.
+- [x] **VER-02**: Contract publication and consumer validation work end to end from generated registry artifact to consumer gate.
+- [x] **VER-03**: v1.1 milestone audit and UAT report no unresolved blocking requirement or integration flow.
 
 ## Future Requirements
 
@@ -51,13 +51,13 @@
 | CI-03 | Phase 9 | Complete |
 | REG-01 | Phase 10 | Complete |
 | REG-02 | Phase 10 | Complete |
-| REG-03 | Phase 10 | Pending |
+| REG-03 | Phase 10 | Complete |
 | ROB-01 | Phase 11 | Complete |
 | ROB-02 | Phase 11 | Complete |
 | ROB-03 | Phase 11 | Complete |
 | VER-01 | Phase 12 | Complete |
-| VER-02 | Phase 12 | Pending |
-| VER-03 | Phase 12 | Pending |
+| VER-02 | Phase 12 | Complete |
+| VER-03 | Phase 12 | Complete |
 
 **Coverage:** 12 requirements, 12 mapped, 0 unmapped.
 

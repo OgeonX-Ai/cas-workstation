@@ -1,3 +1,7 @@
+---
+requirements-completed: [CI-01, CI-02, CI-03]
+---
+
 # Plan 09-02 Summary
 
 **Repository:** `portfolio/cas-contracts`

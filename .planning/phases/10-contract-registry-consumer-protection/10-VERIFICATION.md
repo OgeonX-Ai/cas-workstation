@@ -1,5 +1,5 @@
 ---
-status: human_needed
+status: passed
 phase: 10
 verified: 2026-07-04
 ---
@@ -14,9 +14,14 @@ verified: 2026-07-04
 - Orchestrator v1.1 compatibility: 5/5 passed.
 - Live drift workflows parse and contain bounded, least-privilege jobs.
 
-## Human-controlled release gate
+## Live release evidence
 
-The live Pages registry returns only release `0.1.0`; `v1.1.0` is not published.
-After the `cas-contracts` registry branch is reviewed and merged, create/push the
-intended release tag and confirm both live consumer workflows pass. This phase
-must not be marked passed before that evidence exists.
+- `v1.1.0` was published, then retained as immutable evidence after review found
+  a schema-identity regression.
+- Corrective `v1.1.1` is published and stable line `v1.1` points to it.
+- `common.schema.json` uses canonical identity
+  `https://schemas.coding-autopilot.dev/v1.1/common.schema.json`.
+- Autogen live drift run `28734067301` passed on `main`.
+- GSD Orchestrator live drift run `28734067953` passed on `main`.
+
+REG-01 through REG-03 are satisfied.
