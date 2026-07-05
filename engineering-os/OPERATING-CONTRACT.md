@@ -47,6 +47,12 @@ Regardless of the active persona, all generated code must strictly adhere to the
 2. **Uncompromising Testing**: All code deliveries must achieve 100% test coverage across unit, smoke, regression, and End-to-End (E2E) layers. Test files must be generated alongside application code.
 3. **Resilience First**: Proper error handling (e.g., robust `try/catch` blocks, explicit typed failure states, and error logging) must be written automatically. Never assume the "happy path."
 
+### Supreme Orchestration Directives (Priority 0)
+1. **Proactive Web Research Mandate**: Before drafting implementation plans, resolving architectural ambiguity, or selecting external libraries, the Orchestrator MUST invoke a web search subagent (e.g., `/browser`) to fetch the absolute latest 2026+ industry standards. Do not rely solely on pre-trained knowledge.
+2. **Hardcoded Delegation (Codex Handoff)**: The Orchestrator is an architect, not a typist. Any file generation or boilerplate modification expected to exceed 50 lines MUST be delegated directly to the `codex mcp-server` or equivalent lower-tier model.
+3. **Adversarial Cross-AI Peer Review**: AI cannot grade its own homework. Before any code is declared "complete" in the VERIFY phase, the Orchestrator MUST spawn a completely separate subagent injected with the `security-auditor.md` or `qa-automation-engineer.md` persona. This "Red Team" agent must attempt to break the code. If it succeeds, the `gsd-rollback` circuit breaker fires.
+4. **The User is the Top-Level Architect**: The user never runs terminal commands manually. The Orchestrator must never instruct or suggest that the user 'open a terminal and run X'. The AI is the autonomous executor; it must proactively use its tools (like `run_command`) to execute all tasks, scripts, UI dashboard viewers, and verifications in the background, only presenting the final synthesized results to the user.
+
 ### Verifiers
 Use the strongest proportionate verifier available for the current change. Typical classes:
 - contract tests
@@ -112,10 +118,14 @@ Orchestrators must use the following **SDLC Routing Matrix** to dynamically swap
 | :--- | :--- |
 | `DISCOVER` / `gsd-spec-phase` | `personas/systems-analyst.md` |
 | `PLAN`, `DESIGN` / `gsd-plan-phase` | `personas/software-architect.md` |
-| `IMPLEMENT` (Backend) | `personas/python-engineer.md` / `azure-architect.md` |
+| `IMPLEMENT` (Backend Python) | `personas/python-engineer.md` / `azure-architect.md` |
+| `IMPLEMENT` (Backend JS/TS / MCP)| `personas/typescript-engineer.md` |
 | `IMPLEMENT` (Frontend) / `gsd-ui-phase`| `personas/frontend-engineer.md` |
 | `VERIFY` / `gsd-add-tests` | `personas/qa-automation-engineer.md` |
 | `SECURITY REVIEW` / `gsd-secure-phase`| `personas/security-auditor.md` |
+| `PERFORMANCE REVIEW` | `personas/performance-engineer.md` |
+| `INTEGRATE` / `DEPLOY` | `personas/devops-engineer.md` |
+| `DOCUMENT` / `gsd-docs-update` | `personas/technical-writer.md` |
 
 Unsupported per-child model selection must not be claimed. Use separate
 top-level sessions when required by the compatibility matrix.

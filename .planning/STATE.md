@@ -1,7 +1,7 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.3
-milestone_name: Bootstrapping
+milestone: v1.4
+milestone_name: Quality and Resilience Hardening
 status: planning
 last_updated: "2026-07-05T14:00:00.000Z"
 last_activity: 2026-07-05
@@ -20,7 +20,7 @@ progress:
 See: `.planning/PROJECT.md` (updated 2026-07-05)
 
 **Core value:** A Windows-first developer can trust CAS to pursue repository goals in parallel without losing control of state, cost, safety, evidence, or completion.
-**Current focus:** Bootstrapping v1.3 milestone
+**Current focus:** Bootstrapping v1.4 milestone
 
 ## Current Position
 
@@ -49,7 +49,7 @@ Last activity: 2026-07-05 — v1.2 Shared AI Engineering OS archived.
 
 ### Pending Todos
 
-- Run `/gsd-new-milestone` to begin planning v1.3 Bootstrapping.
+- Execute Phase 26 for Test Coverage Automation.
 
 ### Blockers/Concerns
 
@@ -71,4 +71,4 @@ Resume file: .planning/PROJECT.md
 
 ## Operator Next Steps
 
-- Define requirements and roadmap for v1.3 via `/gsd-new-milestone`.
+- Proceed to `/gsd-plan-phase 26` to begin implementation.

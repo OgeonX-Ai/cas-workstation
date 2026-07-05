@@ -22,10 +22,20 @@ verifier and acceptance criterion passes.
 
 ## Current State
 
+**v1.3 Bootstrapping shipped 2026-07-05.**
+Ollama latency bottlenecks were resolved with caching and async optimizations, distributed scheduling architecture was implemented across nodes, automatic tool provisioning and paid API-based routing were integrated, and E2E pilots verified multi-machine execution and latency improvements.
+
+Across v1.0 to v1.3, 25 phases are complete.
+
+<details>
+<summary>Archived State (v1.2)</summary>
+
 **v1.2 Shared AI Engineering OS shipped 2026-07-05.** 
 A canonical cross-tool engineering OS was established with explicit invariant contracts across Antigravity, Claude, Codex, Gemini, and local tooling. Proportionate SDLC profiles, safe fan-out, tool adapters, and policy verifiers were deployed to replace unstructured planning. All requirement audits and E2E pilots succeeded without paid-API dependencies.
 
 Across v1.0 to v1.2, 21 phases are complete.
+
+</details>
 
 <details>
 <summary>Archived State (v1.1)</summary>
@@ -42,9 +52,9 @@ shared cross-tool engineering operating contract without paid API dependency.
 
 </details>
 
-## Current Milestone: v1.3 Bootstrapping
+## Current Milestone: v1.4 Quality and Resilience Hardening
 
-**Goal:** Scale the CAS engineering loop by resolving Ollama latency bottlenecks, implementing multi-machine distributed scheduling, and integrating automatic tool provisioning and paid API-based fallback routing.
+**Goal:** Enforce 100% test coverage and Resilience First architecture with typed failure states across all CAS Loop Engineering orchestrators and workers.
 
 ## Target Runtime
 
@@ -80,12 +90,16 @@ Additional validated outcomes from v1.2:
 - Deterministic routing with local fallback.
 - Paid-API independent fresh session bootstrapping.
 
+Additional validated outcomes from v1.3:
+
+- Minimization of Ollama latency and establishment of local fallback optimizations.
+- Multi-machine distributed scheduling architecture and orchestrator connection to multiple nodes.
+- Automatic tool provisioning integrated into the bootstrapping process.
+- Optional paid API-based routing fallback implemented for local model failure.
+
 ### Active
 
-- Scale the CAS engineering loop (multi-machine scheduling, parallel handling)
-- Minimize Ollama latency and establish local fallback optimizations
-- Automatic tool provisioning
-- Optional paid API-based routing fallback
+- Enforce 100% test coverage baseline and typed failure states
 
 ### Out of Scope
 
@@ -138,4 +152,4 @@ and update STATE.md with the exact evidence and remaining blockers. Architectura
 ownership changes require a superseding ADR.
 
 ---
-*Last updated: 2026-07-05 after v1.2 Shared AI Engineering OS*
+*Last updated: 2026-07-05 after v1.3 Bootstrapping*
