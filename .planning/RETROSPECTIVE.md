@@ -47,6 +47,51 @@
 
 ---
 
+## Milestone: v1.1 — Portfolio Hardening
+
+**Shipped:** 2026-07-05
+
+**Phases:** 4 | **Plans:** 8
+
+### What Was Built
+
+- Portfolio-wide workflow hardening and managed action update policy.
+- Deterministic contract publication with immutable release and stable-line URLs.
+- Live consumer drift gates for Autogen and GSD Orchestrator.
+- Evidence-led robustness and infrastructure closure with cross-repository UAT.
+
+### What Worked
+
+- Independent review caught contract identity, telemetry leakage, digest portability, and timeout recovery issues before merge.
+- Atomic repository ownership and default-branch CI kept cross-repo changes reviewable.
+- Immutable release correction preserved evidence instead of rewriting history.
+
+### What Was Inefficient
+
+- Approval-only branch protection required a reversible administrative merge procedure for a single-maintainer organization.
+- GitHub Pages deployment ordering required a corrective post-tag commit and transient retries.
+- Initial summaries lacked frontmatter, reducing automatic milestone extraction quality.
+
+### Patterns Established
+
+- Separate schema identity from distribution location.
+- Treat published tags as immutable; issue corrective patch releases.
+- Verify live distribution and consumers after merge, not only local artifacts.
+- Preserve security boundaries even when diagnostic exception chaining appears useful.
+
+### Key Lessons
+
+1. Release workflows need an explicit tag-to-Pages ordering contract.
+2. Cross-platform digest checks must define canonical bytes.
+3. Review findings must be adjudicated against security and public-contract invariants.
+
+### Cost Observations
+
+- Subscription/model telemetry was not captured consistently.
+- Lower-tier parallel workers were effective for bounded fixes; parent adjudication remained necessary for contract and telemetry decisions.
+
+---
+
 ## Cross-Milestone Trends
 
 ### Process Evolution
@@ -54,12 +99,14 @@
 | Milestone | Phases | Plans | Key Change |
 |-----------|--------|-------|------------|
 | v1.0 | 8 | 22 | Established bounded cross-repository loop engineering and clean delivery branches |
+| v1.1 | 4 | 8 | Added portfolio hardening, immutable release correction, and live consumer gates |
 
 ### Cumulative Quality
 
 | Milestone | Requirements | Phase Verifications | Milestone Audit |
 |-----------|--------------|---------------------|-----------------|
 | v1.0 | 28/28 | 8/8 passed | Passed |
+| v1.1 | 12/12 | 4/4 passed | Passed |
 
 ### Top Lessons (Verified Across Milestones)
 

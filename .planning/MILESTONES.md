@@ -1,5 +1,23 @@
 # Milestones
 
+## v1.1 Portfolio Hardening (Shipped: 2026-07-05)
+
+**Phases completed:** 4 phases, 8 plans, 0 tasks
+
+**Key accomplishments:**
+
+- Hardened active GitHub Actions with bounded execution, least privilege, correct CodeQL scope, and managed action updates.
+- Published deterministic CAS contract releases and corrected schema identity in immutable v1.1.1 without rewriting v1.1.0 history.
+- Added live registry drift gates to both genuine v1.1 consumers and verified them on merged default branches.
+- Closed reproduced runtime and infrastructure findings with regression coverage while dismissing false positives with evidence.
+- Merged all 13 portfolio PRs plus corrective release PRs and completed cross-repository UAT.
+
+**Verification:** 12/12 requirements, 4/4 phase verifications, 5/5 end-to-end flows, and both live consumer drift runs passed.
+
+**Known deferred work:** Shared AI Engineering OS begins as the next milestone; distributed scheduling, Kubernetes, and Azure deployment remain out of scope.
+
+---
+
 ## v1.0 Loop Engineering (Shipped: 2026-07-01)
 
 **Phases completed:** 8 phases, 22 plans, 37 tasks

@@ -22,26 +22,24 @@ verifier and acceptance criterion passes.
 
 ## Current State
 
-**v1.0 Loop Engineering shipped 2026-07-01.** The workstation, contracts,
+**v1.1 Portfolio Hardening shipped 2026-07-05.** The workstation, contracts,
 durable scheduler, bounded MAF fan-out, deterministic verification, operator
 telemetry, identity-first Azure boundary, and four executable pilot scenarios
-are implemented and verified across their owning repositories.
+are implemented and verified across their owning repositories. Portfolio
+workflows are bounded and least-privilege, contract release v1.1.1 preserves
+canonical schema identity, and live consumer drift gates pass on merged `main`.
 
-The milestone delivered 8 phases, 22 plans, and 28 validated requirements.
-Default-branch CI passed after integration in every repository with configured
-checks. Azure resources were not deployed as part of this milestone.
+Across v1.0 and v1.1, 12 phases are complete. The next milestone establishes a
+shared cross-tool engineering operating contract without paid API dependency.
 
-## Current Milestone: v1.1 Portfolio Hardening
+## Next Milestone: Shared AI Engineering OS
 
-**Goal:** Close verified cross-repository CI, contract-distribution,
-infrastructure, and robustness gaps before starting the Shared AI Engineering
-OS milestone.
+**Goal:** Combine GSD lifecycle management with proportionate loop-engineering
+SDLC controls, model-role tiering, safe delegation, and cross-tool verification.
 
-**Target features:**
-- Least-privilege, bounded GitHub Actions across the active portfolio
-- Consumer-side validation of the published CAS contract registry
-- Verified closure of remaining Bicep and code-robustness findings
-- Milestone-level UAT, security, and integration evidence
+**Target features:** canonical policy, quick/standard/critical SDLC profiles,
+tool compatibility matrix, deterministic routing, safe fan-out, role-based model
+tiering, optional benchmark-gated Ollama classification, and fresh-session pilots.
 
 ## Target Runtime
 
@@ -63,12 +61,15 @@ OS milestone.
 - ✓ Operator state, correlated telemetry, Foundry Next Gen identity, and Flex Consumption boundaries — v1.0
 - ✓ Reproducible feature, repair, restart, and policy pilot evidence — v1.0
 
+Additional validated outcomes from v1.1:
+
+- Bounded least-privilege portfolio workflows.
+- Canonical contract identity with immutable v1.1.1 publication and live consumer drift gates.
+- Evidence-led robustness closure and cross-repository UAT.
+
 ### Active
 
-- Portfolio workflow permissions and timeout hardening
-- Contract-registry consumer drift detection
-- Evidence-led validation of remaining robustness findings
-- Cross-repository milestone audit and UAT
+- Shared AI Engineering OS requirements and implementation
 
 ### Out of Scope
 
@@ -121,4 +122,4 @@ and update STATE.md with the exact evidence and remaining blockers. Architectura
 ownership changes require a superseding ADR.
 
 ---
-*Last updated: 2026-07-04 for v1.1 Portfolio Hardening*
+*Last updated: 2026-07-05 after v1.1 Portfolio Hardening*
