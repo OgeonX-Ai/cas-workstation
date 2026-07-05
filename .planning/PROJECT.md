@@ -32,7 +32,7 @@ canonical schema identity, and live consumer drift gates pass on merged `main`.
 Across v1.0 and v1.1, 12 phases are complete. The next milestone establishes a
 shared cross-tool engineering operating contract without paid API dependency.
 
-## Next Milestone: Shared AI Engineering OS
+## Current Milestone: v1.2 Shared AI Engineering OS
 
 **Goal:** Combine GSD lifecycle management with proportionate loop-engineering
 SDLC controls, model-role tiering, safe delegation, and cross-tool verification.

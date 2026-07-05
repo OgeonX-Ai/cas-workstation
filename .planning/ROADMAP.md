@@ -2,35 +2,89 @@
 
 ## Milestones
 
-- **v1.0 Loop Engineering** — Phases 1–8, 22 plans (shipped 2026-07-01). [Archive](milestones/v1.0-ROADMAP.md)
-- **v1.1 Portfolio Hardening** — Phases 9–12, 8 plans (shipped 2026-07-05). [Archive](milestones/v1.1-ROADMAP.md)
+- **v1.0 Loop Engineering** — Phases 1–8 (shipped 2026-07-01). [Archive](milestones/v1.0-ROADMAP.md)
+- **v1.1 Portfolio Hardening** — Phases 9–12 (shipped 2026-07-05). [Archive](milestones/v1.1-ROADMAP.md)
+- **v1.2 Shared AI Engineering OS** — Phases 13–21 (in progress)
 
-## Completed Phases
+## v1.2 Phases
 
-<details>
-<summary>v1.0 Loop Engineering (Phases 1–8) — SHIPPED 2026-07-01</summary>
+### Phase 13: Live Tool Inventory and Compatibility Baseline
 
-- [x] Phase 1: Stable Workstation and Recovery (4/4 plans)
-- [x] Phase 2: Typed Goal and Lifecycle Contract (2/2 plans)
-- [x] Phase 3: Durable Goal Scheduler (3/3 plans)
-- [x] Phase 4: Isolated MAF Fan-Out Workers (2/2 plans)
-- [x] Phase 5: Evidence-Gated Verification and Learning (3/3 plans)
-- [x] Phase 6: Operator Observability and Azure Boundaries (3/3 plans)
-- [x] Phase 7: Reproducible Pilot Evidence (2/2 plans)
-- [x] Phase 8: Executable Loop Integration (3/3 plans)
+**Goal:** Establish current, evidence-backed capabilities and constraints for Codex, Claude Code, Gemini, Antigravity, Ollama, Git, and PowerShell.
+**Requirements:** COMP-01, COMP-02, COMP-03
+**Success criteria:**
+1. Every installed tool has version, auth/config path, concurrency, model-selection, context, permission, and delegation evidence.
+2. Unknown or unavailable behavior is labeled rather than inferred.
+3. The matrix is machine-readable and human-readable.
 
-</details>
+### Phase 14: Canonical Operating Contract
 
-<details>
-<summary>v1.1 Portfolio Hardening (Phases 9–12) — SHIPPED 2026-07-05</summary>
+**Goal:** Create one authoritative, version-controlled cross-tool engineering contract in `C:\PersonalRepo`.
+**Requirements:** POL-01, POL-02
+**Success criteria:**
+1. Canonical invariants and precedence are explicit and testable.
+2. Tool-global instructions can bootstrap the contract from a fresh session.
+3. Existing global safety and repository-local context chains remain intact.
 
-- [x] Phase 9: Systemic CI and Security Hardening (4/4 plans)
-- [x] Phase 10: Contract Registry Consumer Protection (2/2 plans)
-- [x] Phase 11: Infrastructure and Code Robustness Closure (1/1 plan)
-- [x] Phase 12: Portfolio Hardening Integration and UAT (1/1 plan)
+### Phase 15: Loop Engineering SDLC and GSD Integration
 
-</details>
+**Goal:** Combine GSD lifecycle control with proportionate quick, standard, and critical SDLC loops.
+**Requirements:** SDLC-01, SDLC-02, GSD-01, GSD-02
+**Success criteria:**
+1. Each profile has stages, gates, evidence, failure return paths, and override schema.
+2. Work classes route to the intended GSD skill and profile.
+3. Planning artifacts can carry all required control metadata.
 
-## Next Milestone
+### Phase 16: Delegation, Collision Safety, and Model Roles
 
-Shared AI Engineering OS — requirements and roadmap pending.
+**Goal:** Define efficient bounded fan-out with verified tool-specific model tiering and safe writer ownership.
+**Requirements:** DEL-01, DEL-02, DEL-03, MOD-01, MOD-02, MOD-03
+**Success criteria:**
+1. Parent/child ownership, recursion limits, task packets, and synthesis contracts are executable.
+2. Concurrent writers cannot overlap without isolation or exclusive ownership.
+3. Model aliases map only to live-supported tool behavior and reserve strong tiers for earned complexity.
+
+### Phase 17: Deterministic Router and Optional Ollama Benchmark
+
+**Goal:** Implement local deterministic routing with an optional benchmark-gated Ollama classifier.
+**Requirements:** ROUT-01, ROUT-02, ROUT-03
+**Success criteria:**
+1. Routing fixtures validate structured decisions and escalation.
+2. Ollama absence or failure produces deterministic fallback.
+3. Local model enablement requires recorded threshold evidence and cannot adjudicate critical outcomes.
+
+### Phase 18: Evidence, Context, Memory, and Telemetry Discipline
+
+**Goal:** Define compact context transfer, evidence classes, reviewed memory writes, and subscription-capacity telemetry.
+**Requirements:** EVD-01, EVD-02
+**Success criteria:**
+1. Checkpoints, artifacts, memory, and telemetry have distinct lifecycle rules.
+2. Agent task packets avoid transcript fan-out and preserve artifact traceability.
+3. Telemetry supports quality/capacity analysis without paid-API cost assumptions.
+
+### Phase 19: Tool Adapters and Policy Verification
+
+**Goal:** Install thin global adapters and an automated drift/capability verifier.
+**Requirements:** ROLL-01
+**Success criteria:**
+1. Codex, Claude, Gemini, and Antigravity adapters reference the canonical contract where supported.
+2. Verification detects missing references, policy drift, invalid mappings, unsupported claims, and writer collisions.
+3. Every adapter has a documented rollback to its previous state.
+
+### Phase 20: Cross-Tool Pilot and Controlled Rollout
+
+**Goal:** Prove representative work and fresh-session bootstrap across available tools without paid APIs.
+**Requirements:** ROLL-02, ROLL-03
+**Success criteria:**
+1. Exploration, diagnosis, implementation, security review, and documentation pilots produce comparable evidence.
+2. Supported tools demonstrate autonomous continuation and safe delegation/tiering behavior.
+3. Ollama absence and unsupported capabilities degrade safely.
+
+### Phase 21: Milestone Audit, UAT, and Improvement Closure
+
+**Goal:** Verify all requirements, security boundaries, fresh-session behavior, and remaining improvement opportunities before archive.
+**Requirements:** All v1.2 requirements
+**Success criteria:**
+1. Requirement, integration, security, and UAT audits have no blocker.
+2. Policy verifier and representative pilots pass from clean sessions.
+3. Retrospective records lessons, residual debt, and rollback evidence.
