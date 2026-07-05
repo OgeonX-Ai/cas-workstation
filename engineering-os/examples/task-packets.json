@@ -1,0 +1,32 @@
+[
+  {
+    "goal": "Inspect compatibility documentation",
+    "nonGoals": ["No writes"],
+    "contextFiles": ["engineering-os/compatibility/tool-matrix.json"],
+    "instructionChain": ["engineering-os/OPERATING-CONTRACT.md"],
+    "roleAlias": "light",
+    "mutation": false,
+    "writeScope": [],
+    "worktree": null,
+    "acceptanceCriteria": ["Return verified capability matrix"],
+    "verifier": "parent-review",
+    "evidenceDestination": "engineering-os/pilots",
+    "timeoutMinutes": 10,
+    "maxDelegationDepth": 0
+  },
+  {
+    "goal": "Update router fixtures",
+    "nonGoals": ["No policy edits"],
+    "contextFiles": ["engineering-os/router/fixtures.json"],
+    "instructionChain": ["engineering-os/OPERATING-CONTRACT.md"],
+    "roleAlias": "standard",
+    "mutation": true,
+    "writeScope": ["engineering-os/router/fixtures.json"],
+    "worktree": "C:\\PersonalRepo",
+    "acceptanceCriteria": ["Router fixture gate passes"],
+    "verifier": "scripts/test-engineering-router.ps1",
+    "evidenceDestination": "engineering-os/pilots",
+    "timeoutMinutes": 15,
+    "maxDelegationDepth": 0
+  }
+]

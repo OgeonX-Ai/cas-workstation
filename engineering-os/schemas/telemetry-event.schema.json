@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.coding-autopilot.dev/engineering-os/telemetry-event.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tool", "agentRole", "modelAlias", "elapsedMs", "retries", "contextEstimate", "verifierResult", "rework", "routingConfidence"],
+  "properties": {
+    "tool": { "enum": ["codex", "claude", "gemini", "antigravity", "ollama", "human"] },
+    "agentRole": { "type": "string", "minLength": 1 },
+    "modelAlias": { "enum": ["light", "standard", "strong", "adjudicator", "none"] },
+    "concreteModel": { "type": ["string", "null"] },
+    "elapsedMs": { "type": "integer", "minimum": 0 },
+    "retries": { "type": "integer", "minimum": 0 },
+    "contextEstimate": { "type": "integer", "minimum": 0 },
+    "verifierResult": { "enum": ["passed", "failed", "blocked", "not-run"] },
+    "rework": { "type": "boolean" },
+    "routingConfidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "fallbackReason": { "type": ["string", "null"] }
+  }
+}

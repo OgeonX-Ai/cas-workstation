@@ -1,0 +1,12 @@
+{
+  "tool": "antigravity",
+  "auth": "interactive IDE",
+  "aliases": {
+    "light": { "session": "separate-cheaper-top-level", "model": null },
+    "standard": { "session": "separate-default-top-level", "model": null },
+    "strong": { "session": "separate-strong-top-level", "model": null },
+    "adjudicator": { "session": "separate-strong-top-level", "model": null }
+  },
+  "perSubagentOverride": false,
+  "status": "model names and child overrides disabled until live proof"
+}

@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "profiles": {
+    "quick": {
+      "risk": ["low"],
+      "stages": ["understand", "bounded-plan", "implement", "verify", "learn"],
+      "requiredEvidence": ["scope", "change", "direct-verification"],
+      "humanAcceptance": false
+    },
+    "standard": {
+      "risk": ["low", "medium"],
+      "stages": ["understand", "research", "analyze", "design", "risk-review", "implement", "verify", "implementation-review", "document", "integrate", "learn"],
+      "requiredEvidence": ["requirements", "design", "risk", "tests", "review", "integration"],
+      "humanAcceptance": false
+    },
+    "critical": {
+      "risk": ["high", "critical"],
+      "stages": ["understand", "research", "analyze", "design", "threat-model", "risk-review", "implement", "verify", "security-verify", "performance-reliability", "rollback-validate", "implementation-review", "document", "integrate", "human-acceptance", "learn"],
+      "requiredEvidence": ["requirements", "architecture", "threat-model", "security-tests", "reliability-tests", "rollback", "human-acceptance"],
+      "humanAcceptance": true
+    }
+  },
+  "failureRule": "Return to the earliest stage whose output could have caused the failed verifier."
+}

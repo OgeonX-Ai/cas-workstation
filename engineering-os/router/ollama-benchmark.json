@@ -1,0 +1,74 @@
+{
+    "capturedAt":  "2026-07-05T09:51:01.5557415Z",
+    "model":  "gemma3:1b",
+    "sampleSize":  5,
+    "accuracy":  0,
+    "p95LatencyMs":  16953,
+    "thresholds":  {
+                       "successfulRuns":  20,
+                       "accuracy":  0.9,
+                       "p95LatencyMs":  2500
+                   },
+    "enabled":  false,
+    "decision":  "disabled: benchmark must meet all thresholds and sample size",
+    "elapsedMs":  31025,
+    "results":  [
+                    {
+                        "input":  "Fix a typo in README.md",
+                        "passed":  false,
+                        "latencyMs":  16953,
+                        "response":  {
+                                         "taskClass":  "defect",
+                                         "risk":  "low",
+                                         "sdlcs Profile":  null,
+                                         "roleAlias":  null
+                                     }
+                    },
+                    {
+                        "input":  "Reproduce and fix intermittent null reference in scheduler",
+                        "passed":  false,
+                        "latencyMs":  3287,
+                        "response":  {
+                                         "taskClass":  "defect",
+                                         "risk":  "high",
+                                         " sdlcProfile":  "critical",
+                                         "roleAliases":  [
+                                                             "adversary"
+                                                         ]
+                                     }
+                    },
+                    {
+                        "input":  "Threat model authentication and rotate production identity",
+                        "passed":  false,
+                        "latencyMs":  3116,
+                        "response":  {
+                                         "taskClass":  "substantially",
+                                         "risk":  "high",
+                                         "sdlcProfile":  "critical",
+                                         "roleAlias":  "strong"
+                                     }
+                    },
+                    {
+                        "input":  "Map repository architecture and summarize files",
+                        "passed":  false,
+                        "latencyMs":  3576,
+                        "response":  {
+                                         "taskClass":  "documentation",
+                                         "risk":  "low",
+                                         "sdlcsProfilE":  "standard",
+                                         "roleAlias":  "standard"
+                                     }
+                    },
+                    {
+                        "input":  "Design a cross-repository orchestration architecture",
+                        "passed":  false,
+                        "latencyMs":  4020,
+                        "response":  {
+                                         "taskClass":  "substantial",
+                                         "risk":  "medium",
+                                         "ssdlCoreProfile":  "standard",
+                                         "roleAlias":  "standard"
+                                     }
+                    }
+                ]
+}

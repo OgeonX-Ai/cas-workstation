@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.coding-autopilot.dev/engineering-os/task-packet.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["goal", "nonGoals", "contextFiles", "instructionChain", "roleAlias", "mutation", "writeScope", "acceptanceCriteria", "verifier", "evidenceDestination", "timeoutMinutes", "maxDelegationDepth"],
+  "properties": {
+    "goal": { "type": "string", "minLength": 1 },
+    "nonGoals": { "type": "array", "items": { "type": "string" } },
+    "contextFiles": { "type": "array", "items": { "type": "string" } },
+    "instructionChain": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "roleAlias": { "enum": ["light", "standard", "strong", "adjudicator"] },
+    "mutation": { "type": "boolean" },
+    "writeScope": { "type": "array", "items": { "type": "string" } },
+    "worktree": { "type": ["string", "null"] },
+    "acceptanceCriteria": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "verifier": { "type": "string", "minLength": 1 },
+    "evidenceDestination": { "type": "string", "minLength": 1 },
+    "timeoutMinutes": { "type": "integer", "minimum": 1, "maximum": 240 },
+    "maxDelegationDepth": { "type": "integer", "minimum": 0, "maximum": 2 }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "mutation": { "const": true } } },
+      "then": {
+        "properties": {
+          "writeScope": { "minItems": 1 },
+          "worktree": { "type": "string", "minLength": 3 }
+        },
+        "required": ["worktree"]
+      }
+    }
+  ]
+}

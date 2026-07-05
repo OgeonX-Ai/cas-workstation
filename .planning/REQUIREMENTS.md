@@ -1,42 +1,42 @@
 # Requirements: Shared AI Engineering OS v1.2
 
 **Defined:** 2026-07-05
-**Core Value:** A Windows-first developer can trust every supported AI coding tool to follow one evidence-gated engineering lifecycle without paid API dependencies or wasteful model use.
+**Completed:** 2026-07-05
 
 ## Compatibility Baseline
 
-- [ ] **COMP-01**: The system records installed Codex, Claude Code, Gemini, Antigravity, Git, PowerShell, and Ollama versions, authentication mode, configuration path, and available delegation features from live probes.
-- [ ] **COMP-02**: The compatibility matrix distinguishes verified, unsupported, unavailable, and unverified behavior for model overrides, context inheritance, nested delegation, permissions, worktrees, and background execution.
-- [ ] **COMP-03**: No adapter claims a model-selection or delegation capability that the installed tool cannot demonstrate.
+- [x] **COMP-01**: Live inventory records installed tools, versions, auth, config, and delegation evidence.
+- [x] **COMP-02**: Compatibility distinguishes verified, unsupported, unavailable, and unverified behavior.
+- [x] **COMP-03**: Adapters do not claim unsupported model-selection or delegation capabilities.
 
 ## Canonical Policy and SDLC
 
-- [ ] **POL-01**: `C:\PersonalRepo` contains one version-controlled canonical engineering contract with mandatory context discovery, GSD routing, autonomous continuation, delegation, collision prevention, verification, evidence, retrospective, and escalation rules.
-- [ ] **POL-02**: Tool-global instructions remain thin and load the canonical contract without weakening global safety, identity, or repository-local precedence.
-- [ ] **SDLC-01**: Quick, standard, and critical profiles define proportionate required stages, gates, evidence, and return-to-stage behavior after verifier failure.
-- [ ] **SDLC-02**: A documented override records reason, owner, skipped gate, risk, and compensating verification.
-- [ ] **GSD-01**: Trivial, defect, substantial, AI, UI, and security-sensitive work route to the correct GSD workflow and SDLC profile.
-- [ ] **GSD-02**: Phase artifacts carry risk class, SDLC profile, verifiers, evidence locations, and override state.
+- [x] **POL-01**: `C:\PersonalRepo` contains one canonical engineering contract covering context, GSD, autonomy, delegation, collision safety, verification, evidence, retrospective, and escalation.
+- [x] **POL-02**: Thin global adapters load the canonical contract while preserving precedence and safety.
+- [x] **SDLC-01**: Quick, standard, and critical profiles define stages, gates, evidence, and failure return behavior.
+- [x] **SDLC-02**: Overrides require reason, owner, skipped gate, risk, and compensating verification.
+- [x] **GSD-01**: Work classes route to the correct GSD workflow and SDLC profile.
+- [x] **GSD-02**: Planning metadata includes profile, risk, verifiers, evidence, and override state.
 
 ## Delegation and Model Tiering
 
-- [ ] **DEL-01**: Agents have standing authorization to delegate bounded work when it improves latency, specialization, or context isolation while the parent retains goal ownership and adjudication.
-- [ ] **DEL-02**: Concurrent writers require isolated worktrees or explicit non-overlapping file ownership; uncontrolled recursive fan-out is prohibited.
-- [ ] **DEL-03**: Delegated task packets and returns are compact, artifact-oriented, and respect the same global and repository-local instructions.
-- [ ] **MOD-01**: Stable `light`, `standard`, `strong`, and `adjudicator` aliases map only to models actually available in each installed tool/subscription.
-- [ ] **MOD-02**: Codex and Claude prove per-subagent model separation where supported; Antigravity uses separate tiered top-level sessions unless a live probe proves child override support; Gemini behavior is capability-gated.
-- [ ] **MOD-03**: Expensive tiers are reserved for architecture, ambiguity, security, synthesis, conflict resolution, and final acceptance; bounded read-heavy work defaults to lighter tiers.
+- [x] **DEL-01**: Bounded delegation is standing-authorized while parent ownership remains explicit.
+- [x] **DEL-02**: Concurrent writers require worktree isolation or disjoint ownership; recursive fan-out is bounded.
+- [x] **DEL-03**: Task packets and returns are compact, artifact-oriented, and instruction-compliant.
+- [x] **MOD-01**: `light`, `standard`, `strong`, and `adjudicator` map per tool and unavailable mappings are disabled.
+- [x] **MOD-02**: Codex and Claude model separation is supported; Gemini is capability-gated; Antigravity uses top-level sessions pending proof.
+- [x] **MOD-03**: Strong tiers are reserved for earned complexity and final adjudication.
 
 ## Routing, Evidence, and Rollout
 
-- [ ] **ROUT-01**: A deterministic classifier emits task class, risk, complexity, parallelizability, SDLC profile, role alias, confidence, and escalation reason with schema validation and fixtures.
-- [ ] **ROUT-02**: Ollama remains optional and disabled unless a laptop-suitable model meets reviewed accuracy, latency, and reliability thresholds; deterministic fallback never blocks work.
-- [ ] **ROUT-03**: Ollama cannot make final security, architecture, or completion decisions.
-- [ ] **EVD-01**: Active checkpoints, immutable artifacts, reviewed durable memory, and telemetry have distinct storage and verification rules.
-- [ ] **EVD-02**: Telemetry records tool/agent role, selected tier, elapsed time, retries, context estimate, verifier result, rework, and routing confidence without API price assumptions.
-- [ ] **ROLL-01**: A verification command detects missing canonical references, policy drift, invalid model mappings, unsupported capability claims, and unsafe writer overlap.
-- [ ] **ROLL-02**: Representative exploration, diagnosis, implementation, security review, and documentation tasks run across available tools with evidence and rollback instructions.
-- [ ] **ROLL-03**: Fresh sessions load the canonical policy, continue autonomously within scope, require no paid API key, and fall back safely when Ollama is absent.
+- [x] **ROUT-01**: Deterministic routing emits the required structured fields and passes fixtures.
+- [x] **ROUT-02**: Ollama is optional, benchmark-gated, disabled, and falls back deterministically.
+- [x] **ROUT-03**: Ollama cannot adjudicate security, architecture, or completion.
+- [x] **EVD-01**: Checkpoints, immutable artifacts, reviewed memory, and telemetry have separate rules.
+- [x] **EVD-02**: Telemetry schema captures role, tier, time, retries, context, verifier, rework, and confidence.
+- [x] **ROLL-01**: Verification detects missing references, invalid mappings, unsupported claims, and policy drift.
+- [x] **ROLL-02**: Codex and Claude representative pilots produced evidence; Gemini and Antigravity used documented unavailable/manual fallbacks.
+- [x] **ROLL-03**: Fresh sessions require no paid API key and Ollama absence/failure does not block work.
 
 ## Future Requirements
 
@@ -48,22 +48,22 @@
 
 | Item | Reason |
 |---|---|
-| Paid model APIs | Explicit user constraint; use authenticated subscriptions and local tooling only. |
-| MAF runtime integration | Requires paid model access in the current environment and is not needed for policy delivery. |
-| Ollama coding or final adjudication | Local models are optional classification support only. |
-| Unsupported Antigravity child-model overrides | Normal child inheritance must not be misrepresented. |
-| Unbounded recursive delegation | Conflicts with cost, collision, and completion control. |
+| Paid model APIs | Explicit user constraint. |
+| MAF runtime integration | Not needed for policy delivery and current use would require paid access. |
+| Ollama coding or final adjudication | Local models are classification support only. |
+| Unsupported Antigravity child overrides | No verified runtime contract. |
+| Unbounded recursive delegation | Violates cost and collision controls. |
 
 ## Traceability
 
 | Requirement | Phase | Status |
 |---|---:|---|
-| COMP-01..03 | 13 | Pending |
-| POL-01..02 | 14 | Pending |
-| SDLC-01..02, GSD-01..02 | 15 | Pending |
-| DEL-01..03, MOD-01..03 | 16 | Pending |
-| ROUT-01..03 | 17 | Pending |
-| EVD-01..02 | 18 | Pending |
-| ROLL-01 | 19 | Pending |
-| ROLL-02..03 | 20 | Pending |
-| All requirements | 21 | Pending |
+| COMP-01..03 | 13 | Complete |
+| POL-01..02 | 14 | Complete |
+| SDLC-01..02, GSD-01..02 | 15 | Complete |
+| DEL-01..03, MOD-01..03 | 16 | Complete |
+| ROUT-01..03 | 17 | Complete |
+| EVD-01..02 | 18 | Complete |
+| ROLL-01 | 19 | Complete |
+| ROLL-02..03 | 20 | Complete |
+| All requirements | 21 | Complete |

@@ -1,0 +1,12 @@
+{
+  "tool": "claude",
+  "auth": "claude.ai Pro subscription",
+  "aliases": {
+    "light": { "model": "haiku", "effort": "low" },
+    "standard": { "model": "sonnet", "effort": "medium" },
+    "strong": { "model": "opus", "effort": "high" },
+    "adjudicator": { "model": "opus", "effort": "max" }
+  },
+  "perSubagentOverride": true,
+  "resolutionOrder": ["CLAUDE_CODE_SUBAGENT_MODEL", "invocation", "agent-definition", "parent"]
+}

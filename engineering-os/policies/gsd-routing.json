@@ -1,0 +1,11 @@
+{
+  "routes": [
+    { "taskClass": "trivial", "gsd": "gsd-fast or gsd-quick", "profile": "quick" },
+    { "taskClass": "defect", "gsd": "gsd-debug", "profile": "risk-derived", "rule": "reproduce first" },
+    { "taskClass": "substantial", "gsd": "requirements-roadmap-discuss-plan-execute-verify-uat-audit", "profile": "standard" },
+    { "taskClass": "security", "gsd": "gsd-secure-phase plus standard lifecycle", "profile": "critical" },
+    { "taskClass": "ai", "gsd": "gsd-ai-integration-phase plus standard lifecycle", "profile": "standard-or-critical" },
+    { "taskClass": "ui", "gsd": "gsd-ui-phase plus standard lifecycle", "profile": "standard" }
+  ],
+  "planningFields": ["sdlcProfile", "riskClass", "requiredVerifiers", "evidenceLocations", "overrideState"]
+}

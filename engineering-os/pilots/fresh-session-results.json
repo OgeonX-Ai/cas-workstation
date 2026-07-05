@@ -1,0 +1,30 @@
+{
+  "capturedAt": "2026-07-05",
+  "results": {
+    "codex": {
+      "status": "passed-with-operational-warning",
+      "model": "gpt-5.4-mini",
+      "evidence": { "loaded": true, "policyVersion": "1.0.0", "thread": "019f31b2-3bb7-7383-bf1a-1b81e30517e1" },
+      "warning": "Fresh session exposed and then corrected malformed /mnt/c/codex-home custom-agent paths. Read-only Windows sandbox helper also reported an ACL lock failure; policy loading still completed."
+    },
+    "claude": {
+      "status": "passed-isolated-bootstrap",
+      "model": "haiku requested",
+      "evidence": { "loaded": true, "canonicalPath": "C:\\PersonalRepo\\engineering-os\\OPERATING-CONTRACT.md", "session": "86eb400e-bd09-4d2c-8007-70bd5c047e0e" },
+      "warning": "Normal user settings timed out. A bounded run with project-only settings, empty MCP config, and explicit global adapter succeeded. Model telemetry showed both Haiku and Sonnet despite Haiku being requested, so subscription-side orchestration is recorded and concrete savings are not assumed.",
+      "representativePilot": "Exploration, diagnosis, implementation review, security review, and documentation review completed in session a809835b-979e-4396-aa33-0ede00a2ac8a. No security defect found; README discoverability gap corrected."
+    },
+    "gemini": {
+      "status": "unavailable",
+      "evidence": "Gemini CLI 0.47.0 returned IneligibleTierError and requires migration to Antigravity for individual accounts.",
+      "fallback": "Use Antigravity top-level sessions; do not claim Gemini runtime pilot success."
+    },
+    "antigravity": {
+      "status": "manual-only",
+      "evidence": "IDE versions 2.1.4 and 2.0.4 installed; no verified CLI or global instruction contract.",
+      "fallback": "Repository-local instructions and separate tiered top-level sessions."
+    }
+  },
+  "paidApiRequired": false,
+  "ollamaRequired": false
+}

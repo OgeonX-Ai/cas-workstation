@@ -1,0 +1,7 @@
+{
+  "reason": "External test environment is unavailable during the approved window.",
+  "owner": "human-supervisor",
+  "skippedGate": "external-integration-test",
+  "risk": "medium",
+  "compensatingVerification": ["offline contract tests", "post-availability UAT"]
+}

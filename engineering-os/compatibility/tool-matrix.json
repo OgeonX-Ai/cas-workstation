@@ -1,0 +1,72 @@
+{
+  "capturedAt": "2026-07-05",
+  "machine": "Windows 11 laptop",
+  "tools": {
+    "codex": {
+      "version": "0.142.3",
+      "auth": "ChatGPT login",
+      "config": "C:\\codex-home\\config.toml",
+      "globalInstructions": "C:\\codex-home\\AGENTS.md",
+      "modelOverride": "verified",
+      "subagentModelOverride": "verified-current-runtime",
+      "isolatedContext": "verified-current-runtime",
+      "nestedDelegation": "bounded-by-runtime",
+      "worktrees": "supported-via-git-and-agent-workspaces",
+      "background": "supported-current-runtime",
+      "notes": "Subagent credit/capacity exhaustion falls back to parent execution."
+    },
+    "claude": {
+      "version": "2.1.200",
+      "auth": "claude.ai Pro subscription",
+      "config": "C:\\Users\\KimHarjamäki\\.claude\\settings.json",
+      "globalInstructions": "C:\\Users\\KimHarjamäki\\.claude\\CLAUDE.md",
+      "modelOverride": "verified-cli-help",
+      "subagentModelOverride": "documented-model-and-effort",
+      "isolatedContext": "documented-fresh-context",
+      "nestedDelegation": "unsupported-subagents-cannot-spawn-subagents",
+      "worktrees": "documented-isolation-worktree",
+      "background": "verified-cli-help",
+      "notes": "Subagents load CLAUDE.md hierarchy but not parent transcript unless forked."
+    },
+    "gemini": {
+      "version": "0.47.0",
+      "auth": "oauth-personal configured but runtime ineligible: unsupported individual client",
+      "config": "C:\\Users\\KimHarjamäki\\.gemini\\settings.json",
+      "globalInstructions": "C:\\Users\\KimHarjamäki\\.gemini\\gemini.md",
+      "modelOverride": "verified-cli-help",
+      "subagentModelOverride": "documented-agent-frontmatter-and-overrides; runtime unavailable",
+      "isolatedContext": "documented",
+      "nestedDelegation": "unsupported-recursion-protected",
+      "worktrees": "verified-cli-help",
+      "background": "unverified",
+      "notes": "Gemini CLI 0.47.0 cannot authenticate this individual tier and directs migration to Antigravity. Top-level --model does not override subagents."
+    },
+    "antigravity": {
+      "version": "2.1.4 (Antigravity), 2.0.4 (Antigravity IDE)",
+      "auth": "interactive IDE state; not inspected for secrets",
+      "config": "C:\\Users\\KimHarjamaki\\AppData\\Roaming\\Antigravity",
+      "globalInstructions": "unverified",
+      "modelOverride": "interactive-top-level-only-unverified",
+      "subagentModelOverride": "unsupported-until-live-proof",
+      "isolatedContext": "unverified",
+      "nestedDelegation": "unverified",
+      "worktrees": "external-git-only",
+      "background": "unverified",
+      "notes": "Use separate cheaper/stronger top-level sessions; do not claim child overrides."
+    },
+    "ollama": {
+      "version": "0.30.7",
+      "auth": "local",
+      "models": ["gemma3:1b", "phi3:mini", "qwen3:8b", "gemma3:12b", "glm-4.7-flash:latest"],
+      "role": "optional routing/classification benchmark only",
+      "enabled": false
+    }
+  },
+  "sources": [
+    "local CLI --version/--help and configuration probes",
+    "https://code.claude.com/docs/en/sub-agents",
+    "https://geminicli.com/docs/core/subagents/",
+    "https://geminicli.com/docs/cli/model/",
+    "Profile split: C:\\Users\\KimHarjamaki exists with restrictive ACLs, while active CLI files resolve under C:\\Users\\KimHarjamäki"
+  ]
+}

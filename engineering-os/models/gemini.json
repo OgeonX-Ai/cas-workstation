@@ -1,0 +1,13 @@
+{
+  "tool": "gemini",
+  "auth": "personal OAuth",
+  "enabled": false,
+  "aliases": {
+    "light": { "model": "gemini-3-flash-preview" },
+    "standard": { "model": "gemini-3-flash-preview" },
+    "strong": { "model": "gemini-3-pro-preview" },
+    "adjudicator": { "model": "gemini-3-pro-preview" }
+  },
+  "perSubagentOverride": true,
+  "notes": "Capability is documented, but this installed client is disabled because the OAuth individual tier is ineligible and requires Antigravity migration."
+}

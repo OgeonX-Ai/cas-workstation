@@ -1,0 +1,11 @@
+{
+  "tool": "codex",
+  "auth": "ChatGPT subscription",
+  "aliases": {
+    "light": { "model": "gpt-5.4-mini", "effort": "medium" },
+    "standard": { "model": "gpt-5.4", "effort": "medium" },
+    "strong": { "model": "gpt-5.5", "effort": "high" },
+    "adjudicator": { "model": "gpt-5.5", "effort": "xhigh" }
+  },
+  "perSubagentOverride": true
+}

@@ -1,0 +1,7 @@
+[
+  { "input": "Fix a typo in README.md", "expected": { "taskClass": "trivial", "risk": "low", "sdlcProfile": "quick", "roleAlias": "light" } },
+  { "input": "Reproduce and fix intermittent null reference in scheduler", "expected": { "taskClass": "defect", "risk": "medium", "sdlcProfile": "standard", "roleAlias": "strong" } },
+  { "input": "Threat model authentication and rotate production identity", "expected": { "taskClass": "security", "risk": "critical", "sdlcProfile": "critical", "roleAlias": "adjudicator" } },
+  { "input": "Map repository architecture and summarize files", "expected": { "taskClass": "documentation", "risk": "low", "sdlcProfile": "quick", "roleAlias": "light" } },
+  { "input": "Design a cross-repository orchestration architecture", "expected": { "taskClass": "substantial", "risk": "high", "sdlcProfile": "critical", "roleAlias": "strong" } }
+]

@@ -1,0 +1,10 @@
+{
+  "taskClass": "security",
+  "risk": "critical",
+  "complexity": "ambiguous",
+  "parallelizable": true,
+  "sdlcProfile": "critical",
+  "roleAlias": "adjudicator",
+  "confidence": 0.95,
+  "escalationReason": "Security impact requires critical gates and human acceptance."
+}

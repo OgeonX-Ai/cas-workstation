@@ -1,0 +1,32 @@
+[
+  {
+    "goal": "Writer one",
+    "nonGoals": [],
+    "contextFiles": [],
+    "instructionChain": ["engineering-os/OPERATING-CONTRACT.md"],
+    "roleAlias": "standard",
+    "mutation": true,
+    "writeScope": ["shared.txt"],
+    "worktree": "C:\\PersonalRepo",
+    "acceptanceCriteria": ["done"],
+    "verifier": "test",
+    "evidenceDestination": "evidence",
+    "timeoutMinutes": 5,
+    "maxDelegationDepth": 0
+  },
+  {
+    "goal": "Writer two",
+    "nonGoals": [],
+    "contextFiles": [],
+    "instructionChain": ["engineering-os/OPERATING-CONTRACT.md"],
+    "roleAlias": "standard",
+    "mutation": true,
+    "writeScope": ["shared.txt"],
+    "worktree": "C:\\PersonalRepo",
+    "acceptanceCriteria": ["done"],
+    "verifier": "test",
+    "evidenceDestination": "evidence",
+    "timeoutMinutes": 5,
+    "maxDelegationDepth": 0
+  }
+]

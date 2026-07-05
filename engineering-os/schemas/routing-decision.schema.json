@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.coding-autopilot.dev/engineering-os/routing-decision.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["taskClass", "risk", "complexity", "parallelizable", "sdlcProfile", "roleAlias", "confidence", "escalationReason"],
+  "properties": {
+    "taskClass": { "enum": ["trivial", "defect", "substantial", "security", "ai", "ui", "documentation", "operations"] },
+    "risk": { "enum": ["low", "medium", "high", "critical"] },
+    "complexity": { "enum": ["bounded", "moderate", "ambiguous"] },
+    "parallelizable": { "type": "boolean" },
+    "sdlcProfile": { "enum": ["quick", "standard", "critical"] },
+    "roleAlias": { "enum": ["light", "standard", "strong", "adjudicator"] },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "escalationReason": { "type": ["string", "null"] }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "algorithm": "SHA256",
+  "files": {
+    "claude-CLAUDE.md": "f0a2cbfd1995f4375e386c360265893fb9f2dc4a27a108c8b28dc57f3bec5149",
+    "codex-home-AGENTS.md": "3c1d16a82030be2f3c6fcd555d5ec1f5004b2a907a361e8f801e0dc336fd0cb7",
+    "codex-profile-AGENTS.md": "538ab93f4814e710d9835244189cca417d36fffdddb72bdb9044fa93c845af76",
+    "gemini-gemini.md": "b83ee9a77fe10cfa054199839648d94eb1700974260fc5ad29ecac9451a526c7",
+    "shared-GLOBAL_AGENTS.md": "7329e2c00c48b27761c59288353244ce05a563d9975765a26c500de92f6e098b"
+  }
+}
