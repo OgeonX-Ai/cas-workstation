@@ -9,8 +9,16 @@ $fixtures = Get-Content (Join-Path $root 'engineering-os\router\fixtures.json') 
 $results = @()
 $watch = [System.Diagnostics.Stopwatch]::StartNew()
 
+$pool = [runspacefactory]::CreateRunspacePool(1, 10)
+$pool.Open()
+$runspaces = @()
+
 foreach ($fixture in $fixtures) {
-    $prompt = @"
+    $ps = [powershell]::Create()
+    $ps.RunspacePool = $pool
+    [void]$ps.AddScript({
+        param($Model, $fixture)
+        $prompt = @"
 Classify this engineering task. Return JSON only with taskClass, risk, sdlcProfile, roleAlias.
 Allowed taskClass: trivial, defect, substantial, security, ai, ui, documentation, operations.
 Allowed risk: low, medium, high, critical.
@@ -18,26 +26,44 @@ Allowed sdlcProfile: quick, standard, critical.
 Allowed roleAlias: light, standard, strong, adjudicator.
 Task: $($fixture.input)
 "@
-    $itemWatch = [System.Diagnostics.Stopwatch]::StartNew()
-    $raw = (& ollama run $Model $prompt 2>&1 | Out-String).Trim()
-    $itemWatch.Stop()
-    $parsed = $null
-    $valid = $false
-    try {
-        $candidate = [regex]::Match($raw, '\{[\s\S]*\}').Value
-        $parsed = $candidate | ConvertFrom-Json
-        $valid = $true
-        foreach ($name in @('taskClass', 'risk', 'sdlcProfile', 'roleAlias')) {
-            if ($parsed.$name -ne $fixture.expected.$name) { $valid = $false }
+        $itemWatch = [System.Diagnostics.Stopwatch]::StartNew()
+        $parsed = $null
+        $valid = $false
+        try {
+            $body = @{
+                model = $Model
+                prompt = $prompt
+                stream = $false
+                keep_alive = "5m"
+            } | ConvertTo-Json
+            $response = Invoke-RestMethod -Uri "http://localhost:11434/api/generate" -Method Post -Body $body -ContentType "application/json" -ErrorAction Stop
+            $raw = $response.response.Trim()
+            $candidate = [regex]::Match($raw, '\{[\s\S]*\}').Value
+            $parsed = $candidate | ConvertFrom-Json
+            $valid = $true
+            foreach ($name in @('taskClass', 'risk', 'sdlcProfile', 'roleAlias')) {
+                if ($parsed.$name -ne $fixture.expected.$name) { $valid = $false }
+            }
+        } catch { $valid = $false }
+        $itemWatch.Stop()
+        [pscustomobject]@{
+            input = $fixture.input
+            passed = $valid
+            latencyMs = $itemWatch.ElapsedMilliseconds
+            response = $parsed
         }
-    } catch { $valid = $false }
-    $results += [pscustomobject]@{
-        input = $fixture.input
-        passed = $valid
-        latencyMs = $itemWatch.ElapsedMilliseconds
-        response = $parsed
-    }
+    }).AddArgument($Model).AddArgument($fixture)
+    
+    $runspaces += [pscustomobject]@{ Pipe = $ps; Status = $ps.BeginInvoke() }
 }
+
+$results = foreach ($r in $runspaces) {
+    $r.Pipe.EndInvoke($r.Status)
+    $r.Pipe.Dispose()
+}
+
+$pool.Close()
+$pool.Dispose()
 $watch.Stop()
 
 $latencies = @($results | ForEach-Object latencyMs | Sort-Object)
