@@ -35,7 +35,11 @@
 - **Phase 31: Org-wide CI & Supply-Chain Hardening** *(depends on: 30; backlog S1, S2, S3, P3)*
   Pin all third-party GitHub Actions to commit SHAs and enable Dependabot actions updates org-wide (S1). Fix CodeQL language mismatches in `cloud-security-service-model` and `cas-workstation` (S2). Add least-privilege `permissions:` blocks and `timeout-minutes` to all workflows via shared templates in `org-dotgithub` (S3). Add coverage thresholds (`--cov-fail-under`) and review self-hosted-runner token scope in `ci-autopilot` (P3).
 - **Phase 32: Contracts Registry Publishing** *(depends on: 30; backlog S4)*
-  Resolve the cas-contracts dead registry: `pages.yml` and `publish-registry.yml` fight over one Pages site and `schemas.coding-autopilot.dev` is unconfigured so every schema `$id` 404s. Choose: docs-subpath registry, GitHub Packages npm, or custom domain + DNS. Then enable consumer registry-fetch CI in dependent repos.
+  Resolve the cas-contracts dead registry: `pages.yml` already unifies docs+registry publishing (the earlier `publish-registry.yml` Pages conflict was resolved in prior PRs #12/#14/#15/#16) and the registry itself already resolves 200 on GitHub Pages, but every schema `$id` still points at the unconfigured `schemas.coding-autopilot.dev` (confirmed via `gh api .../pages`: `cname: null`), so `$id` values 404. Rewrite `$id` to the resolvable docs-subpath registry URL (Option 1) and enable consumer registry-fetch CI in cas-evals.
+
+  **Plans:** 2 plans (2 waves)
+  - [ ] 32-01-PLAN.md — cas-contracts: rewrite all 22 schema $id values to the live Pages registry URL, flip the canonical-identity regression test, update docs/changelog, open PR (wave 1)
+  - [ ] 32-02-PLAN.md — cas-evals: update hardcoded vendored $id checks, add registry-fetch smoke check module + CI job, open PR (wave 2)
 - **Phase 33: Azure Infra Hardening** *(depends on: 30; backlog P1, P2, P4)*
   Parameterize `publicNetworkAccess` per environment in cas-platform `observability.bicep` (P1). Add `.bicepconfig.json` linting and pin API versions in cas-platform and cloud-security-service-model (P2). Decide and document the `DoNotEnforce` policy-assignment mode in cloud-security-service-model (P4).
 - **Phase 34: Workspace Guardrails & Drift Prevention** *(depends on: 26, 30)*

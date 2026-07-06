@@ -35,6 +35,16 @@ Also from the 260706-h8b worktree audit: 10 kept worktrees hold **unmerged, unpu
 - After each merge: `git switch main && git pull`, delete the merged local branch.
 - Deliverable includes a committed `docs/merge-train-runbook.md` so this is repeatable.
 
+## Codex Code Review Blockers (Must address before merge)
+- **gsd-orchestrator PR #15**: Fix the 100% coverage gate failure (coverage is 93.7%).
+- **autogen PR #10**: Ensure `pytest-cov` is installed before `--cov`, fix DevUI HTML `Content-Length`.
+- **autopilot-core PR #14**: Increase `timeout-minutes: 60` and 15-minute installer timeout.
+- **Promptimprover PR #26**: Bind dashboard to loopback only, return JSON when trace file is missing, avoid `innerHTML` XSS.
+- **cas-contracts PR #15**: Fix the `$id` vs `$ref` canonical URL resolution issue.
+- **gsd-orchestrator PR #14**: Fix Linux LF/CRLF manifest hash validation.
+- **autogen PR #9**: Fix vendored CAS schema `$id` URLs.
+- **cas-reference-product PR #9**: Stop chaining raw provider exceptions (leaks details).
+
 ## Definition of done
 
 - `gh pr list` shows 0 open PRs older than 7 days across all 13 repos.
