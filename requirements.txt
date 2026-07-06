@@ -1,0 +1,3 @@
+# Minimal Python dependencies for pilot scripts
+# Add any packages needed, e.g., requests
+requests
