@@ -1,7 +1,7 @@
 {
-  "enabled": false,
+  "enabled": true,
   "allowedPurpose": "routing-classification-only",
-  "candidate": "gemma3:1b",
+  "candidate": "gemma3:2b",
   "thresholds": { "accuracy": 0.9, "p95LatencyMs": 6000, "successfulRuns": 20 },
   "forbiddenDecisions": ["security-final", "architecture-final", "completion-final"],
   "fallback": "deterministic-rules"

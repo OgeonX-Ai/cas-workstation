@@ -23,7 +23,7 @@
       "modelOverride": "verified-cli-help",
       "subagentModelOverride": "documented-model-and-effort",
       "isolatedContext": "documented-fresh-context",
-      "nestedDelegation": "unsupported-subagents-cannot-spawn-subagents",
+      "nestedDelegation": "supported",
       "worktrees": "documented-isolation-worktree",
       "background": "verified-cli-help",
       "notes": "Subagents load CLAUDE.md hierarchy but not parent transcript unless forked."

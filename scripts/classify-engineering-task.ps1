@@ -1,7 +1,8 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)][string]$Task,
-    [switch]$AsJson
+    [switch]$AsJson,
+    [switch]$UsePaidApi
 )
 
 $policyPath = Join-Path (Split-Path -Parent $PSScriptRoot) 'engineering-os\router\ollama-policy.json'

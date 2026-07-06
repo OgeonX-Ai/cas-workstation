@@ -1,9 +1,9 @@
 {
-    "capturedAt":  "2026-07-05T14:54:08.3654417Z",
+    "capturedAt":  "2026-07-05T15:33:13.2127923Z",
     "model":  "gemma3:1b",
     "sampleSize":  20,
     "accuracy":  1,
-    "p95LatencyMs":  3542,
+    "p95LatencyMs":  3043,
     "thresholds":  {
                        "successfulRuns":  20,
                        "accuracy":  0.9,
@@ -11,12 +11,12 @@
                    },
     "enabled":  false,
     "decision":  "disabled: benchmark must meet all thresholds and sample size",
-    "elapsedMs":  62222,
+    "elapsedMs":  55373,
     "results":  [
                     {
                         "input":  "Fix a typo in README.md",
                         "passed":  true,
-                        "latencyMs":  3348,
+                        "latencyMs":  2900,
                         "response":  {
                                          "taskClass":  "trivial",
                                          "roleAlias":  "light",
@@ -27,7 +27,7 @@
                     {
                         "input":  "Reproduce and fix intermittent null reference in scheduler",
                         "passed":  true,
-                        "latencyMs":  3099,
+                        "latencyMs":  2577,
                         "response":  {
                                          "taskClass":  "defect",
                                          "roleAlias":  "strong",
@@ -38,7 +38,7 @@
                     {
                         "input":  "Threat model authentication and rotate production identity",
                         "passed":  true,
-                        "latencyMs":  3117,
+                        "latencyMs":  2829,
                         "response":  {
                                          "taskClass":  "security",
                                          "roleAlias":  "adjudicator",
@@ -49,7 +49,7 @@
                     {
                         "input":  "Map repository architecture and summarize files",
                         "passed":  true,
-                        "latencyMs":  3093,
+                        "latencyMs":  2748,
                         "response":  {
                                          "taskClass":  "documentation",
                                          "roleAlias":  "light",
@@ -60,7 +60,7 @@
                     {
                         "input":  "Design a cross-repository orchestration architecture",
                         "passed":  true,
-                        "latencyMs":  2897,
+                        "latencyMs":  2217,
                         "response":  {
                                          "taskClass":  "substantial",
                                          "roleAlias":  "strong",
@@ -71,7 +71,7 @@
                     {
                         "input":  "Fix a typo in README.md",
                         "passed":  true,
-                        "latencyMs":  3246,
+                        "latencyMs":  2471,
                         "response":  {
                                          "taskClass":  "trivial",
                                          "roleAlias":  "light",
@@ -82,7 +82,7 @@
                     {
                         "input":  "Reproduce and fix intermittent null reference in scheduler",
                         "passed":  true,
-                        "latencyMs":  3058,
+                        "latencyMs":  2653,
                         "response":  {
                                          "taskClass":  "defect",
                                          "roleAlias":  "strong",
@@ -93,7 +93,7 @@
                     {
                         "input":  "Threat model authentication and rotate production identity",
                         "passed":  true,
-                        "latencyMs":  3037,
+                        "latencyMs":  2844,
                         "response":  {
                                          "taskClass":  "security",
                                          "roleAlias":  "adjudicator",
@@ -104,7 +104,7 @@
                     {
                         "input":  "Map repository architecture and summarize files",
                         "passed":  true,
-                        "latencyMs":  2927,
+                        "latencyMs":  3043,
                         "response":  {
                                          "taskClass":  "documentation",
                                          "roleAlias":  "light",
@@ -115,7 +115,7 @@
                     {
                         "input":  "Design a cross-repository orchestration architecture",
                         "passed":  true,
-                        "latencyMs":  3542,
+                        "latencyMs":  2625,
                         "response":  {
                                          "taskClass":  "substantial",
                                          "roleAlias":  "strong",
@@ -126,7 +126,7 @@
                     {
                         "input":  "Fix a typo in README.md",
                         "passed":  true,
-                        "latencyMs":  3142,
+                        "latencyMs":  2567,
                         "response":  {
                                          "taskClass":  "trivial",
                                          "roleAlias":  "light",
@@ -137,7 +137,7 @@
                     {
                         "input":  "Reproduce and fix intermittent null reference in scheduler",
                         "passed":  true,
-                        "latencyMs":  2794,
+                        "latencyMs":  2690,
                         "response":  {
                                          "taskClass":  "defect",
                                          "roleAlias":  "strong",
@@ -148,7 +148,7 @@
                     {
                         "input":  "Threat model authentication and rotate production identity",
                         "passed":  true,
-                        "latencyMs":  3437,
+                        "latencyMs":  2639,
                         "response":  {
                                          "taskClass":  "security",
                                          "roleAlias":  "adjudicator",
@@ -159,7 +159,7 @@
                     {
                         "input":  "Map repository architecture and summarize files",
                         "passed":  true,
-                        "latencyMs":  2992,
+                        "latencyMs":  2729,
                         "response":  {
                                          "taskClass":  "documentation",
                                          "roleAlias":  "light",
@@ -170,7 +170,7 @@
                     {
                         "input":  "Design a cross-repository orchestration architecture",
                         "passed":  true,
-                        "latencyMs":  3553,
+                        "latencyMs":  2864,
                         "response":  {
                                          "taskClass":  "substantial",
                                          "roleAlias":  "strong",
@@ -181,7 +181,7 @@
                     {
                         "input":  "Fix a typo in README.md",
                         "passed":  true,
-                        "latencyMs":  2999,
+                        "latencyMs":  2826,
                         "response":  {
                                          "taskClass":  "trivial",
                                          "roleAlias":  "light",
@@ -192,7 +192,7 @@
                     {
                         "input":  "Reproduce and fix intermittent null reference in scheduler",
                         "passed":  true,
-                        "latencyMs":  2870,
+                        "latencyMs":  2956,
                         "response":  {
                                          "taskClass":  "defect",
                                          "roleAlias":  "strong",
@@ -203,7 +203,7 @@
                     {
                         "input":  "Threat model authentication and rotate production identity",
                         "passed":  true,
-                        "latencyMs":  2915,
+                        "latencyMs":  3173,
                         "response":  {
                                          "taskClass":  "security",
                                          "roleAlias":  "adjudicator",
@@ -214,7 +214,7 @@
                     {
                         "input":  "Map repository architecture and summarize files",
                         "passed":  true,
-                        "latencyMs":  2717,
+                        "latencyMs":  3020,
                         "response":  {
                                          "taskClass":  "documentation",
                                          "roleAlias":  "light",
@@ -225,7 +225,7 @@
                     {
                         "input":  "Design a cross-repository orchestration architecture",
                         "passed":  true,
-                        "latencyMs":  3058,
+                        "latencyMs":  2676,
                         "response":  {
                                          "taskClass":  "substantial",
                                          "roleAlias":  "strong",

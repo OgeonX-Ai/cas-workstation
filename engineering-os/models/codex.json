@@ -2,10 +2,10 @@
   "tool": "codex",
   "auth": "ChatGPT subscription",
   "aliases": {
-    "light": { "model": "gpt-5.4-mini", "effort": "medium" },
-    "standard": { "model": "gpt-5.4", "effort": "medium" },
-    "strong": { "model": "gpt-5.5", "effort": "high" },
-    "adjudicator": { "model": "gpt-5.5", "effort": "xhigh" }
+    "light": { "model": "gpt-5.1-codex-mini", "effort": "medium" },
+    "standard": { "model": "gpt-5.3-codex", "effort": "medium" },
+    "strong": { "model": "gpt-5.4", "effort": "high" },
+    "adjudicator": { "model": "gpt-5.4", "effort": "xhigh" }
   },
   "perSubagentOverride": true
 }

@@ -49,7 +49,7 @@ Regardless of the active persona, all generated code must strictly adhere to the
 
 ### Supreme Orchestration Directives (Priority 0)
 1. **Proactive Web Research Mandate**: Before drafting implementation plans, resolving architectural ambiguity, or selecting external libraries, the Orchestrator MUST invoke a web search subagent (e.g., `/browser`) to fetch the absolute latest 2026+ industry standards. Do not rely solely on pre-trained knowledge.
-2. **Hardcoded Delegation (Codex Handoff)**: The Orchestrator is an architect, not a typist. Any file generation or boilerplate modification expected to exceed 50 lines MUST be delegated directly to the `codex mcp-server` or equivalent lower-tier model.
+2. **Hardcoded Delegation (Codex Handoff)**: The Orchestrator is an architect, not a typist. Any file generation or boilerplate modification expected to exceed 20 lines MUST be delegated directly to the `codex mcp-server` using the lowest tier likely to succeed (see Codex Delegation Tiers table in the Delegation section).
 3. **Adversarial Cross-AI Peer Review**: AI cannot grade its own homework. Before any code is declared "complete" in the VERIFY phase, the Orchestrator MUST spawn a completely separate subagent injected with the `security-auditor.md` or `qa-automation-engineer.md` persona. This "Red Team" agent must attempt to break the code. If it succeeds, the `gsd-rollback` circuit breaker fires.
 4. **The User is the Top-Level Architect**: The user never runs terminal commands manually. The Orchestrator must never instruct or suggest that the user 'open a terminal and run X'. The AI is the autonomous executor; it must proactively use its tools (like `run_command`) to execute all tasks, scripts, UI dashboard viewers, and verifications in the background, only presenting the final synthesized results to the user.
 
@@ -96,7 +96,17 @@ decomposition, synthesis, conflict resolution, verification, and completion.
 - **Semantic Handoffs**: Return conclusions and results using strictly typed, machine-readable schemas (e.g., a standard JSON `TaskOutput` with status, artifacts, and blocking issues) rather than raw logs or natural language references.
 - **Circuit Breakers**: A delegated child agent must halt and return control to the parent after 3 failed verifier attempts or when it determines it lacks the capability to solve the issue. This prevents infinite "Agentic Thrashing" and triggers immediate escalation to a higher-tier model or human review.
 - **Peer Critic Pattern**: For high-risk implementations, orchestrators should spawn a concurrent, isolated `critic` agent to perform static analysis and security review on the `worker` agent's output prior to integration.
-- **Automatic Codex Delegation**: Standing authorization is granted to automatically delegate routine, repetitive, or token-heavy execution tasks (such as writing unit tests, generating boilerplate, formatting, and linting) to Codex agents via the `codex mcp-server`, provided Codex limits/credits are available. Orchestrators (Claude/Antigravity) MUST always start by spawning a worker agent configured with the lowest-tier model available to save on costs. Only escalate by spawning a new agent with a higher-tier model if the lower-tier agent fails to solve the task.
+- **Automatic Codex Delegation**: Standing authorization is granted to automatically delegate routine, repetitive, or token-heavy execution tasks (such as writing unit tests, generating boilerplate, formatting, and linting) to Codex agents via the `codex mcp-server`, provided Codex limits/credits are available. Orchestrators MUST always start at the lowest tier likely to succeed per the table below, then escalate by spawning a new agent with the next tier only after a verifier failure.
+
+**Codex Delegation Tiers** (models from `engineering-os/models/codex.json`):
+
+| Task type | Starting tier | Model | Escalate if |
+|---|---|---|---|
+| Boilerplate, tests, formatting, docs | `light` | gpt-5.1-codex-mini / medium | output wrong after 1 retry |
+| Bounded implementation (<200 lines) | `light` | gpt-5.1-codex-mini / medium | fails verifier after 1 retry |
+| Review, refactor, complex tests | `standard` | gpt-5.3-codex / medium | fails after 1 retry |
+| Architecture, security, ambiguous bugs | `strong` | gpt-5.4 / high | — |
+| Conflict resolution, final acceptance | `adjudicator` | gpt-5.4 / xhigh | — |
 
 ## Model role aliases
 
