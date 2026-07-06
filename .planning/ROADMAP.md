@@ -14,6 +14,11 @@
 - **Phase 26: Test Coverage Automation & Enforcement**
   Establish the 100% test coverage baseline CI gates. Generate missing unit, smoke, regression, and E2E tests for `gsd-orchestrator` and `autogen`.
   *Note (2026-07-06): the v1.3-era coverage suites were found orphaned (untracked in their sub-repos); quick task 260706-h8b committed them. Phase 26 must wire them into CI gates and close the coverage gap to 100% branch.*
+
+  **Plans:** 3 plans (2 waves)
+  - [ ] 26-01-PLAN.md — gsd-orchestrator: branch-coverage runsettings + ratcheted CI gate + new tests (wave 1)
+  - [ ] 26-02-PLAN.md — autogen: pytest-cov + .coveragerc branch=true + ratcheted --cov-fail-under gate + new tests (wave 1)
+  - [ ] 26-03-PLAN.md — cross-repo coverage report + PR verification + human checkpoint (wave 2)
 - **Phase 27: Resilience First Error Typing**
   Refactor all agent boundaries and execution loops to use explicit typed failure states mapped to CAS Contracts.
   Includes verified backlog leads C3 (cas-reference-product `workflow.py:59` bare `except Exception` loses cause) and C4 (cas-evals `reference_product.py:49-52` collapses distinct network errors).
@@ -35,5 +40,9 @@
   Parameterize `publicNetworkAccess` per environment in cas-platform `observability.bicep` (P1). Add `.bicepconfig.json` linting and pin API versions in cas-platform and cloud-security-service-model (P2). Decide and document the `DoNotEnforce` policy-assignment mode in cloud-security-service-model (P4).
 - **Phase 34: Workspace Guardrails & Drift Prevention** *(depends on: 26, 30)*
   Make the 2026-07-06 failure classes impossible to repeat silently: extend `doctor.ps1` into a workspace-health sweep (dirty/unpushed repos, untracked-file drift, gitlink integrity, worktree staleness, branch-vs-main divergence) runnable locally and on a schedule; add the root-repo Pester CI gate (added in 260706-h8b) to required checks; add a commit-integrity check that flags commits whose messages claim artifacts absent from the diff (the b4e0868 failure class); wire the sweep into the root CI workflow.
+
+  **Plans:** 2 plans (2 waves)
+  - [ ] 34-01-PLAN.md -- workspace-health.ps1 sweep extensions (PR-age, credential-helper, stack.manifest assertions, non-ASCII guard, blackboard.json gitignore) + Pester red-fixture tests (wave 1)
+  - [ ] 34-02-PLAN.md -- commit-integrity check + CI wiring (report-only) + Task Scheduler registration + GLOBAL_AGENTS.md prevention notes (wave 2)
 - **Phase 35: v1.4 Verification & Milestone Audit** *(depends on: 26-34)*
   End-to-end verification of both tracks: coverage gates green, typed failure states fault-injected, all repos on `main` with pinned/permissioned workflows, registry resolvable, workspace-health sweep green. Run `/gsd:audit-milestone` and archive.
