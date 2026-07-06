@@ -39,3 +39,6 @@ logs/
 
 # gemini-nano venvs (research components)
 gemini-nano/**/.venv/
+
+# Scratch / transient workspace clutter (never committed)
+scratch/

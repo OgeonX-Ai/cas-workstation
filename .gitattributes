@@ -1,0 +1,16 @@
+* text=auto
+
+*.json eol=lf
+*.md eol=lf
+*.yml eol=lf
+*.yaml eol=lf
+*.js eol=lf
+*.ts eol=lf
+
+*.ps1 eol=crlf
+*.psm1 eol=crlf
+
+*.png binary
+*.pdb binary
+*.dll binary
+*.exe binary

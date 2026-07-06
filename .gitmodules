@@ -1,0 +1,3 @@
+[submodule "gemini-nano"]
+	path = gemini-nano
+	url = https://github.com/Coding-Autopilot-System/gemini-nano.git
