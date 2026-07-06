@@ -3,13 +3,273 @@
     {
       "agentName": "User CLI",
       "toolType": "lint",
-      "intent": "<task-notification>\n<task-id>bfyn0bnua</task-id>\n<summary>Monitor event: \"planner PLAN.md creation\"</summary>\n<event>PLAN.md written</event>\n</task-notification>",
-      "timestamp": "2026-07-06T09:28:28.793Z",
-      "expiresAt": "2026-07-06T09:58:28.793Z",
+      "intent": "<task-notification>\n<task-id>a174635db28ac7ae9</task-id>\n<tool-use-id>toolu_019ygJu5moQpS2DKED5oCCxG</tool-use-id>\n<output-file>C:\\Users\\KIMHAR~1\\AppData\\Local\\Temp\\claude\\C--PersonalRepo\\3282f7d2-e129-4aa9-9a8b-42af09e1bd78\\tasks\\a174635db28ac7ae9.output</output-file>\n<status>completed</status>\n<summary>Agent \"Plan Phase 34 guardrails\" finished</summary>\n<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>\n<result>## PLANNING COMPLETE\n\n**Phase:** 34-workspace-guardrails\n**Plans:** 2 plans in 2 waves\n\n### Wave Structure\n\n| Wave | Plans | Autonomous |\n|------|-------|------------|\n| 1 | 34-01 | yes |\n| 2 | 34-02 (depends on 34-01) | yes |\n\n### Plans Created\n\n| Plan | Objective | Tasks | Files |\n|------|-----------|-------|-------|\n| 34-01 | Extend `workspace-health.ps1` with 6 sweep extensions (PR-age via `gh`, credential-helper WSL-path check, `stack.manifest.json` version assertions, non-ASCII `.ps1` guard, `.refiner/blackboard.json` housekeeping decision, `antigravity-export/`/`evidence/` classification finding) + Pester red-fixture tests | 3 | `scripts/workspace-health.ps1`, `tests/Workspace.Health.Tests.ps1`, `.gitignore`, `.refiner/blackboard.snapshot.json` |\n| 34-02 | Commit-integrity check for the b4e0868 untruthful-commit class, wired into root CI as report-only jobs alongside the existing Pester job, Task Scheduler registration script (idempotent), GLOBAL_AGENTS.md prevention notes | 3 | `scripts/commit-integrity-check.ps1`, `tests/CommitIntegrity.Tests.ps1`, `.github/workflows/ci.yml`, `scripts/register-workspace-health-task.ps1`, `GLOBAL_AGENTS.md` |\n\nBoth plans validated clean (0 errors, 0 warnings) via `gsd-sdk query verify.plan-structure` and `frontmatter.validate`. Full source-audit coverage confirmed against ROADMAP goal, REQ-1.4.8/1.4.12/1.4.13, and every CONTEXT.md \"Sweep extensions\" item — no gaps.\n\nKey design notes baked into the plans:\n- CI jobs are `continue-on-error: true` (report-only) per the threat model, with the required-check ratchet explicitly deferred, not silently dropped.\n- The commit-integrity heuristic's Test 1 fixture replays the exact b4e0868 file set/message so the regression test doesn't depend on real git history surviving future rebases.\n- Task Scheduler registration guards on `Get-ScheduledTask` before registering, verified by running it twice in the task's own `&lt;verify&gt;`.\n- All new `.ps1` files are constrained to strict ASCII in their `&lt;action&gt;` blocks, matching the new `non-ascii-ps1` guard they implement.\n\nFiles:\n- `C:\\PersonalRepo\\.planning\\phases\\34-workspace-guardrails\\34-01-PLAN.md`\n- `C:\\PersonalRepo\\.planning\\phases\\34-workspace-guardrails\\34-02-PLAN.md`\n- `C:\\PersonalRepo\\.planning\\ROADMAP.md` (Phase 34 plan list added)\n\n### Next Steps\n\nExecute: `/gsd:execute-phase 34`\n\n&lt;sub&gt;`/clear` first - fresh context window&lt;/sub&gt;</result>\n<usage><subagent_tokens>95512</subagent_tokens><tool_uses>44</tool_uses><duration_ms>375828</duration_ms></usage>\n</task-notification>",
+      "timestamp": "2026-07-06T12:15:11.602Z",
+      "expiresAt": "2026-07-06T12:45:11.602Z",
       "projectPath": "C:\\PersonalRepo"
     }
   ],
   "logs": [
+    {
+      "timestamp": "2026-07-06T12:15:48.555Z",
+      "message": "Recording agent output for prompt 0a96bf4a-b...",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:15:48.552Z",
+      "message": "MCP Call: record_agent_output",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:15:12.763Z",
+      "message": "Found 2 total gaps (Rule: 2, Semantic: 0).",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:15:11.602Z",
+      "message": "Scouting project for prompt: \"<task-notification>\n<task-id>a...\"",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:15:11.602Z",
+      "message": "Agent [User CLI] intent: <task-notification>\n<task-id>a174635db28ac7ae9</ta...",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:15:11.600Z",
+      "message": "MCP Call: lint_prompt",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:11:53.758Z",
+      "message": "Recording agent output for prompt 6e65e90e-c...",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:11:53.756Z",
+      "message": "MCP Call: record_agent_output",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:11:38.548Z",
+      "message": "Found 3 total gaps (Rule: 3, Semantic: 0).",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:11:36.984Z",
+      "message": "Scouting project for prompt: \"<task-notification>\n<task-id>a...\"",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:11:36.983Z",
+      "message": "Agent [User CLI] intent: <task-notification>\n<task-id>af3dae2dc1285f7d0</ta...",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:11:36.981Z",
+      "message": "MCP Call: lint_prompt",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:10:51.987Z",
+      "message": "Recording agent output for prompt 7a70b6e3-0...",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:10:51.986Z",
+      "message": "MCP Call: record_agent_output",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:09:06.166Z",
+      "message": "Recording agent output for prompt 1a117896-e...",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:09:06.161Z",
+      "message": "MCP Call: record_agent_output",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:06:50.981Z",
+      "message": "Found 3 total gaps (Rule: 3, Semantic: 0).",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:06:48.806Z",
+      "message": "Scouting project for prompt: \"well i think you can restart t...\"",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:06:48.806Z",
+      "message": "Agent [User CLI] intent: well i think you can restart the codex app server ...",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:06:48.805Z",
+      "message": "MCP Call: lint_prompt",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:05:56.579Z",
+      "message": "Recording agent output for prompt ec242cb3-2...",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:05:56.578Z",
+      "message": "MCP Call: record_agent_output",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:05:46.594Z",
+      "message": "Found 3 total gaps (Rule: 3, Semantic: 0).",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:05:44.626Z",
+      "message": "Scouting project for prompt: \"/goal  Finish all the phases. ...\"",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:05:44.626Z",
+      "message": "Agent [User CLI] intent: /goal  Finish all the phases. Improve as you work....",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:05:44.624Z",
+      "message": "MCP Call: lint_prompt",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:04:24.947Z",
+      "message": "Recording agent output for prompt 8a5ca06a-2...",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:04:24.946Z",
+      "message": "MCP Call: record_agent_output",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:02:51.660Z",
+      "message": "Found 3 total gaps (Rule: 3, Semantic: 0).",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:02:49.833Z",
+      "message": "Scouting project for prompt: \"is it because in codex and ant...\"",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:02:49.832Z",
+      "message": "Agent [User CLI] intent: is it because in codex and antigraivty I am logged...",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:02:49.831Z",
+      "message": "MCP Call: lint_prompt",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:01:05.956Z",
+      "message": "Found 3 total gaps (Rule: 3, Semantic: 0).",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:01:04.084Z",
+      "message": "Scouting project for prompt: \"Continue, did we plan all the ...\"",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:01:04.084Z",
+      "message": "Agent [User CLI] intent: Continue, did we plan all the imrpovemtns you can ...",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T12:01:04.083Z",
+      "message": "MCP Call: lint_prompt",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T10:02:49.369Z",
+      "message": "Found 3 total gaps (Rule: 3, Semantic: 0).",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T10:02:47.428Z",
+      "message": "Scouting project for prompt: \"<task-notification>\n<task-id>a...\"",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T10:02:47.427Z",
+      "message": "Agent [User CLI] intent: <task-notification>\n<task-id>af38b401baadc7397</ta...",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T10:02:47.426Z",
+      "message": "MCP Call: lint_prompt",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T10:00:24.037Z",
+      "message": "Recording agent output for prompt 6cc6171b-9...",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T10:00:24.036Z",
+      "message": "MCP Call: record_agent_output",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T09:55:14.536Z",
+      "message": "Found 3 total gaps (Rule: 3, Semantic: 0).",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T09:55:12.788Z",
+      "message": "Scouting project for prompt: \"Continue with what you think i...\"",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T09:55:12.788Z",
+      "message": "Agent [User CLI] intent: Continue with what you think is best, Remember to ...",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T09:55:12.787Z",
+      "message": "MCP Call: lint_prompt",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T09:50:03.440Z",
+      "message": "Recording agent output for prompt bf4b132e-f...",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T09:50:03.439Z",
+      "message": "MCP Call: record_agent_output",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T09:47:27.277Z",
+      "message": "Found 3 total gaps (Rule: 3, Semantic: 0).",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T09:47:25.491Z",
+      "message": "Scouting project for prompt: \"<task-notification>\n<task-id>a...\"",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T09:47:25.491Z",
+      "message": "Agent [User CLI] intent: <task-notification>\n<task-id>a02b16a80da575461</ta...",
+      "projectPath": "C:\\PersonalRepo"
+    },
+    {
+      "timestamp": "2026-07-06T09:47:25.489Z",
+      "message": "MCP Call: lint_prompt",
+      "projectPath": "C:\\PersonalRepo"
+    },
     {
       "timestamp": "2026-07-06T09:38:52.740Z",
       "message": "Recording agent output for prompt 33baab5b-7...",
@@ -748,266 +1008,6 @@
     {
       "timestamp": "2026-07-05T17:09:33.290Z",
       "message": "Scouting project for prompt: \"I have codex installed on my l...\"",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T17:09:33.289Z",
-      "message": "Agent [User CLI] intent: I have codex installed on my local machine and it ...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T17:09:33.288Z",
-      "message": "MCP Call: lint_prompt",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T17:08:57.477Z",
-      "message": "Recording agent output for prompt 2cd4036c-e...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T17:08:57.476Z",
-      "message": "MCP Call: record_agent_output",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T17:06:56.348Z",
-      "message": "Found 3 total gaps (Rule: 3, Semantic: 0).",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T17:06:54.294Z",
-      "message": "Scouting project for prompt: \"CAn you investigate why codex ...\"",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T17:06:54.293Z",
-      "message": "Agent [User CLI] intent: CAn you investigate why codex app server or MCP is...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T17:06:54.292Z",
-      "message": "MCP Call: lint_prompt",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:54:23.672Z",
-      "message": "Recording agent output for prompt 319d017b-d...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:54:23.670Z",
-      "message": "MCP Call: record_agent_output",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:54:02.591Z",
-      "message": "Found 3 total gaps (Rule: 3, Semantic: 0).",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:54:00.715Z",
-      "message": "Scouting project for prompt: \"seems we using bash commands o...\"",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:54:00.715Z",
-      "message": "Agent [User CLI] intent: seems we using bash commands on windows computer ?...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:54:00.714Z",
-      "message": "MCP Call: lint_prompt",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:53:59.703Z",
-      "message": "Recording agent output for prompt 8ca46cae-e...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:53:59.701Z",
-      "message": "MCP Call: record_agent_output",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:50:14.463Z",
-      "message": "[INGESTION_CHECKPOINT] Ingestion checkpoint reached at SHA 5dea241",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:50:14.462Z",
-      "message": "[COMMIT_DETECTED] Commit detected: 5dea241 - docs: start milestone v1.2 shared AI engineering O...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:50:14.461Z",
-      "message": "[COMMIT_DETECTED] Commit detected: c0181dc - feat: implement shared AI engineering OS...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:50:14.461Z",
-      "message": "[COMMIT_DETECTED] Commit detected: 09eeb53 - chore: archive v1.2 milestone...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:50:14.460Z",
-      "message": "[COMMIT_DETECTED] Commit detected: 4b24b11 - docs: bootstrap milestone v1.3 Bootstrapping...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:50:14.459Z",
-      "message": "[COMMIT_DETECTED] Commit detected: a700ce7 - Phase 22: Ollama Latency Mitigation - Refactor scr...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:50:14.458Z",
-      "message": "[COMMIT_DETECTED] Commit detected: f41d74b - docs(planning): finalize Phase 23 context...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:50:14.457Z",
-      "message": "[COMMIT_DETECTED] Commit detected: 22918fa - feat(phase24): implement paid API routing and auto...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:50:14.456Z",
-      "message": "[COMMIT_DETECTED] Commit detected: 8c58443 - chore(phase25): approve and finalize router modifi...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:50:14.455Z",
-      "message": "[COMMIT_DETECTED] Commit detected: 9126b75 - chore: archive v1.3 milestone files...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:50:14.453Z",
-      "message": "[COMMIT_DETECTED] Commit detected: b4e0868 - test: add full coverage suites for gsd-orchestrato...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:49:42.857Z",
-      "message": "Background Autonomy: Watching for changes...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:49:09.908Z",
-      "message": "Found 1 total gaps (Rule: 1, Semantic: 0).",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:49:06.477Z",
-      "message": "Scouting project for prompt: \"CAn you fix these errors ? so ...\"",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:49:06.476Z",
-      "message": "Agent [User CLI] intent: CAn you fix these errors ? so we can delegated tas...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T16:49:06.475Z",
-      "message": "MCP Call: lint_prompt",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T10:06:26.650Z",
-      "message": "Recording agent output for prompt 0578adcc-7...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T10:06:26.647Z",
-      "message": "MCP Call: record_agent_output",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T10:06:17.502Z",
-      "message": "Found 3 total gaps (Rule: 3, Semantic: 0).",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T10:06:10.323Z",
-      "message": "Scouting project for prompt: \"Without using tools, state the...\"",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T10:06:10.322Z",
-      "message": "Agent [User CLI] intent: Without using tools, state the canonical engineeri...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T10:06:10.316Z",
-      "message": "MCP Call: lint_prompt",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T10:03:59.260Z",
-      "message": "Recording agent output for prompt a45496f8-a...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T10:03:59.255Z",
-      "message": "MCP Call: record_agent_output",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T10:03:42.244Z",
-      "message": "Recording agent output for prompt e94f9673-6...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T10:03:42.241Z",
-      "message": "MCP Call: record_agent_output",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T10:03:32.420Z",
-      "message": "Found 4 total gaps (Rule: 4, Semantic: 0).",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T10:03:22.125Z",
-      "message": "Scouting project for prompt: \"Read C:\\PersonalRepo\\engineeri...\"",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T10:03:22.125Z",
-      "message": "Agent [User CLI] intent: Read C:\\PersonalRepo\\engineering-os\\OPERATING-CONT...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T10:03:22.121Z",
-      "message": "MCP Call: lint_prompt",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T10:03:06.760Z",
-      "message": "Scouting project for prompt: \"Read C:\\PersonalRepo\\engineeri...\"",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T10:03:06.759Z",
-      "message": "Agent [User CLI] intent: Read C:\\PersonalRepo\\engineering-os\\OPERATING-CONT...",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-05T10:03:06.751Z",
-      "message": "MCP Call: lint_prompt",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-03T17:06:42.410Z",
-      "message": "Found 4 total gaps (Rule: 4, Semantic: 0).",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-03T17:06:38.447Z",
-      "message": "Scouting project for prompt: \"<task-notification>\n<task-id>a...\"",
-      "projectPath": "C:\\PersonalRepo"
-    },
-    {
-      "timestamp": "2026-07-03T17:06:38.447Z",
-      "message": "Agent [User CLI] intent: <task-notification>\n<task-id>a598350d2c54faca2</ta...",
       "projectPath": "C:\\PersonalRepo"
     }
   ]

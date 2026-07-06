@@ -42,3 +42,6 @@ gemini-nano/**/.venv/
 
 # Scratch / transient workspace clutter (never committed)
 scratch/
+
+# Refiner runtime state (re-dirties continuously; see .refiner/blackboard.snapshot.json for last committed state)
+.refiner/blackboard.json
