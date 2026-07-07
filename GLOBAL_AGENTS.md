@@ -73,6 +73,21 @@ Use GSD entry points before direct file edits:
 
 Do not make direct repo edits outside a GSD workflow unless the user explicitly bypasses it.
 
+## Workspace Hygiene Locks
+
+- **No WSL-created worktrees.** Never register a git worktree from inside WSL
+  against a repo under `C:\PersonalRepo`. WSL registers worktree paths in
+  Unix `/mnt/c/...` form, which breaks git on native Windows and is flagged by
+  `scripts/workspace-health.ps1` (`worktree-unix-path` finding). Create and
+  manage worktrees from Windows PowerShell only.
+- **`.ps1` files must be ASCII-only, or explicitly UTF-8 with a BOM.**
+  BOM-less `.ps1` files are read as the legacy ANSI/OEM codepage by
+  PowerShell 5.1, silently corrupting any non-ASCII character (em-dashes,
+  curly quotes, accented characters) and causing parse or runtime failures.
+  `scripts/workspace-health.ps1` flags plain non-ASCII `.ps1` files
+  (`non-ascii-ps1` finding). Keep script source ASCII-only unless a BOM is
+  present.
+
 ## AI Operating Manual
 
 For all SDLC logic, verification loops, and global constraints, follow the Canonical AI Engineering Operating Contract:
