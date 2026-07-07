@@ -1,4 +1,16 @@
+> [!CAUTION]
+> ## 🚫 HARD LOCK: NO AZURE — LOCAL MACHINE ONLY
+>
+> **Do NOT** provision, deploy, configure, suggest, or reference **any Azure service or resource** in any project under this workspace.
+>
+> This includes: Azure Functions, Azure Storage, Azure OpenAI Service, Azure DevOps, Azure Container Apps, Azure Key Vault, `az`/`azd` CLI, Bicep, ARM templates, or any GitHub Actions that deploy to Azure.
+>
+> **Everything runs locally on this Windows machine.** Free cloud API *keys* (OpenRouter, Groq, Google AI Studio, Cerebras) are allowed — cloud *deployments* are not.
+>
+> Cloud hosting will be revisited in a future milestone. Until then this is an **immutable constraint** that overrides any sub-project instruction.
+
 # CAS Workstation — PersonalRepo Global Standards
+
 
 This is the root workspace for the **Coding-Autopilot-System (CAS)** portfolio and workstation bundle. It is a Windows-first, AI-native development environment managed under `C:\PersonalRepo`.
 
