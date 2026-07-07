@@ -45,3 +45,7 @@ scratch/
 
 # Refiner runtime state (re-dirties continuously; see .refiner/blackboard.snapshot.json for last committed state)
 .refiner/blackboard.json
+
+# Pester -CI test result output (regenerated on every run)
+testResults.xml
+
