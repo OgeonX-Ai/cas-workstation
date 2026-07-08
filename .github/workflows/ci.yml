@@ -22,3 +22,39 @@ jobs:
         shell: pwsh
         run: |
           Invoke-Pester -Path tests/*.Tests.ps1 -CI
+
+  # Report-only (continue-on-error): surfaces drift without blocking merges.
+  # Ratchet to required is an explicit deferred decision (34-02 threat model).
+  workspace-health:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Workspace-health sweep (report-only)
+        shell: pwsh
+        env:
+          WH_SKIP_GH: '1'
+        run: |
+          # CI checks out only the root repo (portfolio/* are separate repos),
+          # so repo-level checks apply to root only here; the full sweep runs
+          # locally via the scheduled task.
+          powershell -NoProfile -File scripts/workspace-health.ps1 -Json
+
+  commit-integrity:
+    runs-on: windows-latest
+    timeout-minutes: 5
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 50
+
+      - name: Commit-integrity check (report-only)
+        shell: pwsh
+        run: |
+          $range = if ($env:GITHUB_EVENT_NAME -eq 'pull_request') { "origin/$($env:GITHUB_BASE_REF)..HEAD" } else { 'HEAD~10..HEAD' }
+          powershell -NoProfile -File scripts/commit-integrity-check.ps1 -Range $range
