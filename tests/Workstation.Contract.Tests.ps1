@@ -29,10 +29,14 @@ $testConfig = Join-Path $testRoot "config"
 try {
     New-Item -ItemType Directory -Path $testRoot -Force | Out-Null
     Import-Module $modulePath -Force
-    $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+    # -Encoding UTF8 is load-bearing: the manifest is BOM-less UTF-8 and PS 5.1
+    # otherwise decodes it as ANSI, mangling non-ASCII path characters.
+    $manifest = Get-Content -LiteralPath $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
 
     Assert-CasEqual "defaults.rootPath" $manifest.defaults.rootPath "C:\PersonalRepo"
-    Assert-CasEqual "defaults.configPath" $manifest.defaults.configPath "C:\Users\KimHarjamaki\.cas"
+    # Expected value derived from the environment: the literal user name contains
+    # a non-ASCII character that must not appear in this ASCII-only test file.
+    Assert-CasEqual "defaults.configPath" $manifest.defaults.configPath (Join-Path $env:USERPROFILE ".cas")
     Assert-CasEqual "paths.reposRoot" $manifest.paths.reposRoot "portfolio"
 
     $requiredRepos = @(

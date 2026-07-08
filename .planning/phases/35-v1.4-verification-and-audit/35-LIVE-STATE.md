@@ -3,6 +3,19 @@
 This file records the live pre-audit position after reconciling the root planning
 state against branch and GitHub evidence.
 
+## Temporary Scope Adjustment - 2026-07-08
+
+- The audit-close blocker from the open PR queue remains real, but it is now treated as a
+  deferred closure gate rather than a stop-work condition.
+- Execution is continuing on high-signal milestone evidence that does not require queue
+  reduction first, starting with docs/visual rollout from the Phase 36 and Phase 37
+  Claude-landed materials.
+- First rollout action in this session:
+  - archive the visible `docs/wiki/Agent-Hierarchy.md` Mermaid into
+    `docs/wiki/diagrams/agent-hierarchy.mmd`
+  - promote a generated-visual placeholder with a stronger prompt aligned to `docs/VISION.md`
+  - preserve Mermaid as the machine-readable fallback instead of deleting it
+
 ## Verified Reality
 
 - Phase 29 is complete as implementation work: `autogen` peer-critic branch exists,

@@ -2,10 +2,10 @@
 gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Quality and Resilience Hardening
-status: blocked
-stopped_at: "Phase 35 audit boundary reached: execution is complete through Phase 36, but v1.4 audit cannot close until the open PR queue across Phases 29, 31, 32, 33, and 36 is reviewed and merged."
-last_updated: "2026-07-08T13:26:00Z"
-last_activity: 2026-07-08 - Reduced the live technical blocker set: opened and greened `autogen#16`, fixed `cloud-security-service-model#15` lint, and rebuilt `Promptimprover#27` on top of current `master` so GitHub can re-evaluate it from clean history.
+status: in_progress
+stopped_at: "Phase 35 audit closure remains deferred behind the org merge queue, but execution continues under a temporary docs-and-visual rollout track so milestone evidence can keep improving while review gates clear."
+last_updated: "2026-07-08T13:35:00Z"
+last_activity: 2026-07-08 - Temporarily deferred the milestone-audit blocker, started docs-image rollout from the Claude-landed VISION/wiki set, archived the visible Agent-Hierarchy Mermaid source, and prepared the first generated visual replacement.
 progress:
   total_phases: 25
   completed_phases: 20
@@ -27,8 +27,8 @@ See: `.planning/PROJECT.md` (updated 2026-07-05)
 
 Phase: 35-v1.4-verification-and-audit
 Plan: pre-audit live-state reconciliation
-Status: Blocked on external review/merge queue
-Last activity: 2026-07-08 - Verified that all planned implementation through Phase 36 exists, but much of Track B and the docs refresh remain PR-only across the org. See `.planning/phases/35-v1.4-verification-and-audit/35-LIVE-STATE.md`.
+Status: In progress with temporary audit deferral
+Last activity: 2026-07-08 - Audit closure is still merge-gated, but docs/visual hardening continues in parallel so Phase 35 evidence can improve without waiting on the queue. See `.planning/phases/35-v1.4-verification-and-audit/35-LIVE-STATE.md`.
 
 ## Performance Metrics
 
