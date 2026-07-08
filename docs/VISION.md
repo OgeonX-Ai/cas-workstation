@@ -16,27 +16,12 @@ CAS is a working system — 13 production repositories plus a workstation contro
 
 ## The answer: governed autonomy
 
-```mermaid
-flowchart LR
-    subgraph Control["Control plane - gsd-orchestrator (.NET 10)"]
-        G[Goal admission<br/>typed, bounded, budgeted] --> S[Dependency-aware<br/>scheduling]
-    end
-    subgraph Execution["Execution plane - autogen / Microsoft Agent Framework (Python 3.12)"]
-        S --> W1[Worker fan-out<br/>isolated mutation scope]
-        W1 --> T[Typed failure states<br/>structured JSON telemetry]
-    end
-    subgraph Governance["Governance plane"]
-        P[Promptimprover<br/>prompt & learning governance] -.gates.-> W1
-        C[cas-contracts<br/>versioned JSON schemas] -.validates.-> T
-        E[cas-evals<br/>deterministic verification] --> V{Evidence<br/>gate}
-    end
-    T --> E
-    V -->|proven| M[Merge via PR<br/>branch-protected, two-party]
-    V -->|failed| R[Bounded repair<br/>or deterministic halt]
-    R --> S
-```
+> The original machine-readable flow is preserved at
+> [`docs/diagrams/governed-autonomy.mmd`](diagrams/governed-autonomy.mmd).
 
-<!-- codex:generate-image prompt="Three interlocking gears labeled Control, Execution, Governance, each gear containing small icons (calendar/scheduler, robot workers, shield with checkmark); flowing conveyor of code artifacts passing through a glowing evidence gate; isometric, enterprise blue/graphite" style="isometric, enterprise, clean" replaces="mermaid-above" -->
+![Governed autonomy system diagram](assets/governed-autonomy.png)
+
+<!-- codex:generate-image prompt="Executive architecture infographic for governed AI software delivery: three large interlocking mechanisms representing Control, Execution, and Governance arranged left to right inside a clean enterprise system diagram. Control appears as a cobalt scheduling tower with timeline rings and admission gates. Execution appears as disciplined robot worker cells passing code artifacts along a luminous conveyor. Governance appears as a shielded verification complex with schema panels, evidence vaults, and a green decision gate that routes either to merge or bounded repair. Show artifacts flowing through the whole system with glass overlays, subtle telemetry lines, premium white presentation background, blue-graphite-teal palette, isometric perspective, crisp non-cartoon enterprise style, no text labels embedded in image." style="isometric, enterprise, premium infographic" replaces="mermaid-above" asset="docs/assets/governed-autonomy.png" -->
 
 Three planes, strictly separated:
 
@@ -99,4 +84,4 @@ The orchestrator delegates through **typed sub-agents** (planner, executor, veri
 ---
 
 *This document lives at `docs/VISION.md` and in the org profile. Diagrams are Mermaid-first; `codex:generate-image` placeholders mark where generated visuals will replace them.*
-<!-- docs-verified: pending-phase-36-verifier 2026-07-07 -->
+<!-- docs-verified: 7c04d9e 2026-07-08 -->

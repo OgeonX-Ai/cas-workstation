@@ -1,0 +1,11 @@
+flowchart TD
+    U[Operator<br/>top-level architect] --> O[Orchestrator session<br/>frontier model, full workspace context]
+    O --> P[gsd-planner<br/>mid tier - writes PLAN.md contracts]
+    O --> E[gsd-executor<br/>mid tier - one repo each, atomic commits]
+    O --> V[gsd-verifier / gsd-plan-checker<br/>mid tier - goal-backward evidence checks]
+    O --> CR[critic agent<br/>mid tier - resilience & security gate]
+    O --> D[doc-writer / mechanical verification<br/>small tier]
+    P -->|plan as contract| E
+    E -->|SUMMARY.md evidence| V
+    style U fill:#24292f,color:#fff
+    style O fill:#1f6feb,color:#fff

@@ -21,7 +21,7 @@ configured AI-native coding workstation.
 - AI coder CLIs: Codex, Claude Code, Gemini CLI
 - Coding-Autopilot-System component repos
 - Loop-engineering repositories under `C:\PersonalRepo\portfolio\`
-- Shared runtime paths under `C:\Users\KimHarjamaki\.cas\`
+- Shared runtime paths under `C:\PersonalRepo\.cas\`
 - Generated MCP client configuration fragments
 
 ## Files
