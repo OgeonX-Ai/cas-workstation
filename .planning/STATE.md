@@ -4,14 +4,14 @@ milestone: v1.4
 milestone_name: Quality and Resilience Hardening
 status: planning
 stopped_at: "Phase 32 (contracts registry publishing) completed: cas-contracts PR #18 and cas-evals PR #9 open, PR-only; #18 blocked on human compatibility-reviewed label."
-last_updated: "2026-07-07T15:40:54.374Z"
+last_updated: "2026-07-07T15:52:42.758Z"
 last_activity: 2026-07-07 - Completed and verified both Phase 28 plans; next planned slice is 29-01.
 progress:
   total_phases: 25
-  completed_phases: 14
+  completed_phases: 15
   total_plans: 35
-  completed_plans: 23
-  percent: 56
+  completed_plans: 29
+  percent: 60
 ---
 
 # Project State
