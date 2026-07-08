@@ -3,6 +3,22 @@
 This file records the live pre-audit position after reconciling the root planning
 state against branch and GitHub evidence.
 
+## End-of-session update - 2026-07-08
+
+- The org-wide PR queue blocker that existed at the start of this session is now cleared.
+- Live GitHub verification at the end of the session shows **0 open PRs** under the
+  `Coding-Autopilot-System` owner.
+- `autogen#17` (`feat(maf): consolidate refresh stack on current main`) replaced the stale
+  `autogen#12`-`#16` stack, passed CI, and was merged with branch protection restored
+  immediately afterward.
+- The docs/visual rollout requested during the blocker window is also landed locally:
+  - Mermaid sources preserved in `docs/diagrams/governed-autonomy.mmd` and
+    `docs/wiki/diagrams/agent-hierarchy.mmd`
+  - generated image assets stored in `docs/assets/governed-autonomy.png` and
+    `docs/wiki/assets/agent-hierarchy.png`
+- The remainder of this file is preserved as the beginning-of-session snapshot that
+  explains why the temporary scope adjustment existed.
+
 ## Temporary Scope Adjustment - 2026-07-08
 
 - The audit-close blocker from the open PR queue remains real, but it is now treated as a
@@ -15,6 +31,8 @@ state against branch and GitHub evidence.
     `docs/wiki/diagrams/agent-hierarchy.mmd`
   - promote a generated-visual placeholder with a stronger prompt aligned to `docs/VISION.md`
   - preserve Mermaid as the machine-readable fallback instead of deleting it
+  - embed generated image assets for `docs/wiki/Agent-Hierarchy.md` and `docs/VISION.md`
+  - mirror the governed-autonomy visual into `portfolio/org-dotgithub/profile/VISION.md`
 
 ## Verified Reality
 

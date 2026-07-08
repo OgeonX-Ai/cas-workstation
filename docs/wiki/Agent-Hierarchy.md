@@ -2,21 +2,12 @@
 
 How CAS structures its AI workforce: who can spawn whom, which model tier each role runs on, and why delegation depth is a governance decision rather than an accident.
 
-```mermaid
-flowchart TD
-    U[Operator<br/>top-level architect] --> O[Orchestrator session<br/>frontier model, full workspace context]
-    O --> P[gsd-planner<br/>mid tier - writes PLAN.md contracts]
-    O --> E[gsd-executor<br/>mid tier - one repo each, atomic commits]
-    O --> V[gsd-verifier / gsd-plan-checker<br/>mid tier - goal-backward evidence checks]
-    O --> CR[critic agent<br/>mid tier - resilience & security gate]
-    O --> D[doc-writer / mechanical verification<br/>small tier]
-    P -->|plan as contract| E
-    E -->|SUMMARY.md evidence| V
-    style U fill:#24292f,color:#fff
-    style O fill:#1f6feb,color:#fff
-```
+> Primary visual is now generated artwork. The original Mermaid source is preserved at
+> [`docs/wiki/diagrams/agent-hierarchy.mmd`](diagrams/agent-hierarchy.mmd).
 
-<!-- codex:generate-image prompt="Corporate org chart of robots: human architect silhouette at top, one large blue conductor robot below, then a row of medium specialist robots (blueprint scroll, wrench, magnifying glass, shield), bottom row of small clerk robots with clipboards; each tier has a smaller price tag; clean isometric enterprise style" style="isometric, enterprise, clean" replaces="mermaid-above" -->
+![CAS agent hierarchy generated visual](assets/agent-hierarchy.png)
+
+<!-- codex:generate-image prompt="Premium enterprise command-center diagram: one human architect silhouette at the apex, a tall cobalt-and-graphite conductor robot beneath with a luminous baton, then three disciplined rows of specialist robots arranged like an executive org chart. Row two: planner robot holding blueprint contracts, executor robot with precision tools, verifier robot with magnifying optics, critic robot with a shield and fault-lightning emblem. Bottom row: compact documentation and operations clerks with clipboards and evidence folders. Fine connector lines show authority flowing downward and evidence flowing back upward. Include subtle pricing badges that shrink by tier, glass-panel dashboards, restrained circuit motifs, white-background presentation style, isometric depth, crisp enterprise infographics, no cartoon faces, no text labels embedded in image." style="isometric, enterprise, premium infographic" replaces="mermaid-above" asset="docs/wiki/assets/agent-hierarchy.png" -->
 
 ## Can an agent launch sub-agents?
 
@@ -49,4 +40,4 @@ Selection defaults live in `engineering-os/models/claude.json`; any spawn can ov
 3. **Foreign dirty files are untouchable** — parallel operator sessions (Gemini, Codex) may leave work in progress; executors stage only files their plan names.
 4. **Session caps are survivable** — plans and summaries on disk mean any interrupted agent's work is reconciled from artifacts, not memory.
 
-<!-- docs-verified: pending-phase-36-verifier 2026-07-08 -->
+<!-- docs-verified: 7c04d9e 2026-07-08 -->

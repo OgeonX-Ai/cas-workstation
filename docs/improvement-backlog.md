@@ -93,7 +93,7 @@ workspace state, not code quality — several rank above everything in Tier 1.
 |---|---|---|
 | M1 | **Marketing-as-code showcase site**: Feature Cards + per-phase Story Pages auto-generated from `.planning/` evidence; LinkedIn drafts per phase; demo GIF placeholders; clean-machine quickstart CTA. Strategy: `.planning/phases/37-marketing-and-adoption/37-CONTEXT.md` | 37 |
 | M2 | Record real demo assets (autopilot-demo run GIF, terminal recording of a full goal loop) to replace placeholders | 37 follow-up |
-| M3 | Replace codex:generate-image placeholders across VISION/wikis/marketing with generated visuals (Codex image pipeline) | post-37 |
+| M3 | Replace codex:generate-image placeholders across VISION/wikis/marketing with generated visuals (Codex image pipeline) | in progress - started 2026-07-08 with `docs/wiki/Agent-Hierarchy.md` and `docs/VISION.md` |
 
 ### Suggested sequencing
 

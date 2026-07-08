@@ -1,0 +1,17 @@
+flowchart LR
+    subgraph Control["Control plane - gsd-orchestrator (.NET 10)"]
+        G[Goal admission<br/>typed, bounded, budgeted] --> S[Dependency-aware<br/>scheduling]
+    end
+    subgraph Execution["Execution plane - autogen / Microsoft Agent Framework (Python 3.12)"]
+        S --> W1[Worker fan-out<br/>isolated mutation scope]
+        W1 --> T[Typed failure states<br/>structured JSON telemetry]
+    end
+    subgraph Governance["Governance plane"]
+        P[Promptimprover<br/>prompt & learning governance] -.gates.-> W1
+        C[cas-contracts<br/>versioned JSON schemas] -.validates.-> T
+        E[cas-evals<br/>deterministic verification] --> V{Evidence<br/>gate}
+    end
+    T --> E
+    V -->|proven| M[Merge via PR<br/>branch-protected, two-party]
+    V -->|failed| R[Bounded repair<br/>or deterministic halt]
+    R --> S
