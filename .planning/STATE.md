@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Quality and Resilience Hardening
-status: planning
-stopped_at: "Phase 29 (automated peer-critic pattern) 29-01 completed: autogen PR #14 open (peer-critic pattern-scan engine), PR-only, verified against real PR #12 diff."
-last_updated: "2026-07-08T12:00:54.625Z"
-last_activity: 2026-07-07 - Completed and verified both Phase 28 plans; next planned slice is 29-01.
+status: blocked
+stopped_at: "Phase 35 audit boundary reached: execution is complete through Phase 36, but v1.4 audit cannot close until the open PR queue across Phases 29, 31, 32, 33, and 36 is reviewed and merged."
+last_updated: "2026-07-08T13:26:00Z"
+last_activity: 2026-07-08 - Reduced the live technical blocker set: opened and greened `autogen#16`, fixed `cloud-security-service-model#15` lint, and rebuilt `Promptimprover#27` on top of current `master` so GitHub can re-evaluate it from clean history.
 progress:
   total_phases: 25
-  completed_phases: 17
+  completed_phases: 20
   total_plans: 36
-  completed_plans: 32
-  percent: 68
+  completed_plans: 36
+  percent: 80
 ---
 
 # Project State
@@ -21,14 +21,14 @@ progress:
 See: `.planning/PROJECT.md` (updated 2026-07-05)
 
 **Core value:** A Windows-first developer can trust CAS to pursue repository goals in parallel without losing control of state, cost, safety, evidence, or completion.
-**Current focus:** Bootstrapping v1.4 milestone
+**Current focus:** Phase 35 milestone audit preparation and blocker reduction
 
 ## Current Position
 
-Phase: 29-peer-critic
-Plan: 29-01
-Status: Executed - PR open (autogen #14, PR-only)
-Last activity: 2026-07-08 - Completed 29-01 (peer-critic pattern-scan engine): verified tests, live-diff evidence against autogen PR #12, pushed branch, opened autogen PR #14.
+Phase: 35-v1.4-verification-and-audit
+Plan: pre-audit live-state reconciliation
+Status: Blocked on external review/merge queue
+Last activity: 2026-07-08 - Verified that all planned implementation through Phase 36 exists, but much of Track B and the docs refresh remain PR-only across the org. See `.planning/phases/35-v1.4-verification-and-audit/35-LIVE-STATE.md`.
 
 ## Performance Metrics
 
@@ -44,6 +44,7 @@ Last activity: 2026-07-08 - Completed 29-01 (peer-critic pattern-scan engine): v
 | 31 | 05 | 25min | 3 | 7 |
 | Phase 32 P01+02 | 35min | 0 tasks | 13 files |
 | Phase 29 P01 | 35min | 2 tasks | 4 files |
+| Phase 36 P01+02+03 | PR-only batch | 13 repos + root docs | 50+ docs files |
 
 ## Accumulated Context
 
@@ -67,16 +68,25 @@ Last activity: 2026-07-08 - Completed 29-01 (peer-critic pattern-scan engine): v
 - [Phase 31-05]: Re-resolved SHA pins against tags actually present in ci-autopilot's workflow files rather than the plan's 2026-07-06 interfaces-block table, which had gone stale as the repo's tags moved (v4->v7, v5->v6, v3->v5, v5->v4, v5->v6, v8->v10).
 - [Phase 32]: Rewrote all 22 cas-contracts schema $id values to the live GitHub Pages registry URL, superseding v1.1.1's schemas.coding-autopilot.dev canonical-namespace decision (documented BREAKING). cas-contracts PR #18 and cas-evals PR #9 opened, PR-only per scope.
 - [Phase 29-01]: autogen PR #14 opened for the peer-critic pattern-scan engine (deterministic, zero-config, BLOCKING/ADVISORY split); live-evidence run against PR #12's diff produced 0 blocking / 1 advisory, falsifying the false-positive-blocking threat.
+- [Phase 34]: Workspace guardrails are fully executed: `workspace-health.ps1`, `commit-integrity-check.ps1`, report-only CI wiring, and scheduled-task registration all have committed summaries and verification evidence.
+- [Phase 36]: Documentation refresh was executed PR-only across 13 repos plus org profile; default-branch checkouts remain stale by design until those PRs merge, so README/wiki freshness must be judged from the `docs/phase-36-refresh` branches and PRs, not from current `main`/`master` trees.
+- [Phase 35]: Live GitHub search on 2026-07-08 found 38 open PRs in `Coding-Autopilot-System`; this is the concrete blocker for the milestone audit's "all repos on default branch" gate, while the "0 open PRs older than 7 days" sub-gate is currently satisfied.
+- [Phase 35]: `autogen`'s current `main` dependency set was proven internally inconsistent in this session. PR `autogen#16` now carries the verified compatibility rollback and all of its GitHub checks are green.
+- [Phase 35]: `cloud-security-service-model#15` was repaired in-session by wrapping the overlong `codex:generate-image` directive in `docs/wiki/Architecture.md`; GitHub lint/CI reran green afterward.
+- [Phase 35]: `Promptimprover#27` was not a real source conflict on 2026-07-08; it was a stale branch-history conflict after `#26` merged via squash. The branch was rebuilt on top of live `master` with only the remaining XSS hardening delta, and fresh CI is now running.
 
 ### Pending Todos
 
-- Track PR merge for autogen `#14` (peer-critic pattern-scan engine, 29-01) once reviewed.
+- Reduce the org-wide open PR queue (still 38 open on 2026-07-08 after opening `autogen#16`) so Phase 35 can run against merged default branches instead of PR-only branches.
+- After the merge queue is materially reduced, run the full Phase 35 verifier stack: workspace-health sweep, branch/default-branch audit, workflow hardening audit, registry resolvability check, and milestone audit/archive workflow.
+- Keep Phase 37 parked until Phase 35 closes; marketing claims must reference the audited milestone, not the current PR-only state.
 
 ### Blockers/Concerns
 
-- Promptimprover local `master` is 1 commit ahead (same change as PR #26); reset to origin/master after the PR merges (Phase 30).
-- 10 `worktrees/` entries hold unmerged, unpushed `codex/*` branches; 3 orphaned dirs need manual deletion (see 260706-h8b worktrees-audit.md).
-- [Phase 32] cas-contracts PR #18 'Classify schema compatibility' check requires a human to add the compatibility-reviewed label (self-approval of a review gate was correctly denied by the permission system to this agent). PR: https://github.com/Coding-Autopilot-System/cas-contracts/pull/18
+- Phase 35 cannot truthfully pass while 38 PRs remain open across the org. The live queue includes Phase 29 (`autogen` #14), the `autogen#16` compatibility-unblock PR, Phase 31 SHA-pin/workflow-hardening PRs, Phase 32 (`cas-contracts` #18, `cas-evals` #9), Phase 33 (`cas-platform` #11, `cloud-security-service-model` #13), and the full Phase 36 docs batch.
+- [Phase 32] cas-contracts PR #18 `Classify schema compatibility` requires a human/maintainer-applied `compatibility-reviewed` label; no code change is pending, but the review gate cannot be self-stamped by the executor.
+- Default-branch local checkouts remain intentionally stale relative to the Phase 36 docs branches. This is not missing implementation, but it does mean any doc audit must inspect the open PR branches until merge.
+- The root workspace and many subrepos are dirty from parallel work; cross-repo implementation edits are unsafe until file ownership is re-established or isolated worktrees are used again.
 
 ### Quick Tasks Completed
 
@@ -95,10 +105,11 @@ Last activity: 2026-07-08 - Completed 29-01 (peer-critic pattern-scan engine): v
 ## Session Continuity
 
 Last session: 2026-07-08T12:00:54.606Z
-Stopped at: Phase 29 (automated peer-critic pattern) 29-01 completed: autogen PR #14 open (peer-critic pattern-scan engine), PR-only, verified against real PR #12 diff.
+Stopped at: Phase 35 audit boundary reached; milestone audit blocked on the open PR queue after live reconciliation through Phase 36.
 Resume file: None
 
 ## Operator Next Steps
 
-- Create and execute `29-01`.
-- Keep Track A moving through Phase 29 before switching to Track B planning (`30`, then `31-35`).
+- Start from `.planning/phases/35-v1.4-verification-and-audit/35-LIVE-STATE.md`, not from the older Phase 29 pointer.
+- Treat Phase 35 as the active phase. Do not re-plan 29-36 unless live evidence changes.
+- Work the merge/review queue or produce a narrower merge-train blocker report; once the queue is reduced enough, run the milestone audit and archive flow.
