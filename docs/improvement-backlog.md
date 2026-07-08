@@ -87,6 +87,14 @@ workspace state, not code quality — several rank above everything in Tier 1.
 | H5 | No `.gitattributes` at root → CRLF/LF churn warnings on every JSON/md diff. Add `* text=auto eol=lf` (or explicit per-type rules). |
 | H6 | Doc drift: GLOBAL_AGENTS.md "Workspace Layout" lists 5 portfolio repos; CLAUDE.md context chain lists 14. Root repo pushes to `OgeonX-Ai/cas-workstation` while `portfolio/cas-workstation` is `Coding-Autopilot-System/cas-workstation` — same name, two orgs; document or rename to avoid mis-targeting. |
 
+## Marketing & Adoption (added 2026-07-08, operator request)
+
+| # | Item | Phase |
+|---|---|---|
+| M1 | **Marketing-as-code showcase site**: Feature Cards + per-phase Story Pages auto-generated from `.planning/` evidence; LinkedIn drafts per phase; demo GIF placeholders; clean-machine quickstart CTA. Strategy: `.planning/phases/37-marketing-and-adoption/37-CONTEXT.md` | 37 |
+| M2 | Record real demo assets (autopilot-demo run GIF, terminal recording of a full goal loop) to replace placeholders | 37 follow-up |
+| M3 | Replace codex:generate-image placeholders across VISION/wikis/marketing with generated visuals (Codex image pipeline) | post-37 |
+
 ### Suggested sequencing
 
 1. **Today**: W1 (commit tests in their own repos), W2 (commit + push root, incl. GLOBAL_AGENTS.md).
