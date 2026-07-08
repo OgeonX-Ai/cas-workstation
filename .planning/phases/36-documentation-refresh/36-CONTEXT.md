@@ -19,8 +19,18 @@
 - org-dotgithub is the org profile repo; its README is the portfolio's front door — highest polish priority.
 - gemini-nano has its own CLAUDE.md/README (experimental repo — mark experimental status honestly).
 
+## Enterprise expansion (operator directive 2026-07-07)
+
+7. **Wiki per repo, docs-as-code**: each repo gets a `docs/wiki/` tree (Home, Architecture, Operations, Decisions) rendered by the repo's existing Pages/mkdocs where present. GitHub's native wiki tab is NOT used (not PR-able — breaks the governance story); optional mirroring is a deferred item.
+8. **Shareable vision pages**: a flagship `docs/VISION.md` (root + org profile) that explains what CAS is building in enterprise language, framed on the governance-with-speed tension ("Speed without governance creates risk. Governance without speed creates irrelevance" — the LinkedIn thesis the operator is building against). Structure: problem → the CAS answer (governed autonomy: every change planned, typed, tested, evidenced, reviewed) → proof points (real numbers from phases 26-34) → architecture.
+9. **Mermaid diagrams, image placeholders**: every architecture page gets correct Mermaid (portfolio plane diagram, SDLC loop with gates, failure-state flow). Next to each diagram add an HTML comment placeholder for later AI image generation, format:
+   `<!-- codex:generate-image prompt="<detailed visual prompt>" style="isometric, enterprise, clean" replaces="mermaid-above" -->`
+10. **Agent-hierarchy page**: document the CAS agent modularity model (orchestrator → typed subagents → model tiers opus/sonnet/haiku; which agent types can spawn sub-agents and why executors deliberately cannot) — this doubles as the answer to "can agents launch sub-agents".
+
 ## Definition of done
 
 - Every repo README accurately describes: purpose, architecture (1 diagram or section), setup, test/coverage commands, CI gates, and its role in the CAS portfolio (link map).
+- Every repo has docs/wiki/ (Home, Architecture with Mermaid + image placeholder, Operations, Decisions index).
+- Flagship VISION.md exists at root and in org-dotgithub profile PR; shareable standalone.
 - gsd-doc-verifier passes on every refreshed doc (all claims verified).
 - Freshness footers present; Phase 34 sweep heuristic implemented or ticketed.
