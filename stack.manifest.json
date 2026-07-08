@@ -4,7 +4,7 @@
   "bundleId": "cas-workstation",
   "defaults": {
     "rootPath": "C:\\PersonalRepo",
-    "configPath": "C:\\Users\\KimHarjamäki\\.cas",
+    "configPath": "C:\\PersonalRepo\\.cas",
     "profile": "full"
   },
   "profiles": {

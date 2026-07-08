@@ -34,9 +34,7 @@ try {
     $manifest = Get-Content -LiteralPath $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
 
     Assert-CasEqual "defaults.rootPath" $manifest.defaults.rootPath "C:\PersonalRepo"
-    # Expected value derived from the environment: the literal user name contains
-    # a non-ASCII character that must not appear in this ASCII-only test file.
-    Assert-CasEqual "defaults.configPath" $manifest.defaults.configPath (Join-Path $env:USERPROFILE ".cas")
+    Assert-CasEqual "defaults.configPath" $manifest.defaults.configPath "C:\PersonalRepo\.cas"
     Assert-CasEqual "paths.reposRoot" $manifest.paths.reposRoot "portfolio"
 
     $requiredRepos = @(
