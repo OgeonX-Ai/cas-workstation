@@ -40,6 +40,7 @@ This workspace follows a deterministic, verifier-led SDLC operating system. Use 
 - Escalate before risky actions
 - Update docs and memory when behavior changes
 - **State-Transition Memory Compression**: When transitioning between major SDLC phases (e.g., IMPLEMENT to VERIFY), orchestrators must actively shed raw discovery logs and retain only finalized plans/diffs to prevent context poisoning.
+- **Session Compression and Handoff**: To prevent API rate limits during long-running sessions, orchestrators must actively monitor session length. When completing a major SDLC phase or after significant autonomous tool execution, the Orchestrator MUST invoke the `/gsd-pause-work` workflow. The user should then be prompted to close the chat and run `/gsd-resume-work` in a fresh session to restore state from `.continue-here.md`.
 
 ### Immutable Coding Standards (Priority 0)
 Regardless of the active persona, all generated code must strictly adhere to the following baseline constraints:
@@ -51,7 +52,13 @@ Regardless of the active persona, all generated code must strictly adhere to the
 1. **Proactive Web Research Mandate**: Before drafting implementation plans, resolving architectural ambiguity, or selecting external libraries, the Orchestrator MUST invoke a web search subagent (e.g., `/browser`) to fetch the absolute latest 2026+ industry standards. Do not rely solely on pre-trained knowledge.
 2. **Hardcoded Delegation (Codex Handoff)**: The Orchestrator is an architect, not a typist. Any file generation or boilerplate modification expected to exceed 20 lines MUST be delegated directly to the `codex mcp-server` using the lowest tier likely to succeed (see Codex Delegation Tiers table in the Delegation section).
 3. **Adversarial Cross-AI Peer Review**: AI cannot grade its own homework. Before any code is declared "complete" in the VERIFY phase, the Orchestrator MUST spawn a completely separate subagent injected with the `security-auditor.md` or `qa-automation-engineer.md` persona. This "Red Team" agent must attempt to break the code. If it succeeds, the `gsd-rollback` circuit breaker fires.
-4. **The User is the Top-Level Architect**: The user never runs terminal commands manually. The Orchestrator must never instruct or suggest that the user 'open a terminal and run X'. The AI is the autonomous executor; it must proactively use its tools (like `run_command`) to execute all tasks, scripts, UI dashboard viewers, and verifications in the background, only presenting the final synthesized results to the user.
+5. **The User is the Top-Level Architect**: The user never runs terminal commands manually. The Orchestrator must never instruct or suggest that the user 'open a terminal and run X'. The AI is the autonomous executor; it must proactively use its tools (like `run_command`) to execute all tasks, scripts, UI dashboard viewers, and verifications in the background, only presenting the final synthesized results to the user.
+
+### Knowledge Management (Obsidian MCP)
+The `obsidian` MCP server provides direct access to the global knowledge graph. Orchestrators and subagents MUST use it in the following scenarios:
+1. **Pre-Design Research**: Before drafting new architectural plans, use `search_notes` to check if a relevant Architecture Decision Record (ADR) or technical note already exists.
+2. **Milestone Logging**: Upon completing a major phase, use `write_note` or `patch_note` to push a summary into the `wiki/log/` directory.
+3. **Tag Enforcement**: When creating notes, always use `update_frontmatter` to attach relevant metadata (e.g., `type: ai-generated`, `status: active`).
 
 ### Verifiers
 Use the strongest proportionate verifier available for the current change. Typical classes:
@@ -114,7 +121,7 @@ Canonical roles are `light`, `standard`, `strong`, and `adjudicator`; concrete
 models are tool-specific in `models/`. Use the lowest role likely to succeed.
 
 - `light`: discovery, extraction, file reading, routine research, logs, and
-  deterministic test execution.
+  deterministic test execution. MUST be routed to the local `ollama` provider to execute massive read workloads at zero cost.
 - `standard`: bounded implementation and ordinary review.
 - `strong`: architecture, ambiguous debugging, security-sensitive reasoning,
   and synthesis.
