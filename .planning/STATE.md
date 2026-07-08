@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Quality and Resilience Hardening
 status: planning
-stopped_at: "Phase 32 (contracts registry publishing) completed: cas-contracts PR #18 and cas-evals PR #9 open, PR-only; #18 blocked on human compatibility-reviewed label."
-last_updated: "2026-07-07T15:52:42.758Z"
+stopped_at: "Phase 29 (automated peer-critic pattern) 29-01 completed: autogen PR #14 open (peer-critic pattern-scan engine), PR-only, verified against real PR #12 diff."
+last_updated: "2026-07-08T12:00:54.625Z"
 last_activity: 2026-07-07 - Completed and verified both Phase 28 plans; next planned slice is 29-01.
 progress:
   total_phases: 25
-  completed_phases: 15
-  total_plans: 35
-  completed_plans: 29
-  percent: 60
+  completed_phases: 17
+  total_plans: 36
+  completed_plans: 32
+  percent: 68
 ---
 
 # Project State
@@ -25,11 +25,10 @@ See: `.planning/PROJECT.md` (updated 2026-07-05)
 
 ## Current Position
 
-Phase: 26-test-coverage-automation
-Phase: 29-automated-peer-critic-pattern
+Phase: 29-peer-critic
 Plan: 29-01
-Status: Ready to plan
-Last activity: 2026-07-07 - Completed and verified both Phase 28 plans; next planned slice is 29-01.
+Status: Executed - PR open (autogen #14, PR-only)
+Last activity: 2026-07-08 - Completed 29-01 (peer-critic pattern-scan engine): verified tests, live-diff evidence against autogen PR #12, pushed branch, opened autogen PR #14.
 
 ## Performance Metrics
 
@@ -44,6 +43,7 @@ Last activity: 2026-07-07 - Completed and verified both Phase 28 plans; next pla
 | 33 | 02 | 25min | 8 | 6 |
 | 31 | 05 | 25min | 3 | 7 |
 | Phase 32 P01+02 | 35min | 0 tasks | 13 files |
+| Phase 29 P01 | 35min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -66,10 +66,11 @@ Last activity: 2026-07-07 - Completed and verified both Phase 28 plans; next pla
 - [Phase 31-05]: ci-autopilot's fixer.yml (issues: read) and runner-health.yml (issues: write) token scopes confirmed already-minimal after reading agent/poll_once.py end-to-end (single read-only GET call, no write-scoped gh calls).
 - [Phase 31-05]: Re-resolved SHA pins against tags actually present in ci-autopilot's workflow files rather than the plan's 2026-07-06 interfaces-block table, which had gone stale as the repo's tags moved (v4->v7, v5->v6, v3->v5, v5->v4, v5->v6, v8->v10).
 - [Phase 32]: Rewrote all 22 cas-contracts schema $id values to the live GitHub Pages registry URL, superseding v1.1.1's schemas.coding-autopilot.dev canonical-namespace decision (documented BREAKING). cas-contracts PR #18 and cas-evals PR #9 opened, PR-only per scope.
+- [Phase 29-01]: autogen PR #14 opened for the peer-critic pattern-scan engine (deterministic, zero-config, BLOCKING/ADVISORY split); live-evidence run against PR #12's diff produced 0 blocking / 1 advisory, falsifying the false-positive-blocking threat.
 
 ### Pending Todos
 
-- Start `29-01` planning for the automated peer-critic pattern.
+- Track PR merge for autogen `#14` (peer-critic pattern-scan engine, 29-01) once reviewed.
 
 ### Blockers/Concerns
 
@@ -93,8 +94,8 @@ Last activity: 2026-07-07 - Completed and verified both Phase 28 plans; next pla
 
 ## Session Continuity
 
-Last session: 2026-07-07T15:40:37.085Z
-Stopped at: Phase 32 (contracts registry publishing) completed: cas-contracts PR #18 and cas-evals PR #9 open, PR-only; #18 blocked on human compatibility-reviewed label.
+Last session: 2026-07-08T12:00:54.606Z
+Stopped at: Phase 29 (automated peer-critic pattern) 29-01 completed: autogen PR #14 open (peer-critic pattern-scan engine), PR-only, verified against real PR #12 diff.
 Resume file: None
 
 ## Operator Next Steps
