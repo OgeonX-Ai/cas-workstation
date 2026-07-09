@@ -17,7 +17,7 @@ CSF, NIST SSDF, and SLSA-style scrutiny.
 | Supplier and dependency governance | ISO 27001, DORA, NIS2, SLSA | Baseline and supplier review ledger now exist, but cadence history and exception usage remain partial | Dependency review policy, supplier register, exception records |
 | SBOM and provenance publication | SLSA, SSDF, DORA | Portfolio provenance ledger now exists, but most repos still stop at SBOM or local evidence rather than attested workflows | Artifact SBOMs, provenance/signing outputs, verifier workflow results |
 | Access review and privileged control evidence | ISO 27001, DORA, NIS2 | Governance ledger and review evidence now exist, but identity-platform export and multi-owner approval evidence remain partial | Access owner list, review cadence, privileged-path audit evidence |
-| Change management evidence | ISO 27001, DORA | Baseline, live fleet-wide minimum approval enforcement, and evidence capture now exist, but emergency-change approval trails remain partial | Change classes, approval model, emergency path, rollback evidence |
+| Change management evidence | ISO 27001, DORA | Baseline, live fleet-wide minimum approval enforcement, branch-protection evidence, and a 365-day emergency-change review ledger now exist, but labeled PR history is still not a full approval trail | Change classes, approval model, emergency path, rollback evidence |
 
 ## Medium priority gaps
 

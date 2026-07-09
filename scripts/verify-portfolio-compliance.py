@@ -36,6 +36,7 @@ REQUIRED_FILES = [
     EVIDENCE / "release-evidence.csv",
     EVIDENCE / "sbom-evidence.csv",
     EVIDENCE / "change-management.csv",
+    EVIDENCE / "emergency-change-log.csv",
     EVIDENCE / "incident-management.csv",
     EVIDENCE / "control-crosswalk.csv",
     EVIDENCE / "evidence-retention.csv",
@@ -223,6 +224,7 @@ def main() -> int:
     release_rows = csv_rows(EVIDENCE / "release-evidence.csv")
     sbom_rows = csv_rows(EVIDENCE / "sbom-evidence.csv")
     change_rows = csv_rows(EVIDENCE / "change-management.csv")
+    emergency_rows = csv_rows(EVIDENCE / "emergency-change-log.csv")
     incident_rows = csv_rows(EVIDENCE / "incident-management.csv")
     crosswalk_rows = csv_rows(EVIDENCE / "control-crosswalk.csv")
     retention_rows = csv_rows(EVIDENCE / "evidence-retention.csv")
@@ -247,6 +249,8 @@ def main() -> int:
         errors.append(f"Expected 15 release-evidence rows, found {len(release_rows)}")
     if len(change_rows) != 15:
         errors.append(f"Expected 15 change-management rows, found {len(change_rows)}")
+    if len(emergency_rows) != 15:
+        errors.append(f"Expected 15 emergency-change rows, found {len(emergency_rows)}")
     if len(incident_rows) == 0:
         errors.append("No incident-management evidence rows found")
     if len(vulnerability_rows) != 15:
@@ -277,6 +281,10 @@ def main() -> int:
         errors.append(f"Expected at least 8 control crosswalk rows, found {len(crosswalk_rows)}")
     if len(retention_rows) < 8:
         errors.append(f"Expected at least 8 evidence-retention rows, found {len(retention_rows)}")
+    if any(row.get("emergency_path_documented") != "true" for row in emergency_rows):
+        errors.append("At least one emergency-change row is missing a documented emergency path flag")
+    if any(not row.get("status") for row in emergency_rows):
+        errors.append("At least one emergency-change row is missing status")
 
     local_repo_paths = {
         "OgeonX-Ai/cas-workstation": ROOT,
