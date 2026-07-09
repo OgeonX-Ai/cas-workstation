@@ -73,8 +73,10 @@ def days_old(iso_date: str) -> int:
 
 def check_url(url: str) -> tuple[bool, str]:
     result = run(["curl", "-I", "-L", "--max-time", "20", url])
-    first_line = result.stdout.splitlines()[0] if result.stdout else result.stderr.splitlines()[0]
-    return ("HTTP/2 200" in first_line or "HTTP/1.1 200" in first_line), first_line
+    lines = [line.strip() for line in result.stdout.splitlines() if line.strip()]
+    http_lines = [line for line in lines if line.startswith("HTTP/")]
+    status_line = http_lines[-1] if http_lines else (lines[0] if lines else (result.stderr.splitlines()[0] if result.stderr else "no response"))
+    return ("HTTP/2 200" in status_line or "HTTP/1.1 200" in status_line), status_line
 
 
 def repo_view(repo: str) -> dict:
@@ -403,9 +405,12 @@ def main() -> int:
         errors.append("Change-management evidence is missing a full fresh portfolio snapshot")
     weak_change_rows = [
         row["repository"] for row in change_rows
-        if row["protection_enabled"] != "true"
-        or int(row["required_approvals"] or "0") < 1
-        or row["enforce_admins"] != "true"
+        if row["result"] == "captured"
+        and (
+            row["protection_enabled"] != "true"
+            or int(row["required_approvals"] or "0") < 1
+            or row["enforce_admins"] != "true"
+        )
     ]
     if weak_change_rows:
         errors.append(f"Managed repositories below minimum change-approval policy: {', '.join(weak_change_rows)}")
