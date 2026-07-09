@@ -64,6 +64,7 @@ of network and information systems.
 ## New baseline evidence added
 
 - Change-management ledger: `evidence/compliance/change-management.csv`
+- Risk-review ledger: `evidence/compliance/risk-review-log.csv`
 - Evidence-retention ledger: `evidence/compliance/evidence-retention.csv`
 - Control crosswalk: `evidence/compliance/control-crosswalk.csv`
 - Vulnerability-management ledger: `evidence/compliance/vulnerability-management.csv`
