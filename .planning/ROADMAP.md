@@ -18,7 +18,9 @@
   - [ ] 38-03-PLAN.md — Root-repo branch-protection decision & codification (root moves to PR flow)
 - **Phase 39: Release Engineering** — per-repo SemVer + generated release notes on merge; staleness detection in the sweep. *(REQ-1.5.3, 1.5.5)*
 - **Phase 40: Pilot Cadence** — weekly scheduled pilots + fault injections with committed evidence; regression auto-issues. *(REQ-1.5.4)*
-- **Phase 41: Learning Loop** — LEARNINGS.md extraction at phase close; repeatable backlog survey script. *(REQ-1.5.6)*
+- **Phase 41: Learning Loop** — LEARNINGS.md extraction at phase close; repeatable backlog survey script. *(REQ-1.5.6)* — **2 plans**
+  - [ ] 41-01-PLAN.md — LEARNINGS template + OPERATING-CONTRACT.md phase-close checklist hook + retroactive v1.4-LEARNINGS.md (phases 26-36)
+  - [ ] 41-02-PLAN.md — scripts/backlog-survey.ps1 repeatable delta report (new/closed/convergence) + Pester suite + baseline evidence
 - **Phase 42: v1.5 Verification & Milestone Audit** — full verifier stack + audit + archive. *(depends on 38-41)*
 
 ## Future Milestones (seeded 2026-07-08 — see [milestones/vNEXT-SEEDS.md](milestones/vNEXT-SEEDS.md))
