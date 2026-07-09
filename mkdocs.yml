@@ -24,6 +24,11 @@ nav:
   - Compliance:
       - Baseline: compliance-baseline.md
       - Gap Register: compliance-gap-register.md
+      - Asset Inventory: asset-inventory.md
+      - Risk Register: risk-register.md
+      - Incident Standard: incident-standard.md
+      - BCDR Baseline: bcdr-baseline.md
+      - Control Matrix: control-matrix.md
   - Operations:
       - Merge Queue: MERGE-QUEUE.md
       - Merge Train Runbook: merge-train-runbook.md

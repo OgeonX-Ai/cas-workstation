@@ -1,0 +1,43 @@
+# Control Matrix
+
+Status date: 2026-07-09
+
+This matrix is the portfolio-level bridge between frameworks and evidence. It is
+intentionally simple at first: auditors care more about clear ownership and real
+evidence than about a decorative spreadsheet.
+
+| Control family | Framework examples | Current evidence | Status |
+|---|---|---|---|
+| Asset inventory | ISO 27001, NIS2, CSF Identify | [Asset Inventory](asset-inventory.md) | Partial |
+| Risk management | ISO 27001, DORA, NIS2, CSF Govern | [Risk Register](risk-register.md), `cloud-security-service-model/docs/09-risk-management.md` | Partial |
+| Incident response | ISO 27001, DORA, NIS2, CSF Respond | [Incident Standard](incident-standard.md), `cloud-security-service-model/docs/11-incident-response.md` | Partial |
+| Audit evidence handling | ISO 27001, DORA | `cloud-security-service-model/docs/10-audit-readiness.md` | Partial |
+| BCDR and resilience | DORA, NIS2, ISO 27001, CSF Recover | [BCDR Baseline](bcdr-baseline.md) | Gap |
+| Supply-chain security | SSDF, SLSA, ISO 27001, CRA | `org-dotgithub/docs/DEPENDENCY_POLICY.md`, `org-dotgithub/docs/RELEASE_POLICY.md` | Partial |
+| Secure development lifecycle | NIST SSDF, CSF Protect | repo CI, workflow linting, code review patterns | Partial |
+| Public governance posture | ISO 27001, SOC 2 trust expectations | root governance files, repo policies, live Pages sites | Partial |
+
+## Interpretation
+
+- **Gap**: no credible evidence baseline yet
+- **Partial**: control intent exists, but evidence is incomplete or not yet enforced portfolio-wide
+- **Ready**: implemented, evidenced, and periodically revalidated
+
+## Current honest state
+
+No major control family is yet at **Ready** across the whole portfolio.
+
+The strongest current areas are:
+
+- public documentation reachability,
+- repository governance basics,
+- secure workflow hygiene in several core repos,
+- security operating-model content in `cloud-security-service-model`.
+
+The weakest current areas are:
+
+- BCDR evidence,
+- access-review evidence,
+- supplier/dependency evidence enforcement,
+- unified control ownership,
+- portfolio-wide operational proof.
