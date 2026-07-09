@@ -1,7 +1,7 @@
-risk_id,title,likelihood,impact,score,owner,treatment,status
-CAS-R001,Portfolio claims exceed actual control evidence,4,5,20,Portfolio maintainer,Mitigate,open
-CAS-R002,No unified asset inventory or classification,4,4,16,Portfolio maintainer,Mitigate,open
-CAS-R003,No portfolio-wide BCDR baseline with tested evidence,4,5,20,Portfolio maintainer,Mitigate,open
-CAS-R004,Inconsistent supply-chain evidence across repos,4,4,16,Portfolio maintainer,Mitigate,open
-CAS-R005,Incident handling remains repo-specific instead of portfolio-wide,3,5,15,Portfolio maintainer,Mitigate,open
-CAS-R006,Protected repos can lag governance updates without independent reviewer availability,3,3,9,Portfolio maintainer,Mitigate,open
+risk_id,title,likelihood,impact,score,owner,treatment,status,due_date,residual_risk,last_review,linked_control
+CAS-R001,Portfolio claims exceed actual control evidence,4,5,20,Portfolio maintainer,Mitigate,open,2026-07-31,Medium,2026-07-09,CAS-CF-006
+CAS-R002,Asset scope or ownership becomes incomplete during audit review,3,4,12,Portfolio maintainer,Mitigate,open,2026-08-15,Medium,2026-07-09,CAS-CF-001
+CAS-R003,Continuity evidence remains too shallow for resilience review,4,5,20,Portfolio maintainer,Mitigate,open,2026-08-15,High,2026-07-09,CAS-CF-004
+CAS-R004,Inconsistent supply-chain evidence across repos weakens release assurance,3,4,12,Portfolio maintainer,Mitigate,open,2026-08-01,Medium,2026-07-09,CAS-CF-005
+CAS-R005,Incident response remains underexercised despite the new baseline,3,4,12,Portfolio maintainer,Mitigate,open,2026-09-30,Medium,2026-07-09,CAS-CF-003
+CAS-R006,Protected repos can lag governance updates without independent reviewer availability,3,3,9,Portfolio maintainer,Mitigate,open,2026-08-31,Medium,2026-07-09,CAS-CF-008

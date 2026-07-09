@@ -10,14 +10,14 @@ Scoring:
 
 ## Active risks
 
-| ID | Risk | Likelihood | Impact | Score | Owner | Treatment | Status |
-|---|---|---:|---:|---:|---|---|---|
-| CAS-R001 | Portfolio claims exceed actual control evidence, leading to failed audit or customer trust loss | 4 | 5 | 20 | Portfolio maintainer | Mitigate with control matrix, evidence ownership, and verified operating artifacts | Open |
-| CAS-R002 | No unified asset inventory or classification leads to incomplete scope during security or resilience review | 4 | 4 | 16 | Portfolio maintainer | Mitigate with authoritative inventory and ownership model | Open |
-| CAS-R003 | No portfolio-wide BCDR baseline causes weak DORA/NIS2 resilience posture | 4 | 5 | 20 | Portfolio maintainer | Mitigate with RTO/RPO, backup scope, and recovery test cadence | Open |
-| CAS-R004 | Inconsistent supply-chain evidence across repos weakens release assurance and SLSA posture | 4 | 4 | 16 | Portfolio maintainer | Mitigate with SBOM/provenance baseline and verifier workflow | Open |
-| CAS-R005 | Incident handling remains repo-specific instead of portfolio-wide, reducing coordinated response readiness | 3 | 5 | 15 | Portfolio maintainer | Mitigate with severity standard and evidence capture baseline | Open |
-| CAS-R006 | Protected repos may lag governance updates because changes require PR flow and explicit merge attention | 3 | 3 | 9 | Portfolio maintainer | Mitigate with governance sweep cadence and tracked PR closure | Open |
+| ID | Risk | Score | Owner | Due date | Residual risk | Linked control | Status |
+|---|---|---:|---|---|---|---|---|
+| CAS-R001 | Portfolio claims exceed actual control evidence, leading to failed audit or customer trust loss | 20 | Portfolio maintainer | 2026-07-31 | Medium | CAS-CF-006 | Open |
+| CAS-R002 | Asset scope or ownership becomes incomplete during audit review | 12 | Portfolio maintainer | 2026-08-15 | Medium | CAS-CF-001 | Open |
+| CAS-R003 | Continuity evidence remains too shallow for resilience review | 20 | Portfolio maintainer | 2026-08-15 | High | CAS-CF-004 | Open |
+| CAS-R004 | Inconsistent supply-chain evidence across repos weakens release assurance | 12 | Portfolio maintainer | 2026-08-01 | Medium | CAS-CF-005 | Open |
+| CAS-R005 | Incident response remains underexercised despite the new baseline | 12 | Portfolio maintainer | 2026-09-30 | Medium | CAS-CF-003 | Open |
+| CAS-R006 | Protected repos may lag governance updates because changes require PR flow and explicit merge attention | 9 | Portfolio maintainer | 2026-08-31 | Medium | CAS-CF-008 | Open |
 
 ## Review cadence
 
@@ -34,3 +34,9 @@ A risk is not closed by writing documentation alone. It closes only when:
 3. the control produces evidence,
 4. the evidence is verifiable,
 5. the residual risk is accepted or reduced.
+
+## Current limitations
+
+- Residual risk is now tracked explicitly, but there is still no second-owner acceptance trail.
+- Due dates are now recorded, but overdue escalation handling is not yet automated.
+- The register still reflects portfolio-maintainer ownership concentration rather than a broader operating model.

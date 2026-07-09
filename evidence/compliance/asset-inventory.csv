@@ -1,16 +1,16 @@
-asset_id,repository,owner,criticality,data_sensitivity,pages_url,wiki_enabled,status
-cas-workstation-root,OgeonX-Ai/cas-workstation,Portfolio maintainer,Critical,Low,https://ogeonx-ai.github.io/cas-workstation/,true,active
-gemini-nano,Coding-Autopilot-System/gemini-nano,Portfolio maintainer,Medium,Low,https://coding-autopilot-system.github.io/gemini-nano/,true,active
-promptimprover,Coding-Autopilot-System/Promptimprover,Portfolio maintainer,High,Moderate,https://coding-autopilot-system.github.io/Promptimprover/,true,active
-autogen,Coding-Autopilot-System/autogen,Portfolio maintainer,High,Moderate,https://coding-autopilot-system.github.io/autogen/,true,active
-autopilot-core,Coding-Autopilot-System/autopilot-core,Portfolio maintainer,High,Moderate,https://coding-autopilot-system.github.io/autopilot-core/,true,active
-autopilot-demo,Coding-Autopilot-System/autopilot-demo,Portfolio maintainer,Medium,Low,https://coding-autopilot-system.github.io/autopilot-demo/,true,active
-cas-contracts,Coding-Autopilot-System/cas-contracts,Portfolio maintainer,Critical,Low,https://coding-autopilot-system.github.io/cas-contracts/,true,active
-cas-evals,Coding-Autopilot-System/cas-evals,Portfolio maintainer,High,Low,https://coding-autopilot-system.github.io/cas-evals/,true,active
-cas-platform,Coding-Autopilot-System/cas-platform,Portfolio maintainer,Critical,Moderate,https://coding-autopilot-system.github.io/cas-platform/,true,active
-cas-reference-product,Coding-Autopilot-System/cas-reference-product,Portfolio maintainer,Critical,Moderate,https://coding-autopilot-system.github.io/cas-reference-product/,true,active
-cas-workstation-portfolio,Coding-Autopilot-System/cas-workstation,Portfolio maintainer,High,Low,https://coding-autopilot-system.github.io/cas-workstation/,true,active
-ci-autopilot,Coding-Autopilot-System/ci-autopilot,Portfolio maintainer,High,Moderate,https://coding-autopilot-system.github.io/ci-autopilot/,true,active
-cloud-security-service-model,Coding-Autopilot-System/cloud-security-service-model,Portfolio maintainer,High,Low,https://coding-autopilot-system.github.io/cloud-security-service-model/,true,active
-gsd-orchestrator,Coding-Autopilot-System/gsd-orchestrator,Portfolio maintainer,Critical,Moderate,https://coding-autopilot-system.github.io/gsd-orchestrator/,true,active
-org-dotgithub,Coding-Autopilot-System/.github,Portfolio maintainer,High,Low,https://coding-autopilot-system.github.io/.github/,true,active
+asset_id,repository,owner,delegate_owner,criticality,data_sensitivity,runtime_surface,recovery_tier,pages_url,wiki_enabled,status
+cas-workstation-root,OgeonX-Ai/cas-workstation,Portfolio maintainer,Portfolio maintainer,Critical,Low,GitHub Pages and GitHub Actions,Tier-0,https://ogeonx-ai.github.io/cas-workstation/,true,active
+gemini-nano,Coding-Autopilot-System/gemini-nano,Portfolio maintainer,Portfolio maintainer,Medium,Low,GitHub Pages and GitHub Actions,Tier-2,https://coding-autopilot-system.github.io/gemini-nano/,true,active
+promptimprover,Coding-Autopilot-System/Promptimprover,Portfolio maintainer,Portfolio maintainer,High,Moderate,GitHub Pages and GitHub Actions,Tier-1,https://coding-autopilot-system.github.io/Promptimprover/,true,active
+autogen,Coding-Autopilot-System/autogen,Portfolio maintainer,Portfolio maintainer,High,Moderate,GitHub Pages and GitHub Actions,Tier-1,https://coding-autopilot-system.github.io/autogen/,true,active
+autopilot-core,Coding-Autopilot-System/autopilot-core,Portfolio maintainer,Portfolio maintainer,High,Moderate,GitHub Pages and GitHub Actions,Tier-1,https://coding-autopilot-system.github.io/autopilot-core/,true,active
+autopilot-demo,Coding-Autopilot-System/autopilot-demo,Portfolio maintainer,Portfolio maintainer,Medium,Low,GitHub Pages and GitHub Actions,Tier-2,https://coding-autopilot-system.github.io/autopilot-demo/,true,active
+cas-contracts,Coding-Autopilot-System/cas-contracts,Portfolio maintainer,Portfolio maintainer,Critical,Low,GitHub Pages and GitHub Actions,Tier-0,https://coding-autopilot-system.github.io/cas-contracts/,true,active
+cas-evals,Coding-Autopilot-System/cas-evals,Portfolio maintainer,Portfolio maintainer,High,Low,GitHub Pages and GitHub Actions,Tier-1,https://coding-autopilot-system.github.io/cas-evals/,true,active
+cas-platform,Coding-Autopilot-System/cas-platform,Portfolio maintainer,Portfolio maintainer,Critical,Moderate,GitHub Pages and GitHub Actions,Tier-0,https://coding-autopilot-system.github.io/cas-platform/,true,active
+cas-reference-product,Coding-Autopilot-System/cas-reference-product,Portfolio maintainer,Portfolio maintainer,Critical,Moderate,GitHub Pages and GitHub Actions,Tier-0,https://coding-autopilot-system.github.io/cas-reference-product/,true,active
+cas-workstation-portfolio,Coding-Autopilot-System/cas-workstation,Portfolio maintainer,Portfolio maintainer,High,Low,GitHub Pages and GitHub Actions,Tier-1,https://coding-autopilot-system.github.io/cas-workstation/,true,active
+ci-autopilot,Coding-Autopilot-System/ci-autopilot,Portfolio maintainer,Portfolio maintainer,High,Moderate,GitHub Pages and GitHub Actions,Tier-1,https://coding-autopilot-system.github.io/ci-autopilot/,true,active
+cloud-security-service-model,Coding-Autopilot-System/cloud-security-service-model,Portfolio maintainer,Portfolio maintainer,High,Low,GitHub Pages and GitHub Actions,Tier-1,https://coding-autopilot-system.github.io/cloud-security-service-model/,true,active
+gsd-orchestrator,Coding-Autopilot-System/gsd-orchestrator,Portfolio maintainer,Portfolio maintainer,Critical,Moderate,GitHub Pages and GitHub Actions,Tier-0,https://coding-autopilot-system.github.io/gsd-orchestrator/,true,active
+org-dotgithub,Coding-Autopilot-System/.github,Portfolio maintainer,Portfolio maintainer,High,Low,GitHub Pages and GitHub Actions,Tier-1,https://coding-autopilot-system.github.io/.github/,true,active

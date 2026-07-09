@@ -14,23 +14,23 @@ or similar audits can be answered credibly.
 
 ## Repository inventory
 
-| Asset | Owner | Purpose | Exposure | Criticality | Data sensitivity |
-|---|---|---|---|---|---|
-| `OgeonX-Ai/cas-workstation` | Portfolio maintainer | Public workstation bootstrap and governance surface | Public docs + repo | Critical | Low |
-| `Coding-Autopilot-System/gemini-nano` | Portfolio maintainer | Research repo for local/browser AI experiments | Public docs + repo | Medium | Low |
-| `Coding-Autopilot-System/Promptimprover` | Portfolio maintainer | Prompt middleware and refinement services | Public docs + repo | High | Moderate |
-| `Coding-Autopilot-System/autogen` | Portfolio maintainer | Local multi-agent runtime and orchestration experiments | Public docs + repo | High | Moderate |
-| `Coding-Autopilot-System/autopilot-core` | Portfolio maintainer | Issue intake and repair automation | Public docs + repo | High | Moderate |
-| `Coding-Autopilot-System/autopilot-demo` | Portfolio maintainer | Demonstration surface for automation workflows | Public docs + repo | Medium | Low |
-| `Coding-Autopilot-System/cas-contracts` | Portfolio maintainer | Shared goal, task, evidence, and event contracts | Public docs + repo | Critical | Low |
-| `Coding-Autopilot-System/cas-evals` | Portfolio maintainer | Deterministic evaluation fixtures and evidence checks | Public docs + repo | High | Low |
-| `Coding-Autopilot-System/cas-platform` | Portfolio maintainer | Shared platform and deployment boundaries | Public docs + repo | Critical | Moderate |
-| `Coding-Autopilot-System/cas-reference-product` | Portfolio maintainer | Foundry Next Gen reference application | Public docs + repo | Critical | Moderate |
-| `Coding-Autopilot-System/cas-workstation` | Portfolio maintainer | Portfolio-local workstation variant | Public docs + repo | High | Low |
-| `Coding-Autopilot-System/ci-autopilot` | Portfolio maintainer | CI repair control plane | Public docs + repo | High | Moderate |
-| `Coding-Autopilot-System/cloud-security-service-model` | Portfolio maintainer | Security operating model and control reference | Public docs + repo | High | Low |
-| `Coding-Autopilot-System/gsd-orchestrator` | Portfolio maintainer | Autonomous issue-to-PR orchestration engine | Public docs + repo | Critical | Moderate |
-| `Coding-Autopilot-System/.github` | Portfolio maintainer | Organization-level profile, policy, and shared docs | Public docs + repo | High | Low |
+| Asset | Owner | Delegate | Purpose | Runtime surface | Recovery tier | Criticality | Data sensitivity |
+|---|---|---|---|---|---|---|---|
+| `OgeonX-Ai/cas-workstation` | Portfolio maintainer | Portfolio maintainer | Public workstation bootstrap and governance surface | GitHub Pages + Actions | Tier-0 | Critical | Low |
+| `Coding-Autopilot-System/gemini-nano` | Portfolio maintainer | Portfolio maintainer | Research repo for local/browser AI experiments | GitHub Pages + Actions | Tier-2 | Medium | Low |
+| `Coding-Autopilot-System/Promptimprover` | Portfolio maintainer | Portfolio maintainer | Prompt middleware and refinement services | GitHub Pages + Actions | Tier-1 | High | Moderate |
+| `Coding-Autopilot-System/autogen` | Portfolio maintainer | Portfolio maintainer | Local multi-agent runtime and orchestration experiments | GitHub Pages + Actions | Tier-1 | High | Moderate |
+| `Coding-Autopilot-System/autopilot-core` | Portfolio maintainer | Portfolio maintainer | Issue intake and repair automation | GitHub Pages + Actions | Tier-1 | High | Moderate |
+| `Coding-Autopilot-System/autopilot-demo` | Portfolio maintainer | Portfolio maintainer | Demonstration surface for automation workflows | GitHub Pages + Actions | Tier-2 | Medium | Low |
+| `Coding-Autopilot-System/cas-contracts` | Portfolio maintainer | Portfolio maintainer | Shared goal, task, evidence, and event contracts | GitHub Pages + Actions | Tier-0 | Critical | Low |
+| `Coding-Autopilot-System/cas-evals` | Portfolio maintainer | Portfolio maintainer | Deterministic evaluation fixtures and evidence checks | GitHub Pages + Actions | Tier-1 | High | Low |
+| `Coding-Autopilot-System/cas-platform` | Portfolio maintainer | Portfolio maintainer | Shared platform and deployment boundaries | GitHub Pages + Actions | Tier-0 | Critical | Moderate |
+| `Coding-Autopilot-System/cas-reference-product` | Portfolio maintainer | Portfolio maintainer | Foundry Next Gen reference application | GitHub Pages + Actions | Tier-0 | Critical | Moderate |
+| `Coding-Autopilot-System/cas-workstation` | Portfolio maintainer | Portfolio maintainer | Portfolio-local workstation variant | GitHub Pages + Actions | Tier-1 | High | Low |
+| `Coding-Autopilot-System/ci-autopilot` | Portfolio maintainer | Portfolio maintainer | CI repair control plane | GitHub Pages + Actions | Tier-1 | High | Moderate |
+| `Coding-Autopilot-System/cloud-security-service-model` | Portfolio maintainer | Portfolio maintainer | Security operating model and control reference | GitHub Pages + Actions | Tier-1 | High | Low |
+| `Coding-Autopilot-System/gsd-orchestrator` | Portfolio maintainer | Portfolio maintainer | Autonomous issue-to-PR orchestration engine | GitHub Pages + Actions | Tier-0 | Critical | Moderate |
+| `Coding-Autopilot-System/.github` | Portfolio maintainer | Portfolio maintainer | Organization-level profile, policy, and shared docs | GitHub Pages + Actions | Tier-1 | High | Low |
 
 ## Shared supporting assets
 
@@ -43,7 +43,7 @@ or similar audits can be answered credibly.
 
 ## Inventory gaps
 
-- No per-repo system owner or delegate owner list beyond the portfolio maintainer assumption
+- Delegate ownership is still concentrated in one maintainer instead of a multi-person operating model
 - No formal data classification matrix beyond the initial low/moderate estimates above
-- No inventory of runtime environments, tenants, secrets stores, or deployment targets outside repo docs
-- No authoritative mapping from assets to recovery objectives or retention obligations
+- Runtime surfaces are captured at the GitHub layer, but cloud tenants, secret stores, and deployment targets are not yet inventoried here
+- Recovery tiers are defined, but they are not yet tied to explicit RTO/RPO values per asset

@@ -10,8 +10,8 @@ CSF, NIST SSDF, and SLSA-style scrutiny.
 
 | Gap | Framework pressure | Current state | Needed evidence |
 |---|---|---|---|
-| Portfolio asset inventory | ISO 27001, NIS2, CSF | Authoritative repo inventory exists, but owner delegation and runtime-asset coverage remain partial | Repo/system inventory with owner, criticality, data sensitivity, runtime surface |
-| Risk register | ISO 27001, DORA, NIS2, CSF | Unified register exists, but residual-risk decisions and due-date tracking remain partial | Central risk log with owner, treatment, due date, residual risk |
+| Portfolio asset inventory | ISO 27001, NIS2, CSF | Authoritative repo inventory now includes delegate ownership, runtime surface, and recovery tier, but non-GitHub infrastructure inventory remains partial | Repo/system inventory with owner, criticality, data sensitivity, runtime surface |
+| Risk register | ISO 27001, DORA, NIS2, CSF | Unified register now tracks due dates, residual risk, and linked controls, but acceptance evidence and overdue escalation remain partial | Central risk log with owner, treatment, due date, residual risk |
 | Continuity and recovery | DORA, NIS2, ISO 27001 | Portfolio BCDR baseline and drill evidence exist, but restore cadence and dependency coverage remain partial | RTO/RPO, backup scope, recovery owners, test cadence |
 | Incident management baseline | DORA, NIS2, ISO 27001 | Portfolio baseline and tabletop evidence now exist, but live incident history is still thin | Severity matrix, escalation path, evidence template, post-incident loop, repeated exercises |
 | Supplier and dependency governance | ISO 27001, DORA, NIS2, SLSA | Policy fragments exist, not uniformly evidenced | Dependency review policy, supplier register, exception records |

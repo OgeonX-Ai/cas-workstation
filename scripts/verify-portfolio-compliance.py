@@ -222,6 +222,8 @@ def main() -> int:
     vulnerability_rows = csv_rows(EVIDENCE / "vulnerability-management.csv")
     if len(asset_rows) != 15:
         errors.append(f"Expected 15 asset inventory rows, found {len(asset_rows)}")
+    if any(not row.get("delegate_owner") or not row.get("runtime_surface") or not row.get("recovery_tier") for row in asset_rows):
+        errors.append("At least one asset inventory row is missing delegate ownership, runtime surface, or recovery tier")
     if len(supply_chain_rows) != 15:
         errors.append(f"Expected 15 supply-chain rows, found {len(supply_chain_rows)}")
     if len(release_rows) != 15:
@@ -381,6 +383,18 @@ def main() -> int:
     open_exceptions = [row for row in exception_rows if row["status"] == "open"]
     if open_exceptions:
         warnings.append(f"{len(open_exceptions)} open exception(s) remain")
+
+    risk_rows = csv_rows(EVIDENCE / "risk-register.csv")
+    if len(risk_rows) < 6:
+        errors.append(f"Expected at least 6 risk rows, found {len(risk_rows)}")
+    if any(not row.get("due_date") or not row.get("residual_risk") or not row.get("linked_control") for row in risk_rows):
+        errors.append("At least one risk row is missing due date, residual risk, or linked control")
+    stale_risk_reviews = [
+        row["risk_id"] for row in risk_rows
+        if row.get("last_review") and days_old(row["last_review"]) > 120
+    ]
+    if stale_risk_reviews:
+        errors.append(f"Risk review is stale for: {', '.join(stale_risk_reviews)}")
 
     if os.environ.get("SKIP_REMOTE_ATTESTATION_VERIFY") != "1":
         try:
