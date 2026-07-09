@@ -1,25 +1,25 @@
 {
-  "captured_at": "2026-07-09T14:21:06.799833+00:00",
+  "captured_at": "2026-07-09T14:58:24.308197+00:00",
   "repositories": [
     {
       "repository": "OgeonX-Ai/cas-workstation",
       "default_branch": "master",
-      "protection_enabled": false,
-      "required_approvals": 0,
-      "enforce_admins": false,
+      "protection_enabled": true,
+      "required_approvals": 1,
+      "enforce_admins": true,
       "linear_history": false,
-      "force_pushes_blocked": false,
+      "force_pushes_blocked": true,
       "result": "captured",
       "notes": "GitHub branch protection snapshot"
     },
     {
       "repository": "Coding-Autopilot-System/gemini-nano",
       "default_branch": "master",
-      "protection_enabled": false,
-      "required_approvals": 0,
-      "enforce_admins": false,
+      "protection_enabled": true,
+      "required_approvals": 1,
+      "enforce_admins": true,
       "linear_history": false,
-      "force_pushes_blocked": false,
+      "force_pushes_blocked": true,
       "result": "captured",
       "notes": "GitHub branch protection snapshot"
     },
@@ -27,7 +27,7 @@
       "repository": "Coding-Autopilot-System/Promptimprover",
       "default_branch": "master",
       "protection_enabled": true,
-      "required_approvals": 0,
+      "required_approvals": 1,
       "enforce_admins": true,
       "linear_history": false,
       "force_pushes_blocked": true,

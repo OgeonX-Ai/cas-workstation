@@ -28,6 +28,7 @@ REQUIRED_FILES = [
     EVIDENCE / "control-owners.csv",
     EVIDENCE / "bcdr-objectives.csv",
     EVIDENCE / "data-classification.csv",
+    EVIDENCE / "provenance-evidence.csv",
     EVIDENCE / "risk-register.csv",
     EVIDENCE / "supplier-register.csv",
     EVIDENCE / "supplier-review-log.csv",
@@ -226,6 +227,7 @@ def main() -> int:
     vulnerability_rows = csv_rows(EVIDENCE / "vulnerability-management.csv")
     bcdr_rows = csv_rows(EVIDENCE / "bcdr-objectives.csv")
     classification_rows = csv_rows(EVIDENCE / "data-classification.csv")
+    provenance_rows = csv_rows(EVIDENCE / "provenance-evidence.csv")
     supplier_rows = csv_rows(EVIDENCE / "supplier-review-log.csv")
     if len(asset_rows) != 15:
         errors.append(f"Expected 15 asset inventory rows, found {len(asset_rows)}")
@@ -237,6 +239,8 @@ def main() -> int:
         errors.append(f"Expected 15 BCDR objective rows, found {len(bcdr_rows)}")
     if len(classification_rows) != 15:
         errors.append(f"Expected 15 data-classification rows, found {len(classification_rows)}")
+    if len(provenance_rows) != 15:
+        errors.append(f"Expected 15 provenance rows, found {len(provenance_rows)}")
     if len(release_rows) != 15:
         errors.append(f"Expected 15 release-evidence rows, found {len(release_rows)}")
     if len(change_rows) != 15:
@@ -257,6 +261,16 @@ def main() -> int:
         errors.append("Data-classification evidence is missing a full fresh portfolio snapshot")
     if any(not row.get("data_class") or not row.get("handling_rule") or not row.get("evidence_access") for row in classification_rows):
         errors.append("At least one data-classification row is missing class, handling rule, or evidence access")
+    fresh_provenance_rows = [
+        row for row in provenance_rows
+        if row["review_date"] and days_old(row["review_date"]) <= 120
+    ]
+    if len(fresh_provenance_rows) != 15:
+        errors.append("Provenance evidence is missing a full fresh portfolio snapshot")
+    if not any(row["attestation_workflow"] == "true" for row in provenance_rows):
+        errors.append("No repository is recorded as having an attestation workflow")
+    if any(not row.get("status") for row in provenance_rows):
+        errors.append("At least one provenance row is missing status")
     if len(crosswalk_rows) < 8:
         errors.append(f"Expected at least 8 control crosswalk rows, found {len(crosswalk_rows)}")
     if len(retention_rows) < 8:
@@ -387,6 +401,14 @@ def main() -> int:
     ]
     if len(fresh_change_rows) != 15:
         errors.append("Change-management evidence is missing a full fresh portfolio snapshot")
+    weak_change_rows = [
+        row["repository"] for row in change_rows
+        if row["protection_enabled"] != "true"
+        or int(row["required_approvals"] or "0") < 1
+        or row["enforce_admins"] != "true"
+    ]
+    if weak_change_rows:
+        errors.append(f"Managed repositories below minimum change-approval policy: {', '.join(weak_change_rows)}")
 
     fresh_incident_rows = [
         row for row in incident_rows

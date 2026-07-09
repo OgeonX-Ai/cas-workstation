@@ -14,7 +14,7 @@ evidence than about a decorative spreadsheet.
 | Incident response | ISO 27001, DORA, NIS2, CSF Respond | [Incident Standard](incident-standard.md), `evidence/compliance/incident-management.csv`, `cloud-security-service-model/docs/11-incident-response.md` | Partial |
 | Audit evidence handling | ISO 27001, DORA | `cloud-security-service-model/docs/10-audit-readiness.md` | Partial |
 | BCDR and resilience | DORA, NIS2, ISO 27001, CSF Recover | [BCDR Baseline](bcdr-baseline.md), `evidence/compliance/bcdr-objectives.csv`, `evidence/compliance/recovery-drills.csv` | Partial |
-| Supply-chain security | SSDF, SLSA, ISO 27001, CRA | [Supply-Chain Baseline](supply-chain-baseline.md), [SBOM Baseline](sbom-baseline.md), `evidence/compliance/supplier-review-log.csv`, `evidence/compliance/supply-chain-controls.csv`, `evidence/compliance/sbom-evidence.csv` | Partial |
+| Supply-chain security | SSDF, SLSA, ISO 27001, CRA | [Supply-Chain Baseline](supply-chain-baseline.md), [SBOM Baseline](sbom-baseline.md), [Provenance Baseline](provenance-baseline.md), `evidence/compliance/supplier-review-log.csv`, `evidence/compliance/supply-chain-controls.csv`, `evidence/compliance/sbom-evidence.csv`, `evidence/compliance/provenance-evidence.csv` | Partial |
 | Secure development lifecycle | NIST SSDF, CSF Protect | repo CI, workflow linting, code review patterns | Partial |
 | Public governance posture | ISO 27001, SOC 2 trust expectations | root governance files, repo policies, live Pages sites | Partial |
 | Access review baseline | ISO 27001, DORA, NIS2 | [Access Review Baseline](access-review-baseline.md), `evidence/compliance/access-governance.csv`, `evidence/compliance/access-review-log.csv`, `evidence/compliance/snapshots/` | Partial |

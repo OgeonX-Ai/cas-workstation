@@ -1,7 +1,7 @@
 review_id,repository,default_branch,review_date,protection_enabled,required_approvals,enforce_admins,linear_history,force_pushes_blocked,result,notes
-CAS-CHANGE-cas-workstation,OgeonX-Ai/cas-workstation,master,2026-07-09,false,0,false,false,false,captured,GitHub branch protection snapshot
-CAS-CHANGE-gemini-nano,Coding-Autopilot-System/gemini-nano,master,2026-07-09,false,0,false,false,false,captured,GitHub branch protection snapshot
-CAS-CHANGE-Promptimprover,Coding-Autopilot-System/Promptimprover,master,2026-07-09,true,0,true,false,true,captured,GitHub branch protection snapshot
+CAS-CHANGE-cas-workstation,OgeonX-Ai/cas-workstation,master,2026-07-09,true,1,true,false,true,captured,GitHub branch protection snapshot
+CAS-CHANGE-gemini-nano,Coding-Autopilot-System/gemini-nano,master,2026-07-09,true,1,true,false,true,captured,GitHub branch protection snapshot
+CAS-CHANGE-Promptimprover,Coding-Autopilot-System/Promptimprover,master,2026-07-09,true,1,true,false,true,captured,GitHub branch protection snapshot
 CAS-CHANGE-autogen,Coding-Autopilot-System/autogen,main,2026-07-09,true,1,true,false,true,captured,GitHub branch protection snapshot
 CAS-CHANGE-autopilot-core,Coding-Autopilot-System/autopilot-core,main,2026-07-09,true,1,true,false,true,captured,GitHub branch protection snapshot
 CAS-CHANGE-autopilot-demo,Coding-Autopilot-System/autopilot-demo,main,2026-07-09,true,1,true,false,true,captured,GitHub branch protection snapshot
