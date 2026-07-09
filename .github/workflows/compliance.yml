@@ -1,0 +1,52 @@
+name: Compliance Evidence
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 5 * * 1"
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/compliance.yml"
+      - "scripts/capture-access-review.py"
+      - "scripts/capture-supply-chain-state.py"
+      - "scripts/capture-release-evidence.py"
+      - "scripts/verify-portfolio-compliance.py"
+      - "evidence/compliance/**"
+      - "docs/**"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+
+      - name: Capture access review snapshot
+        run: python scripts/capture-access-review.py
+
+      - name: Capture supply-chain snapshot
+        run: python scripts/capture-supply-chain-state.py
+
+      - name: Capture release evidence snapshot
+        run: python scripts/capture-release-evidence.py
+
+      - name: Run compliance verifier
+        run: python scripts/verify-portfolio-compliance.py
+
+      - uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
+        with:
+          name: compliance-evidence
+          path: evidence/compliance/

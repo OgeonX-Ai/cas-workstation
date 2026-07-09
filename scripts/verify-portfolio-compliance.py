@@ -19,6 +19,7 @@ REQUIRED_FILES = [
     EVIDENCE / "risk-register.csv",
     EVIDENCE / "supplier-register.csv",
     EVIDENCE / "supply-chain-controls.csv",
+    EVIDENCE / "release-evidence.csv",
     EVIDENCE / "recovery-drills.csv",
     EVIDENCE / "access-review-log.csv",
     EVIDENCE / "exception-register.csv",
@@ -72,10 +73,13 @@ def main() -> int:
 
     asset_rows = csv_rows(EVIDENCE / "asset-inventory.csv")
     supply_chain_rows = csv_rows(EVIDENCE / "supply-chain-controls.csv")
+    release_rows = csv_rows(EVIDENCE / "release-evidence.csv")
     if len(asset_rows) != 15:
         errors.append(f"Expected 15 asset inventory rows, found {len(asset_rows)}")
     if len(supply_chain_rows) != 15:
         errors.append(f"Expected 15 supply-chain rows, found {len(supply_chain_rows)}")
+    if len(release_rows) != 15:
+        errors.append(f"Expected 15 release-evidence rows, found {len(release_rows)}")
 
     local_repo_paths = {
         "OgeonX-Ai/cas-workstation": ROOT,
@@ -122,6 +126,14 @@ def main() -> int:
             errors.append(f"Dependabot baseline missing for {repo}")
         if row["codeql"] == "true" and not (repo_path / ".github" / "workflows" / "codeql.yml").exists():
             errors.append(f"CodeQL baseline missing for {repo}")
+
+    for row in release_rows:
+        repo = row["repository"]
+        repo_path = local_repo_paths[repo]
+        if row["pages_workflow"] == "true" and not (repo_path / ".github" / "workflows" / "pages.yml").exists():
+            errors.append(f"Pages workflow baseline missing for {repo}")
+        if row["release_policy_source"] == "missing":
+            errors.append(f"Release policy source missing for {repo}")
 
     recovery_rows = csv_rows(EVIDENCE / "recovery-drills.csv")
     if not any(row["status"] == "passed" for row in recovery_rows):

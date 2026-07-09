@@ -1,0 +1,125 @@
+{
+  "captured_at": "2026-07-09T09:12:26.577087+00:00",
+  "repositories": [
+    {
+      "repository": "OgeonX-Ai/cas-workstation",
+      "lockfile_present": true,
+      "pages_workflow": true,
+      "codeql": true,
+      "dependabot": true,
+      "release_policy_source": "org"
+    },
+    {
+      "repository": "Coding-Autopilot-System/gemini-nano",
+      "lockfile_present": true,
+      "pages_workflow": true,
+      "codeql": true,
+      "dependabot": true,
+      "release_policy_source": "org"
+    },
+    {
+      "repository": "Coding-Autopilot-System/Promptimprover",
+      "lockfile_present": true,
+      "pages_workflow": true,
+      "codeql": true,
+      "dependabot": true,
+      "release_policy_source": "org"
+    },
+    {
+      "repository": "Coding-Autopilot-System/autogen",
+      "lockfile_present": false,
+      "pages_workflow": true,
+      "codeql": true,
+      "dependabot": true,
+      "release_policy_source": "org"
+    },
+    {
+      "repository": "Coding-Autopilot-System/autopilot-core",
+      "lockfile_present": false,
+      "pages_workflow": true,
+      "codeql": true,
+      "dependabot": true,
+      "release_policy_source": "org"
+    },
+    {
+      "repository": "Coding-Autopilot-System/autopilot-demo",
+      "lockfile_present": false,
+      "pages_workflow": true,
+      "codeql": true,
+      "dependabot": true,
+      "release_policy_source": "org"
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-contracts",
+      "lockfile_present": true,
+      "pages_workflow": true,
+      "codeql": true,
+      "dependabot": true,
+      "release_policy_source": "org"
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-evals",
+      "lockfile_present": true,
+      "pages_workflow": true,
+      "codeql": true,
+      "dependabot": true,
+      "release_policy_source": "org"
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-platform",
+      "lockfile_present": true,
+      "pages_workflow": true,
+      "codeql": true,
+      "dependabot": true,
+      "release_policy_source": "org"
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-reference-product",
+      "lockfile_present": false,
+      "pages_workflow": true,
+      "codeql": true,
+      "dependabot": true,
+      "release_policy_source": "org"
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-workstation",
+      "lockfile_present": false,
+      "pages_workflow": true,
+      "codeql": true,
+      "dependabot": true,
+      "release_policy_source": "org"
+    },
+    {
+      "repository": "Coding-Autopilot-System/ci-autopilot",
+      "lockfile_present": false,
+      "pages_workflow": true,
+      "codeql": true,
+      "dependabot": true,
+      "release_policy_source": "org"
+    },
+    {
+      "repository": "Coding-Autopilot-System/cloud-security-service-model",
+      "lockfile_present": false,
+      "pages_workflow": true,
+      "codeql": true,
+      "dependabot": true,
+      "release_policy_source": "org"
+    },
+    {
+      "repository": "Coding-Autopilot-System/gsd-orchestrator",
+      "lockfile_present": false,
+      "pages_workflow": true,
+      "codeql": true,
+      "dependabot": true,
+      "release_policy_source": "org"
+    },
+    {
+      "repository": "Coding-Autopilot-System/.github",
+      "lockfile_present": false,
+      "pages_workflow": true,
+      "codeql": true,
+      "dependabot": true,
+      "release_policy_source": "local"
+    }
+  ]
+}
