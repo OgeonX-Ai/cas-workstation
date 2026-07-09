@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-07-09T14:17:26.645037+00:00",
+  "captured_at": "2026-07-09T14:21:06.799833+00:00",
   "repositories": [
     {
       "repository": "OgeonX-Ai/cas-workstation",
@@ -8,7 +8,9 @@
       "required_approvals": 0,
       "enforce_admins": false,
       "linear_history": false,
-      "force_pushes_blocked": false
+      "force_pushes_blocked": false,
+      "result": "captured",
+      "notes": "GitHub branch protection snapshot"
     },
     {
       "repository": "Coding-Autopilot-System/gemini-nano",
@@ -17,7 +19,9 @@
       "required_approvals": 0,
       "enforce_admins": false,
       "linear_history": false,
-      "force_pushes_blocked": false
+      "force_pushes_blocked": false,
+      "result": "captured",
+      "notes": "GitHub branch protection snapshot"
     },
     {
       "repository": "Coding-Autopilot-System/Promptimprover",
@@ -26,7 +30,9 @@
       "required_approvals": 0,
       "enforce_admins": true,
       "linear_history": false,
-      "force_pushes_blocked": true
+      "force_pushes_blocked": true,
+      "result": "captured",
+      "notes": "GitHub branch protection snapshot"
     },
     {
       "repository": "Coding-Autopilot-System/autogen",
@@ -35,7 +41,9 @@
       "required_approvals": 1,
       "enforce_admins": true,
       "linear_history": false,
-      "force_pushes_blocked": true
+      "force_pushes_blocked": true,
+      "result": "captured",
+      "notes": "GitHub branch protection snapshot"
     },
     {
       "repository": "Coding-Autopilot-System/autopilot-core",
@@ -44,7 +52,9 @@
       "required_approvals": 1,
       "enforce_admins": true,
       "linear_history": false,
-      "force_pushes_blocked": true
+      "force_pushes_blocked": true,
+      "result": "captured",
+      "notes": "GitHub branch protection snapshot"
     },
     {
       "repository": "Coding-Autopilot-System/autopilot-demo",
@@ -53,7 +63,9 @@
       "required_approvals": 1,
       "enforce_admins": true,
       "linear_history": false,
-      "force_pushes_blocked": true
+      "force_pushes_blocked": true,
+      "result": "captured",
+      "notes": "GitHub branch protection snapshot"
     },
     {
       "repository": "Coding-Autopilot-System/cas-contracts",
@@ -62,7 +74,9 @@
       "required_approvals": 1,
       "enforce_admins": true,
       "linear_history": false,
-      "force_pushes_blocked": true
+      "force_pushes_blocked": true,
+      "result": "captured",
+      "notes": "GitHub branch protection snapshot"
     },
     {
       "repository": "Coding-Autopilot-System/cas-evals",
@@ -71,7 +85,9 @@
       "required_approvals": 1,
       "enforce_admins": true,
       "linear_history": false,
-      "force_pushes_blocked": true
+      "force_pushes_blocked": true,
+      "result": "captured",
+      "notes": "GitHub branch protection snapshot"
     },
     {
       "repository": "Coding-Autopilot-System/cas-platform",
@@ -80,7 +96,9 @@
       "required_approvals": 1,
       "enforce_admins": true,
       "linear_history": false,
-      "force_pushes_blocked": true
+      "force_pushes_blocked": true,
+      "result": "captured",
+      "notes": "GitHub branch protection snapshot"
     },
     {
       "repository": "Coding-Autopilot-System/cas-reference-product",
@@ -89,7 +107,9 @@
       "required_approvals": 1,
       "enforce_admins": true,
       "linear_history": false,
-      "force_pushes_blocked": true
+      "force_pushes_blocked": true,
+      "result": "captured",
+      "notes": "GitHub branch protection snapshot"
     },
     {
       "repository": "Coding-Autopilot-System/cas-workstation",
@@ -98,7 +118,9 @@
       "required_approvals": 1,
       "enforce_admins": true,
       "linear_history": false,
-      "force_pushes_blocked": true
+      "force_pushes_blocked": true,
+      "result": "captured",
+      "notes": "GitHub branch protection snapshot"
     },
     {
       "repository": "Coding-Autopilot-System/ci-autopilot",
@@ -107,7 +129,9 @@
       "required_approvals": 1,
       "enforce_admins": true,
       "linear_history": false,
-      "force_pushes_blocked": true
+      "force_pushes_blocked": true,
+      "result": "captured",
+      "notes": "GitHub branch protection snapshot"
     },
     {
       "repository": "Coding-Autopilot-System/cloud-security-service-model",
@@ -116,7 +140,9 @@
       "required_approvals": 1,
       "enforce_admins": true,
       "linear_history": false,
-      "force_pushes_blocked": true
+      "force_pushes_blocked": true,
+      "result": "captured",
+      "notes": "GitHub branch protection snapshot"
     },
     {
       "repository": "Coding-Autopilot-System/gsd-orchestrator",
@@ -125,7 +151,9 @@
       "required_approvals": 1,
       "enforce_admins": true,
       "linear_history": false,
-      "force_pushes_blocked": true
+      "force_pushes_blocked": true,
+      "result": "captured",
+      "notes": "GitHub branch protection snapshot"
     },
     {
       "repository": "Coding-Autopilot-System/.github",
@@ -134,7 +162,9 @@
       "required_approvals": 1,
       "enforce_admins": true,
       "linear_history": false,
-      "force_pushes_blocked": true
+      "force_pushes_blocked": true,
+      "result": "captured",
+      "notes": "GitHub branch protection snapshot"
     }
   ]
 }

@@ -18,6 +18,9 @@ control, branch governance, and rollback-readiness.
   repeatable review
 - Change-management capture fails on branch-protection API errors instead of
   silently serializing them as unprotected state
+- When the GitHub workflow token cannot read protection detail endpoints, the
+  ledger records `result=limited` and preserves only the public branch
+  `protected` state rather than fabricating full settings
 
 ## What this does not yet prove
 

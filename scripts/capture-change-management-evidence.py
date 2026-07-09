@@ -38,6 +38,10 @@ def run_json(cmd: list[str]) -> dict:
     return json.loads(result.stdout)
 
 
+def branch_view(repo: str, branch: str) -> dict:
+    return run_json(["gh", "api", f"repos/{repo}/branches/{branch}"])
+
+
 def branch_protection(repo: str, branch: str) -> dict | None:
     result = subprocess.run(
         ["gh", "api", f"repos/{repo}/branches/{branch}/protection"],
@@ -49,8 +53,12 @@ def branch_protection(repo: str, branch: str) -> dict | None:
         details = (result.stderr or result.stdout).strip()
         if "404" in details or "Branch not protected" in details:
             return None
+        if "403" in details or "Resource not accessible by integration" in details:
+            return {"inspection_status": "limited"}
         raise RuntimeError(f"Unable to inspect branch protection for {repo}@{branch}: {details}")
-    return json.loads(result.stdout)
+    payload = json.loads(result.stdout)
+    payload["inspection_status"] = "captured"
+    return payload
 
 
 def main() -> int:
@@ -64,20 +72,31 @@ def main() -> int:
     for repo in REPOS:
         repo_view = run_json(["gh", "repo", "view", repo, "--json", "defaultBranchRef"])
         default_branch = repo_view["defaultBranchRef"]["name"]
+        branch = branch_view(repo, default_branch)
         protection = branch_protection(repo, default_branch)
 
-        protection_enabled = protection is not None
-        required_reviews = 0
-        enforce_admins = False
-        linear_history = False
-        force_pushes_blocked = False
+        protection_enabled = bool(branch.get("protected"))
+        required_reviews = ""
+        enforce_admins = ""
+        linear_history = ""
+        force_pushes_blocked = ""
+        result = "captured"
+        notes = "GitHub branch protection snapshot"
 
-        if protection:
+        if protection and protection.get("inspection_status") == "captured":
             reviews = protection.get("required_pull_request_reviews") or {}
             required_reviews = reviews.get("required_approving_review_count", 0) or 0
             enforce_admins = bool((protection.get("enforce_admins") or {}).get("enabled"))
             linear_history = bool((protection.get("required_linear_history") or {}).get("enabled"))
             force_pushes_blocked = not bool((protection.get("allow_force_pushes") or {}).get("enabled"))
+        elif protection and protection.get("inspection_status") == "limited":
+            result = "limited"
+            notes = "Branch protection detail API not accessible to current token; used branch protected flag only"
+        else:
+            required_reviews = 0
+            enforce_admins = False
+            linear_history = False
+            force_pushes_blocked = False
 
         rows.append(
             {
@@ -90,8 +109,8 @@ def main() -> int:
                 "enforce_admins": str(enforce_admins).lower(),
                 "linear_history": str(linear_history).lower(),
                 "force_pushes_blocked": str(force_pushes_blocked).lower(),
-                "result": "captured",
-                "notes": "GitHub branch protection snapshot",
+                "result": result,
+                "notes": notes,
             }
         )
         snapshot_rows.append(
@@ -103,6 +122,8 @@ def main() -> int:
                 "enforce_admins": enforce_admins,
                 "linear_history": linear_history,
                 "force_pushes_blocked": force_pushes_blocked,
+                "result": result,
+                "notes": notes,
             }
         )
 
