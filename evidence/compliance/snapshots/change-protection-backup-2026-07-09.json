@@ -1,0 +1,275 @@
+[
+  {
+    "repository": "OgeonX-Ai/cas-workstation",
+    "branch": "master",
+    "branch_payload": {
+      "name": "master",
+      "commit": {
+        "sha": "57cea23fc984dceff43ff5092f405a84e1a14a90",
+        "node_id": "C_kwDOS5qXRNoAKDU3Y2VhMjNmYzk4NGRjZWZmNDNmZjUwOTJmNDA1YTg0ZTFhMTRhOTA",
+        "commit": {
+          "author": {
+            "name": "root",
+            "email": "root@Kimi.localdomain",
+            "date": "2026-07-09T14:49:14Z"
+          },
+          "committer": {
+            "name": "root",
+            "email": "root@Kimi.localdomain",
+            "date": "2026-07-09T14:49:14Z"
+          },
+          "message": "docs(compliance): add data classification baseline",
+          "tree": {
+            "sha": "d0e86b4f4eda5bc93771d3f940924d8190715677",
+            "url": "https://api.github.com/repos/OgeonX-Ai/cas-workstation/git/trees/d0e86b4f4eda5bc93771d3f940924d8190715677"
+          },
+          "url": "https://api.github.com/repos/OgeonX-Ai/cas-workstation/git/commits/57cea23fc984dceff43ff5092f405a84e1a14a90",
+          "comment_count": 0,
+          "verification": {
+            "verified": false,
+            "reason": "unsigned",
+            "signature": null,
+            "payload": null,
+            "verified_at": null
+          }
+        },
+        "url": "https://api.github.com/repos/OgeonX-Ai/cas-workstation/commits/57cea23fc984dceff43ff5092f405a84e1a14a90",
+        "html_url": "https://github.com/OgeonX-Ai/cas-workstation/commit/57cea23fc984dceff43ff5092f405a84e1a14a90",
+        "comments_url": "https://api.github.com/repos/OgeonX-Ai/cas-workstation/commits/57cea23fc984dceff43ff5092f405a84e1a14a90/comments",
+        "author": null,
+        "committer": null,
+        "parents": [
+          {
+            "sha": "4319886cad0336fdd1a29d64e5930fde26d29fea",
+            "url": "https://api.github.com/repos/OgeonX-Ai/cas-workstation/commits/4319886cad0336fdd1a29d64e5930fde26d29fea",
+            "html_url": "https://github.com/OgeonX-Ai/cas-workstation/commit/4319886cad0336fdd1a29d64e5930fde26d29fea"
+          }
+        ]
+      },
+      "_links": {
+        "self": "https://api.github.com/repos/OgeonX-Ai/cas-workstation/branches/master",
+        "html": "https://github.com/OgeonX-Ai/cas-workstation/tree/master"
+      },
+      "protected": false,
+      "protection": {
+        "enabled": false,
+        "required_status_checks": {
+          "enforcement_level": "off",
+          "contexts": [],
+          "checks": []
+        }
+      },
+      "protection_url": "https://api.github.com/repos/OgeonX-Ai/cas-workstation/branches/master/protection"
+    },
+    "protection_payload": null,
+    "protection_error": "gh: Branch not protected (HTTP 404)"
+  },
+  {
+    "repository": "Coding-Autopilot-System/gemini-nano",
+    "branch": "master",
+    "branch_payload": {
+      "name": "master",
+      "commit": {
+        "sha": "bc3479b2bdbfe1eddd7faec13f12504dbb659293",
+        "node_id": "C_kwDOS6tf9doAKGJjMzQ3OWIyYmRiZmUxZWRkZDdmYWVjMTNmMTI1MDRkYmI2NTkyOTM",
+        "commit": {
+          "author": {
+            "name": "root",
+            "email": "root@Kimi.localdomain",
+            "date": "2026-07-09T14:16:56Z"
+          },
+          "committer": {
+            "name": "root",
+            "email": "root@Kimi.localdomain",
+            "date": "2026-07-09T14:16:56Z"
+          },
+          "message": "docs(security): add disclosure policy baseline",
+          "tree": {
+            "sha": "20257e901991a224162a151a2d18d17a3e865b5e",
+            "url": "https://api.github.com/repos/Coding-Autopilot-System/gemini-nano/git/trees/20257e901991a224162a151a2d18d17a3e865b5e"
+          },
+          "url": "https://api.github.com/repos/Coding-Autopilot-System/gemini-nano/git/commits/bc3479b2bdbfe1eddd7faec13f12504dbb659293",
+          "comment_count": 0,
+          "verification": {
+            "verified": false,
+            "reason": "unsigned",
+            "signature": null,
+            "payload": null,
+            "verified_at": null
+          }
+        },
+        "url": "https://api.github.com/repos/Coding-Autopilot-System/gemini-nano/commits/bc3479b2bdbfe1eddd7faec13f12504dbb659293",
+        "html_url": "https://github.com/Coding-Autopilot-System/gemini-nano/commit/bc3479b2bdbfe1eddd7faec13f12504dbb659293",
+        "comments_url": "https://api.github.com/repos/Coding-Autopilot-System/gemini-nano/commits/bc3479b2bdbfe1eddd7faec13f12504dbb659293/comments",
+        "author": null,
+        "committer": null,
+        "parents": [
+          {
+            "sha": "7b1518eb1f80bca94ef935cd51ddd796445bd98d",
+            "url": "https://api.github.com/repos/Coding-Autopilot-System/gemini-nano/commits/7b1518eb1f80bca94ef935cd51ddd796445bd98d",
+            "html_url": "https://github.com/Coding-Autopilot-System/gemini-nano/commit/7b1518eb1f80bca94ef935cd51ddd796445bd98d"
+          }
+        ]
+      },
+      "_links": {
+        "self": "https://api.github.com/repos/Coding-Autopilot-System/gemini-nano/branches/master",
+        "html": "https://github.com/Coding-Autopilot-System/gemini-nano/tree/master"
+      },
+      "protected": false,
+      "protection": {
+        "enabled": false,
+        "required_status_checks": {
+          "enforcement_level": "off",
+          "contexts": [],
+          "checks": []
+        }
+      },
+      "protection_url": "https://api.github.com/repos/Coding-Autopilot-System/gemini-nano/branches/master/protection"
+    },
+    "protection_payload": null,
+    "protection_error": "gh: Branch not protected (HTTP 404)"
+  },
+  {
+    "repository": "Coding-Autopilot-System/Promptimprover",
+    "branch": "master",
+    "branch_payload": {
+      "name": "master",
+      "commit": {
+        "sha": "126474036a361fccd6b498b7c77cd4cbf69430d0",
+        "node_id": "C_kwDOSj2j6doAKDEyNjQ3NDAzNmEzNjFmY2NkNmI0OThiN2M3N2NkNGNiZjY5NDMwZDA",
+        "commit": {
+          "author": {
+            "name": "Kim Harjamaki",
+            "email": "ogeonx@gmail.com",
+            "date": "2026-07-08T17:52:22Z"
+          },
+          "committer": {
+            "name": "GitHub",
+            "email": "noreply@github.com",
+            "date": "2026-07-08T17:52:22Z"
+          },
+          "message": "docs: Phase 36 README + docs/wiki refresh (#29)\n\n* docs(36-01): append freshness footer to README\n\n* docs(36-03): add docs/wiki tree (Home, Architecture, Operations, Decisions)\n\n- Architecture.md documents the governance/blackboard flow (AgenticBlackboard)\n- Operations.md verified install/build/test/release-gate/CI commands\n- Decisions.md indexes phase history, ADR convention, and open PRs\n\n---------\n\nCo-authored-by: Kim Harjam\u00e4ki <kim.harjamaki@prosimo.fi>",
+          "tree": {
+            "sha": "64afbc0f6fcfa5231351ee02963380c7d891c15c",
+            "url": "https://api.github.com/repos/Coding-Autopilot-System/Promptimprover/git/trees/64afbc0f6fcfa5231351ee02963380c7d891c15c"
+          },
+          "url": "https://api.github.com/repos/Coding-Autopilot-System/Promptimprover/git/commits/126474036a361fccd6b498b7c77cd4cbf69430d0",
+          "comment_count": 0,
+          "verification": {
+            "verified": true,
+            "reason": "valid",
+            "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqTo5WCRC1aQ7uu5UhlAAAUAsQAJMxoyUa/GsuDjhHzG/qDrVt\n/KriVn66IhQo0qzty5MgCJ5B+OdzRBlDbDuNpgRUfhE+N6DT1SUlWH2DEbxN/kCF\nOyuYitUA+VZ96SeILSYv96WnoKC8e5AeN0t0+aUUshHhk/y2Pz1LPov5mo3Otofe\n0YWBVLrxcru9F2mDelcHhznymreSpO1Gbpo1oTtKI9edJiV13FeMwU8nIlYR4gtj\nKZq9rx5cGpYx0JoVkZLdMtcW4rwVnGD1T0vDJEgRyN4SBlr44xFc5zQHNNVdtUL0\nJEEplMLI+TTeWn5abDhcwPS8+CZtPFlhR1XF9qfggfvWexPyWOk7JmvGlPmmz6v0\nM1ygIDapXBSyQ+oBQIMPuO/S4o6ziyWx2TaLTFGgVHu9rPIpOJ1wqyxMAfCpmbu/\nghSPqSvd1GmjYgRoKBX39ORhMz1cr+X9UdLhqGzdhGbrHC2s2wJy3Pyg15LvCMMo\naLisCS6JEZozrTL/JidTbLeRn5my2oHd749E9K+tqrX7/teI4yXonHk4J+3U4GeE\nNHhXP/bnhVWXjVr8iYnT/Xqg33bs3QQJG1W1hNSq4BrHky2jAT6E5sd3DZBE9Wd+\n6qusw9ipQOQ2gSMJn1vvqW3CmpNOm8oPMuJbql5eHYUlProXWN6cLtwOiMtHhPlt\nRR6VRnJAcMgB59Wg4P/6\n=ZKSi\n-----END PGP SIGNATURE-----\n",
+            "payload": "tree 64afbc0f6fcfa5231351ee02963380c7d891c15c\nparent 41444ad26a7c1252a9fac2908f6f80ed8b84a8b1\nauthor Kim Harjamaki <ogeonx@gmail.com> 1783533142 +0300\ncommitter GitHub <noreply@github.com> 1783533142 +0300\n\ndocs: Phase 36 README + docs/wiki refresh (#29)\n\n* docs(36-01): append freshness footer to README\n\n* docs(36-03): add docs/wiki tree (Home, Architecture, Operations, Decisions)\n\n- Architecture.md documents the governance/blackboard flow (AgenticBlackboard)\n- Operations.md verified install/build/test/release-gate/CI commands\n- Decisions.md indexes phase history, ADR convention, and open PRs\n\n---------\n\nCo-authored-by: Kim Harjam\u00e4ki <kim.harjamaki@prosimo.fi>",
+            "verified_at": "2026-07-08T17:52:23Z"
+          }
+        },
+        "url": "https://api.github.com/repos/Coding-Autopilot-System/Promptimprover/commits/126474036a361fccd6b498b7c77cd4cbf69430d0",
+        "html_url": "https://github.com/Coding-Autopilot-System/Promptimprover/commit/126474036a361fccd6b498b7c77cd4cbf69430d0",
+        "comments_url": "https://api.github.com/repos/Coding-Autopilot-System/Promptimprover/commits/126474036a361fccd6b498b7c77cd4cbf69430d0/comments",
+        "author": {
+          "login": "OgeonX-Ai",
+          "id": 248683486,
+          "node_id": "U_kgDODtKb3g",
+          "avatar_url": "https://avatars.githubusercontent.com/u/248683486?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/OgeonX-Ai",
+          "html_url": "https://github.com/OgeonX-Ai",
+          "followers_url": "https://api.github.com/users/OgeonX-Ai/followers",
+          "following_url": "https://api.github.com/users/OgeonX-Ai/following{/other_user}",
+          "gists_url": "https://api.github.com/users/OgeonX-Ai/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/OgeonX-Ai/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/OgeonX-Ai/subscriptions",
+          "organizations_url": "https://api.github.com/users/OgeonX-Ai/orgs",
+          "repos_url": "https://api.github.com/users/OgeonX-Ai/repos",
+          "events_url": "https://api.github.com/users/OgeonX-Ai/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/OgeonX-Ai/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "committer": {
+          "login": "web-flow",
+          "id": 19864447,
+          "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/web-flow",
+          "html_url": "https://github.com/web-flow",
+          "followers_url": "https://api.github.com/users/web-flow/followers",
+          "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+          "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+          "organizations_url": "https://api.github.com/users/web-flow/orgs",
+          "repos_url": "https://api.github.com/users/web-flow/repos",
+          "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/web-flow/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "parents": [
+          {
+            "sha": "41444ad26a7c1252a9fac2908f6f80ed8b84a8b1",
+            "url": "https://api.github.com/repos/Coding-Autopilot-System/Promptimprover/commits/41444ad26a7c1252a9fac2908f6f80ed8b84a8b1",
+            "html_url": "https://github.com/Coding-Autopilot-System/Promptimprover/commit/41444ad26a7c1252a9fac2908f6f80ed8b84a8b1"
+          }
+        ]
+      },
+      "_links": {
+        "self": "https://api.github.com/repos/Coding-Autopilot-System/Promptimprover/branches/master",
+        "html": "https://github.com/Coding-Autopilot-System/Promptimprover/tree/master"
+      },
+      "protected": true,
+      "protection": {
+        "enabled": true,
+        "required_status_checks": {
+          "enforcement_level": "off",
+          "contexts": [],
+          "checks": []
+        }
+      },
+      "protection_url": "https://api.github.com/repos/Coding-Autopilot-System/Promptimprover/branches/master/protection"
+    },
+    "protection_payload": {
+      "url": "https://api.github.com/repos/Coding-Autopilot-System/Promptimprover/branches/master/protection",
+      "required_pull_request_reviews": {
+        "url": "https://api.github.com/repos/Coding-Autopilot-System/Promptimprover/branches/master/protection/required_pull_request_reviews",
+        "dismiss_stale_reviews": true,
+        "require_code_owner_reviews": false,
+        "require_last_push_approval": false,
+        "required_approving_review_count": 0
+      },
+      "required_signatures": {
+        "url": "https://api.github.com/repos/Coding-Autopilot-System/Promptimprover/branches/master/protection/required_signatures",
+        "enabled": false
+      },
+      "enforce_admins": {
+        "url": "https://api.github.com/repos/Coding-Autopilot-System/Promptimprover/branches/master/protection/enforce_admins",
+        "enabled": true
+      },
+      "required_linear_history": {
+        "enabled": false
+      },
+      "allow_force_pushes": {
+        "enabled": false
+      },
+      "allow_deletions": {
+        "enabled": false
+      },
+      "block_creations": {
+        "enabled": false
+      },
+      "required_conversation_resolution": {
+        "enabled": true
+      },
+      "lock_branch": {
+        "enabled": false
+      },
+      "allow_fork_syncing": {
+        "enabled": false
+      }
+    },
+    "protection_error": null
+  }
+]

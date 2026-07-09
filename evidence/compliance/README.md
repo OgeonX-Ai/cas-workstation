@@ -15,6 +15,7 @@ The goal is not to create static paperwork. Each file here should either:
 - `control-owners.csv` - named control owners and evidence responsibilities
 - `bcdr-objectives.csv` - per-asset recovery objectives and ownership ledger
 - `data-classification.csv` - per-asset data class and evidence-handling baseline
+- `provenance-evidence.csv` - per-repository provenance and attestation baseline
 - `risk-register.csv` - machine-readable version of the top portfolio risks
 - `supplier-register.csv` - external suppliers and dependency surfaces
 - `supplier-review-log.csv` - supplier governance review cadence and evidence ledger

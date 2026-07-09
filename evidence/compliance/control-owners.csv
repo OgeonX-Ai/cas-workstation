@@ -10,3 +10,4 @@ exception_management,Portfolio maintainer,evidence/compliance/exception-register
 change_management,Portfolio maintainer,evidence/compliance/change-management.csv,monthly,partial
 evidence_retention,Portfolio maintainer,evidence/compliance/evidence-retention.csv,annual,partial
 vulnerability_management,Portfolio maintainer,evidence/compliance/vulnerability-management.csv,monthly,partial
+release_provenance,Portfolio maintainer,evidence/compliance/provenance-evidence.csv,monthly,partial

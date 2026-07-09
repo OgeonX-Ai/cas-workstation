@@ -13,6 +13,7 @@ on:
       - "scripts/capture-change-management-evidence.py"
       - "scripts/capture-bcdr-evidence.py"
       - "scripts/capture-data-classification-evidence.py"
+      - "scripts/capture-provenance-evidence.py"
       - "scripts/capture-incident-management-evidence.py"
       - "scripts/capture-supplier-governance-evidence.py"
       - "scripts/capture-supply-chain-state.py"
@@ -71,6 +72,9 @@ jobs:
       - name: Capture data-classification snapshot
         run: python scripts/capture-data-classification-evidence.py
 
+      - name: Capture provenance snapshot
+        run: python scripts/capture-provenance-evidence.py
+
       - name: Capture incident-management snapshot
         run: python scripts/capture-incident-management-evidence.py
 
@@ -111,7 +115,7 @@ jobs:
           gh attestation verify "compliance-evidence-${GITHUB_SHA}.tar.gz" \
             --repo OgeonX-Ai/cas-workstation \
             --signer-workflow OgeonX-Ai/cas-workstation/.github/workflows/compliance.yml \
-            --source-ref refs/heads/master
+            --source-ref "${GITHUB_REF}"
 
       - name: Publish compliance evidence directory
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7

@@ -27,7 +27,9 @@
 param(
     [string]$Root = "C:\PersonalRepo",
     [int]$WorktreeStaleDays = 14,
-    [switch]$Json
+    [switch]$Json,
+    [switch]$SkipStackManifestChecks,
+    [switch]$RootOnly
 )
 
 # 'Continue' on purpose: git writes advisory output to stderr and PS 5.1 wraps
@@ -47,8 +49,33 @@ function Add-Finding([string]$Repo, [string]$Check, [string]$Detail) {
     $findings.Add([pscustomobject]@{ Repo = $Repo; Check = $Check; Detail = $Detail })
 }
 
+function Resolve-WorkspaceTool([string]$CommandName, [string[]]$FallbackPaths = @()) {
+    $command = Get-Command $CommandName -ErrorAction SilentlyContinue
+    if ($command) {
+        return $command.Source
+    }
+
+    foreach ($path in @($FallbackPaths)) {
+        if ($path -and (Test-Path -LiteralPath $path)) {
+            return $path
+        }
+    }
+
+    return $null
+}
+
+$gitExe = Resolve-WorkspaceTool -CommandName 'git.exe' -FallbackPaths @(
+    (Join-Path ${env:ProgramFiles} 'Git\cmd\git.exe'),
+    (Join-Path ${env:ProgramFiles} 'Git\bin\git.exe'),
+    (Join-Path ${env:ProgramFiles(x86)} 'Git\cmd\git.exe'),
+    (Join-Path ${env:ProgramFiles(x86)} 'Git\bin\git.exe')
+)
+
 function Get-Repos([string]$RootPath) {
     $repos = @([pscustomobject]@{ Name = 'root'; Path = $RootPath })
+    if ($RootOnly) {
+        return $repos
+    }
     foreach ($d in Get-ChildItem -Directory (Join-Path $RootPath 'portfolio') -ErrorAction SilentlyContinue) {
         if (Test-Path (Join-Path $d.FullName '.git')) {
             $repos += [pscustomobject]@{ Name = "portfolio/$($d.Name)"; Path = $d.FullName }
@@ -61,18 +88,37 @@ function Get-Repos([string]$RootPath) {
     return $repos
 }
 
+function Get-TrackedPowerShellFiles([string]$RepoPath) {
+    if (-not $gitExe) {
+        return @()
+    }
+
+    $tracked = & $gitExe -C $RepoPath ls-files -- '*.ps1' 2>$null
+    foreach ($relativePath in @($tracked)) {
+        if (-not $relativePath) { continue }
+        $fullPath = Join-Path $RepoPath $relativePath
+        if ($fullPath -match '\\node_modules\\|\\bin\\|\\obj\\|\\.git\\') { continue }
+        if (Test-Path -LiteralPath $fullPath -PathType Leaf) {
+            Get-Item -LiteralPath $fullPath -ErrorAction SilentlyContinue
+        }
+    }
+}
+
 foreach ($repo in Get-Repos $Root) {
-    $g = { param([string[]]$GitArgs) & git -C $repo.Path @GitArgs 2>$null }
+    if (-not $gitExe) {
+        Add-Finding $repo.Name 'git-missing' "git.exe was not found in PATH or standard Git for Windows install locations."
+        continue
+    }
 
     # 1. Dirty working tree
-    $dirty = & git -C $repo.Path status --porcelain 2>$null
+    $dirty = & $gitExe -C $repo.Path status --porcelain 2>$null
     if ($dirty) {
         Add-Finding $repo.Name 'dirty' ("{0} uncommitted change(s), e.g. {1}" -f @($dirty).Count, (@($dirty)[0].Trim()))
     }
 
     # 2. Current vs default branch
-    $branch = (& git -C $repo.Path branch --show-current 2>$null)
-    $defRef = (& git -C $repo.Path symbolic-ref refs/remotes/origin/HEAD --short 2>$null)
+    $branch = (& $gitExe -C $repo.Path branch --show-current 2>$null)
+    $defRef = (& $gitExe -C $repo.Path symbolic-ref refs/remotes/origin/HEAD --short 2>$null)
     $default = if ($defRef) { $defRef -replace '^origin/', '' } else { $null }
     if ($default -and $branch -and $branch -ne $default) {
         Add-Finding $repo.Name 'off-default-branch' "on '$branch', default is '$default'"
@@ -80,9 +126,9 @@ foreach ($repo in Get-Repos $Root) {
 
     # 3. Unpushed commits
     if ($branch) {
-        $upstream = (& git -C $repo.Path rev-parse --abbrev-ref "@{u}" 2>$null)
+        $upstream = (& $gitExe -C $repo.Path rev-parse --abbrev-ref "@{u}" 2>$null)
         if ($upstream) {
-            $ahead = (& git -C $repo.Path rev-list --count "$upstream..HEAD" 2>$null)
+            $ahead = (& $gitExe -C $repo.Path rev-list --count "$upstream..HEAD" 2>$null)
             if ([int]$ahead -gt 0) {
                 Add-Finding $repo.Name 'unpushed' "$ahead commit(s) ahead of $upstream"
             }
@@ -92,7 +138,7 @@ foreach ($repo in Get-Repos $Root) {
     }
 
     # 4. Gitlinks without .gitmodules coverage
-    $gitlinks = (& git -C $repo.Path ls-files -s 2>$null) | Where-Object { $_ -match '^160000\s' }
+    $gitlinks = (& $gitExe -C $repo.Path ls-files -s 2>$null) | Where-Object { $_ -match '^160000\s' }
     foreach ($gl in $gitlinks) {
         $glPath = ($gl -split "`t")[-1]
         $inModules = $false
@@ -106,7 +152,7 @@ foreach ($repo in Get-Repos $Root) {
     }
 
     # 5. Stale worktrees registered to this repo
-    $wtBlocks = (& git -C $repo.Path worktree list --porcelain 2>$null) -join "`n" -split "`n`n"
+    $wtBlocks = (& $gitExe -C $repo.Path worktree list --porcelain 2>$null) -join "`n" -split "`n`n"
     foreach ($block in $wtBlocks) {
         if ($block -notmatch 'worktree (.+)') { continue }
         $wtPath = $Matches[1].Trim()
@@ -120,7 +166,7 @@ foreach ($repo in Get-Repos $Root) {
             continue
         }
         if ((Resolve-Path -LiteralPath $wtPath -ErrorAction SilentlyContinue).Path -eq (Resolve-Path $repo.Path).Path) { continue }
-        $last = (& git -C $wtPath log -1 --format=%ct 2>$null)
+        $last = (& $gitExe -C $wtPath log -1 --format=%ct 2>$null)
         if ($last) {
             $ageDays = [int](([DateTimeOffset]::UtcNow.ToUnixTimeSeconds() - [long]$last) / 86400)
             if ($ageDays -gt $WorktreeStaleDays) {
@@ -130,7 +176,7 @@ foreach ($repo in Get-Repos $Root) {
     }
 
     # 6. Credential helper WSL-path normalization
-    $helper = & git -C $repo.Path config --get credential.helper 2>$null
+    $helper = & $gitExe -C $repo.Path config --get credential.helper 2>$null
     if ($helper -match '/mnt/[a-z]/') {
         Add-Finding $repo.Name 'credential-helper-wsl-path' "credential.helper='$helper' uses WSL /mnt/ path; run 'git config credential.helper manager' to normalize to Windows Credential Manager"
     }
@@ -142,7 +188,8 @@ foreach ($repo in Get-Repos $Root) {
 if (-not $env:WH_SKIP_GH -and (Get-Command gh -ErrorAction SilentlyContinue)) {
     foreach ($repo in Get-Repos $Root) {
         try {
-            $originUrl = & git -C $repo.Path remote get-url origin 2>$null
+            if (-not $gitExe) { continue }
+            $originUrl = & $gitExe -C $repo.Path remote get-url origin 2>$null
             if (-not $originUrl) { continue }
             if ($originUrl -notmatch 'github\.com[:/]([^/]+)/([^/.]+)(\.git)?$') { continue }
             $owner = $Matches[1]
@@ -166,7 +213,7 @@ if (-not $env:WH_SKIP_GH -and (Get-Command gh -ErrorAction SilentlyContinue)) {
 
 # 8. stack.manifest.json tool version assertions (root only, run once)
 $rootRepo = (Get-Repos $Root) | Where-Object { $_.Name -eq 'root' } | Select-Object -First 1
-if ($rootRepo) {
+if ($rootRepo -and -not $SkipStackManifestChecks) {
     try {
         $manifestPath = Join-Path $Root 'stack.manifest.json'
         if (Test-Path -LiteralPath $manifestPath) {
@@ -186,8 +233,7 @@ if ($rootRepo) {
 
 # 9. Non-ASCII .ps1 guard (workspace-wide, per repo)
 foreach ($repo in Get-Repos $Root) {
-    $psFiles = Get-ChildItem -Path $repo.Path -Filter *.ps1 -Recurse -File -ErrorAction SilentlyContinue |
-        Where-Object { $_.FullName -notmatch '\\node_modules\\|\\bin\\|\\obj\\|\\.git\\' }
+    $psFiles = @(Get-TrackedPowerShellFiles -RepoPath $repo.Path)
     $offenderCount = 0
     $firstOffender = $null
     foreach ($f in $psFiles) {
@@ -214,10 +260,14 @@ foreach ($repo in Get-Repos $Root) {
 foreach ($dirName in @('antigravity-export', 'evidence')) {
     $dirPath = Join-Path $Root $dirName
     if (-not (Test-Path -LiteralPath $dirPath)) { continue }
-    & git -C $Root check-ignore -q $dirName 2>$null
+    if (-not $gitExe) {
+        Add-Finding 'root' 'git-missing' "git.exe was not found in PATH or standard Git for Windows install locations."
+        break
+    }
+    & $gitExe -C $Root check-ignore -q $dirName 2>$null
     $isIgnored = $LASTEXITCODE -eq 0
     if ($isIgnored) { continue }
-    $tracked = & git -C $Root ls-files $dirName 2>$null
+    $tracked = & $gitExe -C $Root ls-files $dirName 2>$null
     if (-not $tracked) {
         Add-Finding 'root' 'unclassified-housekeeping-dir' "'$dirName' exists, is untracked and not gitignored - classify as keep (add README + track) or archive/scratch (add to .gitignore)"
     }
