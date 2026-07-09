@@ -158,6 +158,7 @@ Describe 'workspace-health.ps1 sweep' {
             $dash = [char]0x2014
             $content = "# comment with an em-dash $dash character" + [Environment]::NewLine + "Write-Host 'hi'" + [Environment]::NewLine
             [System.IO.File]::WriteAllText((Join-Path $script:Fixture5 'bad.ps1'), $content, [System.Text.Encoding]::UTF8)
+            & $script:GitExe -C $script:Fixture5 add bad.ps1 2>$null
         }
         AfterAll {
             Remove-WhFixture -Path $script:Fixture5

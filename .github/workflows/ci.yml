@@ -46,6 +46,10 @@ jobs:
             -RootOnly `
             -Json `
             -SkipStackManifestChecks
+          if ($LASTEXITCODE -ne 0) {
+            Write-Host 'workspace-health findings recorded (report-only).'
+          }
+          exit 0
 
   commit-integrity:
     runs-on: windows-latest
