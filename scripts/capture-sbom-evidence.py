@@ -134,16 +134,43 @@ def main() -> int:
         out_path = SBOM_DIR / f"{target['target_id']}.cdx.json"
         status = "generated"
         notes = ""
+        source_path = Path(target["source"])
+
+        if not source_path.exists():
+            rows.append(
+                {
+                    "target_id": target["target_id"],
+                    "repository": target["repository"],
+                    "ecosystem": target["ecosystem"],
+                    "source_path": str(source_path.relative_to(ROOT)),
+                    "generated_at": today,
+                    "sbom_path": "",
+                    "status": "skipped",
+                    "notes": "source path missing in current workspace",
+                }
+            )
+            snapshot_rows.append(
+                {
+                    "target_id": target["target_id"],
+                    "repository": target["repository"],
+                    "ecosystem": target["ecosystem"],
+                    "source_path": str(source_path),
+                    "status": "skipped",
+                    "sbom_path": "",
+                    "notes": "source path missing in current workspace",
+                }
+            )
+            continue
 
         if target["ecosystem"] == "python-requirements":
-            result = run([str(PYTHON_TOOL), "requirements", str(target["source"]), "-o", str(out_path)])
+            result = run([str(PYTHON_TOOL), "requirements", str(source_path), "-o", str(out_path)])
         elif target["ecosystem"] == "npm-lockfile":
             result = run(
                 ["npx", "-y", "@cyclonedx/cyclonedx-npm", "--ignore-npm-errors", "--package-lock-only", "--output-file", str(out_path)],
-                cwd=Path(target["source"]),
+                cwd=source_path,
             )
         elif target["ecosystem"] == "dotnet-csproj":
-            result = run([str(DOTNET_TOOL), str(target["source"]), "-o", str(SBOM_DIR), "-F", "Json", "--filename", f"{target['target_id']}.cdx.json"])
+            result = run([str(DOTNET_TOOL), str(source_path), "-o", str(SBOM_DIR), "-F", "Json", "--filename", f"{target['target_id']}.cdx.json"])
         else:
             result = subprocess.CompletedProcess([], 1, "", f"Unsupported ecosystem {target['ecosystem']}")
 
@@ -158,7 +185,7 @@ def main() -> int:
                 "target_id": target["target_id"],
                 "repository": target["repository"],
                 "ecosystem": target["ecosystem"],
-                "source_path": str(Path(target["source"]).relative_to(ROOT)),
+                "source_path": str(source_path.relative_to(ROOT)),
                 "generated_at": today,
                 "sbom_path": str(out_path.relative_to(ROOT)) if out_path.exists() else "",
                 "status": status,
@@ -170,7 +197,7 @@ def main() -> int:
                 "target_id": target["target_id"],
                 "repository": target["repository"],
                 "ecosystem": target["ecosystem"],
-                "source_path": str(target["source"]),
+                "source_path": str(source_path),
                 "status": status,
                 "sbom_path": str(out_path) if out_path.exists() else "",
                 "notes": notes,

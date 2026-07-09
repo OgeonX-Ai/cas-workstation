@@ -263,7 +263,10 @@ def main() -> int:
     generated_sboms = [row for row in sbom_rows if row["status"] == "generated" and row["sbom_path"]]
     if len(generated_sboms) < 5:
         errors.append(f"Expected at least 5 generated SBOM artifacts, found {len(generated_sboms)}")
-    failed_sboms = [row for row in sbom_rows if row["status"] != "generated"]
+    allow_skipped_sboms = os.environ.get("ALLOW_SKIPPED_SBOM_TARGETS") == "1"
+    failed_sboms = [row for row in sbom_rows if row["status"] not in {"generated"}]
+    if allow_skipped_sboms:
+        failed_sboms = [row for row in failed_sboms if row["status"] != "skipped"]
     if failed_sboms:
         errors.append(f"SBOM generation failed for {len(failed_sboms)} target(s)")
 
