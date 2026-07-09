@@ -7,7 +7,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 
 
-ROOT = Path("/mnt/c/personalrepo")
+ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE = ROOT / "evidence" / "compliance"
 SNAPSHOTS = EVIDENCE / "snapshots"
 
