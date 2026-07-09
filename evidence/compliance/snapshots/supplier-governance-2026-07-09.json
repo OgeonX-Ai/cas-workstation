@@ -1,0 +1,37 @@
+{
+  "captured_at": "2026-07-09T14:39:40.138916+00:00",
+  "suppliers": [
+    {
+      "supplier": "GitHub",
+      "service": "Source control Actions Pages Wikis",
+      "dependency_scope": "Portfolio-wide",
+      "criticality": "Critical",
+      "owner": "Portfolio maintainer",
+      "review_status": "active"
+    },
+    {
+      "supplier": "Microsoft",
+      "service": "PowerShell .NET Azure CLI and Windows runtime",
+      "dependency_scope": "Portfolio-wide",
+      "criticality": "High",
+      "owner": "Portfolio maintainer",
+      "review_status": "active"
+    },
+    {
+      "supplier": "OpenAI",
+      "service": "Codex and related AI tooling",
+      "dependency_scope": "Portfolio-wide",
+      "criticality": "High",
+      "owner": "Portfolio maintainer",
+      "review_status": "active"
+    },
+    {
+      "supplier": "Google",
+      "service": "Chrome and Gemini Nano browser-adjacent experimentation",
+      "dependency_scope": "Research and local AI surfaces",
+      "criticality": "Medium",
+      "owner": "Portfolio maintainer",
+      "review_status": "active"
+    }
+  ]
+}

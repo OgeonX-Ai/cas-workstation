@@ -1,0 +1,16 @@
+asset_id,repository,recovery_tier,rto_target,rpo_target,recovery_owner,delegate_owner,review_date,status
+cas-workstation-root,OgeonX-Ai/cas-workstation,Tier-0,1 business day,4 hours,Portfolio maintainer,Portfolio maintainer,2026-07-09,active
+gemini-nano,Coding-Autopilot-System/gemini-nano,Tier-2,3 business days,2 business days,Portfolio maintainer,Portfolio maintainer,2026-07-09,active
+promptimprover,Coding-Autopilot-System/Promptimprover,Tier-1,2 business days,1 business day,Portfolio maintainer,Portfolio maintainer,2026-07-09,active
+autogen,Coding-Autopilot-System/autogen,Tier-1,2 business days,1 business day,Portfolio maintainer,Portfolio maintainer,2026-07-09,active
+autopilot-core,Coding-Autopilot-System/autopilot-core,Tier-1,2 business days,1 business day,Portfolio maintainer,Portfolio maintainer,2026-07-09,active
+autopilot-demo,Coding-Autopilot-System/autopilot-demo,Tier-2,3 business days,2 business days,Portfolio maintainer,Portfolio maintainer,2026-07-09,active
+cas-contracts,Coding-Autopilot-System/cas-contracts,Tier-0,1 business day,4 hours,Portfolio maintainer,Portfolio maintainer,2026-07-09,active
+cas-evals,Coding-Autopilot-System/cas-evals,Tier-1,2 business days,1 business day,Portfolio maintainer,Portfolio maintainer,2026-07-09,active
+cas-platform,Coding-Autopilot-System/cas-platform,Tier-0,1 business day,4 hours,Portfolio maintainer,Portfolio maintainer,2026-07-09,active
+cas-reference-product,Coding-Autopilot-System/cas-reference-product,Tier-0,1 business day,4 hours,Portfolio maintainer,Portfolio maintainer,2026-07-09,active
+cas-workstation-portfolio,Coding-Autopilot-System/cas-workstation,Tier-1,2 business days,1 business day,Portfolio maintainer,Portfolio maintainer,2026-07-09,active
+ci-autopilot,Coding-Autopilot-System/ci-autopilot,Tier-1,2 business days,1 business day,Portfolio maintainer,Portfolio maintainer,2026-07-09,active
+cloud-security-service-model,Coding-Autopilot-System/cloud-security-service-model,Tier-1,2 business days,1 business day,Portfolio maintainer,Portfolio maintainer,2026-07-09,active
+gsd-orchestrator,Coding-Autopilot-System/gsd-orchestrator,Tier-0,1 business day,4 hours,Portfolio maintainer,Portfolio maintainer,2026-07-09,active
+org-dotgithub,Coding-Autopilot-System/.github,Tier-1,2 business days,1 business day,Portfolio maintainer,Portfolio maintainer,2026-07-09,active

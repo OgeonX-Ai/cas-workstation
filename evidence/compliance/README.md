@@ -13,8 +13,10 @@ The goal is not to create static paperwork. Each file here should either:
 
 - `asset-inventory.csv` - authoritative repo inventory with ownership and classification
 - `control-owners.csv` - named control owners and evidence responsibilities
+- `bcdr-objectives.csv` - per-asset recovery objectives and ownership ledger
 - `risk-register.csv` - machine-readable version of the top portfolio risks
 - `supplier-register.csv` - external suppliers and dependency surfaces
+- `supplier-review-log.csv` - supplier governance review cadence and evidence ledger
 - `supply-chain-controls.csv` - repo-by-repo Dependabot, CodeQL, and workflow pinning baseline
 - `release-evidence.csv` - release-readiness and lockfile evidence baseline
 - `sbom-evidence.csv` - generated SBOM evidence summary across supported ecosystems
@@ -24,6 +26,7 @@ The goal is not to create static paperwork. Each file here should either:
 - `evidence-retention.csv` - retention rules for core audit artifacts
 - `vulnerability-management.csv` - disclosure-policy and scanning baseline evidence
 - `recovery-drills.csv` - continuity and restore exercise evidence
+- `bcdr-objectives.csv` - continuity objectives derived from recovery tiers
 - `access-review-log.csv` - access review evidence ledger
 - `exception-register.csv` - approved exceptions and expiries
 - `snapshots/*.json` - timestamped GitHub and repo-state captures used to support the CSV ledgers

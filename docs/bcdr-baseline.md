@@ -22,16 +22,22 @@ recovery objectives have been tested in production.
 - Dependency lockfiles where applicable
 - Pages sources and docs definitions stored in-repo
 
+## Evidence model
+
+- Per-asset recovery objectives: `evidence/compliance/bcdr-objectives.csv`
+- Exercise ledger: `evidence/compliance/recovery-drills.csv`
+- Objective snapshot: `evidence/compliance/snapshots/bcdr-objectives-2026-07-09.json`
+
 ## Current gaps
 
-- No portfolio-wide documented backup ownership or restore drill cadence
-- No cross-repo restore exercise evidence
+- No cross-repo restore exercise evidence beyond one critical repo sample
 - No formal dependency on external SaaS availability mapped by asset
 - No explicit continuity plan for maintainer unavailability
+- Recovery objectives are now per-asset, but quarterly revalidation history is still thin
 
 ## Required next evidence
 
-1. Repo restore drill from clean checkout for critical repos
-2. Workflow recovery drill for at least one critical repo
-3. Pages redeploy drill for the public documentation layer
-4. Documented maintainer/delegate ownership for recovery approvals
+1. Second critical-repo restore drill beyond `cas-contracts`
+2. Workflow recovery drill for at least one Tier-0 repo
+3. Explicit external dependency mapping per critical asset
+4. Maintainer-unavailability continuity path with delegate approval rules

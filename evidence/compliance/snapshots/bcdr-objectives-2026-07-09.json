@@ -1,0 +1,155 @@
+{
+  "captured_at": "2026-07-09T14:39:40.104973+00:00",
+  "assets": [
+    {
+      "asset_id": "cas-workstation-root",
+      "repository": "OgeonX-Ai/cas-workstation",
+      "runtime_surface": "GitHub Pages and GitHub Actions",
+      "recovery_tier": "Tier-0",
+      "rto_target": "1 business day",
+      "rpo_target": "4 hours",
+      "recovery_owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer"
+    },
+    {
+      "asset_id": "gemini-nano",
+      "repository": "Coding-Autopilot-System/gemini-nano",
+      "runtime_surface": "GitHub Pages and GitHub Actions",
+      "recovery_tier": "Tier-2",
+      "rto_target": "3 business days",
+      "rpo_target": "2 business days",
+      "recovery_owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer"
+    },
+    {
+      "asset_id": "promptimprover",
+      "repository": "Coding-Autopilot-System/Promptimprover",
+      "runtime_surface": "GitHub Pages and GitHub Actions",
+      "recovery_tier": "Tier-1",
+      "rto_target": "2 business days",
+      "rpo_target": "1 business day",
+      "recovery_owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer"
+    },
+    {
+      "asset_id": "autogen",
+      "repository": "Coding-Autopilot-System/autogen",
+      "runtime_surface": "GitHub Pages and GitHub Actions",
+      "recovery_tier": "Tier-1",
+      "rto_target": "2 business days",
+      "rpo_target": "1 business day",
+      "recovery_owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer"
+    },
+    {
+      "asset_id": "autopilot-core",
+      "repository": "Coding-Autopilot-System/autopilot-core",
+      "runtime_surface": "GitHub Pages and GitHub Actions",
+      "recovery_tier": "Tier-1",
+      "rto_target": "2 business days",
+      "rpo_target": "1 business day",
+      "recovery_owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer"
+    },
+    {
+      "asset_id": "autopilot-demo",
+      "repository": "Coding-Autopilot-System/autopilot-demo",
+      "runtime_surface": "GitHub Pages and GitHub Actions",
+      "recovery_tier": "Tier-2",
+      "rto_target": "3 business days",
+      "rpo_target": "2 business days",
+      "recovery_owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer"
+    },
+    {
+      "asset_id": "cas-contracts",
+      "repository": "Coding-Autopilot-System/cas-contracts",
+      "runtime_surface": "GitHub Pages and GitHub Actions",
+      "recovery_tier": "Tier-0",
+      "rto_target": "1 business day",
+      "rpo_target": "4 hours",
+      "recovery_owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer"
+    },
+    {
+      "asset_id": "cas-evals",
+      "repository": "Coding-Autopilot-System/cas-evals",
+      "runtime_surface": "GitHub Pages and GitHub Actions",
+      "recovery_tier": "Tier-1",
+      "rto_target": "2 business days",
+      "rpo_target": "1 business day",
+      "recovery_owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer"
+    },
+    {
+      "asset_id": "cas-platform",
+      "repository": "Coding-Autopilot-System/cas-platform",
+      "runtime_surface": "GitHub Pages and GitHub Actions",
+      "recovery_tier": "Tier-0",
+      "rto_target": "1 business day",
+      "rpo_target": "4 hours",
+      "recovery_owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer"
+    },
+    {
+      "asset_id": "cas-reference-product",
+      "repository": "Coding-Autopilot-System/cas-reference-product",
+      "runtime_surface": "GitHub Pages and GitHub Actions",
+      "recovery_tier": "Tier-0",
+      "rto_target": "1 business day",
+      "rpo_target": "4 hours",
+      "recovery_owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer"
+    },
+    {
+      "asset_id": "cas-workstation-portfolio",
+      "repository": "Coding-Autopilot-System/cas-workstation",
+      "runtime_surface": "GitHub Pages and GitHub Actions",
+      "recovery_tier": "Tier-1",
+      "rto_target": "2 business days",
+      "rpo_target": "1 business day",
+      "recovery_owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer"
+    },
+    {
+      "asset_id": "ci-autopilot",
+      "repository": "Coding-Autopilot-System/ci-autopilot",
+      "runtime_surface": "GitHub Pages and GitHub Actions",
+      "recovery_tier": "Tier-1",
+      "rto_target": "2 business days",
+      "rpo_target": "1 business day",
+      "recovery_owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer"
+    },
+    {
+      "asset_id": "cloud-security-service-model",
+      "repository": "Coding-Autopilot-System/cloud-security-service-model",
+      "runtime_surface": "GitHub Pages and GitHub Actions",
+      "recovery_tier": "Tier-1",
+      "rto_target": "2 business days",
+      "rpo_target": "1 business day",
+      "recovery_owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer"
+    },
+    {
+      "asset_id": "gsd-orchestrator",
+      "repository": "Coding-Autopilot-System/gsd-orchestrator",
+      "runtime_surface": "GitHub Pages and GitHub Actions",
+      "recovery_tier": "Tier-0",
+      "rto_target": "1 business day",
+      "rpo_target": "4 hours",
+      "recovery_owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer"
+    },
+    {
+      "asset_id": "org-dotgithub",
+      "repository": "Coding-Autopilot-System/.github",
+      "runtime_surface": "GitHub Pages and GitHub Actions",
+      "recovery_tier": "Tier-1",
+      "rto_target": "2 business days",
+      "rpo_target": "1 business day",
+      "recovery_owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer"
+    }
+  ]
+}

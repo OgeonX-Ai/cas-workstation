@@ -26,8 +26,10 @@ ATTESTATION_MAX_AGE_DAYS = 14
 REQUIRED_FILES = [
     EVIDENCE / "asset-inventory.csv",
     EVIDENCE / "control-owners.csv",
+    EVIDENCE / "bcdr-objectives.csv",
     EVIDENCE / "risk-register.csv",
     EVIDENCE / "supplier-register.csv",
+    EVIDENCE / "supplier-review-log.csv",
     EVIDENCE / "supply-chain-controls.csv",
     EVIDENCE / "release-evidence.csv",
     EVIDENCE / "sbom-evidence.csv",
@@ -220,12 +222,16 @@ def main() -> int:
     crosswalk_rows = csv_rows(EVIDENCE / "control-crosswalk.csv")
     retention_rows = csv_rows(EVIDENCE / "evidence-retention.csv")
     vulnerability_rows = csv_rows(EVIDENCE / "vulnerability-management.csv")
+    bcdr_rows = csv_rows(EVIDENCE / "bcdr-objectives.csv")
+    supplier_rows = csv_rows(EVIDENCE / "supplier-review-log.csv")
     if len(asset_rows) != 15:
         errors.append(f"Expected 15 asset inventory rows, found {len(asset_rows)}")
     if any(not row.get("delegate_owner") or not row.get("runtime_surface") or not row.get("recovery_tier") for row in asset_rows):
         errors.append("At least one asset inventory row is missing delegate ownership, runtime surface, or recovery tier")
     if len(supply_chain_rows) != 15:
         errors.append(f"Expected 15 supply-chain rows, found {len(supply_chain_rows)}")
+    if len(bcdr_rows) != 15:
+        errors.append(f"Expected 15 BCDR objective rows, found {len(bcdr_rows)}")
     if len(release_rows) != 15:
         errors.append(f"Expected 15 release-evidence rows, found {len(release_rows)}")
     if len(change_rows) != 15:
@@ -236,6 +242,8 @@ def main() -> int:
         errors.append(f"Expected 15 vulnerability-management rows, found {len(vulnerability_rows)}")
     if len(sbom_rows) == 0:
         errors.append("No SBOM evidence rows found")
+    if len(supplier_rows) < 4:
+        errors.append(f"Expected at least 4 supplier review rows, found {len(supplier_rows)}")
     if len(crosswalk_rows) < 8:
         errors.append(f"Expected at least 8 control crosswalk rows, found {len(crosswalk_rows)}")
     if len(retention_rows) < 8:
@@ -330,6 +338,14 @@ def main() -> int:
     ]
     if missing_recovery_evidence:
         errors.append(f"Missing recovery evidence reference(s): {', '.join(missing_recovery_evidence)}")
+    fresh_bcdr_rows = [
+        row for row in bcdr_rows
+        if row["review_date"] and days_old(row["review_date"]) <= 120
+    ]
+    if len(fresh_bcdr_rows) != 15:
+        errors.append("BCDR objectives are missing a full fresh portfolio snapshot")
+    if any(not row.get("rto_target") or not row.get("rpo_target") or not row.get("recovery_owner") for row in bcdr_rows):
+        errors.append("At least one BCDR objective row is missing RTO, RPO, or recovery owner")
 
     access_rows = csv_rows(EVIDENCE / "access-review-log.csv")
     if any(row["result"] == "missing" for row in access_rows):
@@ -378,6 +394,19 @@ def main() -> int:
         errors.append("At least one managed repository is missing SECURITY.md")
     if any(row["dependabot"] != "true" or row["codeql"] != "true" for row in vulnerability_rows):
         errors.append("At least one managed repository is missing vulnerability scanning baseline coverage")
+    fresh_supplier_rows = [
+        row for row in supplier_rows
+        if row["review_date"] and row["result"] == "passed" and days_old(row["review_date"]) <= 120
+    ]
+    if len(fresh_supplier_rows) < 4:
+        errors.append("Supplier governance evidence is missing a full fresh review cycle")
+    missing_supplier_evidence = [
+        row["evidence_ref"] for row in supplier_rows
+        if row["evidence_ref"].startswith("evidence/")
+        and not (ROOT / row["evidence_ref"]).exists()
+    ]
+    if missing_supplier_evidence:
+        errors.append(f"Missing supplier-governance evidence reference(s): {', '.join(missing_supplier_evidence)}")
 
     exception_rows = csv_rows(EVIDENCE / "exception-register.csv")
     open_exceptions = [row for row in exception_rows if row["status"] == "open"]

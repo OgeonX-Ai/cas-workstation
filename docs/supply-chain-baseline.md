@@ -23,10 +23,17 @@ CAS repositories that execute code, publish artifacts, or operate automation.
   from GitHub Actions so the portfolio has one cryptographically verifiable
   release-evidence path instead of only local CSV snapshots.
 
+## Evidence model
+
+- Supplier register: `evidence/compliance/supplier-register.csv`
+- Supplier review cadence: `evidence/compliance/supplier-review-log.csv`
+- Repo control baseline: `evidence/compliance/supply-chain-controls.csv`
+- Snapshot: `evidence/compliance/snapshots/supplier-governance-2026-07-09.json`
+
 ## Still not fully proven
 
 - Portfolio-wide SBOM generation and retention
 - Portfolio-wide provenance or signing outputs for every releasable asset
 - Uniform lockfile coverage across every executable repo
-- Evidence that dependency reviews are completed to a standard cadence
+- Evidence that dependency reviews are completed to a standard cadence now exists, but it is still single-cycle
 - SLA-backed vulnerability remediation history across every repository

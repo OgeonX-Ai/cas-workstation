@@ -1,0 +1,5 @@
+review_id,supplier,review_date,review_scope,owner,result,exception_status,evidence_ref,notes
+SUP-GITHUB-2026-07-09,GitHub,2026-07-09,Portfolio-wide,Portfolio maintainer,passed,none,evidence/compliance/snapshots/supplier-governance-2026-07-09.json,Reviewed Source control Actions Pages Wikis dependency posture and retained active status baseline.
+SUP-MICROSOFT-2026-07-09,Microsoft,2026-07-09,Portfolio-wide,Portfolio maintainer,passed,none,evidence/compliance/snapshots/supplier-governance-2026-07-09.json,Reviewed PowerShell .NET Azure CLI and Windows runtime dependency posture and retained active status baseline.
+SUP-OPENAI-2026-07-09,OpenAI,2026-07-09,Portfolio-wide,Portfolio maintainer,passed,none,evidence/compliance/snapshots/supplier-governance-2026-07-09.json,Reviewed Codex and related AI tooling dependency posture and retained active status baseline.
+SUP-GOOGLE-2026-07-09,Google,2026-07-09,Research and local AI surfaces,Portfolio maintainer,passed,none,evidence/compliance/snapshots/supplier-governance-2026-07-09.json,Reviewed Chrome and Gemini Nano browser-adjacent experimentation dependency posture and retained active status baseline.

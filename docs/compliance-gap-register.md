@@ -12,9 +12,9 @@ CSF, NIST SSDF, and SLSA-style scrutiny.
 |---|---|---|---|
 | Portfolio asset inventory | ISO 27001, NIS2, CSF | Authoritative repo inventory now includes delegate ownership, runtime surface, and recovery tier, but non-GitHub infrastructure inventory remains partial | Repo/system inventory with owner, criticality, data sensitivity, runtime surface |
 | Risk register | ISO 27001, DORA, NIS2, CSF | Unified register now tracks due dates, residual risk, and linked controls, but acceptance evidence and overdue escalation remain partial | Central risk log with owner, treatment, due date, residual risk |
-| Continuity and recovery | DORA, NIS2, ISO 27001 | Portfolio BCDR baseline and drill evidence exist, but restore cadence and dependency coverage remain partial | RTO/RPO, backup scope, recovery owners, test cadence |
+| Continuity and recovery | DORA, NIS2, ISO 27001 | Portfolio BCDR baseline now includes per-asset objectives and drill evidence, but restore cadence and dependency coverage remain partial | RTO/RPO, backup scope, recovery owners, test cadence |
 | Incident management baseline | DORA, NIS2, ISO 27001 | Portfolio baseline and tabletop evidence now exist, but live incident history is still thin | Severity matrix, escalation path, evidence template, post-incident loop, repeated exercises |
-| Supplier and dependency governance | ISO 27001, DORA, NIS2, SLSA | Policy fragments exist, not uniformly evidenced | Dependency review policy, supplier register, exception records |
+| Supplier and dependency governance | ISO 27001, DORA, NIS2, SLSA | Baseline and supplier review ledger now exist, but cadence history and exception usage remain partial | Dependency review policy, supplier register, exception records |
 | SBOM and provenance publication | SLSA, SSDF, DORA | Some release policy language exists, no portfolio-wide enforcement evidence | Artifact SBOMs, provenance/signing outputs, verifier workflow results |
 | Access review and privileged control evidence | ISO 27001, DORA, NIS2 | Governance intent exists, no portfolio evidence pack | Access owner list, review cadence, privileged-path audit evidence |
 | Change management evidence | ISO 27001, DORA | Baseline and evidence capture now exist, but fleet-wide approval enforcement is still uneven | Change classes, approval model, emergency path, rollback evidence |
@@ -27,6 +27,7 @@ CSF, NIST SSDF, and SLSA-style scrutiny.
 | Logging and retention baseline | Present in some repos only | Cross-portfolio retention and evidence handling standard |
 | Vulnerability-management cadence | Baseline evidence now exists, but SLA-driven remediation history is still incomplete | Scan cadence, SLA targets, exception path |
 | Incident exercise cadence | First tabletop evidence now exists, but repeated drills and postmortem history are still incomplete | Quarterly exercise ledger, follow-up actions, closure evidence |
+| Supplier review cadence | First supplier governance review cycle now exists, but repeat reviews and exception trails are still incomplete | Quarterly review history, exception records, owner sign-off |
 | Secure configuration baseline | Repo-local patterns vary | Baseline hardening checklist and drift checks |
 | Audit evidence ownership | Control ownership is improving, but retention and crosswalk maturity are still partial | Owner map for each control family |
 
