@@ -2,10 +2,10 @@
 gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Quality and Resilience Hardening
-status: in_progress
-stopped_at: "Phase 35 audit closure remains deferred behind the org merge queue, but execution continues under a temporary docs-and-visual rollout track so milestone evidence can keep improving while review gates clear."
-last_updated: "2026-07-08T13:35:00Z"
-last_activity: 2026-07-08 - Temporarily deferred the milestone-audit blocker, started docs-image rollout from the Claude-landed VISION/wiki set, archived the visible Agent-Hierarchy Mermaid source, and prepared the first generated visual replacement.
+status: milestone_complete
+stopped_at: "v1.4 archived and tagged; next: /gsd:new-milestone for v1.5 Delivery Flow (seeds in milestones/vNEXT-SEEDS.md)."
+last_updated: "2026-07-08T19:30:00Z"
+last_activity: 2026-07-08 - v1.4 milestone completed: merge queue drained (39 PRs), audit flipped to passed, archives written, tag v1.4.
 progress:
   total_phases: 25
   completed_phases: 20
@@ -25,10 +25,10 @@ See: `.planning/PROJECT.md` (updated 2026-07-05)
 
 ## Current Position
 
-Phase: 35-v1.4-verification-and-audit
-Plan: pre-audit live-state reconciliation
-Status: In progress with temporary audit deferral
-Last activity: 2026-07-08 - Audit closure is still merge-gated, but docs/visual hardening continues in parallel so Phase 35 evidence can improve without waiting on the queue. See `.planning/phases/35-v1.4-verification-and-audit/35-LIVE-STATE.md`.
+Phase: — (between milestones)
+Plan: —
+Status: v1.4 SHIPPED and archived (2026-07-08). v1.5 not yet started.
+Last activity: 2026-07-08 - milestone archive + tag.
 
 ## Performance Metrics
 
@@ -110,6 +110,5 @@ Resume file: None
 
 ## Operator Next Steps
 
-- Start from `.planning/phases/35-v1.4-verification-and-audit/35-LIVE-STATE.md`, not from the older Phase 29 pointer.
-- Treat Phase 35 as the active phase. Do not re-plan 29-36 unless live evidence changes.
-- Work the merge/review queue or produce a narrower merge-train blocker report; once the queue is reduced enough, run the milestone audit and archive flow.
+- `/gsd:new-milestone` — v1.5 Delivery Flow & Release Engineering (seeds: milestones/vNEXT-SEEDS.md).
+- v1.5 phase 38 backfill items: 6 conservative-kept local branches, 2 worktree leftovers, parallel-session transient files, root branch-protection decision.

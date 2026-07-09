@@ -22,10 +22,20 @@ verifier and acceptance criterion passes.
 
 ## Current State
 
+**v1.4 Quality and Resilience Hardening shipped 2026-07-08.**
+Ratcheted branch-coverage gates, typed FailureState contract proven by fault injection, an automated peer-critic gate, a 25-PR release train, SHA-pinned least-privilege workflows on all 13 repos, a resurrected schema registry, bicep-ready Azure hardening under the operator deploy lock, automated drift guardrails (11-check sweep, commit-integrity, scheduling), and org-wide docs-as-code (wikis, VISION narrative). Audit: passed (v1.4-MILESTONE-AUDIT.md); ~58 PRs merged; three stranded-work incidents caught and rescued.
+
+Across v1.0 to v1.4, 36 phases are complete.
+
+<details>
+<summary>Archived State (v1.3)</summary>
+
 **v1.3 Bootstrapping shipped 2026-07-05.**
 Ollama latency bottlenecks were resolved with caching and async optimizations, distributed scheduling architecture was implemented across nodes, automatic tool provisioning and paid API-based routing were integrated, and E2E pilots verified multi-machine execution and latency improvements.
 
 Across v1.0 to v1.3, 25 phases are complete.
+
+</details>
 
 <details>
 <summary>Archived State (v1.2)</summary>
@@ -52,9 +62,9 @@ shared cross-tool engineering operating contract without paid API dependency.
 
 </details>
 
-## Current Milestone: v1.4 Quality and Resilience Hardening
+## Next Milestone: v1.5 Delivery Flow & Release Engineering
 
-**Goal:** Enforce 100% test coverage and Resilience First architecture with typed failure states across all CAS Loop Engineering orchestrators and workers.
+**Goal:** Changes flow from agent to main in hours without weakening two-party review; every repo ships versioned releases. Seeds: `.planning/milestones/vNEXT-SEEDS.md`. Start via `/gsd:new-milestone`.
 
 ## Target Runtime
 
