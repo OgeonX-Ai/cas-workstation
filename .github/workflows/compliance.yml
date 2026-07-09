@@ -115,7 +115,7 @@ jobs:
           gh attestation verify "compliance-evidence-${GITHUB_SHA}.tar.gz" \
             --repo OgeonX-Ai/cas-workstation \
             --signer-workflow OgeonX-Ai/cas-workstation/.github/workflows/compliance.yml \
-            --source-ref refs/heads/master
+            --source-ref "${GITHUB_REF}"
 
       - name: Publish compliance evidence directory
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
