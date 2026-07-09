@@ -12,6 +12,8 @@ on:
       - "scripts/capture-access-review.py"
       - "scripts/capture-supply-chain-state.py"
       - "scripts/capture-release-evidence.py"
+      - "scripts/capture-sbom-evidence.py"
+      - "scripts/hydrate-portfolio-repos.py"
       - "scripts/verify-portfolio-compliance.py"
       - "evidence/compliance/**"
       - "docs/**"
