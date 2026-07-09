@@ -23,7 +23,7 @@ CSF, NIST SSDF, and SLSA-style scrutiny.
 
 | Gap | Current state | Needed evidence |
 |---|---|---|
-| Portfolio-wide data classification | Implicit only | Data classes, handling rules, examples |
+| Portfolio-wide data classification | Baseline ledger and handling rules now exist, but the model is still coarse and workload-level mapping is incomplete | Data classes, handling rules, examples |
 | Logging and retention baseline | Present in some repos only | Cross-portfolio retention and evidence handling standard |
 | Vulnerability-management cadence | Baseline evidence now exists, but SLA-driven remediation history is still incomplete | Scan cadence, SLA targets, exception path |
 | Incident exercise cadence | First tabletop evidence now exists, but repeated drills and postmortem history are still incomplete | Quarterly exercise ledger, follow-up actions, closure evidence |

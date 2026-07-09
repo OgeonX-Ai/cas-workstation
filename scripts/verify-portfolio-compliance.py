@@ -27,6 +27,7 @@ REQUIRED_FILES = [
     EVIDENCE / "asset-inventory.csv",
     EVIDENCE / "control-owners.csv",
     EVIDENCE / "bcdr-objectives.csv",
+    EVIDENCE / "data-classification.csv",
     EVIDENCE / "risk-register.csv",
     EVIDENCE / "supplier-register.csv",
     EVIDENCE / "supplier-review-log.csv",
@@ -224,6 +225,7 @@ def main() -> int:
     retention_rows = csv_rows(EVIDENCE / "evidence-retention.csv")
     vulnerability_rows = csv_rows(EVIDENCE / "vulnerability-management.csv")
     bcdr_rows = csv_rows(EVIDENCE / "bcdr-objectives.csv")
+    classification_rows = csv_rows(EVIDENCE / "data-classification.csv")
     supplier_rows = csv_rows(EVIDENCE / "supplier-review-log.csv")
     if len(asset_rows) != 15:
         errors.append(f"Expected 15 asset inventory rows, found {len(asset_rows)}")
@@ -233,6 +235,8 @@ def main() -> int:
         errors.append(f"Expected 15 supply-chain rows, found {len(supply_chain_rows)}")
     if len(bcdr_rows) != 15:
         errors.append(f"Expected 15 BCDR objective rows, found {len(bcdr_rows)}")
+    if len(classification_rows) != 15:
+        errors.append(f"Expected 15 data-classification rows, found {len(classification_rows)}")
     if len(release_rows) != 15:
         errors.append(f"Expected 15 release-evidence rows, found {len(release_rows)}")
     if len(change_rows) != 15:
@@ -245,6 +249,14 @@ def main() -> int:
         errors.append("No SBOM evidence rows found")
     if len(supplier_rows) < 4:
         errors.append(f"Expected at least 4 supplier review rows, found {len(supplier_rows)}")
+    fresh_classification_rows = [
+        row for row in classification_rows
+        if row["review_date"] and days_old(row["review_date"]) <= 365
+    ]
+    if len(fresh_classification_rows) != 15:
+        errors.append("Data-classification evidence is missing a full fresh portfolio snapshot")
+    if any(not row.get("data_class") or not row.get("handling_rule") or not row.get("evidence_access") for row in classification_rows):
+        errors.append("At least one data-classification row is missing class, handling rule, or evidence access")
     if len(crosswalk_rows) < 8:
         errors.append(f"Expected at least 8 control crosswalk rows, found {len(crosswalk_rows)}")
     if len(retention_rows) < 8:

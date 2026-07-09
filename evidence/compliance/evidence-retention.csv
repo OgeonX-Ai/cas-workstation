@@ -1,5 +1,6 @@
 artifact_type,source,owner,retention_rule,retention_days,status
 asset_inventory,evidence/compliance/asset-inventory.csv,Portfolio maintainer,keep latest ledger and quarterly snapshots,365,active
+data_classification,evidence/compliance/data-classification.csv,Portfolio maintainer,keep current year and previous year of classification ledgers,730,active
 risk_register,evidence/compliance/risk-register.csv,Portfolio maintainer,keep active register and previous quarter,365,active
 access_review,evidence/compliance/access-review-log.csv,Portfolio maintainer,keep current year and previous year,730,active
 access_governance,evidence/compliance/access-governance.csv,Portfolio maintainer,keep current year and previous year of governance baselines,730,active

@@ -12,6 +12,7 @@ on:
       - "scripts/capture-access-review.py"
       - "scripts/capture-change-management-evidence.py"
       - "scripts/capture-bcdr-evidence.py"
+      - "scripts/capture-data-classification-evidence.py"
       - "scripts/capture-incident-management-evidence.py"
       - "scripts/capture-supplier-governance-evidence.py"
       - "scripts/capture-supply-chain-state.py"
@@ -66,6 +67,9 @@ jobs:
 
       - name: Capture BCDR objectives snapshot
         run: python scripts/capture-bcdr-evidence.py
+
+      - name: Capture data-classification snapshot
+        run: python scripts/capture-data-classification-evidence.py
 
       - name: Capture incident-management snapshot
         run: python scripts/capture-incident-management-evidence.py

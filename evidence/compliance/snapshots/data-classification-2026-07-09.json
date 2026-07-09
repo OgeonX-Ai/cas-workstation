@@ -1,0 +1,110 @@
+{
+  "captured_at": "2026-07-09T14:48:25.270209+00:00",
+  "assets": [
+    {
+      "asset_id": "cas-workstation-root",
+      "repository": "OgeonX-Ai/cas-workstation",
+      "data_class": "Low",
+      "handling_rule": "Public or low-sensitivity engineering metadata only; avoid secrets and personal data in docs and logs.",
+      "evidence_access": "portfolio-public-or-maintainer"
+    },
+    {
+      "asset_id": "gemini-nano",
+      "repository": "Coding-Autopilot-System/gemini-nano",
+      "data_class": "Low",
+      "handling_rule": "Public or low-sensitivity engineering metadata only; avoid secrets and personal data in docs and logs.",
+      "evidence_access": "portfolio-public-or-maintainer"
+    },
+    {
+      "asset_id": "promptimprover",
+      "repository": "Coding-Autopilot-System/Promptimprover",
+      "data_class": "Moderate",
+      "handling_rule": "Internal engineering evidence only; minimize identifiers and keep operational evidence under maintainer-controlled access.",
+      "evidence_access": "maintainer-controlled"
+    },
+    {
+      "asset_id": "autogen",
+      "repository": "Coding-Autopilot-System/autogen",
+      "data_class": "Moderate",
+      "handling_rule": "Internal engineering evidence only; minimize identifiers and keep operational evidence under maintainer-controlled access.",
+      "evidence_access": "maintainer-controlled"
+    },
+    {
+      "asset_id": "autopilot-core",
+      "repository": "Coding-Autopilot-System/autopilot-core",
+      "data_class": "Moderate",
+      "handling_rule": "Internal engineering evidence only; minimize identifiers and keep operational evidence under maintainer-controlled access.",
+      "evidence_access": "maintainer-controlled"
+    },
+    {
+      "asset_id": "autopilot-demo",
+      "repository": "Coding-Autopilot-System/autopilot-demo",
+      "data_class": "Low",
+      "handling_rule": "Public or low-sensitivity engineering metadata only; avoid secrets and personal data in docs and logs.",
+      "evidence_access": "portfolio-public-or-maintainer"
+    },
+    {
+      "asset_id": "cas-contracts",
+      "repository": "Coding-Autopilot-System/cas-contracts",
+      "data_class": "Low",
+      "handling_rule": "Public or low-sensitivity engineering metadata only; avoid secrets and personal data in docs and logs.",
+      "evidence_access": "portfolio-public-or-maintainer"
+    },
+    {
+      "asset_id": "cas-evals",
+      "repository": "Coding-Autopilot-System/cas-evals",
+      "data_class": "Low",
+      "handling_rule": "Public or low-sensitivity engineering metadata only; avoid secrets and personal data in docs and logs.",
+      "evidence_access": "portfolio-public-or-maintainer"
+    },
+    {
+      "asset_id": "cas-platform",
+      "repository": "Coding-Autopilot-System/cas-platform",
+      "data_class": "Moderate",
+      "handling_rule": "Internal engineering evidence only; minimize identifiers and keep operational evidence under maintainer-controlled access.",
+      "evidence_access": "maintainer-controlled"
+    },
+    {
+      "asset_id": "cas-reference-product",
+      "repository": "Coding-Autopilot-System/cas-reference-product",
+      "data_class": "Moderate",
+      "handling_rule": "Internal engineering evidence only; minimize identifiers and keep operational evidence under maintainer-controlled access.",
+      "evidence_access": "maintainer-controlled"
+    },
+    {
+      "asset_id": "cas-workstation-portfolio",
+      "repository": "Coding-Autopilot-System/cas-workstation",
+      "data_class": "Low",
+      "handling_rule": "Public or low-sensitivity engineering metadata only; avoid secrets and personal data in docs and logs.",
+      "evidence_access": "portfolio-public-or-maintainer"
+    },
+    {
+      "asset_id": "ci-autopilot",
+      "repository": "Coding-Autopilot-System/ci-autopilot",
+      "data_class": "Moderate",
+      "handling_rule": "Internal engineering evidence only; minimize identifiers and keep operational evidence under maintainer-controlled access.",
+      "evidence_access": "maintainer-controlled"
+    },
+    {
+      "asset_id": "cloud-security-service-model",
+      "repository": "Coding-Autopilot-System/cloud-security-service-model",
+      "data_class": "Low",
+      "handling_rule": "Public or low-sensitivity engineering metadata only; avoid secrets and personal data in docs and logs.",
+      "evidence_access": "portfolio-public-or-maintainer"
+    },
+    {
+      "asset_id": "gsd-orchestrator",
+      "repository": "Coding-Autopilot-System/gsd-orchestrator",
+      "data_class": "Moderate",
+      "handling_rule": "Internal engineering evidence only; minimize identifiers and keep operational evidence under maintainer-controlled access.",
+      "evidence_access": "maintainer-controlled"
+    },
+    {
+      "asset_id": "org-dotgithub",
+      "repository": "Coding-Autopilot-System/.github",
+      "data_class": "Low",
+      "handling_rule": "Public or low-sensitivity engineering metadata only; avoid secrets and personal data in docs and logs.",
+      "evidence_access": "portfolio-public-or-maintainer"
+    }
+  ]
+}

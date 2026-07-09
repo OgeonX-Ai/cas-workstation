@@ -9,6 +9,7 @@ evidence than about a decorative spreadsheet.
 | Control family | Framework examples | Current evidence | Status |
 |---|---|---|---|
 | Asset inventory | ISO 27001, NIS2, CSF Identify | [Asset Inventory](asset-inventory.md) | Partial |
+| Data classification | ISO 27001, NIS2, CSF Protect | [Data Classification Baseline](data-classification-baseline.md), `evidence/compliance/data-classification.csv` | Partial |
 | Risk management | ISO 27001, DORA, NIS2, CSF Govern | [Risk Register](risk-register.md), `cloud-security-service-model/docs/09-risk-management.md` | Partial |
 | Incident response | ISO 27001, DORA, NIS2, CSF Respond | [Incident Standard](incident-standard.md), `evidence/compliance/incident-management.csv`, `cloud-security-service-model/docs/11-incident-response.md` | Partial |
 | Audit evidence handling | ISO 27001, DORA | `cloud-security-service-model/docs/10-audit-readiness.md` | Partial |

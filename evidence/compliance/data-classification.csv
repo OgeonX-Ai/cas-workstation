@@ -1,0 +1,16 @@
+asset_id,repository,data_class,handling_rule,evidence_access,review_date,status
+cas-workstation-root,OgeonX-Ai/cas-workstation,Low,Public or low-sensitivity engineering metadata only; avoid secrets and personal data in docs and logs.,portfolio-public-or-maintainer,2026-07-09,active
+gemini-nano,Coding-Autopilot-System/gemini-nano,Low,Public or low-sensitivity engineering metadata only; avoid secrets and personal data in docs and logs.,portfolio-public-or-maintainer,2026-07-09,active
+promptimprover,Coding-Autopilot-System/Promptimprover,Moderate,Internal engineering evidence only; minimize identifiers and keep operational evidence under maintainer-controlled access.,maintainer-controlled,2026-07-09,active
+autogen,Coding-Autopilot-System/autogen,Moderate,Internal engineering evidence only; minimize identifiers and keep operational evidence under maintainer-controlled access.,maintainer-controlled,2026-07-09,active
+autopilot-core,Coding-Autopilot-System/autopilot-core,Moderate,Internal engineering evidence only; minimize identifiers and keep operational evidence under maintainer-controlled access.,maintainer-controlled,2026-07-09,active
+autopilot-demo,Coding-Autopilot-System/autopilot-demo,Low,Public or low-sensitivity engineering metadata only; avoid secrets and personal data in docs and logs.,portfolio-public-or-maintainer,2026-07-09,active
+cas-contracts,Coding-Autopilot-System/cas-contracts,Low,Public or low-sensitivity engineering metadata only; avoid secrets and personal data in docs and logs.,portfolio-public-or-maintainer,2026-07-09,active
+cas-evals,Coding-Autopilot-System/cas-evals,Low,Public or low-sensitivity engineering metadata only; avoid secrets and personal data in docs and logs.,portfolio-public-or-maintainer,2026-07-09,active
+cas-platform,Coding-Autopilot-System/cas-platform,Moderate,Internal engineering evidence only; minimize identifiers and keep operational evidence under maintainer-controlled access.,maintainer-controlled,2026-07-09,active
+cas-reference-product,Coding-Autopilot-System/cas-reference-product,Moderate,Internal engineering evidence only; minimize identifiers and keep operational evidence under maintainer-controlled access.,maintainer-controlled,2026-07-09,active
+cas-workstation-portfolio,Coding-Autopilot-System/cas-workstation,Low,Public or low-sensitivity engineering metadata only; avoid secrets and personal data in docs and logs.,portfolio-public-or-maintainer,2026-07-09,active
+ci-autopilot,Coding-Autopilot-System/ci-autopilot,Moderate,Internal engineering evidence only; minimize identifiers and keep operational evidence under maintainer-controlled access.,maintainer-controlled,2026-07-09,active
+cloud-security-service-model,Coding-Autopilot-System/cloud-security-service-model,Low,Public or low-sensitivity engineering metadata only; avoid secrets and personal data in docs and logs.,portfolio-public-or-maintainer,2026-07-09,active
+gsd-orchestrator,Coding-Autopilot-System/gsd-orchestrator,Moderate,Internal engineering evidence only; minimize identifiers and keep operational evidence under maintainer-controlled access.,maintainer-controlled,2026-07-09,active
+org-dotgithub,Coding-Autopilot-System/.github,Low,Public or low-sensitivity engineering metadata only; avoid secrets and personal data in docs and logs.,portfolio-public-or-maintainer,2026-07-09,active

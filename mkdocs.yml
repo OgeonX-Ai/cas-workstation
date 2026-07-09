@@ -25,6 +25,7 @@ nav:
       - Baseline: compliance-baseline.md
       - Gap Register: compliance-gap-register.md
       - Asset Inventory: asset-inventory.md
+      - Data Classification Baseline: data-classification-baseline.md
       - Risk Register: risk-register.md
       - Incident Standard: incident-standard.md
       - BCDR Baseline: bcdr-baseline.md
