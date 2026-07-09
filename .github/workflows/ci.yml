@@ -41,7 +41,11 @@ jobs:
           # CI checks out only the root repo (portfolio/* are separate repos),
           # so repo-level checks apply to root only here; the full sweep runs
           # locally via the scheduled task.
-          powershell -NoProfile -File scripts/workspace-health.ps1 -Json
+          ./scripts/workspace-health.ps1 `
+            -Root $env:GITHUB_WORKSPACE `
+            -RootOnly `
+            -Json `
+            -SkipStackManifestChecks
 
   commit-integrity:
     runs-on: windows-latest

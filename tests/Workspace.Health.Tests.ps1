@@ -6,17 +6,29 @@ Describe 'workspace-health.ps1 sweep' {
         $script:ScriptUnderTest = (Resolve-Path (Join-Path $PSScriptRoot '..\scripts\workspace-health.ps1')).Path
         $script:ModuleUnderTest = (Resolve-Path (Join-Path $PSScriptRoot '..\scripts\Cas.Workstation.psm1')).Path
         $env:WH_SKIP_GH = '1'
+        $script:FixtureRoot = 'C:\temp\workspace-health-tests'
+        New-Item -ItemType Directory -Path $script:FixtureRoot -Force | Out-Null
+        $script:GitExe = @(
+            (Get-Command git.exe -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source -First 1),
+            'C:\Program Files\Git\cmd\git.exe',
+            'C:\Program Files\Git\bin\git.exe',
+            'C:\Program Files (x86)\Git\cmd\git.exe',
+            'C:\Program Files (x86)\Git\bin\git.exe'
+        ) | Where-Object { $_ -and (Test-Path -LiteralPath $_) } | Select-Object -First 1
+        if (-not $script:GitExe) {
+            throw 'Git for Windows was not found for Workspace.Health.Tests.ps1.'
+        }
 
         function New-WhFixture {
             param([string]$Suffix = 'base')
-            $dir = Join-Path $env:TEMP ("wh-test-{0}-{1}" -f $Suffix, [guid]::NewGuid().ToString('N'))
+            $dir = Join-Path $script:FixtureRoot ("wh-test-{0}-{1}" -f $Suffix, [guid]::NewGuid().ToString('N'))
             New-Item -ItemType Directory -Path $dir -Force | Out-Null
-            git -C $dir init -q 2>$null
-            git -C $dir config user.email 'wh-test@example.com' 2>$null
-            git -C $dir config user.name 'WH Test' 2>$null
+            & $script:GitExe -C $dir init -q 2>$null
+            & $script:GitExe -C $dir config user.email 'wh-test@example.com' 2>$null
+            & $script:GitExe -C $dir config user.name 'WH Test' 2>$null
             Set-Content -LiteralPath (Join-Path $dir 'README.md') -Value 'fixture' -Encoding ASCII
-            git -C $dir add README.md 2>$null
-            git -C $dir commit -q -m 'init' 2>$null
+            & $script:GitExe -C $dir add README.md 2>$null
+            & $script:GitExe -C $dir commit -q -m 'init' 2>$null
             return $dir
         }
 
@@ -78,14 +90,14 @@ Describe 'workspace-health.ps1 sweep' {
     Context 'Unpushed commit against a local origin' {
         BeforeAll {
             $script:Fixture3 = New-WhFixture -Suffix 'unpushed'
-            $script:Bare3 = Join-Path $env:TEMP ('wh-test-bare-' + [guid]::NewGuid().ToString('N'))
-            git init -q --bare $script:Bare3 2>$null
-            $branch3 = (git -C $script:Fixture3 branch --show-current 2>$null)
-            git -C $script:Fixture3 remote add origin $script:Bare3 2>$null
-            git -C $script:Fixture3 push -q -u origin "HEAD:refs/heads/$branch3" 2>$null
+            $script:Bare3 = Join-Path $script:FixtureRoot ('wh-test-bare-' + [guid]::NewGuid().ToString('N'))
+            & $script:GitExe init -q --bare $script:Bare3 2>$null
+            $branch3 = (& $script:GitExe -C $script:Fixture3 branch --show-current 2>$null)
+            & $script:GitExe -C $script:Fixture3 remote add origin $script:Bare3 2>$null
+            & $script:GitExe -C $script:Fixture3 push -q -u origin "HEAD:refs/heads/$branch3" 2>$null
             Set-Content -LiteralPath (Join-Path $script:Fixture3 'more.txt') -Value 'more' -Encoding ASCII
-            git -C $script:Fixture3 add more.txt 2>$null
-            git -C $script:Fixture3 commit -q -m 'second commit' 2>$null
+            & $script:GitExe -C $script:Fixture3 add more.txt 2>$null
+            & $script:GitExe -C $script:Fixture3 commit -q -m 'second commit' 2>$null
         }
         AfterAll {
             Remove-WhFixture -Path $script:Fixture3
@@ -101,7 +113,7 @@ Describe 'workspace-health.ps1 sweep' {
 
     Context 'Lying stack.manifest.json version' {
         BeforeAll {
-            $script:Fixture4 = Join-Path $env:TEMP ('wh-test-manifest-' + [guid]::NewGuid().ToString('N'))
+            $script:Fixture4 = Join-Path $script:FixtureRoot ('wh-test-manifest-' + [guid]::NewGuid().ToString('N'))
             New-Item -ItemType Directory -Path (Join-Path $script:Fixture4 'scripts') -Force | Out-Null
             Copy-Item -LiteralPath $script:ModuleUnderTest -Destination (Join-Path $script:Fixture4 'scripts\Cas.Workstation.psm1') -Force
             $manifest = [ordered]@{
@@ -130,6 +142,13 @@ Describe 'workspace-health.ps1 sweep' {
             $checks | Should -Contain 'stack-manifest-version'
             $manifestFindings = @($findings | Where-Object { $_.Check -eq 'stack-manifest-version' })
             $manifestFindings[0].Detail | Should -Match "'Git'"
+        }
+
+        It 'suppresses stack-manifest-version findings when explicitly skipped' {
+            $raw = & powershell.exe -NoProfile -File $script:ScriptUnderTest -Root $script:Fixture4 -Json -SkipStackManifestChecks 2>$null
+            $joined = ($raw -join "`n").Trim()
+            $findings = if ([string]::IsNullOrWhiteSpace($joined)) { @() } else { @($joined | ConvertFrom-Json) }
+            @($findings | ForEach-Object { $_.Check }) | Should -Not -Contain 'stack-manifest-version'
         }
     }
 
