@@ -10,6 +10,7 @@ on:
     paths:
       - ".github/workflows/compliance.yml"
       - "scripts/capture-access-review.py"
+      - "scripts/capture-change-management-evidence.py"
       - "scripts/capture-supply-chain-state.py"
       - "scripts/capture-release-evidence.py"
       - "scripts/capture-sbom-evidence.py"
@@ -55,6 +56,9 @@ jobs:
 
       - name: Capture access review snapshot
         run: python scripts/capture-access-review.py
+
+      - name: Capture change-management snapshot
+        run: python scripts/capture-change-management-evidence.py
 
       - name: Capture supply-chain snapshot
         run: python scripts/capture-supply-chain-state.py

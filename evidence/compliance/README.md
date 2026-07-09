@@ -18,6 +18,9 @@ The goal is not to create static paperwork. Each file here should either:
 - `supply-chain-controls.csv` - repo-by-repo Dependabot, CodeQL, and workflow pinning baseline
 - `release-evidence.csv` - release-readiness and lockfile evidence baseline
 - `sbom-evidence.csv` - generated SBOM evidence summary across supported ecosystems
+- `change-management.csv` - default-branch governance and protection evidence
+- `control-crosswalk.csv` - machine-readable control-to-evidence mapping
+- `evidence-retention.csv` - retention rules for core audit artifacts
 - `recovery-drills.csv` - continuity and restore exercise evidence
 - `access-review-log.csv` - access review evidence ledger
 - `exception-register.csv` - approved exceptions and expiries

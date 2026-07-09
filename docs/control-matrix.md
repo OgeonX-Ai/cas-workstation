@@ -17,6 +17,14 @@ evidence than about a decorative spreadsheet.
 | Secure development lifecycle | NIST SSDF, CSF Protect | repo CI, workflow linting, code review patterns | Partial |
 | Public governance posture | ISO 27001, SOC 2 trust expectations | root governance files, repo policies, live Pages sites | Partial |
 | Access review baseline | ISO 27001, DORA, NIS2 | `evidence/compliance/access-review-log.csv`, `evidence/compliance/snapshots/` | Partial |
+| Change management | ISO 27001, DORA, NIST SSDF | [Change Management Baseline](change-management-baseline.md), `evidence/compliance/change-management.csv` | Partial |
+| Evidence retention | ISO 27001, DORA, SOC 2 | [Evidence Retention Baseline](evidence-retention-baseline.md), `evidence/compliance/evidence-retention.csv` | Partial |
+
+## Detailed crosswalk
+
+For named control IDs, evidence references, and retention expectations, use
+[Control Crosswalk](control-crosswalk.md) plus
+`evidence/compliance/control-crosswalk.csv`.
 
 ## Interpretation
 

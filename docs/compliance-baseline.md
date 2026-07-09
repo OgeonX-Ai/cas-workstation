@@ -61,6 +61,12 @@ of network and information systems.
 - Access-review, change-approval, and evidence-retention operating records
 - Portfolio-level audit control mapping with pass/fail evidence per control
 
+## New baseline evidence added
+
+- Change-management ledger: `evidence/compliance/change-management.csv`
+- Evidence-retention ledger: `evidence/compliance/evidence-retention.csv`
+- Control crosswalk: `evidence/compliance/control-crosswalk.csv`
+
 ## Readiness principle
 
 “Enterprise-ready” for this portfolio should mean:

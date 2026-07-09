@@ -1,0 +1,140 @@
+{
+  "captured_at": "2026-07-09T14:04:48.306574+00:00",
+  "repositories": [
+    {
+      "repository": "OgeonX-Ai/cas-workstation",
+      "default_branch": "master",
+      "protection_enabled": false,
+      "required_approvals": 0,
+      "enforce_admins": false,
+      "linear_history": false,
+      "force_pushes_blocked": false
+    },
+    {
+      "repository": "Coding-Autopilot-System/gemini-nano",
+      "default_branch": "master",
+      "protection_enabled": false,
+      "required_approvals": 0,
+      "enforce_admins": false,
+      "linear_history": false,
+      "force_pushes_blocked": false
+    },
+    {
+      "repository": "Coding-Autopilot-System/Promptimprover",
+      "default_branch": "master",
+      "protection_enabled": true,
+      "required_approvals": 0,
+      "enforce_admins": true,
+      "linear_history": false,
+      "force_pushes_blocked": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/autogen",
+      "default_branch": "main",
+      "protection_enabled": true,
+      "required_approvals": 1,
+      "enforce_admins": true,
+      "linear_history": false,
+      "force_pushes_blocked": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/autopilot-core",
+      "default_branch": "main",
+      "protection_enabled": true,
+      "required_approvals": 1,
+      "enforce_admins": true,
+      "linear_history": false,
+      "force_pushes_blocked": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/autopilot-demo",
+      "default_branch": "main",
+      "protection_enabled": true,
+      "required_approvals": 1,
+      "enforce_admins": true,
+      "linear_history": false,
+      "force_pushes_blocked": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-contracts",
+      "default_branch": "main",
+      "protection_enabled": true,
+      "required_approvals": 1,
+      "enforce_admins": true,
+      "linear_history": false,
+      "force_pushes_blocked": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-evals",
+      "default_branch": "main",
+      "protection_enabled": true,
+      "required_approvals": 1,
+      "enforce_admins": true,
+      "linear_history": false,
+      "force_pushes_blocked": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-platform",
+      "default_branch": "main",
+      "protection_enabled": true,
+      "required_approvals": 1,
+      "enforce_admins": true,
+      "linear_history": false,
+      "force_pushes_blocked": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-reference-product",
+      "default_branch": "main",
+      "protection_enabled": true,
+      "required_approvals": 1,
+      "enforce_admins": true,
+      "linear_history": false,
+      "force_pushes_blocked": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-workstation",
+      "default_branch": "main",
+      "protection_enabled": true,
+      "required_approvals": 1,
+      "enforce_admins": true,
+      "linear_history": false,
+      "force_pushes_blocked": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/ci-autopilot",
+      "default_branch": "main",
+      "protection_enabled": true,
+      "required_approvals": 1,
+      "enforce_admins": true,
+      "linear_history": false,
+      "force_pushes_blocked": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/cloud-security-service-model",
+      "default_branch": "main",
+      "protection_enabled": true,
+      "required_approvals": 1,
+      "enforce_admins": true,
+      "linear_history": false,
+      "force_pushes_blocked": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/gsd-orchestrator",
+      "default_branch": "main",
+      "protection_enabled": true,
+      "required_approvals": 1,
+      "enforce_admins": true,
+      "linear_history": false,
+      "force_pushes_blocked": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/.github",
+      "default_branch": "main",
+      "protection_enabled": true,
+      "required_approvals": 1,
+      "enforce_admins": true,
+      "linear_history": false,
+      "force_pushes_blocked": true
+    }
+  ]
+}

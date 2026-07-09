@@ -1,0 +1,16 @@
+review_id,repository,default_branch,review_date,protection_enabled,required_approvals,enforce_admins,linear_history,force_pushes_blocked,result,notes
+CAS-CHANGE-cas-workstation,OgeonX-Ai/cas-workstation,master,2026-07-09,false,0,false,false,false,captured,GitHub branch protection snapshot
+CAS-CHANGE-gemini-nano,Coding-Autopilot-System/gemini-nano,master,2026-07-09,false,0,false,false,false,captured,GitHub branch protection snapshot
+CAS-CHANGE-Promptimprover,Coding-Autopilot-System/Promptimprover,master,2026-07-09,true,0,true,false,true,captured,GitHub branch protection snapshot
+CAS-CHANGE-autogen,Coding-Autopilot-System/autogen,main,2026-07-09,true,1,true,false,true,captured,GitHub branch protection snapshot
+CAS-CHANGE-autopilot-core,Coding-Autopilot-System/autopilot-core,main,2026-07-09,true,1,true,false,true,captured,GitHub branch protection snapshot
+CAS-CHANGE-autopilot-demo,Coding-Autopilot-System/autopilot-demo,main,2026-07-09,true,1,true,false,true,captured,GitHub branch protection snapshot
+CAS-CHANGE-cas-contracts,Coding-Autopilot-System/cas-contracts,main,2026-07-09,true,1,true,false,true,captured,GitHub branch protection snapshot
+CAS-CHANGE-cas-evals,Coding-Autopilot-System/cas-evals,main,2026-07-09,true,1,true,false,true,captured,GitHub branch protection snapshot
+CAS-CHANGE-cas-platform,Coding-Autopilot-System/cas-platform,main,2026-07-09,true,1,true,false,true,captured,GitHub branch protection snapshot
+CAS-CHANGE-cas-reference-product,Coding-Autopilot-System/cas-reference-product,main,2026-07-09,true,1,true,false,true,captured,GitHub branch protection snapshot
+CAS-CHANGE-cas-workstation,Coding-Autopilot-System/cas-workstation,main,2026-07-09,true,1,true,false,true,captured,GitHub branch protection snapshot
+CAS-CHANGE-ci-autopilot,Coding-Autopilot-System/ci-autopilot,main,2026-07-09,true,1,true,false,true,captured,GitHub branch protection snapshot
+CAS-CHANGE-cloud-security-service-model,Coding-Autopilot-System/cloud-security-service-model,main,2026-07-09,true,1,true,false,true,captured,GitHub branch protection snapshot
+CAS-CHANGE-gsd-orchestrator,Coding-Autopilot-System/gsd-orchestrator,main,2026-07-09,true,1,true,false,true,captured,GitHub branch protection snapshot
+CAS-CHANGE-.github,Coding-Autopilot-System/.github,main,2026-07-09,true,1,true,false,true,captured,GitHub branch protection snapshot

@@ -31,6 +31,9 @@ REQUIRED_FILES = [
     EVIDENCE / "supply-chain-controls.csv",
     EVIDENCE / "release-evidence.csv",
     EVIDENCE / "sbom-evidence.csv",
+    EVIDENCE / "change-management.csv",
+    EVIDENCE / "control-crosswalk.csv",
+    EVIDENCE / "evidence-retention.csv",
     EVIDENCE / "recovery-drills.csv",
     EVIDENCE / "access-review-log.csv",
     EVIDENCE / "exception-register.csv",
@@ -209,14 +212,23 @@ def main() -> int:
     supply_chain_rows = csv_rows(EVIDENCE / "supply-chain-controls.csv")
     release_rows = csv_rows(EVIDENCE / "release-evidence.csv")
     sbom_rows = csv_rows(EVIDENCE / "sbom-evidence.csv")
+    change_rows = csv_rows(EVIDENCE / "change-management.csv")
+    crosswalk_rows = csv_rows(EVIDENCE / "control-crosswalk.csv")
+    retention_rows = csv_rows(EVIDENCE / "evidence-retention.csv")
     if len(asset_rows) != 15:
         errors.append(f"Expected 15 asset inventory rows, found {len(asset_rows)}")
     if len(supply_chain_rows) != 15:
         errors.append(f"Expected 15 supply-chain rows, found {len(supply_chain_rows)}")
     if len(release_rows) != 15:
         errors.append(f"Expected 15 release-evidence rows, found {len(release_rows)}")
+    if len(change_rows) != 15:
+        errors.append(f"Expected 15 change-management rows, found {len(change_rows)}")
     if len(sbom_rows) == 0:
         errors.append("No SBOM evidence rows found")
+    if len(crosswalk_rows) < 8:
+        errors.append(f"Expected at least 8 control crosswalk rows, found {len(crosswalk_rows)}")
+    if len(retention_rows) < 8:
+        errors.append(f"Expected at least 8 evidence-retention rows, found {len(retention_rows)}")
 
     local_repo_paths = {
         "OgeonX-Ai/cas-workstation": ROOT,
@@ -303,6 +315,13 @@ def main() -> int:
     ]
     if not fresh_access:
         errors.append("No passed access review within the last 90 days")
+
+    fresh_change_rows = [
+        row for row in change_rows
+        if row["review_date"] and days_old(row["review_date"]) <= 90
+    ]
+    if len(fresh_change_rows) != 15:
+        errors.append("Change-management evidence is missing a full fresh portfolio snapshot")
 
     exception_rows = csv_rows(EVIDENCE / "exception-register.csv")
     open_exceptions = [row for row in exception_rows if row["status"] == "open"]

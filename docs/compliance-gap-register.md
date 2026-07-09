@@ -17,7 +17,7 @@ CSF, NIST SSDF, and SLSA-style scrutiny.
 | Supplier and dependency governance | ISO 27001, DORA, NIS2, SLSA | Policy fragments exist, not uniformly evidenced | Dependency review policy, supplier register, exception records |
 | SBOM and provenance publication | SLSA, SSDF, DORA | Some release policy language exists, no portfolio-wide enforcement evidence | Artifact SBOMs, provenance/signing outputs, verifier workflow results |
 | Access review and privileged control evidence | ISO 27001, DORA, NIS2 | Governance intent exists, no portfolio evidence pack | Access owner list, review cadence, privileged-path audit evidence |
-| Change management evidence | ISO 27001, DORA | Git history exists, but no unified change-control control narrative | Change classes, approval model, emergency path, rollback evidence |
+| Change management evidence | ISO 27001, DORA | Baseline and evidence capture now exist, but fleet-wide approval enforcement is still uneven | Change classes, approval model, emergency path, rollback evidence |
 
 ## Medium priority gaps
 
@@ -27,7 +27,7 @@ CSF, NIST SSDF, and SLSA-style scrutiny.
 | Logging and retention baseline | Present in some repos only | Cross-portfolio retention and evidence handling standard |
 | Vulnerability-management cadence | Security policies exist | Scan cadence, SLA targets, exception path |
 | Secure configuration baseline | Repo-local patterns vary | Baseline hardening checklist and drift checks |
-| Audit evidence ownership | Control ownership is uneven | Owner map for each control family |
+| Audit evidence ownership | Control ownership is improving, but retention and crosswalk maturity are still partial | Owner map for each control family |
 
 ## Current strengths
 
