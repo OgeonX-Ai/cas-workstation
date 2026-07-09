@@ -1,0 +1,36 @@
+site_name: CAS Workstation
+site_description: Windows-first bootstrap, operations, and architecture for the Coding-Autopilot-System workstation.
+site_url: https://ogeonx-ai.github.io/cas-workstation/
+repo_url: https://github.com/OgeonX-Ai/cas-workstation
+repo_name: OgeonX-Ai/cas-workstation
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - pymdownx.details
+  - pymdownx.superfences
+nav:
+  - Home: index.md
+  - Vision: VISION.md
+  - Architecture: architecture.md
+  - Support Matrix: support-matrix.md
+  - Operations:
+      - Merge Queue: MERGE-QUEUE.md
+      - Merge Train Runbook: merge-train-runbook.md
+      - Improvement Backlog: improvement-backlog.md
+      - Azure Rollout Plan: azure-rollout-plan.md
+  - Components:
+      - Gemini Nano Integration: gemini-nano.md
+  - Delivery:
+      - Product Requirements: prd/PRD-loop-engineering.md
+      - Technical Specification: specs/SPEC-loop-engineering.md
+      - Agent Hierarchy: wiki/Agent-Hierarchy.md
+  - ADR:
+      - Loop Engineering Ownership: adr/ADR-0001-loop-engineering-ownership.md

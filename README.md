@@ -4,6 +4,10 @@ CAS Workstation is the opinionated Windows-first bootstrap bundle for the
 Coding-Autopilot-System ecosystem. It provides one install surface for a fully
 configured AI-native coding workstation.
 
+Public documentation for this repo now lives under `docs/` and is publishable
+through GitHub Pages via the root `mkdocs.yml` and `.github/workflows/pages.yml`
+pipeline.
+
 ## Commands
 
 ```powershell
