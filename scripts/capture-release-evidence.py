@@ -42,23 +42,23 @@ LOCKFILES = [
 
 
 def has_lockfile(repo_path: Path) -> bool:
-    args = ["rg", "--files", str(repo_path)]
-    for candidate in LOCKFILES:
-        args.extend(["-g", candidate])
-    args.extend(
-        [
-            "-g",
-            "!**/node_modules/**",
-            "-g",
-            "!**/.git/**",
-            "-g",
-            "!**/site/**",
-            "-g",
-            "!**/.venv/**",
-        ]
+    result = subprocess.run(
+        ["git", "-C", str(repo_path), "ls-files"],
+        text=True,
+        capture_output=True,
+        check=False,
     )
-    result = subprocess.run(args, text=True, capture_output=True, check=False)
-    return result.returncode == 0 and bool(result.stdout.strip())
+    if result.returncode != 0:
+        return False
+
+    tracked_files = result.stdout.splitlines()
+    for path_str in tracked_files:
+        path = Path(path_str)
+        if any(part in {".git", "node_modules", "site", ".venv"} for part in path.parts):
+            continue
+        if path.name in LOCKFILES:
+            return True
+    return False
 
 
 def main() -> int:

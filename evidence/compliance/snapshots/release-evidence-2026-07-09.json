@@ -1,9 +1,9 @@
 {
-  "captured_at": "2026-07-09T09:36:18.125260+00:00",
+  "captured_at": "2026-07-09T09:41:44.951260+00:00",
   "repositories": [
     {
       "repository": "OgeonX-Ai/cas-workstation",
-      "lockfile_present": true,
+      "lockfile_present": false,
       "pages_workflow": true,
       "codeql": true,
       "dependabot": true,
@@ -67,7 +67,7 @@
     },
     {
       "repository": "Coding-Autopilot-System/cas-platform",
-      "lockfile_present": true,
+      "lockfile_present": false,
       "pages_workflow": true,
       "codeql": true,
       "dependabot": true,
