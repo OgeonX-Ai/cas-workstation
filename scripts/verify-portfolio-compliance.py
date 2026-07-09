@@ -3,8 +3,10 @@ from __future__ import annotations
 
 import csv
 import json
+import os
 import subprocess
 import sys
+import tempfile
 from datetime import date, datetime
 from pathlib import Path
 
@@ -12,6 +14,12 @@ from pathlib import Path
 ROOT = Path("/mnt/c/personalrepo")
 EVIDENCE = ROOT / "evidence" / "compliance"
 SNAPSHOTS = EVIDENCE / "snapshots"
+COMPLIANCE_REPO = "OgeonX-Ai/cas-workstation"
+COMPLIANCE_WORKFLOW = "compliance.yml"
+COMPLIANCE_WORKFLOW_REF = f"{COMPLIANCE_REPO}/.github/workflows/compliance.yml"
+COMPLIANCE_BUNDLE_ARTIFACT = "compliance-evidence-bundle"
+COMPLIANCE_ATTESTATION_ARTIFACT = "compliance-attestation-bundle"
+ATTESTATION_MAX_AGE_DAYS = 14
 
 REQUIRED_FILES = [
     EVIDENCE / "asset-inventory.csv",
@@ -60,6 +68,115 @@ def pages_view(repo: str) -> dict | None:
     return json.loads(result.stdout)
 
 
+def latest_successful_run(repo: str, workflow: str) -> dict | None:
+    result = run(
+        [
+            "gh",
+            "run",
+            "list",
+            "--repo",
+            repo,
+            "--workflow",
+            workflow,
+            "--limit",
+            "20",
+            "--json",
+            "databaseId,headSha,status,conclusion,updatedAt,url",
+        ]
+    )
+    if result.returncode != 0:
+        raise RuntimeError(result.stderr.strip() or result.stdout.strip())
+
+    for run_item in json.loads(result.stdout):
+        if run_item.get("status") == "completed" and run_item.get("conclusion") == "success":
+            return run_item
+    return None
+
+
+def run_artifacts(repo: str, run_id: int) -> list[dict]:
+    result = run(["gh", "api", f"repos/{repo}/actions/runs/{run_id}/artifacts"])
+    if result.returncode != 0:
+        raise RuntimeError(result.stderr.strip() or result.stdout.strip())
+    return json.loads(result.stdout).get("artifacts", [])
+
+
+def workflow_has_attestation_baseline() -> tuple[bool, list[str]]:
+    workflow_text = (ROOT / ".github" / "workflows" / "compliance.yml").read_text(encoding="utf-8")
+    expected_tokens = [
+        "actions/attest@f6bf1532d7d6793fce74eac584813a8eee607999",
+        "attestations: write",
+        "id-token: write",
+        "artifact-metadata: write",
+        COMPLIANCE_BUNDLE_ARTIFACT,
+        COMPLIANCE_ATTESTATION_ARTIFACT,
+    ]
+    missing = [token for token in expected_tokens if token not in workflow_text]
+    return (len(missing) == 0, missing)
+
+
+def verify_latest_attestation() -> tuple[bool, str]:
+    latest_run = latest_successful_run(COMPLIANCE_REPO, COMPLIANCE_WORKFLOW)
+    if not latest_run:
+        return (False, "No successful compliance workflow run found for attestation verification")
+
+    run_id = latest_run["databaseId"]
+    updated_at = latest_run["updatedAt"]
+    if days_old(updated_at[:10]) > ATTESTATION_MAX_AGE_DAYS:
+        return (False, f"Latest successful compliance run is stale: {updated_at}")
+
+    artifacts = run_artifacts(COMPLIANCE_REPO, run_id)
+    artifact_names = {artifact["name"] for artifact in artifacts}
+    missing_artifacts = sorted(
+        {COMPLIANCE_BUNDLE_ARTIFACT, COMPLIANCE_ATTESTATION_ARTIFACT}.difference(artifact_names)
+    )
+    if missing_artifacts:
+        return (False, f"Latest successful compliance run {run_id} is missing artifact(s): {', '.join(missing_artifacts)}")
+
+    with tempfile.TemporaryDirectory(prefix="compliance-attestation-") as tmp_dir:
+        download = run(
+            [
+                "gh",
+                "run",
+                "download",
+                str(run_id),
+                "--repo",
+                COMPLIANCE_REPO,
+                "--name",
+                COMPLIANCE_BUNDLE_ARTIFACT,
+                "--dir",
+                tmp_dir,
+            ]
+        )
+        if download.returncode != 0:
+            return (False, f"Unable to download compliance bundle from run {run_id}: {(download.stderr or download.stdout).strip()}")
+
+        bundle_paths = sorted(Path(tmp_dir).rglob("*.tar.gz"))
+        if not bundle_paths:
+            return (False, f"Compliance bundle artifact from run {run_id} did not contain a .tar.gz file")
+
+        verify = run(
+            [
+                "gh",
+                "attestation",
+                "verify",
+                str(bundle_paths[0]),
+                "--repo",
+                COMPLIANCE_REPO,
+                "--signer-workflow",
+                COMPLIANCE_WORKFLOW_REF,
+                "--source-ref",
+                "refs/heads/master",
+                "--format",
+                "json",
+            ]
+        )
+        if verify.returncode != 0:
+            details = (verify.stderr or verify.stdout).strip()
+            return (False, f"Attestation verification failed for run {run_id}: {details}")
+
+    return (True, f"Verified attested compliance bundle from run {run_id} for commit {latest_run['headSha']}")
+
+
 def main() -> int:
     errors: list[str] = []
     warnings: list[str] = []
@@ -71,6 +188,10 @@ def main() -> int:
             errors.append(f"Empty evidence file: {path}")
     if not SNAPSHOTS.exists():
         errors.append(f"Missing snapshots directory: {SNAPSHOTS}")
+
+    has_workflow_attestation, missing_tokens = workflow_has_attestation_baseline()
+    if not has_workflow_attestation:
+        errors.append(f"Compliance workflow attestation baseline missing token(s): {', '.join(missing_tokens)}")
 
     asset_rows = csv_rows(EVIDENCE / "asset-inventory.csv")
     supply_chain_rows = csv_rows(EVIDENCE / "supply-chain-controls.csv")
@@ -172,6 +293,15 @@ def main() -> int:
     open_exceptions = [row for row in exception_rows if row["status"] == "open"]
     if open_exceptions:
         warnings.append(f"{len(open_exceptions)} open exception(s) remain")
+
+    if os.environ.get("SKIP_REMOTE_ATTESTATION_VERIFY") != "1":
+        try:
+            attestation_ok, attestation_note = verify_latest_attestation()
+        except RuntimeError as exc:
+            errors.append(f"Unable to inspect GitHub attestation state: {exc}")
+        else:
+            if not attestation_ok:
+                errors.append(attestation_note)
 
     report = {
         "errors": errors,

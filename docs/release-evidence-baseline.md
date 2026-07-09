@@ -17,9 +17,13 @@ production-relevant state.
 - Central release policy source of truth: `portfolio/org-dotgithub/docs/RELEASE_POLICY.md`
 - Machine-readable ledger: `evidence/compliance/release-evidence.csv`
 - Snapshot generator: `scripts/capture-release-evidence.py`
+- GitHub Actions workflow: `.github/workflows/compliance.yml`
+- Attested artifact: `compliance-evidence-<git-sha>.tar.gz`
+- Verifier path: `scripts/verify-portfolio-compliance.py` plus `gh attestation verify`
 
-## Honest limitation
+## Current limitation
 
-This is still release-readiness evidence, not full artifact provenance. It does
-not yet prove SBOM generation, signing, attestation, or immutable release
-verification for every releasable asset.
+The root workstation repo now produces an attested compliance evidence bundle,
+but this still does not prove artifact provenance for every releasable asset in
+every portfolio repository. It materially closes the root audit trail gap
+without yet giving full fleet-wide release signing coverage.

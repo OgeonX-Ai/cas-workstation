@@ -19,10 +19,13 @@ CAS repositories that execute code, publish artifacts, or operate automation.
   `portfolio/org-dotgithub/docs/RELEASE_POLICY.md`.
 - Root `cas-workstation` and `gemini-nano` now include Dependabot and CodeQL
   baselines so they are no longer outliers relative to the portfolio repos.
+- Root `cas-workstation` now publishes an attested `compliance-evidence` bundle
+  from GitHub Actions so the portfolio has one cryptographically verifiable
+  release-evidence path instead of only local CSV snapshots.
 
 ## Still not fully proven
 
 - Portfolio-wide SBOM generation and retention
-- Portfolio-wide provenance or signing outputs
+- Portfolio-wide provenance or signing outputs for every releasable asset
 - Uniform lockfile coverage across every executable repo
 - Evidence that dependency reviews are completed to a standard cadence

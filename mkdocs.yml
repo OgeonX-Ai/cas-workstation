@@ -31,6 +31,7 @@ nav:
       - Supply-Chain Baseline: supply-chain-baseline.md
       - Release Evidence Baseline: release-evidence-baseline.md
       - SBOM Baseline: sbom-baseline.md
+      - Provenance Baseline: provenance-baseline.md
       - Control Matrix: control-matrix.md
   - Operations:
       - Merge Queue: MERGE-QUEUE.md

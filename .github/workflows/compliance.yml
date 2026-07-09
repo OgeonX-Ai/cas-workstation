@@ -18,6 +18,9 @@ on:
 
 permissions:
   contents: read
+  attestations: write
+  id-token: write
+  artifact-metadata: write
 
 jobs:
   verify:
@@ -25,6 +28,9 @@ jobs:
     timeout-minutes: 20
     permissions:
       contents: read
+      attestations: write
+      id-token: write
+      artifact-metadata: write
     env:
       GH_TOKEN: ${{ github.token }}
     steps:
@@ -47,9 +53,45 @@ jobs:
         run: python scripts/capture-sbom-evidence.py
 
       - name: Run compliance verifier
+        env:
+          SKIP_REMOTE_ATTESTATION_VERIFY: "1"
         run: python scripts/verify-portfolio-compliance.py
 
-      - uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
+      - name: Create compliance evidence bundle
+        run: |
+          tar -czf "compliance-evidence-${GITHUB_SHA}.tar.gz" evidence/compliance
+          sha256sum "compliance-evidence-${GITHUB_SHA}.tar.gz" | tee "evidence/compliance/snapshots/compliance-evidence-${GITHUB_SHA}.sha256"
+
+      - name: Attest compliance evidence bundle
+        id: attest
+        uses: actions/attest@f6bf1532d7d6793fce74eac584813a8eee607999 # v4
+        with:
+          subject-path: "compliance-evidence-${{ github.sha }}.tar.gz"
+
+      - name: Publish compliance evidence directory
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: compliance-evidence
           path: evidence/compliance/
+
+      - name: Publish compliance evidence bundle
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: compliance-evidence-bundle
+          path: compliance-evidence-${{ github.sha }}.tar.gz
+
+      - name: Publish compliance attestation bundle
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: compliance-attestation-bundle
+          path: ${{ steps.attest.outputs.bundle-path }}
+
+      - name: Write compliance attestation summary
+        run: |
+          {
+            echo "## Compliance Attestation"
+            echo
+            echo "- Artifact: \`compliance-evidence-${GITHUB_SHA}.tar.gz\`"
+            echo "- Attestation: ${{ steps.attest.outputs.attestation-url }}"
+            echo "- Bundle artifact: \`compliance-attestation-bundle\`"
+          } >> "$GITHUB_STEP_SUMMARY"
