@@ -1,0 +1,2 @@
+exercise_id,scope,exercise_type,exercise_date,severity,status,evidence_ref,postmortem_due,template_ref,notes
+CAS-IR-001,portfolio_control_system,tabletop,2026-07-09,SEV2,passed,evidence/compliance/snapshots/incident-management-2026-07-09.json,2026-07-14,portfolio/cloud-security-service-model/docs/21-templates/template-incident-report.md,"Validated escalation roles, evidence handling, and post-incident loop for root compliance evidence failures."

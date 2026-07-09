@@ -7,6 +7,19 @@ surfaces.
 
 Prepare -> Detect -> Triage -> Contain -> Eradicate -> Recover -> Learn
 
+```mermaid
+flowchart LR
+  A["Control or runtime signal"] --> B["Triage and severity assignment"]
+  B --> C{"SEV1 or SEV2?"}
+  C -->|Yes| D["Immediate containment and owner notification"]
+  C -->|No| E["Tracked remediation with named owner"]
+  D --> F["Evidence preservation"]
+  E --> F
+  F --> G["Recovery and verification"]
+  G --> H["Postmortem within 5 business days"]
+  H --> I["Corrective actions into risk and control ledgers"]
+```
+
 ## Severity model
 
 | Severity | Description | Example |
@@ -23,6 +36,13 @@ Prepare -> Detect -> Triage -> Contain -> Eradicate -> Recover -> Learn
 - **Evidence lead**: preserves logs, commits, workflow runs, and timelines
 - **Communications lead**: stakeholder updates and external messaging when needed
 - **Risk owner**: approves major containment or accepted residual risk
+
+## Source of truth
+
+- Portfolio baseline: `docs/incident-standard.md`
+- Triage runbook: `portfolio/cloud-security-service-model/docs/20-runbooks/rbk-001-incident-triage.md`
+- Incident report template: `portfolio/cloud-security-service-model/docs/21-templates/template-incident-report.md`
+- Evidence ledger: `evidence/compliance/incident-management.csv`
 
 ## Minimum evidence
 
@@ -41,6 +61,19 @@ Every incident record should capture:
 - SEV1/SEV2: immediate owner notification and same-day containment path
 - SEV3: tracked remediation with explicit owner and target date
 - SEV4: may route through standard backlog if no control weakness remains
+
+## Post-incident loop
+
+- Open an incident record the same day a material control or runtime failure is confirmed.
+- Preserve the supporting evidence reference before attempting cleanup or reruns.
+- Complete a postmortem within 5 business days for every SEV1 or SEV2 event and every control-integrity failure that blocks audit claims.
+- Route corrective actions into `docs/risk-register.md`, `evidence/compliance/exception-register.csv`, or the relevant control ledger.
+
+## Exercise cadence
+
+- Run at least one incident tabletop or live-response drill every quarter.
+- Keep the latest annual exercise trail in `evidence/compliance/incident-management.csv`.
+- Treat a missing or stale exercise record as a portfolio control gap.
 
 ## Portfolio rule
 

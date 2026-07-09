@@ -3,6 +3,7 @@ asset_inventory,evidence/compliance/asset-inventory.csv,Portfolio maintainer,kee
 risk_register,evidence/compliance/risk-register.csv,Portfolio maintainer,keep active register and previous quarter,365,active
 access_review,evidence/compliance/access-review-log.csv,Portfolio maintainer,keep current year and previous year,730,active
 recovery_drill,evidence/compliance/recovery-drills.csv,Portfolio maintainer,keep current year and previous year,730,active
+incident_management,evidence/compliance/incident-management.csv,Portfolio maintainer,keep current year and previous year of exercises and incident records,730,active
 supply_chain,evidence/compliance/supply-chain-controls.csv,Portfolio maintainer,keep current month and prior quarter snapshots,180,active
 release_evidence,evidence/compliance/release-evidence.csv,Portfolio maintainer,keep latest ledger and prior quarter snapshots,180,active
 sbom,evidence/compliance/sbom-evidence.csv,Portfolio maintainer,keep current generated set and prior quarter snapshots,180,active

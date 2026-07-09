@@ -1,0 +1,40 @@
+{
+  "captured_at": "2026-07-09T14:28:55.378462+00:00",
+  "exercise": {
+    "exercise_id": "CAS-IR-001",
+    "exercise_type": "tabletop",
+    "scenario": "Compliance evidence integrity failure on the root workstation release path",
+    "severity": "SEV2",
+    "scope": [
+      "OgeonX-Ai/cas-workstation",
+      "Coding-Autopilot-System/cas-contracts",
+      "Coding-Autopilot-System/gsd-orchestrator"
+    ],
+    "roles": {
+      "incident_commander": "Portfolio maintainer",
+      "technical_resolver": "Portfolio maintainer",
+      "evidence_lead": "Portfolio maintainer",
+      "communications_lead": "Portfolio maintainer",
+      "risk_owner": "Portfolio maintainer"
+    },
+    "timeline": {
+      "detect": "2026-07-09T13:55:00Z",
+      "triage": "2026-07-09T14:00:00Z",
+      "contain": "2026-07-09T14:10:00Z",
+      "recover": "2026-07-09T14:24:00Z"
+    },
+    "decision_log": [
+      "Treat missing or unverifiable attestation evidence as a control-system incident.",
+      "Block further audit claims until the workflow reproduces a green attested bundle.",
+      "Record limited-token branch-protection visibility explicitly instead of flattening it to unprotected."
+    ],
+    "evidence_sources": [
+      "docs/incident-standard.md",
+      "portfolio/cloud-security-service-model/docs/20-runbooks/rbk-001-incident-triage.md",
+      "portfolio/cloud-security-service-model/docs/21-templates/template-incident-report.md",
+      "https://github.com/OgeonX-Ai/cas-workstation/actions/runs/29025205984"
+    ],
+    "postmortem_due": "2026-07-14",
+    "status": "completed"
+  }
+}

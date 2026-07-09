@@ -11,6 +11,7 @@ on:
       - ".github/workflows/compliance.yml"
       - "scripts/capture-access-review.py"
       - "scripts/capture-change-management-evidence.py"
+      - "scripts/capture-incident-management-evidence.py"
       - "scripts/capture-supply-chain-state.py"
       - "scripts/capture-vulnerability-management-evidence.py"
       - "scripts/capture-release-evidence.py"
@@ -60,6 +61,9 @@ jobs:
 
       - name: Capture change-management snapshot
         run: python scripts/capture-change-management-evidence.py
+
+      - name: Capture incident-management snapshot
+        run: python scripts/capture-incident-management-evidence.py
 
       - name: Capture supply-chain snapshot
         run: python scripts/capture-supply-chain-state.py

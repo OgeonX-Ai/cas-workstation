@@ -32,6 +32,7 @@ REQUIRED_FILES = [
     EVIDENCE / "release-evidence.csv",
     EVIDENCE / "sbom-evidence.csv",
     EVIDENCE / "change-management.csv",
+    EVIDENCE / "incident-management.csv",
     EVIDENCE / "control-crosswalk.csv",
     EVIDENCE / "evidence-retention.csv",
     EVIDENCE / "vulnerability-management.csv",
@@ -215,6 +216,7 @@ def main() -> int:
     release_rows = csv_rows(EVIDENCE / "release-evidence.csv")
     sbom_rows = csv_rows(EVIDENCE / "sbom-evidence.csv")
     change_rows = csv_rows(EVIDENCE / "change-management.csv")
+    incident_rows = csv_rows(EVIDENCE / "incident-management.csv")
     crosswalk_rows = csv_rows(EVIDENCE / "control-crosswalk.csv")
     retention_rows = csv_rows(EVIDENCE / "evidence-retention.csv")
     vulnerability_rows = csv_rows(EVIDENCE / "vulnerability-management.csv")
@@ -226,6 +228,8 @@ def main() -> int:
         errors.append(f"Expected 15 release-evidence rows, found {len(release_rows)}")
     if len(change_rows) != 15:
         errors.append(f"Expected 15 change-management rows, found {len(change_rows)}")
+    if len(incident_rows) == 0:
+        errors.append("No incident-management evidence rows found")
     if len(vulnerability_rows) != 15:
         errors.append(f"Expected 15 vulnerability-management rows, found {len(vulnerability_rows)}")
     if len(sbom_rows) == 0:
@@ -341,6 +345,26 @@ def main() -> int:
     ]
     if len(fresh_change_rows) != 15:
         errors.append("Change-management evidence is missing a full fresh portfolio snapshot")
+
+    fresh_incident_rows = [
+        row for row in incident_rows
+        if row["exercise_date"] and row["status"] == "passed" and days_old(row["exercise_date"]) <= 365
+    ]
+    if not fresh_incident_rows:
+        errors.append("No passed incident-management exercise within the last 365 days")
+    missing_incident_evidence = [
+        row["evidence_ref"] for row in incident_rows
+        if row["evidence_ref"].startswith("evidence/")
+        and not (ROOT / row["evidence_ref"]).exists()
+    ]
+    if missing_incident_evidence:
+        errors.append(f"Missing incident-management evidence reference(s): {', '.join(missing_incident_evidence)}")
+    missing_incident_templates = [
+        row["template_ref"] for row in incident_rows
+        if row["template_ref"] and not (ROOT / row["template_ref"]).exists()
+    ]
+    if missing_incident_templates:
+        errors.append(f"Missing incident-management template reference(s): {', '.join(missing_incident_templates)}")
 
     fresh_vulnerability_rows = [
         row for row in vulnerability_rows

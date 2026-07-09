@@ -10,7 +10,7 @@ evidence than about a decorative spreadsheet.
 |---|---|---|---|
 | Asset inventory | ISO 27001, NIS2, CSF Identify | [Asset Inventory](asset-inventory.md) | Partial |
 | Risk management | ISO 27001, DORA, NIS2, CSF Govern | [Risk Register](risk-register.md), `cloud-security-service-model/docs/09-risk-management.md` | Partial |
-| Incident response | ISO 27001, DORA, NIS2, CSF Respond | [Incident Standard](incident-standard.md), `cloud-security-service-model/docs/11-incident-response.md` | Partial |
+| Incident response | ISO 27001, DORA, NIS2, CSF Respond | [Incident Standard](incident-standard.md), `evidence/compliance/incident-management.csv`, `cloud-security-service-model/docs/11-incident-response.md` | Partial |
 | Audit evidence handling | ISO 27001, DORA | `cloud-security-service-model/docs/10-audit-readiness.md` | Partial |
 | BCDR and resilience | DORA, NIS2, ISO 27001, CSF Recover | [BCDR Baseline](bcdr-baseline.md), `evidence/compliance/recovery-drills.csv` | Partial |
 | Supply-chain security | SSDF, SLSA, ISO 27001, CRA | [Supply-Chain Baseline](supply-chain-baseline.md), [SBOM Baseline](sbom-baseline.md), `evidence/compliance/supply-chain-controls.csv`, `evidence/compliance/sbom-evidence.csv` | Partial |

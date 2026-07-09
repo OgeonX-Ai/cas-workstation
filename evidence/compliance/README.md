@@ -19,6 +19,7 @@ The goal is not to create static paperwork. Each file here should either:
 - `release-evidence.csv` - release-readiness and lockfile evidence baseline
 - `sbom-evidence.csv` - generated SBOM evidence summary across supported ecosystems
 - `change-management.csv` - default-branch governance and protection evidence
+- `incident-management.csv` - incident tabletop and post-incident evidence ledger
 - `control-crosswalk.csv` - machine-readable control-to-evidence mapping
 - `evidence-retention.csv` - retention rules for core audit artifacts
 - `vulnerability-management.csv` - disclosure-policy and scanning baseline evidence
