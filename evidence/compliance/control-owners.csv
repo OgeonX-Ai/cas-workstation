@@ -4,7 +4,7 @@ risk_management,Portfolio maintainer,evidence/compliance/risk-register.csv,month
 incident_management,Portfolio maintainer,evidence/compliance/incident-management.csv,quarterly,partial
 bcdr,Portfolio maintainer,evidence/compliance/bcdr-objectives.csv,quarterly,partial
 supply_chain,Portfolio maintainer,evidence/compliance/supplier-review-log.csv,monthly,partial
-access_review,Portfolio maintainer,evidence/compliance/access-review-log.csv,quarterly,partial
+access_review,Portfolio maintainer,evidence/compliance/access-governance.csv,quarterly,partial
 exception_management,Portfolio maintainer,evidence/compliance/exception-register.csv,monthly,active
 change_management,Portfolio maintainer,evidence/compliance/change-management.csv,monthly,partial
 evidence_retention,Portfolio maintainer,evidence/compliance/evidence-retention.csv,annual,partial

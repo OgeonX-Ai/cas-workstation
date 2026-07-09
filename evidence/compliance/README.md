@@ -28,6 +28,7 @@ The goal is not to create static paperwork. Each file here should either:
 - `recovery-drills.csv` - continuity and restore exercise evidence
 - `bcdr-objectives.csv` - continuity objectives derived from recovery tiers
 - `access-review-log.csv` - access review evidence ledger
+- `access-governance.csv` - per-repository access owner and privileged-path baseline
 - `exception-register.csv` - approved exceptions and expiries
 - `snapshots/*.json` - timestamped GitHub and repo-state captures used to support the CSV ledgers
 

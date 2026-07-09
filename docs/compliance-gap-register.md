@@ -16,7 +16,7 @@ CSF, NIST SSDF, and SLSA-style scrutiny.
 | Incident management baseline | DORA, NIS2, ISO 27001 | Portfolio baseline and tabletop evidence now exist, but live incident history is still thin | Severity matrix, escalation path, evidence template, post-incident loop, repeated exercises |
 | Supplier and dependency governance | ISO 27001, DORA, NIS2, SLSA | Baseline and supplier review ledger now exist, but cadence history and exception usage remain partial | Dependency review policy, supplier register, exception records |
 | SBOM and provenance publication | SLSA, SSDF, DORA | Some release policy language exists, no portfolio-wide enforcement evidence | Artifact SBOMs, provenance/signing outputs, verifier workflow results |
-| Access review and privileged control evidence | ISO 27001, DORA, NIS2 | Governance intent exists, no portfolio evidence pack | Access owner list, review cadence, privileged-path audit evidence |
+| Access review and privileged control evidence | ISO 27001, DORA, NIS2 | Governance ledger and review evidence now exist, but identity-platform export and multi-owner approval evidence remain partial | Access owner list, review cadence, privileged-path audit evidence |
 | Change management evidence | ISO 27001, DORA | Baseline and evidence capture now exist, but fleet-wide approval enforcement is still uneven | Change classes, approval model, emergency path, rollback evidence |
 
 ## Medium priority gaps

@@ -35,6 +35,7 @@ nav:
       - Change Management Baseline: change-management-baseline.md
       - Evidence Retention Baseline: evidence-retention-baseline.md
       - Vulnerability Management Baseline: vulnerability-management-baseline.md
+      - Access Review Baseline: access-review-baseline.md
       - Control Matrix: control-matrix.md
       - Control Crosswalk: control-crosswalk.md
   - Operations:

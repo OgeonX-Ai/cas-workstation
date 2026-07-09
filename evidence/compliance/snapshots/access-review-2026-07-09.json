@@ -1,95 +1,170 @@
 {
-  "captured_at": "2026-07-09T09:36:18.136803+00:00",
+  "captured_at": "2026-07-09T14:43:46.859698+00:00",
   "repositories": [
     {
       "repository": "OgeonX-Ai/cas-workstation",
       "wiki_enabled": true,
       "default_branch": "master",
-      "url": "https://github.com/OgeonX-Ai/cas-workstation"
+      "url": "https://github.com/OgeonX-Ai/cas-workstation",
+      "owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer",
+      "privileged_path": "GitHub admin and workflow settings",
+      "review_cadence": "quarterly",
+      "break_glass_path": "Escalate through portfolio maintainer and record incident in control system"
     },
     {
       "repository": "Coding-Autopilot-System/gemini-nano",
       "wiki_enabled": true,
       "default_branch": "master",
-      "url": "https://github.com/Coding-Autopilot-System/gemini-nano"
+      "url": "https://github.com/Coding-Autopilot-System/gemini-nano",
+      "owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer",
+      "privileged_path": "GitHub admin and Pages deployment settings",
+      "review_cadence": "quarterly",
+      "break_glass_path": "Escalate through portfolio maintainer and record incident in control system"
     },
     {
       "repository": "Coding-Autopilot-System/Promptimprover",
       "wiki_enabled": true,
       "default_branch": "master",
-      "url": "https://github.com/Coding-Autopilot-System/Promptimprover"
+      "url": "https://github.com/Coding-Autopilot-System/Promptimprover",
+      "owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer",
+      "privileged_path": "GitHub admin workflow and release settings",
+      "review_cadence": "quarterly",
+      "break_glass_path": "Escalate through portfolio maintainer and record incident in control system"
     },
     {
       "repository": "Coding-Autopilot-System/autogen",
       "wiki_enabled": true,
       "default_branch": "main",
-      "url": "https://github.com/Coding-Autopilot-System/autogen"
+      "url": "https://github.com/Coding-Autopilot-System/autogen",
+      "owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer",
+      "privileged_path": "GitHub admin workflow and release settings",
+      "review_cadence": "quarterly",
+      "break_glass_path": "Escalate through portfolio maintainer and record incident in control system"
     },
     {
       "repository": "Coding-Autopilot-System/autopilot-core",
       "wiki_enabled": true,
       "default_branch": "main",
-      "url": "https://github.com/Coding-Autopilot-System/autopilot-core"
+      "url": "https://github.com/Coding-Autopilot-System/autopilot-core",
+      "owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer",
+      "privileged_path": "GitHub admin workflow and release settings",
+      "review_cadence": "quarterly",
+      "break_glass_path": "Escalate through portfolio maintainer and record incident in control system"
     },
     {
       "repository": "Coding-Autopilot-System/autopilot-demo",
       "wiki_enabled": true,
       "default_branch": "main",
-      "url": "https://github.com/Coding-Autopilot-System/autopilot-demo"
+      "url": "https://github.com/Coding-Autopilot-System/autopilot-demo",
+      "owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer",
+      "privileged_path": "GitHub admin and Pages deployment settings",
+      "review_cadence": "quarterly",
+      "break_glass_path": "Escalate through portfolio maintainer and record incident in control system"
     },
     {
       "repository": "Coding-Autopilot-System/cas-contracts",
       "wiki_enabled": true,
       "default_branch": "main",
-      "url": "https://github.com/Coding-Autopilot-System/cas-contracts"
+      "url": "https://github.com/Coding-Autopilot-System/cas-contracts",
+      "owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer",
+      "privileged_path": "GitHub admin branch and workflow settings",
+      "review_cadence": "quarterly",
+      "break_glass_path": "Escalate through portfolio maintainer and record incident in control system"
     },
     {
       "repository": "Coding-Autopilot-System/cas-evals",
       "wiki_enabled": true,
       "default_branch": "main",
-      "url": "https://github.com/Coding-Autopilot-System/cas-evals"
+      "url": "https://github.com/Coding-Autopilot-System/cas-evals",
+      "owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer",
+      "privileged_path": "GitHub admin branch and workflow settings",
+      "review_cadence": "quarterly",
+      "break_glass_path": "Escalate through portfolio maintainer and record incident in control system"
     },
     {
       "repository": "Coding-Autopilot-System/cas-platform",
       "wiki_enabled": true,
       "default_branch": "main",
-      "url": "https://github.com/Coding-Autopilot-System/cas-platform"
+      "url": "https://github.com/Coding-Autopilot-System/cas-platform",
+      "owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer",
+      "privileged_path": "GitHub admin branch and workflow settings",
+      "review_cadence": "quarterly",
+      "break_glass_path": "Escalate through portfolio maintainer and record incident in control system"
     },
     {
       "repository": "Coding-Autopilot-System/cas-reference-product",
       "wiki_enabled": true,
       "default_branch": "main",
-      "url": "https://github.com/Coding-Autopilot-System/cas-reference-product"
+      "url": "https://github.com/Coding-Autopilot-System/cas-reference-product",
+      "owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer",
+      "privileged_path": "GitHub admin branch and workflow settings",
+      "review_cadence": "quarterly",
+      "break_glass_path": "Escalate through portfolio maintainer and record incident in control system"
     },
     {
       "repository": "Coding-Autopilot-System/cas-workstation",
       "wiki_enabled": true,
       "default_branch": "main",
-      "url": "https://github.com/Coding-Autopilot-System/cas-workstation"
+      "url": "https://github.com/Coding-Autopilot-System/cas-workstation",
+      "owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer",
+      "privileged_path": "GitHub admin and workflow settings",
+      "review_cadence": "quarterly",
+      "break_glass_path": "Escalate through portfolio maintainer and record incident in control system"
     },
     {
       "repository": "Coding-Autopilot-System/ci-autopilot",
       "wiki_enabled": true,
       "default_branch": "main",
-      "url": "https://github.com/Coding-Autopilot-System/ci-autopilot"
+      "url": "https://github.com/Coding-Autopilot-System/ci-autopilot",
+      "owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer",
+      "privileged_path": "GitHub admin branch and runner workflow settings",
+      "review_cadence": "quarterly",
+      "break_glass_path": "Escalate through portfolio maintainer and record incident in control system"
     },
     {
       "repository": "Coding-Autopilot-System/cloud-security-service-model",
       "wiki_enabled": true,
       "default_branch": "main",
-      "url": "https://github.com/Coding-Autopilot-System/cloud-security-service-model"
+      "url": "https://github.com/Coding-Autopilot-System/cloud-security-service-model",
+      "owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer",
+      "privileged_path": "GitHub admin branch and documentation settings",
+      "review_cadence": "quarterly",
+      "break_glass_path": "Escalate through portfolio maintainer and record incident in control system"
     },
     {
       "repository": "Coding-Autopilot-System/gsd-orchestrator",
       "wiki_enabled": true,
       "default_branch": "main",
-      "url": "https://github.com/Coding-Autopilot-System/gsd-orchestrator"
+      "url": "https://github.com/Coding-Autopilot-System/gsd-orchestrator",
+      "owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer",
+      "privileged_path": "GitHub admin branch and workflow settings",
+      "review_cadence": "quarterly",
+      "break_glass_path": "Escalate through portfolio maintainer and record incident in control system"
     },
     {
       "repository": "Coding-Autopilot-System/.github",
       "wiki_enabled": true,
       "default_branch": "main",
-      "url": "https://github.com/Coding-Autopilot-System/.github"
+      "url": "https://github.com/Coding-Autopilot-System/.github",
+      "owner": "Portfolio maintainer",
+      "delegate_owner": "Portfolio maintainer",
+      "privileged_path": "Organization policy and shared documentation settings",
+      "review_cadence": "quarterly",
+      "break_glass_path": "Escalate through portfolio maintainer and record incident in control system"
     }
   ]
 }

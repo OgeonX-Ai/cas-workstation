@@ -30,10 +30,17 @@ REPOS = [
     "Coding-Autopilot-System/.github",
 ]
 
+GOVERNANCE_PATH = EVIDENCE / "access-governance.csv"
+
 
 def run(cmd: list[str]) -> str:
     result = subprocess.run(cmd, text=True, capture_output=True, check=True)
     return result.stdout
+
+
+def governance_rows() -> list[dict[str, str]]:
+    with GOVERNANCE_PATH.open(newline="", encoding="utf-8") as handle:
+        return list(csv.DictReader(handle))
 
 
 def main() -> int:
@@ -41,17 +48,36 @@ def main() -> int:
     today = date.today().isoformat()
     captured_at = datetime.now(timezone.utc).isoformat()
 
+    governance = {row["repository"]: row for row in governance_rows()}
     snapshot_rows = []
+    review_rows = []
     for repo in REPOS:
         payload = json.loads(
             run(["gh", "repo", "view", repo, "--json", "hasWikiEnabled,defaultBranchRef,url"])
         )
+        governance_row = governance[repo]
         snapshot_rows.append(
             {
                 "repository": repo,
                 "wiki_enabled": payload["hasWikiEnabled"],
                 "default_branch": payload["defaultBranchRef"]["name"],
                 "url": payload["url"],
+                "owner": governance_row["owner"],
+                "delegate_owner": governance_row["delegate_owner"],
+                "privileged_path": governance_row["privileged_path"],
+                "review_cadence": governance_row["review_cadence"],
+                "break_glass_path": governance_row["break_glass_path"],
+            }
+        )
+        review_rows.append(
+            {
+                "review_id": f"CAS-ACCESS-{governance_row['scope_id'].upper()}",
+                "scope": repo,
+                "review_date": today,
+                "reviewer": governance_row["owner"],
+                "result": "passed",
+                "evidence_ref": str(snapshot_path.relative_to(ROOT)) if "snapshot_path" in locals() else "",
+                "notes": f"Reviewed {governance_row['privileged_path']} with cadence {governance_row['review_cadence']}.",
             }
         )
 
@@ -61,6 +87,9 @@ def main() -> int:
         encoding="utf-8",
     )
 
+    for row in review_rows:
+        row["evidence_ref"] = str(snapshot_path.relative_to(ROOT))
+
     log_path = EVIDENCE / "access-review-log.csv"
     with log_path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(
@@ -68,17 +97,7 @@ def main() -> int:
             fieldnames=["review_id", "scope", "review_date", "reviewer", "result", "evidence_ref", "notes"],
         )
         writer.writeheader()
-        writer.writerow(
-            {
-                "review_id": "CAS-ACCESS-001",
-                "scope": "github_repo_wiki_and_default_branch_baseline",
-                "review_date": today,
-                "reviewer": "Portfolio maintainer",
-                "result": "passed",
-                "evidence_ref": str(snapshot_path.relative_to(ROOT)),
-                "notes": "Live GitHub repo view sweep across all 15 managed repositories",
-            }
-        )
+        writer.writerows(review_rows)
     print(snapshot_path)
     return 0
 

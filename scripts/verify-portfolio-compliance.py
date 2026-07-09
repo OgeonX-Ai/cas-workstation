@@ -39,6 +39,7 @@ REQUIRED_FILES = [
     EVIDENCE / "evidence-retention.csv",
     EVIDENCE / "vulnerability-management.csv",
     EVIDENCE / "recovery-drills.csv",
+    EVIDENCE / "access-governance.csv",
     EVIDENCE / "access-review-log.csv",
     EVIDENCE / "exception-register.csv",
 ]
@@ -348,14 +349,25 @@ def main() -> int:
         errors.append("At least one BCDR objective row is missing RTO, RPO, or recovery owner")
 
     access_rows = csv_rows(EVIDENCE / "access-review-log.csv")
+    access_governance_rows = csv_rows(EVIDENCE / "access-governance.csv")
+    if len(access_governance_rows) != 15:
+        errors.append(f"Expected 15 access-governance rows, found {len(access_governance_rows)}")
+    if any(
+        not row.get("owner")
+        or not row.get("delegate_owner")
+        or not row.get("privileged_path")
+        or row.get("review_cadence") != "quarterly"
+        for row in access_governance_rows
+    ):
+        errors.append("At least one access-governance row is missing owner, delegate owner, privileged path, or quarterly cadence")
     if any(row["result"] == "missing" for row in access_rows):
         warnings.append("Access review evidence is still missing")
     fresh_access = [
         row for row in access_rows
         if row["review_date"] and row["result"] == "passed" and days_old(row["review_date"]) <= 90
     ]
-    if not fresh_access:
-        errors.append("No passed access review within the last 90 days")
+    if len(fresh_access) != 15:
+        errors.append("Access review evidence is missing a full fresh portfolio review cycle")
 
     fresh_change_rows = [
         row for row in change_rows
