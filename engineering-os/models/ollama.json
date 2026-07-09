@@ -1,0 +1,12 @@
+{
+  "tool": "ollama",
+  "auth": "local",
+  "enabled": true,
+  "aliases": {
+    "light": { "model": "llama3.2:latest" },
+    "research": { "model": "llama3.2:latest" },
+    "standard": { "model": "llama3.2:latest" }
+  },
+  "perSubagentOverride": true,
+  "notes": "Local execution. Used primarily for massive read-heavy tasks to prevent API token bloat."
+}

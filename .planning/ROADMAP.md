@@ -53,5 +53,11 @@
   Bring every repo's GitHub documentation up to the code's current reality and keep it there: READMEs (features, setup, usage, badges incl. new CI/coverage gates), CONTRIBUTING, architecture docs, org profile (org-dotgithub), and the root workstation README/docs. Verified-against-code via gsd-doc-writer + gsd-doc-verifier agents (no unverifiable claims — the b4e0868 lesson applied to prose). Deliverable includes a docs-freshness convention: each README carries a "verified against commit <sha>" footer, checked by the Phase 34 sweep as a staleness heuristic.
 - **Phase 37: Marketing & Adoption Engine** *(depends on: 35, 36 — marketing claims must reference the audited milestone; added 2026-07-08 by operator request)*
   Marketing-as-code: a showcase site (mkdocs-material on Pages) whose Feature Cards and per-phase Story Pages are auto-generated from `.planning/` plans/summaries/verification evidence — every claim links to its commit/PR/test. Includes LinkedIn post drafts per phase (the governance-with-speed narrative), demo-asset placeholders, codex:generate-image placeholders, and a clean-machine quickstart as the adoption CTA. Strategy locked in `.planning/phases/37-marketing-and-adoption/37-CONTEXT.md`.
+## Future Milestones (seeded 2026-07-08 — see [milestones/vNEXT-SEEDS.md](milestones/vNEXT-SEEDS.md))
+
+- **v1.5 Delivery Flow & Release Engineering** — Phases 38–42: merge-queue flow + real two-party auto-merge policy, per-repo SemVer releases with generated notes, weekly pilot/fault-injection cadence, institutionalized learning loop, audit. *Kick off via `/gsd:new-milestone` after v1.4 archives.*
+- **v1.6 Trust Depth & Self-Measurement** — Phases 43–47: signed commits/SLSA-lite/SBOM, secret-scanning + token rotation, DORA + token-economics dashboard from traces.jsonl, mutation + property-based testing, audit.
+- **v1.7 Product & Scale** — Phases 48–51: clean-machine bootstrap product, marketing live (37 + M2/M3), disaster-restore drill, cloud readiness (**gated on operator lifting the NO-AZURE deploy lock**).
+
 - **Phase 35: v1.4 Verification & Milestone Audit** *(depends on: 26-34, 36)*
   End-to-end verification of both tracks: coverage gates green, typed failure states fault-injected, all repos on `main` with pinned/permissioned workflows, registry resolvable, workspace-health sweep green. Run `/gsd:audit-milestone` and archive.

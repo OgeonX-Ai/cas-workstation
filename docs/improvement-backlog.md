@@ -95,6 +95,22 @@ workspace state, not code quality — several rank above everything in Tier 1.
 | M2 | Record real demo assets (autopilot-demo run GIF, terminal recording of a full goal loop) to replace placeholders | 37 follow-up |
 | M3 | Replace codex:generate-image placeholders across VISION/wikis/marketing with generated visuals (Codex image pipeline) | in progress - started 2026-07-08 with `docs/wiki/Agent-Hierarchy.md` and `docs/VISION.md` |
 
+## Elite-enterprise gap analysis (2026-07-08 → milestones v1.5–v1.7, see .planning/milestones/vNEXT-SEEDS.md)
+
+| # | Gap | Milestone |
+|---|---|---|
+| E1 | Merge flow: human-merge bottleneck (40-PR queue); need merge queue + safe auto-merge + real second reviewer | v1.5/38 |
+| E2 | No per-repo releases/changelogs/SemVer discipline | v1.5/39 |
+| E3 | Pilots + fault injections not on a schedule (regression risk) | v1.5/40 |
+| E4 | Learnings extraction not institutionalized per phase | v1.5/41 |
+| E5 | No commit/tag signing, provenance, or SBOMs | v1.6/43 |
+| E6 | Secret-scanning gates unverified; token inventory/rotation undefined | v1.6/44 |
+| E7 | No self-measurement: DORA metrics, token spend, health trends | v1.6/45 |
+| E8 | Test quality unmeasured (mutation testing, property-based contract tests) | v1.6/46 |
+| E9 | Clean-machine bootstrap unproven; community files incomplete | v1.7/48 |
+| E10 | No disaster-restore drill / documented RTO | v1.7/50 |
+| E11 | REQUIREMENTS.md format blocks `requirements.mark-complete` tooling (hit by 3 agents) | v1.5/38 (quick fix eligible) |
+
 ### Suggested sequencing
 
 1. **Today**: W1 (commit tests in their own repos), W2 (commit + push root, incl. GLOBAL_AGENTS.md).
