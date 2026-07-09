@@ -47,9 +47,9 @@ def main() -> int:
             escalation_status = "not-due"
 
         escalation_evidence_ref = ""
-        notes = "Generated from risk register due dates and statuses"
+        notes = "Derived from risk register due dates and statuses; not independent acceptance evidence"
         if is_overdue:
-            notes = "Risk is overdue and requires explicit escalation evidence or exception approval"
+            notes = "Derived from risk register state; risk is overdue and requires explicit escalation evidence or exception approval"
 
         row = {
             "risk_id": risk["risk_id"],

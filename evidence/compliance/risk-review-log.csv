@@ -1,7 +1,7 @@
 risk_id,review_date,residual_decision,acceptance_status,acceptance_owner,acceptance_evidence_ref,escalation_status,escalation_evidence_ref,notes
-CAS-R001,2026-07-09,mitigate,mitigation-in-flight,,,not-due,,Generated from risk register due dates and statuses
-CAS-R002,2026-07-09,mitigate,mitigation-in-flight,,,not-due,,Generated from risk register due dates and statuses
-CAS-R003,2026-07-09,mitigate,mitigation-in-flight,,,not-due,,Generated from risk register due dates and statuses
-CAS-R004,2026-07-09,mitigate,mitigation-in-flight,,,not-due,,Generated from risk register due dates and statuses
-CAS-R005,2026-07-09,mitigate,mitigation-in-flight,,,not-due,,Generated from risk register due dates and statuses
-CAS-R006,2026-07-09,mitigate,mitigation-in-flight,,,not-due,,Generated from risk register due dates and statuses
+CAS-R001,2026-07-09,mitigate,mitigation-in-flight,,,not-due,,Derived from risk register due dates and statuses; not independent acceptance evidence
+CAS-R002,2026-07-09,mitigate,mitigation-in-flight,,,not-due,,Derived from risk register due dates and statuses; not independent acceptance evidence
+CAS-R003,2026-07-09,mitigate,mitigation-in-flight,,,not-due,,Derived from risk register due dates and statuses; not independent acceptance evidence
+CAS-R004,2026-07-09,mitigate,mitigation-in-flight,,,not-due,,Derived from risk register due dates and statuses; not independent acceptance evidence
+CAS-R005,2026-07-09,mitigate,mitigation-in-flight,,,not-due,,Derived from risk register due dates and statuses; not independent acceptance evidence
+CAS-R006,2026-07-09,mitigate,mitigation-in-flight,,,not-due,,Derived from risk register due dates and statuses; not independent acceptance evidence

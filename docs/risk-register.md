@@ -44,7 +44,7 @@ A risk is not closed by writing documentation alone. It closes only when:
 
 ## Current limitations
 
-- Residual risk is now tracked explicitly, and a review ledger now records
-  acceptance state and overdue-escalation state for every risk, but there is
-  still no second-owner acceptance trail.
+- Residual risk is now tracked explicitly, and a derived review ledger now
+  records acceptance state and overdue-escalation state for every risk, but it
+  is still not an independent second-owner acceptance trail.
 - The register still reflects portfolio-maintainer ownership concentration rather than a broader operating model.

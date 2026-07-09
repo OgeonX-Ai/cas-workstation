@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-07-09T19:32:42.709559+00:00",
+  "captured_at": "2026-07-09T19:38:03.937072+00:00",
   "reviews": [
     {
       "risk_id": "CAS-R001",
@@ -10,7 +10,7 @@
       "acceptance_evidence_ref": "",
       "escalation_status": "not-due",
       "escalation_evidence_ref": "",
-      "notes": "Generated from risk register due dates and statuses"
+      "notes": "Derived from risk register due dates and statuses; not independent acceptance evidence"
     },
     {
       "risk_id": "CAS-R002",
@@ -21,7 +21,7 @@
       "acceptance_evidence_ref": "",
       "escalation_status": "not-due",
       "escalation_evidence_ref": "",
-      "notes": "Generated from risk register due dates and statuses"
+      "notes": "Derived from risk register due dates and statuses; not independent acceptance evidence"
     },
     {
       "risk_id": "CAS-R003",
@@ -32,7 +32,7 @@
       "acceptance_evidence_ref": "",
       "escalation_status": "not-due",
       "escalation_evidence_ref": "",
-      "notes": "Generated from risk register due dates and statuses"
+      "notes": "Derived from risk register due dates and statuses; not independent acceptance evidence"
     },
     {
       "risk_id": "CAS-R004",
@@ -43,7 +43,7 @@
       "acceptance_evidence_ref": "",
       "escalation_status": "not-due",
       "escalation_evidence_ref": "",
-      "notes": "Generated from risk register due dates and statuses"
+      "notes": "Derived from risk register due dates and statuses; not independent acceptance evidence"
     },
     {
       "risk_id": "CAS-R005",
@@ -54,7 +54,7 @@
       "acceptance_evidence_ref": "",
       "escalation_status": "not-due",
       "escalation_evidence_ref": "",
-      "notes": "Generated from risk register due dates and statuses"
+      "notes": "Derived from risk register due dates and statuses; not independent acceptance evidence"
     },
     {
       "risk_id": "CAS-R006",
@@ -65,7 +65,7 @@
       "acceptance_evidence_ref": "",
       "escalation_status": "not-due",
       "escalation_evidence_ref": "",
-      "notes": "Generated from risk register due dates and statuses"
+      "notes": "Derived from risk register due dates and statuses; not independent acceptance evidence"
     }
   ]
 }

@@ -483,6 +483,12 @@ def main() -> int:
     missing_review_rows = [row["risk_id"] for row in risk_rows if row["risk_id"] not in review_rows_by_risk]
     if missing_review_rows:
         errors.append(f"Missing risk-review evidence for: {', '.join(missing_review_rows)}")
+    stale_risk_review_logs = [
+        row["risk_id"] for row in risk_review_rows
+        if row.get("review_date") and days_old(row["review_date"]) > 120
+    ]
+    if stale_risk_review_logs:
+        errors.append(f"Risk-review ledger is stale for: {', '.join(stale_risk_review_logs)}")
     allowed_acceptance = {"mitigation-in-flight", "accepted"}
     allowed_escalation = {"not-due", "closed", "escalated", "accepted-exception", "overdue-needs-escalation"}
     bad_acceptance = [
@@ -497,6 +503,22 @@ def main() -> int:
     ]
     if bad_escalation:
         errors.append(f"Risk review has invalid escalation status for: {', '.join(bad_escalation)}")
+    invalid_escalation_refs = []
+    for row in risk_review_rows:
+        ref = row.get("escalation_evidence_ref", "").strip()
+        if not ref:
+            continue
+        if ref.startswith("evidence/") and not (ROOT / ref).exists():
+            invalid_escalation_refs.append(row["risk_id"])
+            continue
+        if ref.startswith("https://github.com/"):
+            continue
+        invalid_escalation_refs.append(row["risk_id"])
+    if invalid_escalation_refs:
+        errors.append(
+            "Risk review has invalid escalation evidence reference for: "
+            + ", ".join(invalid_escalation_refs)
+        )
     overdue_without_evidence = []
     for row in risk_rows:
         if row.get("status", "").lower() == "closed":
