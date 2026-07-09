@@ -1,0 +1,2 @@
+exception_id,scope,reason,owner,expiry,status,evidence_ref
+CAS-EX-001,cas-reference-product governance remote merge,Protected branch required independent approving review and could not be self-approved,Portfolio maintainer,2026-07-09,closed,https://github.com/Coding-Autopilot-System/cas-reference-product/pull/14

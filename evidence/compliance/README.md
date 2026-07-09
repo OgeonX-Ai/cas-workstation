@@ -1,0 +1,26 @@
+# Compliance Evidence
+
+This directory holds portfolio-level evidence artifacts that support the control
+baseline documented under `docs/`.
+
+The goal is not to create static paperwork. Each file here should either:
+
+- record real current-state evidence,
+- define the expected schema for future evidence,
+- or be directly checked by a verifier.
+
+## Files
+
+- `asset-inventory.csv` - authoritative repo inventory with ownership and classification
+- `control-owners.csv` - named control owners and evidence responsibilities
+- `risk-register.csv` - machine-readable version of the top portfolio risks
+- `supplier-register.csv` - external suppliers and dependency surfaces
+- `supply-chain-controls.csv` - repo-by-repo Dependabot, CodeQL, and workflow pinning baseline
+- `recovery-drills.csv` - continuity and restore exercise evidence
+- `access-review-log.csv` - access review evidence ledger
+- `exception-register.csv` - approved exceptions and expiries
+
+## Operating rule
+
+Missing, stale, or malformed evidence should be treated as a control gap. The
+verifier should fail loudly instead of silently accepting partial assurance.

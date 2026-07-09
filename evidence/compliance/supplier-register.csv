@@ -1,0 +1,5 @@
+supplier,service,dependency_scope,criticality,owner,review_status
+GitHub,Source control Actions Pages Wikis,Portfolio-wide,Critical,Portfolio maintainer,active
+Microsoft,PowerShell .NET Azure CLI and Windows runtime,Portfolio-wide,High,Portfolio maintainer,active
+OpenAI,Codex and related AI tooling,Portfolio-wide,High,Portfolio maintainer,active
+Google,Chrome and Gemini Nano browser-adjacent experimentation,Research and local AI surfaces,Medium,Portfolio maintainer,active

@@ -1,0 +1,8 @@
+control_family,owner,evidence_location,review_cadence,status
+asset_inventory,Portfolio maintainer,evidence/compliance/asset-inventory.csv,monthly,active
+risk_management,Portfolio maintainer,evidence/compliance/risk-register.csv,monthly,active
+incident_management,Portfolio maintainer,docs/incident-standard.md,quarterly,partial
+bcdr,Portfolio maintainer,evidence/compliance/recovery-drills.csv,quarterly,gap
+supply_chain,Portfolio maintainer,evidence/compliance/supplier-register.csv,monthly,partial
+access_review,Portfolio maintainer,evidence/compliance/access-review-log.csv,quarterly,gap
+exception_management,Portfolio maintainer,evidence/compliance/exception-register.csv,monthly,active

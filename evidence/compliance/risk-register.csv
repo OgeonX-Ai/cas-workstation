@@ -1,0 +1,7 @@
+risk_id,title,likelihood,impact,score,owner,treatment,status
+CAS-R001,Portfolio claims exceed actual control evidence,4,5,20,Portfolio maintainer,Mitigate,open
+CAS-R002,No unified asset inventory or classification,4,4,16,Portfolio maintainer,Mitigate,open
+CAS-R003,No portfolio-wide BCDR baseline with tested evidence,4,5,20,Portfolio maintainer,Mitigate,open
+CAS-R004,Inconsistent supply-chain evidence across repos,4,4,16,Portfolio maintainer,Mitigate,open
+CAS-R005,Incident handling remains repo-specific instead of portfolio-wide,3,5,15,Portfolio maintainer,Mitigate,open
+CAS-R006,Protected repos can lag governance updates without independent reviewer availability,3,3,9,Portfolio maintainer,Mitigate,open

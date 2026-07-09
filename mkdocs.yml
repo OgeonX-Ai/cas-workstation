@@ -28,6 +28,7 @@ nav:
       - Risk Register: risk-register.md
       - Incident Standard: incident-standard.md
       - BCDR Baseline: bcdr-baseline.md
+      - Supply-Chain Baseline: supply-chain-baseline.md
       - Control Matrix: control-matrix.md
   - Operations:
       - Merge Queue: MERGE-QUEUE.md
