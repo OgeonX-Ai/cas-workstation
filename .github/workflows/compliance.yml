@@ -40,6 +40,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Hydrate portfolio source tree
+        run: python scripts/hydrate-portfolio-repos.py
+
       - name: Capture access review snapshot
         run: python scripts/capture-access-review.py
 
