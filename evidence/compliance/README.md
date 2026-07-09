@@ -17,6 +17,7 @@ The goal is not to create static paperwork. Each file here should either:
 - `supplier-register.csv` - external suppliers and dependency surfaces
 - `supply-chain-controls.csv` - repo-by-repo Dependabot, CodeQL, and workflow pinning baseline
 - `release-evidence.csv` - release-readiness and lockfile evidence baseline
+- `sbom-evidence.csv` - generated SBOM evidence summary across supported ecosystems
 - `recovery-drills.csv` - continuity and restore exercise evidence
 - `access-review-log.csv` - access review evidence ledger
 - `exception-register.csv` - approved exceptions and expiries

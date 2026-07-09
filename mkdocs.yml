@@ -30,6 +30,7 @@ nav:
       - BCDR Baseline: bcdr-baseline.md
       - Supply-Chain Baseline: supply-chain-baseline.md
       - Release Evidence Baseline: release-evidence-baseline.md
+      - SBOM Baseline: sbom-baseline.md
       - Control Matrix: control-matrix.md
   - Operations:
       - Merge Queue: MERGE-QUEUE.md

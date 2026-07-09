@@ -43,6 +43,9 @@ jobs:
       - name: Capture release evidence snapshot
         run: python scripts/capture-release-evidence.py
 
+      - name: Capture SBOM evidence snapshot
+        run: python scripts/capture-sbom-evidence.py
+
       - name: Run compliance verifier
         run: python scripts/verify-portfolio-compliance.py
 

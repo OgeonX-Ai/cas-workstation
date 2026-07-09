@@ -1,0 +1,122 @@
+{
+  "captured_at": "2026-07-09T09:25:32.251715+00:00",
+  "targets": [
+    {
+      "target_id": "root-python",
+      "repository": "OgeonX-Ai/cas-workstation",
+      "ecosystem": "python-requirements",
+      "source_path": "/mnt/c/personalrepo/requirements.txt",
+      "status": "generated",
+      "sbom_path": "/mnt/c/personalrepo/evidence/compliance/sbom/root-python.cdx.json",
+      "notes": ""
+    },
+    {
+      "target_id": "gemini-api-server",
+      "repository": "Coding-Autopilot-System/gemini-nano",
+      "ecosystem": "python-requirements",
+      "source_path": "/mnt/c/personalrepo/gemini-nano/api-server/requirements.txt",
+      "status": "generated",
+      "sbom_path": "/mnt/c/personalrepo/evidence/compliance/sbom/gemini-api-server.cdx.json",
+      "notes": ""
+    },
+    {
+      "target_id": "gemini-python-mediapipe",
+      "repository": "Coding-Autopilot-System/gemini-nano",
+      "ecosystem": "python-requirements",
+      "source_path": "/mnt/c/personalrepo/gemini-nano/python-mediapipe/requirements.txt",
+      "status": "generated",
+      "sbom_path": "/mnt/c/personalrepo/evidence/compliance/sbom/gemini-python-mediapipe.cdx.json",
+      "notes": ""
+    },
+    {
+      "target_id": "gemini-chrome-bridge",
+      "repository": "Coding-Autopilot-System/gemini-nano",
+      "ecosystem": "npm-lockfile",
+      "source_path": "/mnt/c/personalrepo/gemini-nano/chrome-bridge",
+      "status": "generated",
+      "sbom_path": "/mnt/c/personalrepo/evidence/compliance/sbom/gemini-chrome-bridge.cdx.json",
+      "notes": ""
+    },
+    {
+      "target_id": "autogen-python",
+      "repository": "Coding-Autopilot-System/autogen",
+      "ecosystem": "python-requirements",
+      "source_path": "/mnt/c/personalrepo/portfolio/autogen/requirements.txt",
+      "status": "generated",
+      "sbom_path": "/mnt/c/personalrepo/evidence/compliance/sbom/autogen-python.cdx.json",
+      "notes": ""
+    },
+    {
+      "target_id": "ci-autopilot-python",
+      "repository": "Coding-Autopilot-System/ci-autopilot",
+      "ecosystem": "python-requirements",
+      "source_path": "/mnt/c/personalrepo/portfolio/ci-autopilot/requirements.txt",
+      "status": "generated",
+      "sbom_path": "/mnt/c/personalrepo/evidence/compliance/sbom/ci-autopilot-python.cdx.json",
+      "notes": ""
+    },
+    {
+      "target_id": "cas-contracts-npm",
+      "repository": "Coding-Autopilot-System/cas-contracts",
+      "ecosystem": "npm-lockfile",
+      "source_path": "/mnt/c/personalrepo/portfolio/cas-contracts",
+      "status": "generated",
+      "sbom_path": "/mnt/c/personalrepo/evidence/compliance/sbom/cas-contracts-npm.cdx.json",
+      "notes": ""
+    },
+    {
+      "target_id": "promptimprover-universal-refiner",
+      "repository": "Coding-Autopilot-System/Promptimprover",
+      "ecosystem": "npm-lockfile",
+      "source_path": "/mnt/c/personalrepo/portfolio/Promptimprover/universal-refiner",
+      "status": "generated",
+      "sbom_path": "/mnt/c/personalrepo/evidence/compliance/sbom/promptimprover-universal-refiner.cdx.json",
+      "notes": ""
+    },
+    {
+      "target_id": "promptimprover-mcp-server",
+      "repository": "Coding-Autopilot-System/Promptimprover",
+      "ecosystem": "npm-lockfile",
+      "source_path": "/mnt/c/personalrepo/portfolio/Promptimprover/mcp-server",
+      "status": "generated",
+      "sbom_path": "/mnt/c/personalrepo/evidence/compliance/sbom/promptimprover-mcp-server.cdx.json",
+      "notes": ""
+    },
+    {
+      "target_id": "promptimprover-gemini-extension",
+      "repository": "Coding-Autopilot-System/Promptimprover",
+      "ecosystem": "npm-lockfile",
+      "source_path": "/mnt/c/personalrepo/portfolio/Promptimprover/gemini-extension",
+      "status": "generated",
+      "sbom_path": "/mnt/c/personalrepo/evidence/compliance/sbom/promptimprover-gemini-extension.cdx.json",
+      "notes": ""
+    },
+    {
+      "target_id": "cas-platform-graphical-console",
+      "repository": "Coding-Autopilot-System/cas-platform",
+      "ecosystem": "npm-lockfile",
+      "source_path": "/mnt/c/personalrepo/portfolio/cas-platform/src/graphical-console",
+      "status": "generated",
+      "sbom_path": "/mnt/c/personalrepo/evidence/compliance/sbom/cas-platform-graphical-console.cdx.json",
+      "notes": ""
+    },
+    {
+      "target_id": "cas-evals-ui",
+      "repository": "Coding-Autopilot-System/cas-evals",
+      "ecosystem": "npm-lockfile",
+      "source_path": "/mnt/c/personalrepo/portfolio/cas-evals/tests/ui",
+      "status": "generated",
+      "sbom_path": "/mnt/c/personalrepo/evidence/compliance/sbom/cas-evals-ui.cdx.json",
+      "notes": ""
+    },
+    {
+      "target_id": "gsd-orchestrator-dotnet",
+      "repository": "Coding-Autopilot-System/gsd-orchestrator",
+      "ecosystem": "dotnet-csproj",
+      "source_path": "/mnt/c/personalrepo/portfolio/gsd-orchestrator/src/GsdOrchestrator/GsdOrchestrator.csproj",
+      "status": "generated",
+      "sbom_path": "/mnt/c/personalrepo/evidence/compliance/sbom/gsd-orchestrator-dotnet.cdx.json",
+      "notes": ""
+    }
+  ]
+}

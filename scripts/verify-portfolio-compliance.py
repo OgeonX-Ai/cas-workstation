@@ -20,6 +20,7 @@ REQUIRED_FILES = [
     EVIDENCE / "supplier-register.csv",
     EVIDENCE / "supply-chain-controls.csv",
     EVIDENCE / "release-evidence.csv",
+    EVIDENCE / "sbom-evidence.csv",
     EVIDENCE / "recovery-drills.csv",
     EVIDENCE / "access-review-log.csv",
     EVIDENCE / "exception-register.csv",
@@ -74,12 +75,15 @@ def main() -> int:
     asset_rows = csv_rows(EVIDENCE / "asset-inventory.csv")
     supply_chain_rows = csv_rows(EVIDENCE / "supply-chain-controls.csv")
     release_rows = csv_rows(EVIDENCE / "release-evidence.csv")
+    sbom_rows = csv_rows(EVIDENCE / "sbom-evidence.csv")
     if len(asset_rows) != 15:
         errors.append(f"Expected 15 asset inventory rows, found {len(asset_rows)}")
     if len(supply_chain_rows) != 15:
         errors.append(f"Expected 15 supply-chain rows, found {len(supply_chain_rows)}")
     if len(release_rows) != 15:
         errors.append(f"Expected 15 release-evidence rows, found {len(release_rows)}")
+    if len(sbom_rows) == 0:
+        errors.append("No SBOM evidence rows found")
 
     local_repo_paths = {
         "OgeonX-Ai/cas-workstation": ROOT,
@@ -134,6 +138,13 @@ def main() -> int:
             errors.append(f"Pages workflow baseline missing for {repo}")
         if row["release_policy_source"] == "missing":
             errors.append(f"Release policy source missing for {repo}")
+
+    generated_sboms = [row for row in sbom_rows if row["status"] == "generated" and row["sbom_path"]]
+    if len(generated_sboms) < 5:
+        errors.append(f"Expected at least 5 generated SBOM artifacts, found {len(generated_sboms)}")
+    failed_sboms = [row for row in sbom_rows if row["status"] != "generated"]
+    if failed_sboms:
+        errors.append(f"SBOM generation failed for {len(failed_sboms)} target(s)")
 
     recovery_rows = csv_rows(EVIDENCE / "recovery-drills.csv")
     if not any(row["status"] == "passed" for row in recovery_rows):
