@@ -30,6 +30,7 @@ REQUIRED_FILES = [
     EVIDENCE / "data-classification.csv",
     EVIDENCE / "provenance-evidence.csv",
     EVIDENCE / "risk-register.csv",
+    EVIDENCE / "risk-review-log.csv",
     EVIDENCE / "supplier-register.csv",
     EVIDENCE / "supplier-review-log.csv",
     EVIDENCE / "supply-chain-controls.csv",
@@ -473,8 +474,11 @@ def main() -> int:
         warnings.append(f"{len(open_exceptions)} open exception(s) remain")
 
     risk_rows = csv_rows(EVIDENCE / "risk-register.csv")
+    risk_review_rows = csv_rows(EVIDENCE / "risk-review-log.csv")
     if len(risk_rows) < 6:
         errors.append(f"Expected at least 6 risk rows, found {len(risk_rows)}")
+    if len(risk_review_rows) != len(risk_rows):
+        errors.append(f"Expected {len(risk_rows)} risk-review rows, found {len(risk_review_rows)}")
     if any(not row.get("due_date") or not row.get("residual_risk") or not row.get("linked_control") for row in risk_rows):
         errors.append("At least one risk row is missing due date, residual risk, or linked control")
     stale_risk_reviews = [
@@ -483,6 +487,64 @@ def main() -> int:
     ]
     if stale_risk_reviews:
         errors.append(f"Risk review is stale for: {', '.join(stale_risk_reviews)}")
+    review_rows_by_risk = {row["risk_id"]: row for row in risk_review_rows}
+    missing_review_rows = [row["risk_id"] for row in risk_rows if row["risk_id"] not in review_rows_by_risk]
+    if missing_review_rows:
+        errors.append(f"Missing risk-review evidence for: {', '.join(missing_review_rows)}")
+    stale_risk_review_logs = [
+        row["risk_id"] for row in risk_review_rows
+        if row.get("review_date") and days_old(row["review_date"]) > 120
+    ]
+    if stale_risk_review_logs:
+        errors.append(f"Risk-review ledger is stale for: {', '.join(stale_risk_review_logs)}")
+    allowed_acceptance = {"mitigation-in-flight", "accepted"}
+    allowed_escalation = {"not-due", "closed", "escalated", "accepted-exception", "overdue-needs-escalation"}
+    bad_acceptance = [
+        row["risk_id"] for row in risk_review_rows
+        if row.get("acceptance_status") not in allowed_acceptance
+    ]
+    if bad_acceptance:
+        errors.append(f"Risk review has invalid acceptance status for: {', '.join(bad_acceptance)}")
+    bad_escalation = [
+        row["risk_id"] for row in risk_review_rows
+        if row.get("escalation_status") not in allowed_escalation
+    ]
+    if bad_escalation:
+        errors.append(f"Risk review has invalid escalation status for: {', '.join(bad_escalation)}")
+    invalid_escalation_refs = []
+    for row in risk_review_rows:
+        ref = row.get("escalation_evidence_ref", "").strip()
+        if not ref:
+            continue
+        if ref.startswith("evidence/") and not (ROOT / ref).exists():
+            invalid_escalation_refs.append(row["risk_id"])
+            continue
+        if ref.startswith("https://github.com/"):
+            continue
+        invalid_escalation_refs.append(row["risk_id"])
+    if invalid_escalation_refs:
+        errors.append(
+            "Risk review has invalid escalation evidence reference for: "
+            + ", ".join(invalid_escalation_refs)
+        )
+    overdue_without_evidence = []
+    for row in risk_rows:
+        if row.get("status", "").lower() == "closed":
+            continue
+        if days_old(row["due_date"]) <= 0:
+            continue
+        review_row = review_rows_by_risk.get(row["risk_id"])
+        if not review_row:
+            continue
+        if review_row["escalation_status"] == "overdue-needs-escalation":
+            overdue_without_evidence.append(row["risk_id"])
+        elif review_row["escalation_status"] in {"escalated", "accepted-exception"} and not review_row.get("escalation_evidence_ref"):
+            overdue_without_evidence.append(row["risk_id"])
+    if overdue_without_evidence:
+        errors.append(
+            "Overdue risks are missing escalation evidence for: "
+            + ", ".join(overdue_without_evidence)
+        )
 
     if os.environ.get("SKIP_REMOTE_ATTESTATION_VERIFY") != "1":
         try:

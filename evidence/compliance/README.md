@@ -17,6 +17,7 @@ The goal is not to create static paperwork. Each file here should either:
 - `data-classification.csv` - per-asset data class and evidence-handling baseline
 - `provenance-evidence.csv` - per-repository provenance and attestation baseline
 - `risk-register.csv` - machine-readable version of the top portfolio risks
+- `risk-review-log.csv` - residual-risk review and overdue-escalation state per risk
 - `supplier-register.csv` - external suppliers and dependency surfaces
 - `supplier-review-log.csv` - supplier governance review cadence and evidence ledger
 - `supply-chain-controls.csv` - repo-by-repo Dependabot, CodeQL, and workflow pinning baseline
