@@ -7,7 +7,9 @@ import os
 import subprocess
 import sys
 import tempfile
+import zipfile
 from datetime import date, datetime
+from io import BytesIO
 from pathlib import Path
 
 
@@ -37,6 +39,17 @@ REQUIRED_FILES = [
 
 def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, text=True, capture_output=True, check=False)
+
+
+def run_bytes(cmd: list[str]) -> subprocess.CompletedProcess[bytes]:
+    return subprocess.run(cmd, capture_output=True, check=False)
+
+
+def gh_local_path(path: Path) -> str:
+    result = run(["wslpath", "-w", str(path)])
+    if result.returncode == 0 and result.stdout.strip():
+        return result.stdout.strip()
+    return str(path)
 
 
 def csv_rows(path: Path) -> list[dict[str, str]]:
@@ -125,7 +138,8 @@ def verify_latest_attestation() -> tuple[bool, str]:
         return (False, f"Latest successful compliance run is stale: {updated_at}")
 
     artifacts = run_artifacts(COMPLIANCE_REPO, run_id)
-    artifact_names = {artifact["name"] for artifact in artifacts}
+    artifacts_by_name = {artifact["name"]: artifact for artifact in artifacts}
+    artifact_names = set(artifacts_by_name)
     missing_artifacts = sorted(
         {COMPLIANCE_BUNDLE_ARTIFACT, COMPLIANCE_ATTESTATION_ARTIFACT}.difference(artifact_names)
     )
@@ -133,24 +147,22 @@ def verify_latest_attestation() -> tuple[bool, str]:
         return (False, f"Latest successful compliance run {run_id} is missing artifact(s): {', '.join(missing_artifacts)}")
 
     with tempfile.TemporaryDirectory(prefix="compliance-attestation-") as tmp_dir:
-        download = run(
+        bundle_artifact = artifacts_by_name[COMPLIANCE_BUNDLE_ARTIFACT]
+        download = run_bytes(
             [
                 "gh",
-                "run",
-                "download",
-                str(run_id),
-                "--repo",
-                COMPLIANCE_REPO,
-                "--name",
-                COMPLIANCE_BUNDLE_ARTIFACT,
-                "--dir",
-                tmp_dir,
+                "api",
+                f"repos/{COMPLIANCE_REPO}/actions/artifacts/{bundle_artifact['id']}/zip",
             ]
         )
         if download.returncode != 0:
-            return (False, f"Unable to download compliance bundle from run {run_id}: {(download.stderr or download.stdout).strip()}")
+            details = (download.stderr or download.stdout).decode(errors="replace").strip()
+            return (False, f"Unable to download compliance bundle from run {run_id}: {details}")
 
-        bundle_paths = sorted(Path(tmp_dir).rglob("*.tar.gz"))
+        with zipfile.ZipFile(BytesIO(download.stdout)) as archive:
+            archive.extractall(tmp_dir)
+
+        bundle_paths = sorted(Path(tmp_dir).rglob("compliance-evidence-*.tar.gz"))
         if not bundle_paths:
             return (False, f"Compliance bundle artifact from run {run_id} did not contain a .tar.gz file")
 
@@ -159,7 +171,7 @@ def verify_latest_attestation() -> tuple[bool, str]:
                 "gh",
                 "attestation",
                 "verify",
-                str(bundle_paths[0]),
+                gh_local_path(bundle_paths[0]),
                 "--repo",
                 COMPLIANCE_REPO,
                 "--signer-workflow",
