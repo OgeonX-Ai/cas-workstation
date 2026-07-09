@@ -66,6 +66,7 @@ of network and information systems.
 - Change-management ledger: `evidence/compliance/change-management.csv`
 - Evidence-retention ledger: `evidence/compliance/evidence-retention.csv`
 - Control crosswalk: `evidence/compliance/control-crosswalk.csv`
+- Vulnerability-management ledger: `evidence/compliance/vulnerability-management.csv`
 
 ## Readiness principle
 

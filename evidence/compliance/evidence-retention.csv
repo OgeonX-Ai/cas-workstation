@@ -7,4 +7,5 @@ supply_chain,evidence/compliance/supply-chain-controls.csv,Portfolio maintainer,
 release_evidence,evidence/compliance/release-evidence.csv,Portfolio maintainer,keep latest ledger and prior quarter snapshots,180,active
 sbom,evidence/compliance/sbom-evidence.csv,Portfolio maintainer,keep current generated set and prior quarter snapshots,180,active
 change_management,evidence/compliance/change-management.csv,Portfolio maintainer,keep current quarter and previous quarter,180,active
+vulnerability_management,evidence/compliance/vulnerability-management.csv,Portfolio maintainer,keep current month and prior quarter snapshots,180,active
 attested_bundle,GitHub Actions compliance workflow artifacts,Portfolio maintainer,retain for repo maximum artifact retention window,90,active

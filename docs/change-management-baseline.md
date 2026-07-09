@@ -16,6 +16,8 @@ control, branch governance, and rollback-readiness.
 - Branch protection state is recorded with review date and core settings
 - The root compliance workflow now produces an attested evidence bundle for
   repeatable review
+- Change-management capture fails on branch-protection API errors instead of
+  silently serializing them as unprotected state
 
 ## What this does not yet prove
 

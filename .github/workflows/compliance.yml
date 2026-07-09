@@ -12,6 +12,7 @@ on:
       - "scripts/capture-access-review.py"
       - "scripts/capture-change-management-evidence.py"
       - "scripts/capture-supply-chain-state.py"
+      - "scripts/capture-vulnerability-management-evidence.py"
       - "scripts/capture-release-evidence.py"
       - "scripts/capture-sbom-evidence.py"
       - "scripts/hydrate-portfolio-repos.py"
@@ -63,6 +64,9 @@ jobs:
       - name: Capture supply-chain snapshot
         run: python scripts/capture-supply-chain-state.py
 
+      - name: Capture vulnerability-management snapshot
+        run: python scripts/capture-vulnerability-management-evidence.py
+
       - name: Capture release evidence snapshot
         run: python scripts/capture-release-evidence.py
 
@@ -86,20 +90,27 @@ jobs:
         with:
           subject-path: "compliance-evidence-${{ github.sha }}.tar.gz"
 
+      - name: Verify current run attestation
+        run: |
+          gh attestation verify "compliance-evidence-${GITHUB_SHA}.tar.gz" \
+            --repo OgeonX-Ai/cas-workstation \
+            --signer-workflow OgeonX-Ai/cas-workstation/.github/workflows/compliance.yml \
+            --source-ref refs/heads/master
+
       - name: Publish compliance evidence directory
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: compliance-evidence
           path: evidence/compliance/
 
       - name: Publish compliance evidence bundle
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: compliance-evidence-bundle
           path: compliance-evidence-${{ github.sha }}.tar.gz
 
       - name: Publish compliance attestation bundle
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: compliance-attestation-bundle
           path: ${{ steps.attest.outputs.bundle-path }}

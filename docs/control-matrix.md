@@ -19,6 +19,7 @@ evidence than about a decorative spreadsheet.
 | Access review baseline | ISO 27001, DORA, NIS2 | `evidence/compliance/access-review-log.csv`, `evidence/compliance/snapshots/` | Partial |
 | Change management | ISO 27001, DORA, NIST SSDF | [Change Management Baseline](change-management-baseline.md), `evidence/compliance/change-management.csv` | Partial |
 | Evidence retention | ISO 27001, DORA, SOC 2 | [Evidence Retention Baseline](evidence-retention-baseline.md), `evidence/compliance/evidence-retention.csv` | Partial |
+| Vulnerability management | ISO 27001, NIST CSF Protect, SSDF | [Vulnerability Management Baseline](vulnerability-management-baseline.md), `evidence/compliance/vulnerability-management.csv` | Partial |
 
 ## Detailed crosswalk
 

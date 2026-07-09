@@ -34,6 +34,7 @@ REQUIRED_FILES = [
     EVIDENCE / "change-management.csv",
     EVIDENCE / "control-crosswalk.csv",
     EVIDENCE / "evidence-retention.csv",
+    EVIDENCE / "vulnerability-management.csv",
     EVIDENCE / "recovery-drills.csv",
     EVIDENCE / "access-review-log.csv",
     EVIDENCE / "exception-register.csv",
@@ -120,6 +121,7 @@ def workflow_has_attestation_baseline() -> tuple[bool, list[str]]:
     workflow_text = (ROOT / ".github" / "workflows" / "compliance.yml").read_text(encoding="utf-8")
     expected_tokens = [
         "actions/attest@f6bf1532d7d6793fce74eac584813a8eee607999",
+        "gh attestation verify",
         "attestations: write",
         "id-token: write",
         "artifact-metadata: write",
@@ -215,6 +217,7 @@ def main() -> int:
     change_rows = csv_rows(EVIDENCE / "change-management.csv")
     crosswalk_rows = csv_rows(EVIDENCE / "control-crosswalk.csv")
     retention_rows = csv_rows(EVIDENCE / "evidence-retention.csv")
+    vulnerability_rows = csv_rows(EVIDENCE / "vulnerability-management.csv")
     if len(asset_rows) != 15:
         errors.append(f"Expected 15 asset inventory rows, found {len(asset_rows)}")
     if len(supply_chain_rows) != 15:
@@ -223,6 +226,8 @@ def main() -> int:
         errors.append(f"Expected 15 release-evidence rows, found {len(release_rows)}")
     if len(change_rows) != 15:
         errors.append(f"Expected 15 change-management rows, found {len(change_rows)}")
+    if len(vulnerability_rows) != 15:
+        errors.append(f"Expected 15 vulnerability-management rows, found {len(vulnerability_rows)}")
     if len(sbom_rows) == 0:
         errors.append("No SBOM evidence rows found")
     if len(crosswalk_rows) < 8:
@@ -287,6 +292,12 @@ def main() -> int:
     generated_sboms = [row for row in sbom_rows if row["status"] == "generated" and row["sbom_path"]]
     if len(generated_sboms) < 5:
         errors.append(f"Expected at least 5 generated SBOM artifacts, found {len(generated_sboms)}")
+    missing_sbom_files = [
+        row["sbom_path"] for row in generated_sboms
+        if not (ROOT / row["sbom_path"]).exists()
+    ]
+    if missing_sbom_files:
+        errors.append(f"Missing generated SBOM artifact(s): {', '.join(missing_sbom_files[:5])}")
     allow_skipped_sboms = os.environ.get("ALLOW_SKIPPED_SBOM_TARGETS") == "1"
     failed_sboms = [row for row in sbom_rows if row["status"] not in {"generated"}]
     if allow_skipped_sboms:
@@ -305,6 +316,14 @@ def main() -> int:
     ]
     if not fresh_recovery:
         errors.append("No passed recovery drill within the last 90 days")
+    missing_recovery_evidence = [
+        row["evidence_ref"] for row in recovery_rows
+        if row["status"] == "passed"
+        and row["evidence_ref"].startswith("evidence/")
+        and not (ROOT / row["evidence_ref"]).exists()
+    ]
+    if missing_recovery_evidence:
+        errors.append(f"Missing recovery evidence reference(s): {', '.join(missing_recovery_evidence)}")
 
     access_rows = csv_rows(EVIDENCE / "access-review-log.csv")
     if any(row["result"] == "missing" for row in access_rows):
@@ -322,6 +341,17 @@ def main() -> int:
     ]
     if len(fresh_change_rows) != 15:
         errors.append("Change-management evidence is missing a full fresh portfolio snapshot")
+
+    fresh_vulnerability_rows = [
+        row for row in vulnerability_rows
+        if row["review_date"] and days_old(row["review_date"]) <= 90
+    ]
+    if len(fresh_vulnerability_rows) != 15:
+        errors.append("Vulnerability-management evidence is missing a full fresh portfolio snapshot")
+    if any(row["security_policy"] != "true" for row in vulnerability_rows):
+        errors.append("At least one managed repository is missing SECURITY.md")
+    if any(row["dependabot"] != "true" or row["codeql"] != "true" for row in vulnerability_rows):
+        errors.append("At least one managed repository is missing vulnerability scanning baseline coverage")
 
     exception_rows = csv_rows(EVIDENCE / "exception-register.csv")
     open_exceptions = [row for row in exception_rows if row["status"] == "open"]

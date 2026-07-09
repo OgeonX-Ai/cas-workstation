@@ -1,3 +1,3 @@
 drill_id,asset_scope,drill_type,last_tested,status,evidence_ref,notes
 CAS-BCDR-001,portfolio_pages,redeploy_drill,2026-07-09,passed,Live HTTP 200 checks across all 15 Pages URLs,Pages redeploy and reachability verified
-CAS-BCDR-002,critical_repos,restore_from_clean_checkout,2026-07-09,passed,/tmp/cas-contracts-recovery clone and file presence verification,Clean checkout restore drill completed for cas-contracts with docs and workflow files present
+CAS-BCDR-002,critical_repos,restore_from_clean_checkout,2026-07-09,passed,evidence/compliance/snapshots/recovery-drill-2026-07-09.json,Clean checkout restore drill completed for cas-contracts with docs and workflow files present

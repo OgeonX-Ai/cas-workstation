@@ -29,3 +29,4 @@ CAS repositories that execute code, publish artifacts, or operate automation.
 - Portfolio-wide provenance or signing outputs for every releasable asset
 - Uniform lockfile coverage across every executable repo
 - Evidence that dependency reviews are completed to a standard cadence
+- SLA-backed vulnerability remediation history across every repository

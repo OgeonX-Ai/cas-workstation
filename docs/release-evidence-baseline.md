@@ -19,7 +19,9 @@ production-relevant state.
 - Snapshot generator: `scripts/capture-release-evidence.py`
 - GitHub Actions workflow: `.github/workflows/compliance.yml`
 - Attested artifact: `compliance-evidence-<git-sha>.tar.gz`
-- Verifier path: `scripts/verify-portfolio-compliance.py` plus `gh attestation verify`
+- Verifier paths:
+  - CI verifies the current run attestation before artifact publication
+  - `scripts/verify-portfolio-compliance.py` verifies the latest successful attested bundle from GitHub
 
 ## Current limitation
 

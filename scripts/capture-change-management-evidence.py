@@ -46,7 +46,10 @@ def branch_protection(repo: str, branch: str) -> dict | None:
         check=False,
     )
     if result.returncode != 0:
-        return None
+        details = (result.stderr or result.stdout).strip()
+        if "404" in details or "Branch not protected" in details:
+            return None
+        raise RuntimeError(f"Unable to inspect branch protection for {repo}@{branch}: {details}")
     return json.loads(result.stdout)
 
 

@@ -21,6 +21,7 @@ The goal is not to create static paperwork. Each file here should either:
 - `change-management.csv` - default-branch governance and protection evidence
 - `control-crosswalk.csv` - machine-readable control-to-evidence mapping
 - `evidence-retention.csv` - retention rules for core audit artifacts
+- `vulnerability-management.csv` - disclosure-policy and scanning baseline evidence
 - `recovery-drills.csv` - continuity and restore exercise evidence
 - `access-review-log.csv` - access review evidence ledger
 - `exception-register.csv` - approved exceptions and expiries

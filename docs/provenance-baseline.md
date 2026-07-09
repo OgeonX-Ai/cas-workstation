@@ -9,7 +9,8 @@ workflow and can be verified independently.
 - Workflow: `.github/workflows/compliance.yml`
 - Subject artifact: `compliance-evidence-<git-sha>.tar.gz`
 - Attestation action: `actions/attest@v4` pinned to an immutable commit SHA
-- Verification path: `gh attestation verify <bundle> --repo OgeonX-Ai/cas-workstation`
+- In-workflow verification: `gh attestation verify` against the current run's bundle before artifact publication
+- Workstation verification: `scripts/verify-portfolio-compliance.py` downloads the latest successful bundle artifact and verifies it with `gh attestation verify`
 
 ## What this proves
 

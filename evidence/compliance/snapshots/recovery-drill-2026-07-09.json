@@ -1,0 +1,21 @@
+{
+  "captured_at": "2026-07-09T14:30:00Z",
+  "drills": [
+    {
+      "drill_id": "CAS-BCDR-001",
+      "asset_scope": "portfolio_pages",
+      "drill_type": "redeploy_drill",
+      "status": "passed",
+      "evidence": "Live HTTP 200 checks across all 15 Pages URLs"
+    },
+    {
+      "drill_id": "CAS-BCDR-002",
+      "asset_scope": "critical_repos",
+      "drill_type": "restore_from_clean_checkout",
+      "status": "passed",
+      "repository": "Coding-Autopilot-System/cas-contracts",
+      "method": "clean git clone plus docs and workflow file presence verification",
+      "source_ref": "2026-07-09 local restore drill"
+    }
+  ]
+}
