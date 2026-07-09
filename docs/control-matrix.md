@@ -12,10 +12,11 @@ evidence than about a decorative spreadsheet.
 | Risk management | ISO 27001, DORA, NIS2, CSF Govern | [Risk Register](risk-register.md), `cloud-security-service-model/docs/09-risk-management.md` | Partial |
 | Incident response | ISO 27001, DORA, NIS2, CSF Respond | [Incident Standard](incident-standard.md), `cloud-security-service-model/docs/11-incident-response.md` | Partial |
 | Audit evidence handling | ISO 27001, DORA | `cloud-security-service-model/docs/10-audit-readiness.md` | Partial |
-| BCDR and resilience | DORA, NIS2, ISO 27001, CSF Recover | [BCDR Baseline](bcdr-baseline.md) | Gap |
-| Supply-chain security | SSDF, SLSA, ISO 27001, CRA | `org-dotgithub/docs/DEPENDENCY_POLICY.md`, `org-dotgithub/docs/RELEASE_POLICY.md` | Partial |
+| BCDR and resilience | DORA, NIS2, ISO 27001, CSF Recover | [BCDR Baseline](bcdr-baseline.md), `evidence/compliance/recovery-drills.csv` | Partial |
+| Supply-chain security | SSDF, SLSA, ISO 27001, CRA | [Supply-Chain Baseline](supply-chain-baseline.md), `evidence/compliance/supply-chain-controls.csv` | Partial |
 | Secure development lifecycle | NIST SSDF, CSF Protect | repo CI, workflow linting, code review patterns | Partial |
 | Public governance posture | ISO 27001, SOC 2 trust expectations | root governance files, repo policies, live Pages sites | Partial |
+| Access review baseline | ISO 27001, DORA, NIS2 | `evidence/compliance/access-review-log.csv`, `evidence/compliance/snapshots/` | Partial |
 
 ## Interpretation
 
@@ -32,7 +33,8 @@ The strongest current areas are:
 - public documentation reachability,
 - repository governance basics,
 - secure workflow hygiene in several core repos,
-- security operating-model content in `cloud-security-service-model`.
+- security operating-model content in `cloud-security-service-model`,
+- machine-checked baseline evidence for repo inventory, Pages, wiki, supply-chain baseline, recovery drills, and access review freshness.
 
 The weakest current areas are:
 

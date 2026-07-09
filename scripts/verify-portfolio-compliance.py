@@ -5,12 +5,13 @@ import csv
 import json
 import subprocess
 import sys
+from datetime import date, datetime
 from pathlib import Path
-from urllib.parse import urlparse
 
 
 ROOT = Path("/mnt/c/personalrepo")
 EVIDENCE = ROOT / "evidence" / "compliance"
+SNAPSHOTS = EVIDENCE / "snapshots"
 
 REQUIRED_FILES = [
     EVIDENCE / "asset-inventory.csv",
@@ -31,6 +32,10 @@ def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
 def csv_rows(path: Path) -> list[dict[str, str]]:
     with path.open(newline="", encoding="utf-8") as handle:
         return list(csv.DictReader(handle))
+
+
+def days_old(iso_date: str) -> int:
+    return (date.today() - datetime.strptime(iso_date, "%Y-%m-%d").date()).days
 
 
 def check_url(url: str) -> tuple[bool, str]:
@@ -62,6 +67,8 @@ def main() -> int:
             errors.append(f"Missing evidence file: {path}")
         elif path.stat().st_size == 0:
             errors.append(f"Empty evidence file: {path}")
+    if not SNAPSHOTS.exists():
+        errors.append(f"Missing snapshots directory: {SNAPSHOTS}")
 
     asset_rows = csv_rows(EVIDENCE / "asset-inventory.csv")
     supply_chain_rows = csv_rows(EVIDENCE / "supply-chain-controls.csv")
@@ -121,10 +128,22 @@ def main() -> int:
         errors.append("No passed recovery drill recorded")
     if any(row["status"] == "planned" for row in recovery_rows):
         warnings.append("At least one recovery drill is still only planned")
+    fresh_recovery = [
+        row for row in recovery_rows
+        if row["last_tested"] and row["status"] == "passed" and days_old(row["last_tested"]) <= 90
+    ]
+    if not fresh_recovery:
+        errors.append("No passed recovery drill within the last 90 days")
 
     access_rows = csv_rows(EVIDENCE / "access-review-log.csv")
     if any(row["result"] == "missing" for row in access_rows):
         warnings.append("Access review evidence is still missing")
+    fresh_access = [
+        row for row in access_rows
+        if row["review_date"] and row["result"] == "passed" and days_old(row["review_date"]) <= 90
+    ]
+    if not fresh_access:
+        errors.append("No passed access review within the last 90 days")
 
     exception_rows = csv_rows(EVIDENCE / "exception-register.csv")
     open_exceptions = [row for row in exception_rows if row["status"] == "open"]

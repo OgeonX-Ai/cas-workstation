@@ -35,7 +35,8 @@ CSF, NIST SSDF, and SLSA-style scrutiny.
 - All 15 repositories have wiki enabled.
 - Root governance files now exist for the workstation repo.
 - `gemini-nano` now has a verified Pages/docs surface.
-- `cas-reference-product` has a PR open to close the final observed conduct-policy gap.
+- `cas-reference-product` conduct-policy gap is closed on `main`.
+- A portfolio verifier now checks inventory, Pages reachability, wiki state, recovery evidence, access-review freshness, and supply-chain baselines.
 
 ## Exit criteria for “audit-ready enough to claim”
 

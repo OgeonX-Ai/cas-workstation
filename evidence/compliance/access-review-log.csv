@@ -1,2 +1,2 @@
 review_id,scope,review_date,reviewer,result,evidence_ref,notes
-CAS-ACCESS-001,github_repo_wiki_and_default_branch_baseline,2026-07-09,Portfolio maintainer,passed,Live gh repo view sweep across all 15 repos,Verified wiki enabled and default branch resolved for every managed repo
+CAS-ACCESS-001,github_repo_wiki_and_default_branch_baseline,2026-07-09,Portfolio maintainer,passed,evidence/compliance/snapshots/access-review-2026-07-09.json,Live GitHub repo view sweep across all 15 managed repositories

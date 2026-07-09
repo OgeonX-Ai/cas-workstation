@@ -1,0 +1,110 @@
+{
+  "captured_at": "2026-07-09T08:52:09.528824+00:00",
+  "repositories": [
+    {
+      "repository": "OgeonX-Ai/cas-workstation",
+      "path": "/mnt/c/personalrepo",
+      "dependabot": true,
+      "codeql": true,
+      "pages_workflow": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/gemini-nano",
+      "path": "/mnt/c/personalrepo/gemini-nano",
+      "dependabot": true,
+      "codeql": true,
+      "pages_workflow": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/Promptimprover",
+      "path": "/mnt/c/personalrepo/portfolio/Promptimprover",
+      "dependabot": true,
+      "codeql": true,
+      "pages_workflow": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/autogen",
+      "path": "/mnt/c/personalrepo/portfolio/autogen",
+      "dependabot": true,
+      "codeql": true,
+      "pages_workflow": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/autopilot-core",
+      "path": "/mnt/c/personalrepo/portfolio/autopilot-core",
+      "dependabot": true,
+      "codeql": true,
+      "pages_workflow": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/autopilot-demo",
+      "path": "/mnt/c/personalrepo/portfolio/autopilot-demo",
+      "dependabot": true,
+      "codeql": true,
+      "pages_workflow": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-contracts",
+      "path": "/mnt/c/personalrepo/portfolio/cas-contracts",
+      "dependabot": true,
+      "codeql": true,
+      "pages_workflow": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-evals",
+      "path": "/mnt/c/personalrepo/portfolio/cas-evals",
+      "dependabot": true,
+      "codeql": true,
+      "pages_workflow": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-platform",
+      "path": "/mnt/c/personalrepo/portfolio/cas-platform",
+      "dependabot": true,
+      "codeql": true,
+      "pages_workflow": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-reference-product",
+      "path": "/mnt/c/personalrepo/portfolio/cas-reference-product",
+      "dependabot": true,
+      "codeql": true,
+      "pages_workflow": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-workstation",
+      "path": "/mnt/c/personalrepo/portfolio/cas-workstation",
+      "dependabot": true,
+      "codeql": true,
+      "pages_workflow": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/ci-autopilot",
+      "path": "/mnt/c/personalrepo/portfolio/ci-autopilot",
+      "dependabot": true,
+      "codeql": true,
+      "pages_workflow": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/cloud-security-service-model",
+      "path": "/mnt/c/personalrepo/portfolio/cloud-security-service-model",
+      "dependabot": true,
+      "codeql": true,
+      "pages_workflow": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/gsd-orchestrator",
+      "path": "/mnt/c/personalrepo/portfolio/gsd-orchestrator",
+      "dependabot": true,
+      "codeql": true,
+      "pages_workflow": true
+    },
+    {
+      "repository": "Coding-Autopilot-System/.github",
+      "path": "/mnt/c/personalrepo/portfolio/org-dotgithub",
+      "dependabot": true,
+      "codeql": true,
+      "pages_workflow": true
+    }
+  ]
+}

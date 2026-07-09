@@ -1,0 +1,95 @@
+{
+  "captured_at": "2026-07-09T08:52:09.482270+00:00",
+  "repositories": [
+    {
+      "repository": "OgeonX-Ai/cas-workstation",
+      "wiki_enabled": true,
+      "default_branch": "master",
+      "url": "https://github.com/OgeonX-Ai/cas-workstation"
+    },
+    {
+      "repository": "Coding-Autopilot-System/gemini-nano",
+      "wiki_enabled": true,
+      "default_branch": "master",
+      "url": "https://github.com/Coding-Autopilot-System/gemini-nano"
+    },
+    {
+      "repository": "Coding-Autopilot-System/Promptimprover",
+      "wiki_enabled": true,
+      "default_branch": "master",
+      "url": "https://github.com/Coding-Autopilot-System/Promptimprover"
+    },
+    {
+      "repository": "Coding-Autopilot-System/autogen",
+      "wiki_enabled": true,
+      "default_branch": "main",
+      "url": "https://github.com/Coding-Autopilot-System/autogen"
+    },
+    {
+      "repository": "Coding-Autopilot-System/autopilot-core",
+      "wiki_enabled": true,
+      "default_branch": "main",
+      "url": "https://github.com/Coding-Autopilot-System/autopilot-core"
+    },
+    {
+      "repository": "Coding-Autopilot-System/autopilot-demo",
+      "wiki_enabled": true,
+      "default_branch": "main",
+      "url": "https://github.com/Coding-Autopilot-System/autopilot-demo"
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-contracts",
+      "wiki_enabled": true,
+      "default_branch": "main",
+      "url": "https://github.com/Coding-Autopilot-System/cas-contracts"
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-evals",
+      "wiki_enabled": true,
+      "default_branch": "main",
+      "url": "https://github.com/Coding-Autopilot-System/cas-evals"
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-platform",
+      "wiki_enabled": true,
+      "default_branch": "main",
+      "url": "https://github.com/Coding-Autopilot-System/cas-platform"
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-reference-product",
+      "wiki_enabled": true,
+      "default_branch": "main",
+      "url": "https://github.com/Coding-Autopilot-System/cas-reference-product"
+    },
+    {
+      "repository": "Coding-Autopilot-System/cas-workstation",
+      "wiki_enabled": true,
+      "default_branch": "main",
+      "url": "https://github.com/Coding-Autopilot-System/cas-workstation"
+    },
+    {
+      "repository": "Coding-Autopilot-System/ci-autopilot",
+      "wiki_enabled": true,
+      "default_branch": "main",
+      "url": "https://github.com/Coding-Autopilot-System/ci-autopilot"
+    },
+    {
+      "repository": "Coding-Autopilot-System/cloud-security-service-model",
+      "wiki_enabled": true,
+      "default_branch": "main",
+      "url": "https://github.com/Coding-Autopilot-System/cloud-security-service-model"
+    },
+    {
+      "repository": "Coding-Autopilot-System/gsd-orchestrator",
+      "wiki_enabled": true,
+      "default_branch": "main",
+      "url": "https://github.com/Coding-Autopilot-System/gsd-orchestrator"
+    },
+    {
+      "repository": "Coding-Autopilot-System/.github",
+      "wiki_enabled": true,
+      "default_branch": "main",
+      "url": "https://github.com/Coding-Autopilot-System/.github"
+    }
+  ]
+}
