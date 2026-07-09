@@ -21,6 +21,9 @@ nav:
   - Vision: VISION.md
   - Architecture: architecture.md
   - Support Matrix: support-matrix.md
+  - Compliance:
+      - Baseline: compliance-baseline.md
+      - Gap Register: compliance-gap-register.md
   - Operations:
       - Merge Queue: MERGE-QUEUE.md
       - Merge Train Runbook: merge-train-runbook.md
