@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.5
 milestone_name: Delivery Flow and Release Engineering
 status: planning
-stopped_at: "v1.5 bootstrapped from seeds; planners fanning out for phases 38-41."
-last_updated: "2026-07-08T19:30:00Z"
-last_activity: 2026-07-08 - v1.4 milestone completed: merge queue drained (39 PRs), audit flipped to passed, archives written, tag v1.4.
+stopped_at: "38-01 and 38-03 auto tasks complete, PRs open (org-dotgithub#17, root#18); 38-01 checkpoint (App creation + live verify) pending operator action"
+last_updated: "2026-07-10T14:32:48.328Z"
+last_activity: 2026-07-08 - milestone archive + tag.
 progress:
-  total_phases: 25
-  completed_phases: 20
-  total_plans: 36
+  total_phases: 28
+  completed_phases: 18
+  total_plans: 41
   completed_plans: 36
-  percent: 80
+  percent: 64
 ---
 
 # Project State
@@ -45,6 +45,8 @@ Last activity: 2026-07-08 - milestone archive + tag.
 | Phase 32 P01+02 | 35min | 0 tasks | 13 files |
 | Phase 29 P01 | 35min | 2 tasks | 4 files |
 | Phase 36 P01+02+03 | PR-only batch | 13 repos + root docs | 50+ docs files |
+| Phase 38 P01 | 55min | 2 tasks | 6 files |
+| Phase 38 P03 | 20min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -74,6 +76,8 @@ Last activity: 2026-07-08 - milestone archive + tag.
 - [Phase 35]: `autogen`'s current `main` dependency set was proven internally inconsistent in this session. PR `autogen#16` now carries the verified compatibility rollback and all of its GitHub checks are green.
 - [Phase 35]: `cloud-security-service-model#15` was repaired in-session by wrapping the overlong `codex:generate-image` directive in `docs/wiki/Architecture.md`; GitHub lint/CI reran green afterward.
 - [Phase 35]: `Promptimprover#27` was not a real source conflict on 2026-07-08; it was a stale branch-history conflict after `#26` merged via squash. The branch was rebuilt on top of live `master` with only the remaining XSS hardening delta, and fresh CI is now running.
+- [Phase 38-01]: review-bot GitHub App mechanism implemented (classifier + review-bot.yml + apply-branch-protection.ps1), PR-only on Coding-Autopilot-System/.github#17 and OgeonX-Ai/cas-workstation#18; App creation + live test-PR verification remain the explicit operator step blocking full REQ-1.5.1 closure.
+- [Phase 38-03]: root repo (OgeonX-Ai/cas-workstation) branch-protection decision resolved as pr-flow-review (auto-selected, operator standing choice); verified already-live via gh api (1 required approval, enforce_admins on, landed via PR #7) -- satisfied-by-live-state, CODEOWNERS added, apply-branch-protection.ps1 -DryRun evidence captured rather than re-applied.
 
 ### Pending Todos
 
@@ -87,6 +91,7 @@ Last activity: 2026-07-08 - milestone archive + tag.
 - [Phase 32] cas-contracts PR #18 `Classify schema compatibility` requires a human/maintainer-applied `compatibility-reviewed` label; no code change is pending, but the review gate cannot be self-stamped by the executor.
 - Default-branch local checkouts remain intentionally stale relative to the Phase 36 docs branches. This is not missing implementation, but it does mean any doc audit must inspect the open PR branches until merge.
 - The root workspace and many subrepos are dirty from parallel work; cross-repo implementation edits are unsafe until file ownership is re-established or isolated worktrees are used again.
+- [Phase 38-01] REQ-1.5.1 closure blocked on operator action: the cas-review-bot GitHub App must be created and installed on Coding-Autopilot-System, REVIEW_BOT_APP_ID/REVIEW_BOT_PRIVATE_KEY stored as org secrets, and a live docs-only auto-merge + a held out-of-class PR verified (see 38-01-SUMMARY.md checkpoint). Everything else is implemented, self-tested, and open as PRs #17 (org-dotgithub) and #18 (root).
 
 ### Quick Tasks Completed
 
@@ -104,8 +109,8 @@ Last activity: 2026-07-08 - milestone archive + tag.
 
 ## Session Continuity
 
-Last session: 2026-07-08T12:00:54.606Z
-Stopped at: Phase 35 audit boundary reached; milestone audit blocked on the open PR queue after live reconciliation through Phase 36.
+Last session: 2026-07-10T14:32:40.606Z
+Stopped at: 38-01 and 38-03 auto tasks complete, PRs open (org-dotgithub#17, root#18); 38-01 checkpoint (App creation + live verify) pending operator action
 Resume file: None
 
 ## Operator Next Steps
