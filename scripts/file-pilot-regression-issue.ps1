@@ -67,8 +67,17 @@ $result = [pscustomobject]@{
 }
 
 try {
+    # Note: the search query intentionally omits wrapping the title in literal
+    # embedded double-quote characters (e.g. "in:title `"$Title`""). Windows
+    # PowerShell 5.1's native-argument marshalling corrupts arguments that
+    # contain embedded `"` characters when invoking gh.exe, splitting the
+    # quoted phrase into separate unrecognized arguments and making the dedupe
+    # search fail closed on every call. Passing the raw phrase is safe because
+    # the results are already filtered client-side to an exact title match
+    # below, so GitHub's substring/token search does not need query-side exact
+    # phrasing.
     $listResult = Invoke-CapturedCommand {
-        & gh issue list --repo $Repo --state open --search "in:title `"$Title`"" --json number,title,url
+        & gh issue list --repo $Repo --state open --search "in:title $Title" --json number,title,url
     }
 
     $existingIssue = $null
