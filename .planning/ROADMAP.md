@@ -21,7 +21,7 @@
 - **Phase 41: Learning Loop** — LEARNINGS.md extraction at phase close; repeatable backlog survey script. *(REQ-1.5.6)* — **2 plans**
   - [ ] 41-01-PLAN.md — LEARNINGS template + OPERATING-CONTRACT.md phase-close checklist hook + retroactive v1.4-LEARNINGS.md (phases 26-36)
   - [ ] 41-02-PLAN.md — scripts/backlog-survey.ps1 repeatable delta report (new/closed/convergence) + Pester suite + baseline evidence
-- **Phase 42: v1.5 Verification & Milestone Audit** — full verifier stack + audit + archive. *(depends on 38-41)*
+- **Phase 42: v1.5 Verification & Milestone Audit** — full verifier stack + audit + archive. *(depends on 38-41)* **HARD-GATE (REQ-1.5.6): the audit fails closed unless a real `{N}-LEARNINGS.md` exists for every phase 38-41 — every `LEARNINGS-PENDING.md` marker must be gone, replaced by its phase's actual extracted LEARNINGS.md via `/gsd:extract-learnings {N}`.**
 
 ## Future Milestones (seeded 2026-07-08 — see [milestones/vNEXT-SEEDS.md](milestones/vNEXT-SEEDS.md))
 
