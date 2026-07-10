@@ -244,6 +244,27 @@ $finishedAt = (Get-Date).ToUniversalTime()
 $failedCount = @($suiteResults | Where-Object { $_.status -ne 'passed' }).Count
 $overallStatus = if ($failedCount -eq 0) { 'passed' } else { 'failed' }
 
+$issuesFiled = @()
+if (-not $NoIssueFile) {
+    $issueFilerScript = Join-Path $PSScriptRoot 'file-pilot-regression-issue.ps1'
+    foreach ($suite in ($suiteResults | Where-Object { $_.status -ne 'passed' })) {
+        Write-Host "Filing regression issue for suite: $($suite.id) ..."
+        try {
+            $issueResult = & $issueFilerScript -Repo $suite.owningRepo -SuiteId $suite.id -FailureExcerpt $suite.failureExcerpt -RunDate $runDate
+        } catch {
+            Write-Warning "file-pilot-regression-issue.ps1 threw for suite $($suite.id) -- $($_.Exception.Message)"
+            $issueResult = $null
+        }
+        if ($issueResult) {
+            $issuesFiled += [ordered]@{
+                suiteId  = $suite.id
+                issueUrl = $issueResult.IssueUrl
+                deduped  = [bool]$issueResult.Deduped
+            }
+        }
+    }
+}
+
 $evidenceEntry = [ordered]@{
     schemaVersion = '1.0.0'
     runDate       = $runDate
@@ -251,6 +272,7 @@ $evidenceEntry = [ordered]@{
     finishedAt    = $finishedAt.ToString('yyyy-MM-ddTHH:mm:ssZ')
     overallStatus = $overallStatus
     suites        = $suiteResults
+    issuesFiled   = $issuesFiled
 }
 
 if (-not (Test-Path -LiteralPath $EvidenceRoot)) {
