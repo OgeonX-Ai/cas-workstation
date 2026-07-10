@@ -45,6 +45,7 @@ Last activity: 2026-07-08 - milestone archive + tag.
 | Phase 32 P01+02 | 35min | 0 tasks | 13 files |
 | Phase 29 P01 | 35min | 2 tasks | 4 files |
 | Phase 36 P01+02+03 | PR-only batch | 13 repos + root docs | 50+ docs files |
+| 40 | 01 | ~90min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -74,12 +75,16 @@ Last activity: 2026-07-08 - milestone archive + tag.
 - [Phase 35]: `autogen`'s current `main` dependency set was proven internally inconsistent in this session. PR `autogen#16` now carries the verified compatibility rollback and all of its GitHub checks are green.
 - [Phase 35]: `cloud-security-service-model#15` was repaired in-session by wrapping the overlong `codex:generate-image` directive in `docs/wiki/Architecture.md`; GitHub lint/CI reran green afterward.
 - [Phase 35]: `Promptimprover#27` was not a real source conflict on 2026-07-08; it was a stale branch-history conflict after `#26` merged via squash. The branch was rebuilt on top of live `master` with only the remaining XSS hardening delta, and fresh CI is now running.
+- [Phase 40-01]: `scripts/run-pilot-cadence.ps1`'s `Sync-ReadOnlyWorktree` best-effort fetch is derived from `$Ref` (main/master) rather than hardcoded `main`, since the root repo `OgeonX-Ai/cas-workstation` has no `main` branch (master only) and the function is reused for the evidence-commit worktree against `origin/master`.
+- [Phase 40-01]: Windows PowerShell 5.1 promotes native-command stderr (captured via `2>&1`) into terminating `ErrorRecord`s under `$ErrorActionPreference = 'Stop'`; both pilot-cadence scripts now route every external command (git/dotnet/pytest/gh/powershell) through an `Invoke-CapturedCommand` helper that temporarily relaxes to `Continue` so a suite's non-zero exit is captured via `$LASTEXITCODE` instead of aborting the run.
+- [Phase 40-01]: First real pilot-cadence run (2026-07-10) was fully green across all three suites (loop-pilots, gsd-orchestrator-fault-injection, autogen-fault-injection); evidence PR #13 and the scripts PR #14 both opened against `OgeonX-Ai/cas-workstation` master with green CI. REQ-1.5.4's falsifier (2 consecutive weekly runs + a seeded-regression issue) is not yet satisfied — deferred to Plan 02 per the plan's own verification section.
 
 ### Pending Todos
 
 - Reduce the org-wide open PR queue (still 38 open on 2026-07-08 after opening `autogen#16`) so Phase 35 can run against merged default branches instead of PR-only branches.
 - After the merge queue is materially reduced, run the full Phase 35 verifier stack: workspace-health sweep, branch/default-branch audit, workflow hardening audit, registry resolvability check, and milestone audit/archive workflow.
 - Keep Phase 37 parked until Phase 35 closes; marketing claims must reference the audited milestone, not the current PR-only state.
+- Phase 40-02 (weekly Scheduled Task registration + seeded-regression falsifier drill) depends on 40-01 (this plan) and still needs to run to satisfy REQ-1.5.4's falsifier (2 consecutive weekly evidence runs + a seeded-regression issue).
 
 ### Blockers/Concerns
 
