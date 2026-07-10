@@ -17,6 +17,8 @@
     10. .refiner/blackboard.json is gitignored (see Task 34-01/1); this comment
         documents why it no longer appears as a false-positive dirty finding
     11. unclassified housekeeping directories (untracked and not gitignored)
+    12. release staleness: latest SemVer tag is >30 days old with commits merged
+        since it, or no SemVer tag exists at all (local git only, no gh dependency)
   Emits a findings table and exits non-zero when anything is found, so it can
   gate CI and run under Task Scheduler.
 .EXAMPLE
@@ -250,6 +252,27 @@ foreach ($repo in Get-Repos $Root) {
     }
     if ($offenderCount -gt 0) {
         Add-Finding $repo.Name 'non-ascii-ps1' "$firstOffender contains non-ASCII character(s) - PS 5.1 ANSI parsing hazard ($offenderCount file(s) affected)"
+    }
+}
+
+# 12. Release staleness (local git only, no gh dependency)
+foreach ($repo in Get-Repos $Root) {
+    if (-not $gitExe) { continue }
+    $tags = & $gitExe -C $repo.Path tag --list 'v[0-9]*.[0-9]*.[0-9]*' --sort=-version:refname 2>$null
+    $latestTag = @($tags) | Where-Object { $_ } | Select-Object -First 1
+    if (-not $latestTag) {
+        $commitCount = (& $gitExe -C $repo.Path rev-list --count HEAD 2>$null)
+        if ($commitCount -and [int]$commitCount -gt 0) {
+            Add-Finding $repo.Name 'release-stale' "no SemVer release tag exists ($commitCount commit(s) on HEAD)"
+        }
+        continue
+    }
+    $tagEpoch = & $gitExe -C $repo.Path log -1 --format=%ct $latestTag 2>$null
+    if (-not $tagEpoch) { continue }
+    $ageDays = [int](([DateTimeOffset]::UtcNow.ToUnixTimeSeconds() - [long]$tagEpoch) / 86400)
+    $sinceCount = (& $gitExe -C $repo.Path rev-list --count "$latestTag..HEAD" 2>$null)
+    if ($ageDays -gt 30 -and $sinceCount -and [int]$sinceCount -gt 0) {
+        Add-Finding $repo.Name 'release-stale' "'$latestTag' is ${ageDays}d old (threshold 30d) with $sinceCount commit(s) merged since"
     }
 }
 
