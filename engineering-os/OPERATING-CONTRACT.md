@@ -42,6 +42,18 @@ This workspace follows a deterministic, verifier-led SDLC operating system. Use 
 - **State-Transition Memory Compression**: When transitioning between major SDLC phases (e.g., IMPLEMENT to VERIFY), orchestrators must actively shed raw discovery logs and retain only finalized plans/diffs to prevent context poisoning.
 - **Session Compression and Handoff**: To prevent API rate limits during long-running sessions, orchestrators must actively monitor session length. When completing a major SDLC phase or after significant autonomous tool execution, the Orchestrator MUST invoke the `/gsd-pause-work` workflow. The user should then be prompted to close the chat and run `/gsd-resume-work` in a fresh session to restore state from `.continue-here.md`.
 
+### Phase-Close Learning Extraction
+Satisfies **REQ-1.5.6** (learning loop institutionalized). This is a checklist requirement,
+not optional guidance:
+
+- Every phase closed under the GSD SDLC loop's DOCUMENT/RETROSPECTIVE steps MUST run
+  `/gsd:extract-learnings {phase}`, producing `{phase_dir}/{padded_phase}-LEARNINGS.md`.
+- The generated file MUST follow the structure defined in
+  `.planning/templates/LEARNINGS-template.md` (frontmatter + Decisions/Lessons/Patterns/Surprises
+  sections), which mirrors `extract-learnings.md`'s `write_learnings` step.
+- A phase is **not** considered closed/auditable until its `LEARNINGS.md` exists. Absence of the
+  file is a falsifiable failure of REQ-1.5.6, not an acceptable gap.
+
 ### Immutable Coding Standards (Priority 0)
 Regardless of the active persona, all generated code must strictly adhere to the following baseline constraints:
 1. **Architecture & SRP**: All code must be strictly modular, adhere to the Single Responsibility Principle (SRP), and be structured to support true scalable microservices. No monolithic scripts allowed.
