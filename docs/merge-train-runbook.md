@@ -2,6 +2,28 @@
 
 Repeatable procedure for landing a batch of PRs across the 13 `Coding-Autopilot-System` repos. First drafted 2026-07-06 for Phase 30 (Release Train & Branch Hygiene); keep updated as the process evolves.
 
+## Auto-merge flow supersedes the manual train for the in-class category (Phase 38)
+
+As of Phase 38, dependabot/docs-only PRs no longer need this manual runbook.
+See [`docs/merge-flow-policy.md`](merge-flow-policy.md) for the full
+mechanism: a fail-closed classifier (required check `automerge-eligibility`)
+plus the `cas-review-bot` GitHub App (gated on the autogen `critic_cli` and
+green CI) approves and auto-merges the in-class category with zero manual
+action.
+
+**This runbook remains the procedure for:**
+- Any PR classified OUT-OF-CLASS (touches executable, workflow, or non-docs
+  files) — the review-bot never approves these; they need real human review
+  and, if self-authored, the `enforce_admins` temp-relax/restore procedure
+  below.
+- Bulk historical drains (e.g. the Phase 31 hardening sweep, Phase 36 docs
+  batch) where many PRs land in a coordinated order.
+- The root repo (`OgeonX-Ai/cas-workstation`), which is now PR-flow with
+  required review (Plan 38-03) but does **not** have the review-bot App
+  installed — every root PR goes through ordinary human review, and the
+  `enforce_admins` temp-relax/restore section below is root's documented
+  break-glass for the solo admin/sole-reviewer case.
+
 ## Preconditions
 
 - `gh auth status` OK with admin on the org repos.
