@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.5
 milestone_name: Delivery Flow and Release Engineering
 status: planning
-stopped_at: "v1.5 bootstrapped from seeds; planners fanning out for phases 38-41."
-last_updated: "2026-07-08T19:30:00Z"
-last_activity: 2026-07-08 - v1.4 milestone completed: merge queue drained (39 PRs), audit flipped to passed, archives written, tag v1.4.
+stopped_at: Phase 35 audit boundary reached; milestone audit blocked on the open PR queue after live reconciliation through Phase 36.
+last_updated: "2026-07-10T14:29:41.021Z"
+last_activity: 2026-07-08 - milestone archive + tag.
 progress:
-  total_phases: 25
-  completed_phases: 20
-  total_plans: 36
-  completed_plans: 36
-  percent: 80
+  total_phases: 30
+  completed_phases: 18
+  total_plans: 46
+  completed_plans: 35
+  percent: 60
 ---
 
 # Project State
@@ -45,6 +45,7 @@ Last activity: 2026-07-08 - milestone archive + tag.
 | Phase 32 P01+02 | 35min | 0 tasks | 13 files |
 | Phase 29 P01 | 35min | 2 tasks | 4 files |
 | Phase 36 P01+02+03 | PR-only batch | 13 repos + root docs | 50+ docs files |
+| 39 | 01 | 45min | 2 | 7 |
 
 ## Accumulated Context
 
@@ -74,12 +75,17 @@ Last activity: 2026-07-08 - milestone archive + tag.
 - [Phase 35]: `autogen`'s current `main` dependency set was proven internally inconsistent in this session. PR `autogen#16` now carries the verified compatibility rollback and all of its GitHub checks are green.
 - [Phase 35]: `cloud-security-service-model#15` was repaired in-session by wrapping the overlong `codex:generate-image` directive in `docs/wiki/Architecture.md`; GitHub lint/CI reran green afterward.
 - [Phase 35]: `Promptimprover#27` was not a real source conflict on 2026-07-08; it was a stale branch-history conflict after `#26` merged via squash. The branch was rebuilt on top of live `master` with only the remaining XSS hardening delta, and fresh CI is now running.
+- [Phase 39-01]: Both repo tasks used isolated git worktrees off freshly-fetched `origin/<default>` instead of touching the primary checkouts (org-dotgithub was dirty on `docs/phase-36-refresh`; root was dirty on `docs/phase-38-plan-fixes`) — pattern reused from 31-04/40-01, both primary checkouts confirmed unchanged before/after.
+- [Phase 39-01]: org-dotgithub's reusable release-please workflow pin SHA is `f288e5e3b67b29a2c08880b76da7b852f4a132d0` (org-dotgithub PR #16) — wave-2/3 plans (39-02, 39-03) must reference this exact SHA in their own caller workflows, not re-derive it.
+- [Phase 39-01]: Root repo's `master` now enforces branch protection (`enforce_admins`), so the workspace-health.ps1 release-stale change went through a PR (`feat/phase-39-release-engineering`, cas-workstation PR #17) instead of a direct commit.
 
 ### Pending Todos
 
 - Reduce the org-wide open PR queue (still 38 open on 2026-07-08 after opening `autogen#16`) so Phase 35 can run against merged default branches instead of PR-only branches.
 - After the merge queue is materially reduced, run the full Phase 35 verifier stack: workspace-health sweep, branch/default-branch audit, workflow hardening audit, registry resolvability check, and milestone audit/archive workflow.
 - Keep Phase 37 parked until Phase 35 closes; marketing claims must reference the audited milestone, not the current PR-only state.
+- Review and merge org-dotgithub PR #16 (reusable release-please workflow) and cas-workstation PR #17 (workspace-health.ps1 release-stale check) — adds 2 more to the open-PR queue tracked above.
+- 39-02/39-03 (wave 2/3) need to wire the other 12 portfolio repos' `release-please.yml` callers against pin SHA `f288e5e3b67b29a2c08880b76da7b852f4a132d0` from org-dotgithub PR #16, re-verifying the SHA once that PR merges to `main`.
 
 ### Blockers/Concerns
 
@@ -104,7 +110,7 @@ Last activity: 2026-07-08 - milestone archive + tag.
 
 ## Session Continuity
 
-Last session: 2026-07-08T12:00:54.606Z
+Last session: 2026-07-10T14:29:41.008Z
 Stopped at: Phase 35 audit boundary reached; milestone audit blocked on the open PR queue after live reconciliation through Phase 36.
 Resume file: None
 
