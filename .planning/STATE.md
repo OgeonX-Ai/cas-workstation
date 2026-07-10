@@ -7,11 +7,11 @@ stopped_at: "v1.5 bootstrapped from seeds; planners fanning out for phases 38-41
 last_updated: "2026-07-10T10:16:22Z"
 last_activity: 2026-07-10 - Phase 38-02 (squash-aware branch gate + residual dispositions) completed; PR opened against origin/master.
 progress:
-  total_phases: 25
-  completed_phases: 20
-  total_plans: 36
+  total_phases: 28
+  completed_phases: 18
+  total_plans: 41
   completed_plans: 36
-  percent: 80
+  percent: 64
 ---
 
 # Project State
@@ -93,6 +93,7 @@ Last activity: 2026-07-08 - milestone archive + tag.
 - [Phase 32] cas-contracts PR #18 `Classify schema compatibility` requires a human/maintainer-applied `compatibility-reviewed` label; no code change is pending, but the review gate cannot be self-stamped by the executor.
 - Default-branch local checkouts remain intentionally stale relative to the Phase 36 docs branches. This is not missing implementation, but it does mean any doc audit must inspect the open PR branches until merge.
 - The root workspace and many subrepos are dirty from parallel work; cross-repo implementation edits are unsafe until file ownership is re-established or isolated worktrees are used again.
+- [Phase 38-01] REQ-1.5.1 closure blocked on operator action: the cas-review-bot GitHub App must be created and installed on Coding-Autopilot-System, REVIEW_BOT_APP_ID/REVIEW_BOT_PRIVATE_KEY stored as org secrets, and a live docs-only auto-merge + a held out-of-class PR verified (see 38-01-SUMMARY.md checkpoint). Everything else is implemented, self-tested, and open as PRs #17 (org-dotgithub) and #18 (root).
 
 ### Quick Tasks Completed
 
