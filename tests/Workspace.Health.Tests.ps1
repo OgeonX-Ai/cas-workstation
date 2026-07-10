@@ -186,4 +186,94 @@ Describe 'workspace-health.ps1 sweep' {
             $checks | Should -Contain 'credential-helper-wsl-path'
         }
     }
+
+    Context 'Release staleness' {
+
+        Context 'Old tag with commits since it (RED fixture)' {
+            BeforeAll {
+                $script:Fixture7 = New-WhFixture -Suffix 'releasestale'
+                $pastDate = (Get-Date).ToUniversalTime().AddDays(-45).ToString('yyyy-MM-ddTHH:mm:ssK')
+                $env:GIT_COMMITTER_DATE = $pastDate
+                $env:GIT_AUTHOR_DATE = $pastDate
+                Set-Content -LiteralPath (Join-Path $script:Fixture7 'v1.txt') -Value 'v1' -Encoding ASCII
+                & $script:GitExe -C $script:Fixture7 add v1.txt 2>$null
+                & $script:GitExe -C $script:Fixture7 commit -q -m 'tagged commit' 2>$null
+                & $script:GitExe -C $script:Fixture7 tag v0.1.0 2>$null
+                Remove-Item Env:\GIT_COMMITTER_DATE -ErrorAction SilentlyContinue
+                Remove-Item Env:\GIT_AUTHOR_DATE -ErrorAction SilentlyContinue
+                Set-Content -LiteralPath (Join-Path $script:Fixture7 'v2.txt') -Value 'v2' -Encoding ASCII
+                & $script:GitExe -C $script:Fixture7 add v2.txt 2>$null
+                & $script:GitExe -C $script:Fixture7 commit -q -m 'untagged commit' 2>$null
+            }
+            AfterAll {
+                Remove-WhFixture -Path $script:Fixture7
+            }
+            It 'reports a release-stale finding naming the tag, age, and commits since' {
+                $findings = Invoke-Wh -Root $script:Fixture7
+                $stale = @($findings | Where-Object { $_.Check -eq 'release-stale' })
+                $stale.Count | Should -Be 1
+                $stale[0].Detail | Should -Match 'v0\.1\.0'
+                $stale[0].Detail | Should -Match '(\d+)d old \(threshold 30d\)'
+                $matched = $stale[0].Detail -match '(\d+)d old \(threshold 30d\)'
+                $matched | Should -BeTrue
+                [int]$Matches[1] | Should -BeGreaterThan 30
+            }
+        }
+
+        Context 'Tag on HEAD, zero commits since it (no false positive)' {
+            BeforeAll {
+                $script:Fixture8 = New-WhFixture -Suffix 'releasefresh'
+                $pastDate = (Get-Date).ToUniversalTime().AddDays(-90).ToString('yyyy-MM-ddTHH:mm:ssK')
+                $env:GIT_COMMITTER_DATE = $pastDate
+                $env:GIT_AUTHOR_DATE = $pastDate
+                Set-Content -LiteralPath (Join-Path $script:Fixture8 'v1.txt') -Value 'v1' -Encoding ASCII
+                & $script:GitExe -C $script:Fixture8 add v1.txt 2>$null
+                & $script:GitExe -C $script:Fixture8 commit -q -m 'tagged commit' 2>$null
+                & $script:GitExe -C $script:Fixture8 tag v0.2.0 2>$null
+                Remove-Item Env:\GIT_COMMITTER_DATE -ErrorAction SilentlyContinue
+                Remove-Item Env:\GIT_AUTHOR_DATE -ErrorAction SilentlyContinue
+            }
+            AfterAll {
+                Remove-WhFixture -Path $script:Fixture8
+            }
+            It 'reports no release-stale finding when HEAD is the tagged commit, regardless of tag age' {
+                $findings = Invoke-Wh -Root $script:Fixture8
+                $checks = @($findings | ForEach-Object { $_.Check })
+                $checks | Should -Not -Contain 'release-stale'
+            }
+        }
+
+        Context 'Recent tag with commits since it (no false positive)' {
+            BeforeAll {
+                $script:Fixture9 = New-WhFixture -Suffix 'releaserecent'
+                & $script:GitExe -C $script:Fixture9 tag v0.3.0 2>$null
+                Set-Content -LiteralPath (Join-Path $script:Fixture9 'v2.txt') -Value 'v2' -Encoding ASCII
+                & $script:GitExe -C $script:Fixture9 add v2.txt 2>$null
+                & $script:GitExe -C $script:Fixture9 commit -q -m 'untagged commit' 2>$null
+            }
+            AfterAll {
+                Remove-WhFixture -Path $script:Fixture9
+            }
+            It 'reports no release-stale finding when the tag is less than 30 days old' {
+                $findings = Invoke-Wh -Root $script:Fixture9
+                $checks = @($findings | ForEach-Object { $_.Check })
+                $checks | Should -Not -Contain 'release-stale'
+            }
+        }
+
+        Context 'No SemVer tag at all (never released)' {
+            BeforeAll {
+                $script:Fixture10 = New-WhFixture -Suffix 'releasenotag'
+            }
+            AfterAll {
+                Remove-WhFixture -Path $script:Fixture10
+            }
+            It 'reports a release-stale finding when no SemVer tag exists' {
+                $findings = Invoke-Wh -Root $script:Fixture10
+                $stale = @($findings | Where-Object { $_.Check -eq 'release-stale' -and $_.Repo -eq 'root' })
+                $stale.Count | Should -Be 1
+                $stale[0].Detail | Should -Match 'no SemVer release tag'
+            }
+        }
+    }
 }
