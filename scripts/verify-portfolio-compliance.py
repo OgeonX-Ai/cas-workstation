@@ -130,7 +130,7 @@ def run_artifacts(repo: str, run_id: int) -> list[dict]:
 def workflow_has_attestation_baseline() -> tuple[bool, list[str]]:
     workflow_text = (ROOT / ".github" / "workflows" / "compliance.yml").read_text(encoding="utf-8")
     expected_tokens = [
-        "actions/attest@f6bf1532d7d6793fce74eac584813a8eee607999",
+        "actions/attest@a1948c3f048ba23858d222213b7c278aabede763",
         "gh attestation verify",
         "attestations: write",
         "id-token: write",
