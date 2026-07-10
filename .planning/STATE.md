@@ -46,6 +46,7 @@ Last activity: 2026-07-08 - milestone archive + tag.
 | Phase 29 P01 | 35min | 2 tasks | 4 files |
 | Phase 36 P01+02+03 | PR-only batch | 13 repos + root docs | 50+ docs files |
 | 40 | 01 | ~90min | 2 tasks | 3 files |
+| 40 | 02 | ~35min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -78,13 +79,16 @@ Last activity: 2026-07-08 - milestone archive + tag.
 - [Phase 40-01]: `scripts/run-pilot-cadence.ps1`'s `Sync-ReadOnlyWorktree` best-effort fetch is derived from `$Ref` (main/master) rather than hardcoded `main`, since the root repo `OgeonX-Ai/cas-workstation` has no `main` branch (master only) and the function is reused for the evidence-commit worktree against `origin/master`.
 - [Phase 40-01]: Windows PowerShell 5.1 promotes native-command stderr (captured via `2>&1`) into terminating `ErrorRecord`s under `$ErrorActionPreference = 'Stop'`; both pilot-cadence scripts now route every external command (git/dotnet/pytest/gh/powershell) through an `Invoke-CapturedCommand` helper that temporarily relaxes to `Continue` so a suite's non-zero exit is captured via `$LASTEXITCODE` instead of aborting the run.
 - [Phase 40-01]: First real pilot-cadence run (2026-07-10) was fully green across all three suites (loop-pilots, gsd-orchestrator-fault-injection, autogen-fault-injection); evidence PR #13 and the scripts PR #14 both opened against `OgeonX-Ai/cas-workstation` master with green CI. REQ-1.5.4's falsifier (2 consecutive weekly runs + a seeded-regression issue) is not yet satisfied — deferred to Plan 02 per the plan's own verification section.
+- [Phase 40-02]: `CAS-PilotCadence` weekly Windows Scheduled Task (Sunday 09:00, 2h execution limit) registered live and idempotent (double-run proof: task count stays 1, second run prints "Updated existing"), closing REQ-1.5.4's first falsifier.
+- [Phase 40-02]: REQ-1.5.4's second falsifier (seeded regression -> issue within one cycle) proven with a throwaway, never-pushed `gsd-orchestrator` worktree commit: red `gsd-orchestrator-fault-injection` suite -> exactly one issue filed (`gsd-orchestrator#23`) -> dedupe comment on rerun (no second issue) -> issue closed -> full cleanup (`origin/main` unchanged, seeded SHA unreachable from any branch, scheduled worktree re-synced). Full transcript in `.planning/phases/40-pilot-cadence/40-drill-evidence.md`.
+- [Phase 40-02]: The drill itself exposed and fixed a real bug in `scripts/file-pilot-regression-issue.ps1` (from 40-01): Windows PowerShell 5.1 corrupts native `gh.exe` arguments containing embedded literal double-quote characters, which made the dedupe search fail closed on every call. Fixed by dropping the embedded quotes around the search title (client-side exact-match filtering already made query-side exact phrasing unnecessary) — this also fixes dedupe for the `autogen-fault-injection` and `loop-pilots` suites' regression paths, not just the drilled one.
+- REQ-1.5.4 is now fully satisfied. Phase 40 complete (2/2 plans).
 
 ### Pending Todos
 
 - Reduce the org-wide open PR queue (still 38 open on 2026-07-08 after opening `autogen#16`) so Phase 35 can run against merged default branches instead of PR-only branches.
 - After the merge queue is materially reduced, run the full Phase 35 verifier stack: workspace-health sweep, branch/default-branch audit, workflow hardening audit, registry resolvability check, and milestone audit/archive workflow.
 - Keep Phase 37 parked until Phase 35 closes; marketing claims must reference the audited milestone, not the current PR-only state.
-- Phase 40-02 (weekly Scheduled Task registration + seeded-regression falsifier drill) depends on 40-01 (this plan) and still needs to run to satisfy REQ-1.5.4's falsifier (2 consecutive weekly evidence runs + a seeded-regression issue).
 
 ### Blockers/Concerns
 
