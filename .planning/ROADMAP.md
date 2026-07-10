@@ -14,7 +14,7 @@
 
 - **Phase 38: Merge Flow & Hygiene Backfill** — auto-merge/merge-queue policy with a real second reviewer; drain-residuals backfill (kept branches, worktree leftovers, root protection decision). *(REQ-1.5.1, 1.5.2)* — **3 plans**
   - [ ] 38-01-PLAN.md — Merge-flow policy & review-bot mechanism (eligibility classifier + critic_cli-gated review-bot App + branch-protection-as-code)
-  - [ ] 38-02-PLAN.md — Residual branch/worktree backfill (squash-aware content gate applied to 6 kept branches; disposition 2 worktree leftovers)
+  - [x] 38-02-PLAN.md — Residual branch/worktree backfill (squash-aware content gate applied to 6 kept branches; disposition 2 worktree leftovers)
   - [ ] 38-03-PLAN.md — Root-repo branch-protection decision & codification (root moves to PR flow)
 - **Phase 39: Release Engineering** — per-repo SemVer + generated release notes on merge; staleness detection in the sweep. *(REQ-1.5.3, 1.5.5)*
 - **Phase 40: Pilot Cadence** — weekly scheduled pilots + fault injections with committed evidence; regression auto-issues. *(REQ-1.5.4)*

@@ -4,8 +4,8 @@ milestone: v1.5
 milestone_name: Delivery Flow and Release Engineering
 status: planning
 stopped_at: "v1.5 bootstrapped from seeds; planners fanning out for phases 38-41."
-last_updated: "2026-07-08T19:30:00Z"
-last_activity: 2026-07-08 - v1.4 milestone completed: merge queue drained (39 PRs), audit flipped to passed, archives written, tag v1.4.
+last_updated: "2026-07-10T10:16:22Z"
+last_activity: 2026-07-10 - Phase 38-02 (squash-aware branch gate + residual dispositions) completed; PR opened against origin/master.
 progress:
   total_phases: 25
   completed_phases: 20
@@ -45,6 +45,7 @@ Last activity: 2026-07-08 - milestone archive + tag.
 | Phase 32 P01+02 | 35min | 0 tasks | 13 files |
 | Phase 29 P01 | 35min | 2 tasks | 4 files |
 | Phase 36 P01+02+03 | PR-only batch | 13 repos + root docs | 50+ docs files |
+| 38 | 02 | ~40min | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -74,12 +75,17 @@ Last activity: 2026-07-08 - milestone archive + tag.
 - [Phase 35]: `autogen`'s current `main` dependency set was proven internally inconsistent in this session. PR `autogen#16` now carries the verified compatibility rollback and all of its GitHub checks are green.
 - [Phase 35]: `cloud-security-service-model#15` was repaired in-session by wrapping the overlong `codex:generate-image` directive in `docs/wiki/Architecture.md`; GitHub lint/CI reran green afterward.
 - [Phase 35]: `Promptimprover#27` was not a real source conflict on 2026-07-08; it was a stale branch-history conflict after `#26` merged via squash. The branch was rebuilt on top of live `master` with only the remaining XSS hardening delta, and fresh CI is now running.
+- [Phase 38-02]: All 6 conservatively-kept branches from the Phase 35 normalization report evaluated RETAIN under the new squash-aware two-dot gate (0 SAFE-TO-DELETE); every corresponding PR is MERGED, so all 6 are flagged as post-merge drift (main advanced with unrelated docs/workflow/loop-coordinator changes after each squash-merge landed), not genuine unmerged work. No branch was deleted; resolving the drift is deferred to an operator follow-up outside this plan's dispositioning-only scope.
+- [Phase 38-02]: `pr-maf-workers` was confirmed NOT a registered git worktree (no `.git`, absent from both root and autogen worktree lists) -- a stray autogen execution-sandbox copy. A full content-uniqueness probe (66 files, `git hash-object` + `--find-object --all` against autogen's full history) found no unique content (62/66 matched existing blobs; the remaining 4 already exist, unchanged or superseded, in autogen's live working tree), so it was moved (never deleted) to `scratch/orphaned-worktrees/pr-maf-workers/`.
+- [Phase 38-02]: `v1.1-cas-contracts` was orphaned residue with its gitdir already gone from `cas-contracts/.git/worktrees/` (no registration on either side); removed directly and re-pruned both repos clean.
 
 ### Pending Todos
 
 - Reduce the org-wide open PR queue (still 38 open on 2026-07-08 after opening `autogen#16`) so Phase 35 can run against merged default branches instead of PR-only branches.
 - After the merge queue is materially reduced, run the full Phase 35 verifier stack: workspace-health sweep, branch/default-branch audit, workflow hardening audit, registry resolvability check, and milestone audit/archive workflow.
 - Keep Phase 37 parked until Phase 35 closes; marketing claims must reference the audited milestone, not the current PR-only state.
+- Phase 38-02 dispositioned the branch/worktree portions of REQ-1.5.2, but the requirement's falsifier also covers "root-repo branch-protection decision executed and documented" -- that is 38-03-PLAN.md's scope and has not run yet; REQ-1.5.2 stays unchecked until 38-03 closes.
+- Operator follow-up (out of scope for 38-02): the 6 RETAIN branches flagged as post-merge drift can likely be deleted directly once confirmed their primary checkouts hold no locally-only work beyond the already-merged PR, or re-gated after rebasing each checkout onto current `main`.
 
 ### Blockers/Concerns
 
@@ -104,8 +110,8 @@ Last activity: 2026-07-08 - milestone archive + tag.
 
 ## Session Continuity
 
-Last session: 2026-07-08T12:00:54.606Z
-Stopped at: Phase 35 audit boundary reached; milestone audit blocked on the open PR queue after live reconciliation through Phase 36.
+Last session: 2026-07-10T10:16:22Z
+Stopped at: Completed 38-02-PLAN.md (squash-aware branch gate + residual dispositions); PR opened against origin/master. 38-01 and 38-03 of Phase 38 remain outstanding.
 Resume file: None
 
 ## Operator Next Steps
