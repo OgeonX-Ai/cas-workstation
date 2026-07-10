@@ -1,0 +1,201 @@
+﻿{
+    "captured_at":  "2026-07-10T13:17:44.8087524+03:00",
+    "backlogPath":  "C:\\PersonalRepo\\worktrees\\phase-41-backlog-survey\\docs\\improvement-backlog.md",
+    "items":  [
+                  {
+                      "Id":  "S1",
+                      "Section":  "Tier 1 — Systemic (highest leverage, fix once, applies org-wide)",
+                      "RawRow":  "| S1 | **Unpinned GitHub Actions** (`@v4`/`@v8` tags, not SHAs) across nearly every repo | Med | ✅ | Pin third-party actions to commit SHAs; enable Dependabot actions updates. Dependabot PRs already open on autopilot-core — adopt org-wide. |"
+                  },
+                  {
+                      "Id":  "S2",
+                      "Section":  "Tier 1 — Systemic (highest leverage, fix once, applies org-wide)",
+                      "RawRow":  "| S2 | **CodeQL language mismatches** — `cloud-security-service-model` runs `javascript` on Bicep; `cas-workstation` runs `python` on PowerShell | Med | ✅ | Set matrix to `actions` (both have workflows) or drop CodeQL for docs-only. cas-platform + `.github` already fixed. |"
+                  },
+                  {
+                      "Id":  "S3",
+                      "Section":  "Tier 1 — Systemic (highest leverage, fix once, applies org-wide)",
+                      "RawRow":  "| S3 | **Over-broad `GITHUB_TOKEN` / missing `permissions:` + `timeout-minutes`** on many workflows | Med | 🔎 | Add least-privilege `permissions:` blocks and job timeouts to shared workflow templates. |"
+                  },
+                  {
+                      "Id":  "S4",
+                      "Section":  "Tier 1 — Systemic (highest leverage, fix once, applies org-wide)",
+                      "RawRow":  "| S4 | **cas-contracts published registry is dead** — `pages.yml` (docs) and `publish-registry.yml` (registry) fight over one Pages site; `schemas.coding-autopilot.dev` unconfigured, so every schema `$id` 404s | High | ✅ | (Task #13) Serve registry under a docs subpath OR publish as GitHub Packages npm OR configure the custom domain + DNS. Unblocks consumer registry-fetch CI (#10). |"
+                  },
+                  {
+                      "Id":  "P1",
+                      "Section":  "Tier 2 — Real, repo-specific",
+                      "RawRow":  "| P1 | cas-platform | `observability.bicep:30-46` hardcodes `publicNetworkAccess: Enabled` (no per-env param). Auth is already AAD-only (`DisableLocalAuth`, resource-permissions), so defense-in-depth, not open door | Med | ✅ |"
+                  },
+                  {
+                      "Id":  "P2",
+                      "Section":  "Tier 2 — Real, repo-specific",
+                      "RawRow":  "| P2 | cas-platform / cloud-security | No `.bicepconfig.json` linting; API versions not consistently pinned | Med | 🔎 |"
+                  },
+                  {
+                      "Id":  "P3",
+                      "Section":  "Tier 2 — Real, repo-specific",
+                      "RawRow":  "| P3 | ci-autopilot | No coverage threshold in CI (`--cov-fail-under`); self-hosted-runner token scope on `fixer.yml`/`runner-health.yml` | Low/Med | 🔎 |"
+                  },
+                  {
+                      "Id":  "P4",
+                      "Section":  "Tier 2 — Real, repo-specific",
+                      "RawRow":  "| P4 | cloud-security | Policy assignment in `DoNotEnforce` audit mode — confirm intent / add tracking ticket | Low | 🔎 |"
+                  },
+                  {
+                      "Id":  "C1",
+                      "Section":  "Tier 3 — Core-code leads (confirm before acting — survey was noisy)",
+                      "RawRow":  "| C1 | gsd-orchestrator | \"Process deadlock in NativeVerifier\" | ❌ **False positive** — async reads start before `WaitForExitAsync`; correct pattern. |"
+                  },
+                  {
+                      "Id":  "C2",
+                      "Section":  "Tier 3 — Core-code leads (confirm before acting — survey was noisy)",
+                      "RawRow":  "| C2 | autogen | \"Shell injection in cli_clients.py\" | ❌ **False positive** — `subprocess.run(list)` with no `shell=True`; no shell interprets input. |"
+                  },
+                  {
+                      "Id":  "C3",
+                      "Section":  "Tier 3 — Core-code leads (confirm before acting — survey was noisy)",
+                      "RawRow":  "| C3 | cas-reference-product | `workflow.py:59` bare `except Exception` loses original cause (no `from`/traceback) | 🔎 plausible, low sev |"
+                  },
+                  {
+                      "Id":  "C4",
+                      "Section":  "Tier 3 — Core-code leads (confirm before acting — survey was noisy)",
+                      "RawRow":  "| C4 | cas-evals | `reference_product.py:49-52` collapses HTTPError/URLError/Timeout/OSError to one \"unavailable\" message, hiding root cause | 🔎 plausible, low sev |"
+                  },
+                  {
+                      "Id":  "C5",
+                      "Section":  "Tier 3 — Core-code leads (confirm before acting — survey was noisy)",
+                      "RawRow":  "| C5 | Promptimprover | Concurrent-write race on blackboard.json; env-var access without defaults | 🔎 plausible, low sev |"
+                  },
+                  {
+                      "Id":  "C6",
+                      "Section":  "Tier 3 — Core-code leads (confirm before acting — survey was noisy)",
+                      "RawRow":  "| C6 | multiple | Missing size limits on subprocess stdin / JSON parse (defensive) | 🔎 low sev |"
+                  },
+                  {
+                      "Id":  "W1",
+                      "Section":  "Tier 0 — Data-loss / integrity risks",
+                      "RawRow":  "| W1 | **Test suites exist nowhere in git.** Root commit `b4e0868` says \"test: add full coverage suites for gsd-orchestrator and autogen\" but contains only `.planning/` + OPERATING-CONTRACT changes. The actual files (`portfolio/gsd-orchestrator/tests/`, `portfolio/autogen/tests/test_autogen.py`) are untracked in their sub-repos, and `portfolio/` is gitignored at root. One disk failure loses both suites. | **High** | ✅ verified |"
+                  },
+                  {
+                      "Id":  "W2",
+                      "Section":  "Tier 0 — Data-loss / integrity risks",
+                      "RawRow":  "| W2 | **Root repo has 10 unpushed commits + large untracked working set** including `GLOBAL_AGENTS.md` (canonical rules referenced by CLAUDE.md), `requirements.txt`, `docs/improvement-backlog.md`, `docs/azure-rollout-plan.md`, all v1.3 `.planning/` records, `engineering-os/personas/`+`scripts/`, and 5 new `scripts/*.ps1`. Entire v1.3 milestone record exists only on this machine. | **High** | ✅ verified |"
+                  },
+                  {
+                      "Id":  "W3",
+                      "Section":  "Tier 0 — Data-loss / integrity risks",
+                      "RawRow":  "| W3 | **`gemini-nano` is a gitlink with no `.gitmodules`** — fresh clones get an empty directory with no URL to restore it from. Add `.gitmodules` or untrack + gitignore. | Med | ✅ verified |"
+                  },
+                  {
+                      "Id":  "W4",
+                      "Section":  "Tier 0.5 — State divergence",
+                      "RawRow":  "| W4 | **15 open PRs across the 13 org repos; every sub-repo is parked on an unmerged feature branch** (`chore/governance-hardening` ×8, dependabot ×2, others). Local reality diverges from what `main` claims everywhere. Run the merge train (see release-process notes), then return checkouts to `main`. | High |"
+                  },
+                  {
+                      "Id":  "W5",
+                      "Section":  "Tier 0.5 — State divergence",
+                      "RawRow":  "| W5 | **Uncommitted engineering-os policy drift**: `OPERATING-CONTRACT.md`, `router/ollama-policy.json`, `ollama-benchmark.json`, `tool-matrix.json`, `models/codex.json` modified but uncommitted — every agent session loads unversioned policy. | Med |"
+                  },
+                  {
+                      "Id":  "H1",
+                      "Section":  "Tier 4 — Hygiene (batch in one cleanup pass)",
+                      "RawRow":  "| H1 | No CI on the root repo (no `.github/workflows/`): `tests/*.Tests.ps1` (workstation contract tests) never run automatically. Add a minimal Pester workflow. |"
+                  },
+                  {
+                      "Id":  "H2",
+                      "Section":  "Tier 4 — Hygiene (batch in one cleanup pass)",
+                      "RawRow":  "| H2 | Sub-repo ignore gaps: `TestResults/` not ignored in gsd-orchestrator; `.coverage` not ignored in autogen. Promptimprover has untracked `package.json`, `dashboard/`, `run-dashboard.ps1` — commit or discard deliberately. |"
+                  },
+                  {
+                      "Id":  "H3",
+                      "Section":  "Tier 4 — Hygiene (batch in one cleanup pass)",
+                      "RawRow":  "| H3 | 14 worktrees under `worktrees/` — several stale (e.g. `cas-workstation-audit` last commit 2026-06-11, `pr-*` copies of merged PRs). Audit + `git worktree prune`/delete. |"
+                  },
+                  {
+                      "Id":  "H4",
+                      "Section":  "Tier 4 — Hygiene (batch in one cleanup pass)",
+                      "RawRow":  "| H4 | Root clutter: `scripts/*.ps1.bak` ×2, `rollback_phase26.ps1`, `rules.json` (branch-protection payload left over from an admin-merge), `test-*.js` ×3, `deep-research-report (4).md`, `ChatGPT Image *.png`, `scratch/`. Delete or move transient artifacts into an ignored `scratch/`. |"
+                  },
+                  {
+                      "Id":  "H5",
+                      "Section":  "Tier 4 — Hygiene (batch in one cleanup pass)",
+                      "RawRow":  "| H5 | No `.gitattributes` at root → CRLF/LF churn warnings on every JSON/md diff. Add `* text=auto eol=lf` (or explicit per-type rules). |"
+                  },
+                  {
+                      "Id":  "H6",
+                      "Section":  "Tier 4 — Hygiene (batch in one cleanup pass)",
+                      "RawRow":  "| H6 | Doc drift: GLOBAL_AGENTS.md \"Workspace Layout\" lists 5 portfolio repos; CLAUDE.md context chain lists 14. Root repo pushes to `OgeonX-Ai/cas-workstation` while `portfolio/cas-workstation` is `Coding-Autopilot-System/cas-workstation` — same name, two orgs; document or rename to avoid mis-targeting. |"
+                  },
+                  {
+                      "Id":  "M1",
+                      "Section":  "Marketing \u0026 Adoption (added 2026-07-08, operator request)",
+                      "RawRow":  "| M1 | **Marketing-as-code showcase site**: Feature Cards + per-phase Story Pages auto-generated from `.planning/` evidence; LinkedIn drafts per phase; demo GIF placeholders; clean-machine quickstart CTA. Strategy: `.planning/phases/37-marketing-and-adoption/37-CONTEXT.md` | 37 |"
+                  },
+                  {
+                      "Id":  "M2",
+                      "Section":  "Marketing \u0026 Adoption (added 2026-07-08, operator request)",
+                      "RawRow":  "| M2 | Record real demo assets (autopilot-demo run GIF, terminal recording of a full goal loop) to replace placeholders | 37 follow-up |"
+                  },
+                  {
+                      "Id":  "M3",
+                      "Section":  "Marketing \u0026 Adoption (added 2026-07-08, operator request)",
+                      "RawRow":  "| M3 | Replace codex:generate-image placeholders across VISION/wikis/marketing with generated visuals (Codex image pipeline) | in progress - started 2026-07-08 with `docs/wiki/Agent-Hierarchy.md` and `docs/VISION.md` |"
+                  },
+                  {
+                      "Id":  "E1",
+                      "Section":  "Elite-enterprise gap analysis (2026-07-08 → milestones v1.5–v1.7, see .planning/milestones/vNEXT-SEEDS.md)",
+                      "RawRow":  "| E1 | Merge flow: human-merge bottleneck (40-PR queue); need merge queue + safe auto-merge + real second reviewer | v1.5/38 |"
+                  },
+                  {
+                      "Id":  "E2",
+                      "Section":  "Elite-enterprise gap analysis (2026-07-08 → milestones v1.5–v1.7, see .planning/milestones/vNEXT-SEEDS.md)",
+                      "RawRow":  "| E2 | No per-repo releases/changelogs/SemVer discipline | v1.5/39 |"
+                  },
+                  {
+                      "Id":  "E3",
+                      "Section":  "Elite-enterprise gap analysis (2026-07-08 → milestones v1.5–v1.7, see .planning/milestones/vNEXT-SEEDS.md)",
+                      "RawRow":  "| E3 | Pilots + fault injections not on a schedule (regression risk) | v1.5/40 |"
+                  },
+                  {
+                      "Id":  "E4",
+                      "Section":  "Elite-enterprise gap analysis (2026-07-08 → milestones v1.5–v1.7, see .planning/milestones/vNEXT-SEEDS.md)",
+                      "RawRow":  "| E4 | Learnings extraction not institutionalized per phase | v1.5/41 |"
+                  },
+                  {
+                      "Id":  "E5",
+                      "Section":  "Elite-enterprise gap analysis (2026-07-08 → milestones v1.5–v1.7, see .planning/milestones/vNEXT-SEEDS.md)",
+                      "RawRow":  "| E5 | No commit/tag signing, provenance, or SBOMs | v1.6/43 |"
+                  },
+                  {
+                      "Id":  "E6",
+                      "Section":  "Elite-enterprise gap analysis (2026-07-08 → milestones v1.5–v1.7, see .planning/milestones/vNEXT-SEEDS.md)",
+                      "RawRow":  "| E6 | Secret-scanning gates unverified; token inventory/rotation undefined | v1.6/44 |"
+                  },
+                  {
+                      "Id":  "E7",
+                      "Section":  "Elite-enterprise gap analysis (2026-07-08 → milestones v1.5–v1.7, see .planning/milestones/vNEXT-SEEDS.md)",
+                      "RawRow":  "| E7 | No self-measurement: DORA metrics, token spend, health trends | v1.6/45 |"
+                  },
+                  {
+                      "Id":  "E8",
+                      "Section":  "Elite-enterprise gap analysis (2026-07-08 → milestones v1.5–v1.7, see .planning/milestones/vNEXT-SEEDS.md)",
+                      "RawRow":  "| E8 | Test quality unmeasured (mutation testing, property-based contract tests) | v1.6/46 |"
+                  },
+                  {
+                      "Id":  "E9",
+                      "Section":  "Elite-enterprise gap analysis (2026-07-08 → milestones v1.5–v1.7, see .planning/milestones/vNEXT-SEEDS.md)",
+                      "RawRow":  "| E9 | Clean-machine bootstrap unproven; community files incomplete | v1.7/48 |"
+                  },
+                  {
+                      "Id":  "E10",
+                      "Section":  "Elite-enterprise gap analysis (2026-07-08 → milestones v1.5–v1.7, see .planning/milestones/vNEXT-SEEDS.md)",
+                      "RawRow":  "| E10 | No disaster-restore drill / documented RTO | v1.7/50 |"
+                  },
+                  {
+                      "Id":  "E11",
+                      "Section":  "Elite-enterprise gap analysis (2026-07-08 → milestones v1.5–v1.7, see .planning/milestones/vNEXT-SEEDS.md)",
+                      "RawRow":  "| E11 | REQUIREMENTS.md format blocks `requirements.mark-complete` tooling (hit by 3 agents) | v1.5/38 (quick fix eligible) |"
+                  }
+              ]
+}
