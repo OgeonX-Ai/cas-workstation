@@ -29,13 +29,18 @@
   review only -- no review-bot App on that org, see docs/merge-flow-policy.md
   Root repo section). Without this switch, requiring a check context that no
   workflow ever reports would leave every PR permanently blocked.
+.PARAMETER RequireCodeOwnerReviews
+  Set required_pull_request_reviews.require_code_owner_reviews = true. Use
+  this for repos that have a CODEOWNERS file whose assignment should be
+  enforced (e.g. the root repo, see CODEOWNERS at the repo root). Defaults
+  to false to preserve existing behavior for repos without one.
 .PARAMETER DryRun
   Prints the exact protection payload per repo without calling the GitHub
   API PUT. Use this to review before applying for real.
 .EXAMPLE
   pwsh -File apply-branch-protection.ps1 -DryRun -Repos autogen
   pwsh -File apply-branch-protection.ps1 -Repos org-dotgithub
-  pwsh -File apply-branch-protection.ps1 -Owner OgeonX-Ai -Repos cas-workstation -SkipEligibilityCheck -DryRun
+  pwsh -File apply-branch-protection.ps1 -Owner OgeonX-Ai -Repos cas-workstation -SkipEligibilityCheck -RequireCodeOwnerReviews -DryRun
 #>
 [CmdletBinding()]
 param(
@@ -47,6 +52,8 @@ param(
     [string[]]$RequiredChecks = @(),
 
     [switch]$SkipEligibilityCheck,
+
+    [switch]$RequireCodeOwnerReviews,
 
     [switch]$DryRun
 )
@@ -62,7 +69,7 @@ function Get-DefaultBranch {
 }
 
 function New-ProtectionPayload {
-    param([string[]]$Contexts)
+    param([string[]]$Contexts, [bool]$RequireCodeOwnerReviews = $false)
     return [ordered]@{
         required_status_checks        = [ordered]@{
             strict   = $true
@@ -72,7 +79,7 @@ function New-ProtectionPayload {
         required_pull_request_reviews  = [ordered]@{
             required_approving_review_count = 1
             dismiss_stale_reviews           = $false
-            require_code_owner_reviews      = $false
+            require_code_owner_reviews      = $RequireCodeOwnerReviews
         }
         restrictions                   = $null
         required_linear_history        = $false
@@ -88,7 +95,7 @@ foreach ($repoName in $Repos) {
     $contexts = @($contexts | Select-Object -Unique)
 
     $defaultBranch = Get-DefaultBranch -OwnerName $Owner -RepoName $repoName
-    $payload = New-ProtectionPayload -Contexts $contexts
+    $payload = New-ProtectionPayload -Contexts $contexts -RequireCodeOwnerReviews $RequireCodeOwnerReviews.IsPresent
     $payloadJson = $payload | ConvertTo-Json -Depth 6
 
     Write-Host ("Repo: {0}/{1}  Default branch: {2}" -f $Owner, $repoName, $defaultBranch)
