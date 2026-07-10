@@ -53,3 +53,54 @@ pwsh -File scripts/squash-aware-branch-gate.ps1 -RepoPath <portfolio/repo> -Bran
 All six flags share the same root cause: `main` in each sub-repo has advanced (workflow-file and docs/wiki updates, and in gsd-orchestrator's case further loop-coordinator work) since each branch's PR was squash-merged, and none of the six local branches were ever rebased or deleted afterward. The squash-aware gate correctly refuses to delete any of them because their trees are no longer identical to current `main` -- but the non-identity is `main` drifting away, not the branch carrying unmerged work. Recommended operator follow-up (out of scope for this plan, which is dispositioning-only per its own instruction not to force-merge/push): once confirmed no branch has locally-only work beyond its already-merged PR, delete these six local branches directly (`git branch -D <branch>` on each, since content is already merged upstream), or re-run this gate after each corresponding primary checkout is fast-forwarded/rebased onto current `main`.
 
 No branch was deleted on a non-empty tree diff (fail-closed proven in Task 1's Pester suite and reproduced here operationally: `Deleted: false` in every one of the six live runs above).
+
+---
+
+## Part 2: The 2 Worktree Leftovers
+
+### 2a. `C:/PersonalRepo/worktrees/v1.1-cas-contracts` -- orphaned/broken worktree
+
+**Disposition: REMOVED + PRUNED.**
+
+- `git -C C:/PersonalRepo/portfolio/cas-contracts worktree list --porcelain` showed only the primary checkout (`C:/PersonalRepo/portfolio/cas-contracts`, branch `main`) -- no `v1.1-cas-contracts` entry.
+- The stray `.git` file inside the directory pointed to `gitdir: /mnt/c/PersonalRepo/portfolio/cas-contracts/.git/worktrees/v1.1-cas-contracts` -- a WSL-style path that does not resolve on Windows, and `cas-contracts/.git/worktrees/` did not even exist (0 entries), confirming the registration had already been torn down on the cas-contracts side, leaving pure orphaned directory residue.
+- `git status` inside the directory failed with `fatal: not a git repository: /mnt/c/PersonalRepo/portfolio/cas-contracts/.git/worktrees/v1.1-cas-contracts` -- no readable HEAD, so no unpushed work could exist to lose.
+- Ran `git -C portfolio/cas-contracts worktree prune -v` (no output -- nothing to prune, confirming no dangling registration).
+- Removed the stale directory directly (`Remove-Item`/`rm -rf` on the single named orphaned path -- not `git clean`).
+- Re-ran `git worktree prune -v` on both `portfolio/cas-contracts` and the root repo -- both clean, no dangling registration.
+- Confirmed: `C:/PersonalRepo/worktrees/v1.1-cas-contracts` no longer exists.
+
+### 2b. `C:/PersonalRepo/worktrees/pr-maf-workers` -- NOT a registered worktree (stray execution-sandbox copy)
+
+**Disposition: MOVED to `C:/PersonalRepo/scratch/orphaned-worktrees/pr-maf-workers/`.**
+
+**Step 1 -- registration verified absent:** No `.git` file or directory inside `pr-maf-workers`. `git -C C:/PersonalRepo worktree list --porcelain` (root) and `git -C portfolio/autogen worktree list --porcelain` both list only their own real worktrees (the four Claude Code phase worktrees on the root side; only the primary checkout on the autogen side) -- `pr-maf-workers` appears in neither. Confirmed NOT a registered git worktree; the `git worktree remove` guard/unpushed-commit-count path from `<key_links>` is a no-op here by design, per the plan's Task 3 correction.
+
+**Step 2 -- content-uniqueness probe:** Directory contents mirror `portfolio/autogen`'s structure (`maf_starter/`, `autogen_dashboard/`, `autogen_starter/`, `entities/`, `tests/`, plus `.venv/`). Probed all 66 non-`.venv`, non-`__pycache__` tracked-shape files (every file under the directory except the venv and bytecode cache) with:
+
+```
+git hash-object <file>
+git -C portfolio/autogen log --all --format=%H -1 --find-object=<hash>
+```
+
+Result: **62/66 files matched an existing blob somewhere in `portfolio/autogen`'s full history** (`--all`), including every one of the largest/newest files (`autogen_dashboard/static/app.js`, `autogen_dashboard/session_runner.py`, `maf_starter/orchestration.py`, `maf_starter/provider_fallback.py`, `maf_starter/loop_worker_cli.py`, `maf_starter/approval_policy.py`, etc.) -- proving this directory is a stray snapshot taken from `autogen` at an earlier point, not novel work.
+
+The remaining 4 files (`AGENTS.md`, `entities/context.md`, `autogen_dashboard/context.md`, `maf_starter/context.md`) returned no `--find-object` match. Deeper check: all 4 paths exist in `portfolio/autogen`'s CURRENT working tree today (`entities/context.md`, `autogen_dashboard/context.md`, `maf_starter/context.md` are byte-identical; `AGENTS.md` differs only because the live copy in `autogen` is STRICTLY NEWER -- it contains everything the sandbox copy has plus an added "NO AZURE" hard-lock section and one extra context-directory line, i.e. the sandbox copy is a subset/older revision, not unique content). These 4 files were never committed to autogen's git history (hence no `--find-object` hit), but their content already lives, uncommitted, in the real `portfolio/autogen` checkout right now.
+
+A recursive diff (`diff -rq`, scoped to the mirrored top-level directories `maf_starter/`, `tests/`, `entities/`, `autogen_dashboard/`, `autogen_starter/`) shows most files "differ" from autogen's CURRENT tree -- but that is expected: autogen has continued development since this snapshot was taken (new files such as `maf_starter/cli.py`, `tests/smoke_test.py`, `autogen_dashboard/blueprints.py` exist only in the live repo). Divergence from the current tip is not the uniqueness test; the `--all`-history `--find-object` probe above is, and it found no unique blob.
+
+**Conclusion: no unique content found.** Per the plan's move-not-delete path:
+
+```
+Move-Item C:/PersonalRepo/worktrees/pr-maf-workers -> C:/PersonalRepo/scratch/orphaned-worktrees/pr-maf-workers
+```
+
+The move (including the `.venv/` subdirectory) completed in a single operation with no unlinkable-file failure this time; nothing was left behind at the source, and the full directory (all 172 entries, including `.venv/lib64` and `pyvenv.cfg`) landed intact at the destination. Verified: source path gone, destination path present with contents. The directory was never `git worktree remove`d (correctly, since it was never registered) and was never deleted outright.
+
+### Workspace-health sweep (post-disposition)
+
+```
+pwsh -File scripts/workspace-health.ps1 -Json
+```
+
+No `stale-worktree`, `worktree-missing`, or `worktree-unix-path` findings for `root` or `portfolio/cas-contracts` (the two categories/repos this task's dispositions affect). Remaining findings across other repos (dirty/off-default-branch/credential-helper/non-ascii-ps1/unpushed on unrelated repos such as Promptimprover, ci-autopilot, gsd-orchestrator, gemini-nano, etc.) are pre-existing and out of scope for this plan -- foreign dirty files and unrelated repo state are untouchable per the Agent-Hierarchy concurrency rule.
