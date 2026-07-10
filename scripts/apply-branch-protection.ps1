@@ -22,13 +22,20 @@
   Extra required status check contexts to add alongside
   'automerge-eligibility' (e.g. the repo's own CI workflow job name).
   Optional; defaults to none.
+.PARAMETER SkipEligibilityCheck
+  Do not require the 'automerge-eligibility' status check context. Use this
+  for repos that do NOT have the review-bot/classifier workflow installed
+  (e.g. the root repo OgeonX-Ai/cas-workstation, which is PR-flow-with-
+  review only -- no review-bot App on that org, see docs/merge-flow-policy.md
+  Root repo section). Without this switch, requiring a check context that no
+  workflow ever reports would leave every PR permanently blocked.
 .PARAMETER DryRun
   Prints the exact protection payload per repo without calling the GitHub
   API PUT. Use this to review before applying for real.
 .EXAMPLE
   pwsh -File apply-branch-protection.ps1 -DryRun -Repos autogen
   pwsh -File apply-branch-protection.ps1 -Repos org-dotgithub
-  pwsh -File apply-branch-protection.ps1 -Owner OgeonX-Ai -Repos cas-workstation -DryRun
+  pwsh -File apply-branch-protection.ps1 -Owner OgeonX-Ai -Repos cas-workstation -SkipEligibilityCheck -DryRun
 #>
 [CmdletBinding()]
 param(
@@ -38,6 +45,8 @@ param(
     [string]$Owner = 'Coding-Autopilot-System',
 
     [string[]]$RequiredChecks = @(),
+
+    [switch]$SkipEligibilityCheck,
 
     [switch]$DryRun
 )
@@ -74,7 +83,8 @@ function New-ProtectionPayload {
 
 $results = @()
 foreach ($repoName in $Repos) {
-    $contexts = @('automerge-eligibility') + @($RequiredChecks)
+    $baseContexts = if ($SkipEligibilityCheck) { @() } else { @('automerge-eligibility') }
+    $contexts = @($baseContexts) + @($RequiredChecks)
     $contexts = @($contexts | Select-Object -Unique)
 
     $defaultBranch = Get-DefaultBranch -OwnerName $Owner -RepoName $repoName
