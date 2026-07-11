@@ -54,8 +54,12 @@ Then:
 
 ## Reusable workflow pin rule
 
-Pin reusable workflows to the **merged `main` commit SHA**, never a PR branch tip
-— squash-merge deletes branches and strands the SHA.
+For a **cross-repository** reusable workflow, pin to an immutable commit SHA
+already reachable from the provider repository's default branch, never a PR
+branch tip. For a **same-repository** workflow, use the relative
+`./.github/workflows/<file>.yml` form so caller and implementation run from
+the same reviewed commit. Squash-merge deletes branches and strands branch-tip
+SHAs.
 
 Learned 2026-07-11 (Phase 42 pre-verification blocker #1): all 13 repos'
 `.github/workflows/release-please.yml` pinned the reusable workflow call to
@@ -69,7 +73,7 @@ part of that history and become orphaned once the source branch is deleted.
 
 Before pinning a `uses: <repo>/.github/workflows/<file>.yml@<sha>` reference:
 
-1. Confirm the SHA is on the target repo's default branch, not just a PR
+1. For a cross-repository call, confirm the SHA is on the target repo's default branch, not just a PR
    branch: `gh api repos/<org>/<repo>/compare/<default>...<sha> --jq .status`
    must return `identical` or `behind` (never `diverged` or `ahead` only from
    an unmerged branch).
@@ -77,3 +81,5 @@ Before pinning a `uses: <repo>/.github/workflows/<file>.yml@<sha>` reference:
 3. Prefer pinning to the exact merge commit SHA on `main`, not the tip of a
    feature branch that is about to be squash-merged — the two are usually
    different commits and only the merge commit survives.
+4. For a same-repository call, use the relative form rather than a self-pin;
+   a self-pin freezes execution to an older implementation revision.
