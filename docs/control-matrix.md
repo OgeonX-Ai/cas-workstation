@@ -10,7 +10,7 @@ evidence than about a decorative spreadsheet.
 |---|---|---|---|
 | Asset inventory | ISO 27001, NIS2, CSF Identify | [Asset Inventory](asset-inventory.md) | Partial |
 | Data classification | ISO 27001, NIS2, CSF Protect | [Data Classification Baseline](data-classification-baseline.md), `evidence/compliance/data-classification.csv` | Partial |
-| Risk management | ISO 27001, DORA, NIS2, CSF Govern | [Risk Register](risk-register.md), `cloud-security-service-model/docs/09-risk-management.md` | Partial |
+| Risk management | ISO 27001, DORA, NIS2, CSF Govern | [Risk Register](risk-register.md), `evidence/compliance/risk-register.csv`, `evidence/compliance/risk-review-log.csv`, `cloud-security-service-model/docs/09-risk-management.md` | Partial |
 | Incident response | ISO 27001, DORA, NIS2, CSF Respond | [Incident Standard](incident-standard.md), `evidence/compliance/incident-management.csv`, `cloud-security-service-model/docs/11-incident-response.md` | Partial |
 | Audit evidence handling | ISO 27001, DORA | `cloud-security-service-model/docs/10-audit-readiness.md` | Partial |
 | BCDR and resilience | DORA, NIS2, ISO 27001, CSF Recover | [BCDR Baseline](bcdr-baseline.md), `evidence/compliance/bcdr-objectives.csv`, `evidence/compliance/recovery-drills.csv` | Partial |
@@ -18,7 +18,7 @@ evidence than about a decorative spreadsheet.
 | Secure development lifecycle | NIST SSDF, CSF Protect | repo CI, workflow linting, code review patterns | Partial |
 | Public governance posture | ISO 27001, SOC 2 trust expectations | root governance files, repo policies, live Pages sites | Partial |
 | Access review baseline | ISO 27001, DORA, NIS2 | [Access Review Baseline](access-review-baseline.md), `evidence/compliance/access-governance.csv`, `evidence/compliance/access-review-log.csv`, `evidence/compliance/snapshots/` | Partial |
-| Change management | ISO 27001, DORA, NIST SSDF | [Change Management Baseline](change-management-baseline.md), `evidence/compliance/change-management.csv` | Partial |
+| Change management | ISO 27001, DORA, NIST SSDF | [Change Management Baseline](change-management-baseline.md), `evidence/compliance/change-management.csv`, `evidence/compliance/emergency-change-log.csv` | Partial |
 | Evidence retention | ISO 27001, DORA, SOC 2 | [Evidence Retention Baseline](evidence-retention-baseline.md), `evidence/compliance/evidence-retention.csv` | Partial |
 | Vulnerability management | ISO 27001, NIST CSF Protect, SSDF | [Vulnerability Management Baseline](vulnerability-management-baseline.md), `evidence/compliance/vulnerability-management.csv` | Partial |
 

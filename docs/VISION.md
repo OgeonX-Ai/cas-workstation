@@ -3,7 +3,7 @@
 > **Speed without governance creates risk. Governance without speed creates irrelevance.**
 > CAS (Coding-Autopilot-System) is built on the position that this is a false trade-off: when governance is executable — schemas, gates, and evidence instead of meeting minutes — it *is* the speed.
 
-<!-- codex:generate-image prompt="Hero banner: an assembly line where autonomous robot arms write code, and every station has a transparent glass quality gate stamping a green seal; isometric, enterprise blue/graphite palette, subtle circuit motifs, wide banner format" style="isometric, enterprise, clean" replaces="none" -->
+![Hero banner](assets/hero-banner.png)
 
 ## The problem
 
@@ -21,7 +21,6 @@ CAS is a working system — 13 production repositories plus a workstation contro
 
 ![Governed autonomy system diagram](assets/governed-autonomy.png)
 
-<!-- codex:generate-image prompt="Executive architecture infographic for governed AI software delivery: three large interlocking mechanisms representing Control, Execution, and Governance arranged left to right inside a clean enterprise system diagram. Control appears as a cobalt scheduling tower with timeline rings and admission gates. Execution appears as disciplined robot worker cells passing code artifacts along a luminous conveyor. Governance appears as a shielded verification complex with schema panels, evidence vaults, and a green decision gate that routes either to merge or bounded repair. Show artifacts flowing through the whole system with glass overlays, subtle telemetry lines, premium white presentation background, blue-graphite-teal palette, isometric perspective, crisp non-cartoon enterprise style, no text labels embedded in image." style="isometric, enterprise, premium infographic" replaces="mermaid-above" asset="docs/assets/governed-autonomy.png" -->
 
 Three planes, strictly separated:
 
@@ -33,19 +32,7 @@ Three planes, strictly separated:
 
 ## Every change runs the same SDLC loop
 
-```mermaid
-flowchart TD
-    A[Plan<br/>phase contract with threat model] --> B[Execute<br/>agent fan-out, one owner per repo]
-    B --> C[Test<br/>ratcheted branch-coverage gates]
-    C --> D[Verify<br/>goal-backward evidence check]
-    D --> E[Review<br/>PR, branch protection, two-party approval]
-    E --> F[Audit<br/>milestone verification vs falsifiable requirements]
-    F -->|drift found| A
-    C -.->|coverage regression| B
-    D -.->|gaps| B
-```
-
-<!-- codex:generate-image prompt="Circular racetrack with six pit-stop stations labeled Plan, Execute, Test, Verify, Review, Audit; a sleek car made of code symbols racing through; each station has a gate barrier that only opens on green; isometric, enterprise" style="isometric, enterprise, clean" replaces="mermaid-above" -->
+![SDLC loop](assets/sdlc-loop-racetrack.png)
 
 The loop is not aspirational — each gate is a running control with a falsifiable check:
 
@@ -58,18 +45,7 @@ The loop is not aspirational — each gate is a running control with a falsifiab
 
 ## Modular agents, priced to the task
 
-```mermaid
-flowchart TD
-    O[Orchestrator<br/>frontier model, full context] --> PL[Planner agents<br/>mid-tier]
-    O --> EX[Executor agents<br/>mid-tier, one repo each]
-    O --> VR[Verifier / critic agents<br/>mid-tier]
-    O --> DOC[Doc & housekeeping agents<br/>small models]
-    PL -->|plans as contracts| EX
-    EX -->|evidence| VR
-    style O fill:#1f6feb,color:#fff
-```
-
-<!-- codex:generate-image prompt="Organizational chart of robots: one large conductor robot on top with a baton, delegating to rows of medium specialist robots (blueprint, wrench, magnifying glass icons) and small clerk robots with clipboards; price tags shrink down the hierarchy; isometric, enterprise" style="isometric, enterprise, clean" replaces="mermaid-above" -->
+![Modular agents org chart](assets/modular-agents-org-chart.png)
 
 The orchestrator delegates through **typed sub-agents** (planner, executor, verifier, critic, doc-writer), each with a scoped toolset and an explicitly chosen model tier — frontier reasoning only where it pays, small models for mechanical work. Specialist agents deliberately *cannot* spawn their own sub-agents; delegation depth is a governance decision, not an accident. The result: parallel throughput of a team, token cost of a task queue, and an audit trail for every decision.
 

@@ -11,13 +11,13 @@ CSF, NIST SSDF, and SLSA-style scrutiny.
 | Gap | Framework pressure | Current state | Needed evidence |
 |---|---|---|---|
 | Portfolio asset inventory | ISO 27001, NIS2, CSF | Authoritative repo inventory now includes delegate ownership, runtime surface, and recovery tier, but non-GitHub infrastructure inventory remains partial | Repo/system inventory with owner, criticality, data sensitivity, runtime surface |
-| Risk register | ISO 27001, DORA, NIS2, CSF | Unified register now tracks due dates, residual risk, and linked controls, but acceptance evidence and overdue escalation remain partial | Central risk log with owner, treatment, due date, residual risk |
+| Risk register | ISO 27001, DORA, NIS2, CSF | Unified register now tracks due dates, residual risk, linked controls, and a freshness-checked derived review ledger, but independent residual-risk acceptance evidence and explicit overdue escalation proof remain partial | Central risk log with owner, treatment, due date, residual risk |
 | Continuity and recovery | DORA, NIS2, ISO 27001 | Portfolio BCDR baseline now includes per-asset objectives and drill evidence, but restore cadence and dependency coverage remain partial | RTO/RPO, backup scope, recovery owners, test cadence |
 | Incident management baseline | DORA, NIS2, ISO 27001 | Portfolio baseline and tabletop evidence now exist, but live incident history is still thin | Severity matrix, escalation path, evidence template, post-incident loop, repeated exercises |
 | Supplier and dependency governance | ISO 27001, DORA, NIS2, SLSA | Baseline and supplier review ledger now exist, but cadence history and exception usage remain partial | Dependency review policy, supplier register, exception records |
 | SBOM and provenance publication | SLSA, SSDF, DORA | Portfolio provenance ledger now exists, but most repos still stop at SBOM or local evidence rather than attested workflows | Artifact SBOMs, provenance/signing outputs, verifier workflow results |
 | Access review and privileged control evidence | ISO 27001, DORA, NIS2 | Governance ledger and review evidence now exist, but identity-platform export and multi-owner approval evidence remain partial | Access owner list, review cadence, privileged-path audit evidence |
-| Change management evidence | ISO 27001, DORA | Baseline, live fleet-wide minimum approval enforcement, and evidence capture now exist, but emergency-change approval trails remain partial | Change classes, approval model, emergency path, rollback evidence |
+| Change management evidence | ISO 27001, DORA | Baseline, live fleet-wide minimum approval enforcement, branch-protection evidence, and a 365-day emergency-change review ledger now exist, but labeled PR history is still not a full approval trail | Change classes, approval model, emergency path, rollback evidence |
 
 ## Medium priority gaps
 

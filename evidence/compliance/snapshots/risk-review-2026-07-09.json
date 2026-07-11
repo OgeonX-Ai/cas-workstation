@@ -1,0 +1,71 @@
+{
+  "captured_at": "2026-07-09T19:38:03.937072+00:00",
+  "reviews": [
+    {
+      "risk_id": "CAS-R001",
+      "review_date": "2026-07-09",
+      "residual_decision": "mitigate",
+      "acceptance_status": "mitigation-in-flight",
+      "acceptance_owner": "",
+      "acceptance_evidence_ref": "",
+      "escalation_status": "not-due",
+      "escalation_evidence_ref": "",
+      "notes": "Derived from risk register due dates and statuses; not independent acceptance evidence"
+    },
+    {
+      "risk_id": "CAS-R002",
+      "review_date": "2026-07-09",
+      "residual_decision": "mitigate",
+      "acceptance_status": "mitigation-in-flight",
+      "acceptance_owner": "",
+      "acceptance_evidence_ref": "",
+      "escalation_status": "not-due",
+      "escalation_evidence_ref": "",
+      "notes": "Derived from risk register due dates and statuses; not independent acceptance evidence"
+    },
+    {
+      "risk_id": "CAS-R003",
+      "review_date": "2026-07-09",
+      "residual_decision": "mitigate",
+      "acceptance_status": "mitigation-in-flight",
+      "acceptance_owner": "",
+      "acceptance_evidence_ref": "",
+      "escalation_status": "not-due",
+      "escalation_evidence_ref": "",
+      "notes": "Derived from risk register due dates and statuses; not independent acceptance evidence"
+    },
+    {
+      "risk_id": "CAS-R004",
+      "review_date": "2026-07-09",
+      "residual_decision": "mitigate",
+      "acceptance_status": "mitigation-in-flight",
+      "acceptance_owner": "",
+      "acceptance_evidence_ref": "",
+      "escalation_status": "not-due",
+      "escalation_evidence_ref": "",
+      "notes": "Derived from risk register due dates and statuses; not independent acceptance evidence"
+    },
+    {
+      "risk_id": "CAS-R005",
+      "review_date": "2026-07-09",
+      "residual_decision": "mitigate",
+      "acceptance_status": "mitigation-in-flight",
+      "acceptance_owner": "",
+      "acceptance_evidence_ref": "",
+      "escalation_status": "not-due",
+      "escalation_evidence_ref": "",
+      "notes": "Derived from risk register due dates and statuses; not independent acceptance evidence"
+    },
+    {
+      "risk_id": "CAS-R006",
+      "review_date": "2026-07-09",
+      "residual_decision": "mitigate",
+      "acceptance_status": "mitigation-in-flight",
+      "acceptance_owner": "",
+      "acceptance_evidence_ref": "",
+      "escalation_status": "not-due",
+      "escalation_evidence_ref": "",
+      "notes": "Derived from risk register due dates and statuses; not independent acceptance evidence"
+    }
+  ]
+}

@@ -2,6 +2,7 @@ artifact_type,source,owner,retention_rule,retention_days,status
 asset_inventory,evidence/compliance/asset-inventory.csv,Portfolio maintainer,keep latest ledger and quarterly snapshots,365,active
 data_classification,evidence/compliance/data-classification.csv,Portfolio maintainer,keep current year and previous year of classification ledgers,730,active
 risk_register,evidence/compliance/risk-register.csv,Portfolio maintainer,keep active register and previous quarter,365,active
+risk_review,evidence/compliance/risk-review-log.csv,Portfolio maintainer,keep current year and previous year of risk review ledgers,730,active
 access_review,evidence/compliance/access-review-log.csv,Portfolio maintainer,keep current year and previous year,730,active
 access_governance,evidence/compliance/access-governance.csv,Portfolio maintainer,keep current year and previous year of governance baselines,730,active
 recovery_drill,evidence/compliance/recovery-drills.csv,Portfolio maintainer,keep current year and previous year,730,active
@@ -12,6 +13,7 @@ supply_chain,evidence/compliance/supply-chain-controls.csv,Portfolio maintainer,
 release_evidence,evidence/compliance/release-evidence.csv,Portfolio maintainer,keep latest ledger and prior quarter snapshots,180,active
 sbom,evidence/compliance/sbom-evidence.csv,Portfolio maintainer,keep current generated set and prior quarter snapshots,180,active
 change_management,evidence/compliance/change-management.csv,Portfolio maintainer,keep current quarter and previous quarter,180,active
+emergency_change,evidence/compliance/emergency-change-log.csv,Portfolio maintainer,keep current year and previous year of emergency-change reviews,730,active
 vulnerability_management,evidence/compliance/vulnerability-management.csv,Portfolio maintainer,keep current month and prior quarter snapshots,180,active
 attested_bundle,GitHub Actions compliance workflow artifacts,Portfolio maintainer,retain for repo maximum artifact retention window,90,active
 provenance_evidence,evidence/compliance/provenance-evidence.csv,Portfolio maintainer,keep current year and previous year of provenance ledgers,730,active

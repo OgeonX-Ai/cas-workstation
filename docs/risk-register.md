@@ -19,6 +19,13 @@ Scoring:
 | CAS-R005 | Incident response remains underexercised despite the new baseline | 12 | Portfolio maintainer | 2026-09-30 | Medium | CAS-CF-003 | Open |
 | CAS-R006 | Protected repos may lag governance updates because changes require PR flow and explicit merge attention | 9 | Portfolio maintainer | 2026-08-31 | Medium | CAS-CF-008 | Open |
 
+## Current evidence
+
+- Machine-readable register: `evidence/compliance/risk-register.csv`
+- Residual-review and overdue-escalation ledger: `evidence/compliance/risk-review-log.csv`
+- Snapshot generator: `scripts/capture-risk-review-evidence.py`
+- Exception evidence: `evidence/compliance/exception-register.csv`
+
 ## Review cadence
 
 - Monthly: top open risks and remediation progress
@@ -37,6 +44,7 @@ A risk is not closed by writing documentation alone. It closes only when:
 
 ## Current limitations
 
-- Residual risk is now tracked explicitly, but there is still no second-owner acceptance trail.
-- Due dates are now recorded, but overdue escalation handling is not yet automated.
+- Residual risk is now tracked explicitly, and a derived review ledger now
+  records acceptance state and overdue-escalation state for every risk, but it
+  is still not an independent second-owner acceptance trail.
 - The register still reflects portfolio-maintainer ownership concentration rather than a broader operating model.

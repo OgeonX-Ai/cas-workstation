@@ -2,6 +2,28 @@
 
 Repeatable procedure for landing a batch of PRs across the 13 `Coding-Autopilot-System` repos. First drafted 2026-07-06 for Phase 30 (Release Train & Branch Hygiene); keep updated as the process evolves.
 
+## Auto-merge flow supersedes the manual train for the in-class category (Phase 38)
+
+As of Phase 38, dependabot/docs-only PRs no longer need this manual runbook.
+See [`docs/merge-flow-policy.md`](merge-flow-policy.md) for the full
+mechanism: a fail-closed classifier (required check `automerge-eligibility`)
+plus the `cas-review-bot` GitHub App (gated on the autogen `critic_cli` and
+green CI) approves and auto-merges the in-class category with zero manual
+action.
+
+**This runbook remains the procedure for:**
+- Any PR classified OUT-OF-CLASS (touches executable, workflow, or non-docs
+  files) — the review-bot never approves these; they need real human review
+  and, if self-authored, the `enforce_admins` temp-relax/restore procedure
+  below.
+- Bulk historical drains (e.g. the Phase 31 hardening sweep, Phase 36 docs
+  batch) where many PRs land in a coordinated order.
+- The root repo (`OgeonX-Ai/cas-workstation`), which is now PR-flow with
+  required review (Plan 38-03) but does **not** have the review-bot App
+  installed — every root PR goes through ordinary human review, and the
+  `enforce_admins` temp-relax/restore section below is root's documented
+  break-glass for the solo admin/sole-reviewer case.
+
 ## Preconditions
 
 - `gh auth status` OK with admin on the org repos.
@@ -19,16 +41,17 @@ Repeatable procedure for landing a batch of PRs across the 13 `Coding-Autopilot-
 
 ```powershell
 $repo = "Coding-Autopilot-System/<name>"
+$branch = gh api "repos/$repo" --jq .default_branch
 # 1. Verify CI green on the PR
 gh pr checks <num> --repo $repo
 # 2a. Reviewed PR (or dependabot): normal merge
 gh pr merge <num> --repo $repo --squash --delete-branch
 # 2b. Self-authored + blocked: temp-relax enforce_admins (re-enable IMMEDIATELY after)
-gh api -X DELETE "repos/$repo/branches/main/protection/enforce_admins"
+gh api -X DELETE "repos/$repo/branches/$branch/protection/enforce_admins"
 gh pr merge <num> --repo $repo --squash --delete-branch --admin
-gh api -X POST "repos/$repo/branches/main/protection/enforce_admins"
+gh api -X POST "repos/$repo/branches/$branch/protection/enforce_admins"
 # 3. Confirm protection restored
-gh api "repos/$repo/branches/main/protection/enforce_admins" --jq .enabled   # must be true
+gh api "repos/$repo/branches/$branch/protection/enforce_admins" --jq .enabled   # must be true
 ```
 
 ## After the train
@@ -51,3 +74,35 @@ Then:
 - Never leave `enforce_admins` disabled — relax and restore in the same sitting, verify with the `--jq .enabled` check.
 - Never merge a PR with red CI to "unblock" the train; fix or defer it.
 - If two PRs on one repo conflict, land oldest first, rebase the second via `gh pr update-branch`.
+
+## Reusable workflow pin rule
+
+For a **cross-repository** reusable workflow, pin to an immutable commit SHA
+already reachable from the provider repository's default branch, never a PR
+branch tip. For a **same-repository** workflow, use the relative
+`./.github/workflows/<file>.yml` form so caller and implementation run from
+the same reviewed commit. Squash-merge deletes branches and strands branch-tip
+SHAs.
+
+Learned 2026-07-11 (Phase 42 pre-verification blocker #1): all 13 repos'
+`.github/workflows/release-please.yml` pinned the reusable workflow call to
+`f288e5e3b67b29a2c08880b76da7b852f4a132d0`, the tip commit of the source
+branch for `.github` PR #16. When that PR squash-merged, the branch was
+deleted and the pinned SHA became unreachable — every push-triggered
+`release-please` run failed with "workflow was not found" from that point
+on. Squash-merge rewrites history into a single new commit on `main`; the
+original branch-tip commits (and any SHA pinned to one of them) are never
+part of that history and become orphaned once the source branch is deleted.
+
+Before pinning a `uses: <repo>/.github/workflows/<file>.yml@<sha>` reference:
+
+1. For a cross-repository call, confirm the SHA is on the target repo's default branch, not just a PR
+   branch: `gh api repos/<org>/<repo>/compare/<default>...<sha> --jq .status`
+   must return `identical` or `behind` (never `diverged` or `ahead` only from
+   an unmerged branch).
+2. Confirm the referenced workflow file exists at that SHA.
+3. Prefer pinning to the exact merge commit SHA on `main`, not the tip of a
+   feature branch that is about to be squash-merged — the two are usually
+   different commits and only the merge commit survives.
+4. For a same-repository call, use the relative form rather than a self-pin;
+   a self-pin freezes execution to an older implementation revision.

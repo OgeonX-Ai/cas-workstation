@@ -20,6 +20,8 @@ pipeline.
 
 ## What It Manages
 
+![CAS Workstation Hub](docs/assets/cas-workstation-hub.png)
+
 - Core developer tooling: Git, GitHub CLI, Node.js, Python, uv, .NET, Docker,
   Azure CLI, WSL
 - AI coder CLIs: Codex, Claude Code, Gemini CLI

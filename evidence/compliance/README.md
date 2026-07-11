@@ -17,12 +17,14 @@ The goal is not to create static paperwork. Each file here should either:
 - `data-classification.csv` - per-asset data class and evidence-handling baseline
 - `provenance-evidence.csv` - per-repository provenance and attestation baseline
 - `risk-register.csv` - machine-readable version of the top portfolio risks
+- `risk-review-log.csv` - residual-risk review and overdue-escalation state per risk
 - `supplier-register.csv` - external suppliers and dependency surfaces
 - `supplier-review-log.csv` - supplier governance review cadence and evidence ledger
 - `supply-chain-controls.csv` - repo-by-repo Dependabot, CodeQL, and workflow pinning baseline
 - `release-evidence.csv` - release-readiness and lockfile evidence baseline
 - `sbom-evidence.csv` - generated SBOM evidence summary across supported ecosystems
 - `change-management.csv` - default-branch governance and protection evidence
+- `emergency-change-log.csv` - fleet-wide emergency PR review ledger
 - `incident-management.csv` - incident tabletop and post-incident evidence ledger
 - `control-crosswalk.csv` - machine-readable control-to-evidence mapping
 - `evidence-retention.csv` - retention rules for core audit artifacts

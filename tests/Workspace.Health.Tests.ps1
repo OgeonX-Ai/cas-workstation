@@ -6,17 +6,29 @@ Describe 'workspace-health.ps1 sweep' {
         $script:ScriptUnderTest = (Resolve-Path (Join-Path $PSScriptRoot '..\scripts\workspace-health.ps1')).Path
         $script:ModuleUnderTest = (Resolve-Path (Join-Path $PSScriptRoot '..\scripts\Cas.Workstation.psm1')).Path
         $env:WH_SKIP_GH = '1'
+        $script:FixtureRoot = 'C:\temp\workspace-health-tests'
+        New-Item -ItemType Directory -Path $script:FixtureRoot -Force | Out-Null
+        $script:GitExe = @(
+            (Get-Command git.exe -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source -First 1),
+            'C:\Program Files\Git\cmd\git.exe',
+            'C:\Program Files\Git\bin\git.exe',
+            'C:\Program Files (x86)\Git\cmd\git.exe',
+            'C:\Program Files (x86)\Git\bin\git.exe'
+        ) | Where-Object { $_ -and (Test-Path -LiteralPath $_) } | Select-Object -First 1
+        if (-not $script:GitExe) {
+            throw 'Git for Windows was not found for Workspace.Health.Tests.ps1.'
+        }
 
         function New-WhFixture {
             param([string]$Suffix = 'base')
-            $dir = Join-Path $env:TEMP ("wh-test-{0}-{1}" -f $Suffix, [guid]::NewGuid().ToString('N'))
+            $dir = Join-Path $script:FixtureRoot ("wh-test-{0}-{1}" -f $Suffix, [guid]::NewGuid().ToString('N'))
             New-Item -ItemType Directory -Path $dir -Force | Out-Null
-            git -C $dir init -q 2>$null
-            git -C $dir config user.email 'wh-test@example.com' 2>$null
-            git -C $dir config user.name 'WH Test' 2>$null
+            & $script:GitExe -C $dir init -q 2>$null
+            & $script:GitExe -C $dir config user.email 'wh-test@example.com' 2>$null
+            & $script:GitExe -C $dir config user.name 'WH Test' 2>$null
             Set-Content -LiteralPath (Join-Path $dir 'README.md') -Value 'fixture' -Encoding ASCII
-            git -C $dir add README.md 2>$null
-            git -C $dir commit -q -m 'init' 2>$null
+            & $script:GitExe -C $dir add README.md 2>$null
+            & $script:GitExe -C $dir commit -q -m 'init' 2>$null
             return $dir
         }
 
@@ -78,14 +90,14 @@ Describe 'workspace-health.ps1 sweep' {
     Context 'Unpushed commit against a local origin' {
         BeforeAll {
             $script:Fixture3 = New-WhFixture -Suffix 'unpushed'
-            $script:Bare3 = Join-Path $env:TEMP ('wh-test-bare-' + [guid]::NewGuid().ToString('N'))
-            git init -q --bare $script:Bare3 2>$null
-            $branch3 = (git -C $script:Fixture3 branch --show-current 2>$null)
-            git -C $script:Fixture3 remote add origin $script:Bare3 2>$null
-            git -C $script:Fixture3 push -q -u origin "HEAD:refs/heads/$branch3" 2>$null
+            $script:Bare3 = Join-Path $script:FixtureRoot ('wh-test-bare-' + [guid]::NewGuid().ToString('N'))
+            & $script:GitExe init -q --bare $script:Bare3 2>$null
+            $branch3 = (& $script:GitExe -C $script:Fixture3 branch --show-current 2>$null)
+            & $script:GitExe -C $script:Fixture3 remote add origin $script:Bare3 2>$null
+            & $script:GitExe -C $script:Fixture3 push -q -u origin "HEAD:refs/heads/$branch3" 2>$null
             Set-Content -LiteralPath (Join-Path $script:Fixture3 'more.txt') -Value 'more' -Encoding ASCII
-            git -C $script:Fixture3 add more.txt 2>$null
-            git -C $script:Fixture3 commit -q -m 'second commit' 2>$null
+            & $script:GitExe -C $script:Fixture3 add more.txt 2>$null
+            & $script:GitExe -C $script:Fixture3 commit -q -m 'second commit' 2>$null
         }
         AfterAll {
             Remove-WhFixture -Path $script:Fixture3
@@ -101,7 +113,7 @@ Describe 'workspace-health.ps1 sweep' {
 
     Context 'Lying stack.manifest.json version' {
         BeforeAll {
-            $script:Fixture4 = Join-Path $env:TEMP ('wh-test-manifest-' + [guid]::NewGuid().ToString('N'))
+            $script:Fixture4 = Join-Path $script:FixtureRoot ('wh-test-manifest-' + [guid]::NewGuid().ToString('N'))
             New-Item -ItemType Directory -Path (Join-Path $script:Fixture4 'scripts') -Force | Out-Null
             Copy-Item -LiteralPath $script:ModuleUnderTest -Destination (Join-Path $script:Fixture4 'scripts\Cas.Workstation.psm1') -Force
             $manifest = [ordered]@{
@@ -131,6 +143,13 @@ Describe 'workspace-health.ps1 sweep' {
             $manifestFindings = @($findings | Where-Object { $_.Check -eq 'stack-manifest-version' })
             $manifestFindings[0].Detail | Should -Match "'Git'"
         }
+
+        It 'suppresses stack-manifest-version findings when explicitly skipped' {
+            $raw = & powershell.exe -NoProfile -File $script:ScriptUnderTest -Root $script:Fixture4 -Json -SkipStackManifestChecks 2>$null
+            $joined = ($raw -join "`n").Trim()
+            $findings = if ([string]::IsNullOrWhiteSpace($joined)) { @() } else { @($joined | ConvertFrom-Json) }
+            @($findings | ForEach-Object { $_.Check }) | Should -Not -Contain 'stack-manifest-version'
+        }
     }
 
     Context 'Non-ASCII .ps1 guard' {
@@ -139,6 +158,7 @@ Describe 'workspace-health.ps1 sweep' {
             $dash = [char]0x2014
             $content = "# comment with an em-dash $dash character" + [Environment]::NewLine + "Write-Host 'hi'" + [Environment]::NewLine
             [System.IO.File]::WriteAllText((Join-Path $script:Fixture5 'bad.ps1'), $content, [System.Text.Encoding]::UTF8)
+            & $script:GitExe -C $script:Fixture5 add bad.ps1 2>$null
         }
         AfterAll {
             Remove-WhFixture -Path $script:Fixture5
@@ -164,6 +184,96 @@ Describe 'workspace-health.ps1 sweep' {
             $findings = Invoke-Wh -Root $script:Fixture6
             $checks = @($findings | ForEach-Object { $_.Check })
             $checks | Should -Contain 'credential-helper-wsl-path'
+        }
+    }
+
+    Context 'Release staleness' {
+
+        Context 'Old tag with commits since it (RED fixture)' {
+            BeforeAll {
+                $script:Fixture7 = New-WhFixture -Suffix 'releasestale'
+                $pastDate = (Get-Date).ToUniversalTime().AddDays(-45).ToString('yyyy-MM-ddTHH:mm:ssK')
+                $env:GIT_COMMITTER_DATE = $pastDate
+                $env:GIT_AUTHOR_DATE = $pastDate
+                Set-Content -LiteralPath (Join-Path $script:Fixture7 'v1.txt') -Value 'v1' -Encoding ASCII
+                & $script:GitExe -C $script:Fixture7 add v1.txt 2>$null
+                & $script:GitExe -C $script:Fixture7 commit -q -m 'tagged commit' 2>$null
+                & $script:GitExe -C $script:Fixture7 tag v0.1.0 2>$null
+                Remove-Item Env:\GIT_COMMITTER_DATE -ErrorAction SilentlyContinue
+                Remove-Item Env:\GIT_AUTHOR_DATE -ErrorAction SilentlyContinue
+                Set-Content -LiteralPath (Join-Path $script:Fixture7 'v2.txt') -Value 'v2' -Encoding ASCII
+                & $script:GitExe -C $script:Fixture7 add v2.txt 2>$null
+                & $script:GitExe -C $script:Fixture7 commit -q -m 'untagged commit' 2>$null
+            }
+            AfterAll {
+                Remove-WhFixture -Path $script:Fixture7
+            }
+            It 'reports a release-stale finding naming the tag, age, and commits since' {
+                $findings = Invoke-Wh -Root $script:Fixture7
+                $stale = @($findings | Where-Object { $_.Check -eq 'release-stale' })
+                $stale.Count | Should -Be 1
+                $stale[0].Detail | Should -Match 'v0\.1\.0'
+                $stale[0].Detail | Should -Match '(\d+)d old \(threshold 30d\)'
+                $matched = $stale[0].Detail -match '(\d+)d old \(threshold 30d\)'
+                $matched | Should -BeTrue
+                [int]$Matches[1] | Should -BeGreaterThan 30
+            }
+        }
+
+        Context 'Tag on HEAD, zero commits since it (no false positive)' {
+            BeforeAll {
+                $script:Fixture8 = New-WhFixture -Suffix 'releasefresh'
+                $pastDate = (Get-Date).ToUniversalTime().AddDays(-90).ToString('yyyy-MM-ddTHH:mm:ssK')
+                $env:GIT_COMMITTER_DATE = $pastDate
+                $env:GIT_AUTHOR_DATE = $pastDate
+                Set-Content -LiteralPath (Join-Path $script:Fixture8 'v1.txt') -Value 'v1' -Encoding ASCII
+                & $script:GitExe -C $script:Fixture8 add v1.txt 2>$null
+                & $script:GitExe -C $script:Fixture8 commit -q -m 'tagged commit' 2>$null
+                & $script:GitExe -C $script:Fixture8 tag v0.2.0 2>$null
+                Remove-Item Env:\GIT_COMMITTER_DATE -ErrorAction SilentlyContinue
+                Remove-Item Env:\GIT_AUTHOR_DATE -ErrorAction SilentlyContinue
+            }
+            AfterAll {
+                Remove-WhFixture -Path $script:Fixture8
+            }
+            It 'reports no release-stale finding when HEAD is the tagged commit, regardless of tag age' {
+                $findings = Invoke-Wh -Root $script:Fixture8
+                $checks = @($findings | ForEach-Object { $_.Check })
+                $checks | Should -Not -Contain 'release-stale'
+            }
+        }
+
+        Context 'Recent tag with commits since it (no false positive)' {
+            BeforeAll {
+                $script:Fixture9 = New-WhFixture -Suffix 'releaserecent'
+                & $script:GitExe -C $script:Fixture9 tag v0.3.0 2>$null
+                Set-Content -LiteralPath (Join-Path $script:Fixture9 'v2.txt') -Value 'v2' -Encoding ASCII
+                & $script:GitExe -C $script:Fixture9 add v2.txt 2>$null
+                & $script:GitExe -C $script:Fixture9 commit -q -m 'untagged commit' 2>$null
+            }
+            AfterAll {
+                Remove-WhFixture -Path $script:Fixture9
+            }
+            It 'reports no release-stale finding when the tag is less than 30 days old' {
+                $findings = Invoke-Wh -Root $script:Fixture9
+                $checks = @($findings | ForEach-Object { $_.Check })
+                $checks | Should -Not -Contain 'release-stale'
+            }
+        }
+
+        Context 'No SemVer tag at all (never released)' {
+            BeforeAll {
+                $script:Fixture10 = New-WhFixture -Suffix 'releasenotag'
+            }
+            AfterAll {
+                Remove-WhFixture -Path $script:Fixture10
+            }
+            It 'reports a release-stale finding when no SemVer tag exists' {
+                $findings = Invoke-Wh -Root $script:Fixture10
+                $stale = @($findings | Where-Object { $_.Check -eq 'release-stale' -and $_.Repo -eq 'root' })
+                $stale.Count | Should -Be 1
+                $stale[0].Detail | Should -Match 'no SemVer release tag'
+            }
         }
     }
 }

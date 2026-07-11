@@ -14,14 +14,14 @@
 
 - **Phase 38: Merge Flow & Hygiene Backfill** — auto-merge/merge-queue policy with a real second reviewer; drain-residuals backfill (kept branches, worktree leftovers, root protection decision). *(REQ-1.5.1, 1.5.2)* — **3 plans**
   - [ ] 38-01-PLAN.md — Merge-flow policy & review-bot mechanism (eligibility classifier + critic_cli-gated review-bot App + branch-protection-as-code)
-  - [ ] 38-02-PLAN.md — Residual branch/worktree backfill (squash-aware content gate applied to 6 kept branches; disposition 2 worktree leftovers)
+  - [x] 38-02-PLAN.md — Residual branch/worktree backfill (squash-aware content gate applied to 6 kept branches; disposition 2 worktree leftovers)
   - [ ] 38-03-PLAN.md — Root-repo branch-protection decision & codification (root moves to PR flow)
 - **Phase 39: Release Engineering** — per-repo SemVer + generated release notes on merge; staleness detection in the sweep. *(REQ-1.5.3, 1.5.5)*
 - **Phase 40: Pilot Cadence** — weekly scheduled pilots + fault injections with committed evidence; regression auto-issues. *(REQ-1.5.4)*
 - **Phase 41: Learning Loop** — LEARNINGS.md extraction at phase close; repeatable backlog survey script. *(REQ-1.5.6)* — **2 plans**
   - [ ] 41-01-PLAN.md — LEARNINGS template + OPERATING-CONTRACT.md phase-close checklist hook + retroactive v1.4-LEARNINGS.md (phases 26-36)
   - [ ] 41-02-PLAN.md — scripts/backlog-survey.ps1 repeatable delta report (new/closed/convergence) + Pester suite + baseline evidence
-- **Phase 42: v1.5 Verification & Milestone Audit** — full verifier stack + audit + archive. *(depends on 38-41)*
+- **Phase 42: v1.5 Verification & Milestone Audit** — full verifier stack + audit + archive; HARD-GATES on LEARNINGS.md present for phases 38-41 (REQ-1.5.6 enforcement). *(depends on 38-41)*
 
 ## Future Milestones (seeded 2026-07-08 — see [milestones/vNEXT-SEEDS.md](milestones/vNEXT-SEEDS.md))
 
