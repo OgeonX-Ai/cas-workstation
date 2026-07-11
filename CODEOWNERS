@@ -1,0 +1,8 @@
+# Root workspace code ownership (REQ-1.5.2 / Phase 38-03).
+#
+# The operator identity (@OgeonX-Ai) is the required reviewer for every path
+# in this repo. No authoring agent holds this identity's credentials or can
+# approve on its behalf -- see docs/wiki/Agent-Hierarchy.md rule 2 ("agent
+# never self-approves") and docs/merge-flow-policy.md's Root repo section
+# for the full rationale and decision record.
+* @OgeonX-Ai
