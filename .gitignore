@@ -53,3 +53,9 @@ scratch/
 # Pester -CI test result output (regenerated on every run)
 testResults.xml
 
+
+.tmp-gh-*.ps1
+
+.tmp-venv*/
+
+TestResults/
