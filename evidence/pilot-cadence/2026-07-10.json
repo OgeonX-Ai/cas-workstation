@@ -1,0 +1,30 @@
+﻿{
+    "schemaVersion":  "1.0.0",
+    "runDate":  "2026-07-10",
+    "startedAt":  "2026-07-10T10:11:43Z",
+    "finishedAt":  "2026-07-10T10:11:55Z",
+    "overallStatus":  "passed",
+    "suites":  [
+                   {
+                       "id":  "loop-pilots",
+                       "owningRepo":  "OgeonX-Ai/cas-workstation",
+                       "status":  "passed",
+                       "durationSeconds":  0.94,
+                       "commitSha":  "da50712d9ee7526669bc7096049a61136e4930c5"
+                   },
+                   {
+                       "id":  "gsd-orchestrator-fault-injection",
+                       "owningRepo":  "Coding-Autopilot-System/gsd-orchestrator",
+                       "status":  "passed",
+                       "durationSeconds":  4.8,
+                       "commitSha":  "d141f42733fdc840535426f8938e976094248fca"
+                   },
+                   {
+                       "id":  "autogen-fault-injection",
+                       "owningRepo":  "Coding-Autopilot-System/autogen",
+                       "status":  "passed",
+                       "durationSeconds":  2.7,
+                       "commitSha":  "e20478b7490632286409203014ea01afef8c994b"
+                   }
+               ]
+}
