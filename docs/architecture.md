@@ -12,14 +12,4 @@ The CAS (Coding-Autopilot-System) Workstation is an opinionated, desired-state e
 
 ## Workflow
 
-```mermaid
-graph TD;
-    User-->|Runs cas.ps1| Wrapper;
-    Wrapper-->|Invokes| Module[Cas.Workstation];
-    Module-->|Reads| Manifest[stack.manifest.json];
-    Manifest-->|Defines| Requirements;
-    Module-->|Checks & Installs| Requirements;
-    Requirements-->Tools[System Tools];
-    Requirements-->Repos[Portfolio Repos];
-    Module-->|Generates| MCPConfigs[MCP Server Configs];
-```
+![Architecture Diagram](assets/architecture-diagram.png)
