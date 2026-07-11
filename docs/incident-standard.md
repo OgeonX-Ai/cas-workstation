@@ -7,18 +7,7 @@ surfaces.
 
 Prepare -> Detect -> Triage -> Contain -> Eradicate -> Recover -> Learn
 
-```mermaid
-flowchart LR
-  A["Control or runtime signal"] --> B["Triage and severity assignment"]
-  B --> C{"SEV1 or SEV2?"}
-  C -->|Yes| D["Immediate containment and owner notification"]
-  C -->|No| E["Tracked remediation with named owner"]
-  D --> F["Evidence preservation"]
-  E --> F
-  F --> G["Recovery and verification"]
-  G --> H["Postmortem within 5 business days"]
-  H --> I["Corrective actions into risk and control ledgers"]
-```
+![Incident Lifecycle](assets/incident-lifecycle.png)
 
 ## Severity model
 
