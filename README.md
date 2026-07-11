@@ -1,5 +1,8 @@
 # CAS Workstation
 
+![Visual Diagram](docs/assets/concept.png)
+
+
 CAS Workstation is the opinionated Windows-first bootstrap bundle for the
 Coding-Autopilot-System ecosystem. It provides one install surface for a fully
 configured AI-native coding workstation.
