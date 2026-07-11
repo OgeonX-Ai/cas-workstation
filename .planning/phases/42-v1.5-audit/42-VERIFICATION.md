@@ -225,3 +225,9 @@ Both PRs fix ONLY the `.github` repo's own self-caller. Diff comparison:
 4. Merge org #17 (review-bot, CodeQL green) — then create + install the `cas-review-bot` App and store its two secrets (38-01 checklist) → activates REQ-1.5.1's falsifier test.
 5. Let the week turn: second pilot-cadence run fires 2026-07-17 (REQ-1.5.4's second falsifier); the REQ-1.5.1 24h-median window starts once auto-merge is live.
 6. Then `/gsd:complete-milestone v1.5`.
+
+## Checklist amendments (2026-07-11, post-audit reconnaissance)
+
+- Item 3 amended: root #18 is SUPERSEDED by Codex's #20 (same content + a new BranchProtectionPayload Pester suite) — merge **#20**, close #18 (comment posted on #18).
+- New item 3b: merge **root #24** (fix/vision-missing-assets) — master's VISION.md referenced 3 never-committed generated images (stranded-asset class, caught live); page renders broken until it lands.
+- Codex session actively iterating on further visuals (architecture-diagram, cas-workstation-hub, incident-lifecycle — untracked, unreferenced, deliberately left in its custody).
