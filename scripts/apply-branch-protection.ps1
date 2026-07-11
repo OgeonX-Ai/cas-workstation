@@ -68,23 +68,80 @@ function Get-DefaultBranch {
     return $branch.Trim()
 }
 
+function Get-CurrentProtection {
+    param([string]$OwnerName, [string]$RepoName, [string]$BranchName)
+
+    $protectionJson = & gh api "repos/$OwnerName/$RepoName/branches/$BranchName/protection" 2>$null
+    if ($LASTEXITCODE -eq 0) {
+        return ($protectionJson | ConvertFrom-Json)
+    }
+
+    # An unprotected branch has no representation to preserve. The new payload
+    # still establishes the requested baseline without treating a 404 as a fault.
+    if ($LASTEXITCODE -eq 1) {
+        return $null
+    }
+
+    throw "Unable to read current protection for $OwnerName/$RepoName@$BranchName (exit $LASTEXITCODE)."
+}
+
+function Get-ProtectionFlag {
+    param($Protection, [string]$Name)
+
+    if ($null -eq $Protection -or $null -eq $Protection.$Name) {
+        return $false
+    }
+
+    return [bool]$Protection.$Name.enabled
+}
+
 function New-ProtectionPayload {
-    param([string[]]$Contexts, [bool]$RequireCodeOwnerReviews = $false)
+    param(
+        [string[]]$Contexts,
+        [bool]$RequireCodeOwnerReviews = $false,
+        $ExistingProtection
+    )
+
+    $existingContexts = @($ExistingProtection.required_status_checks.contexts)
+    $allContexts = @($Contexts) + $existingContexts | Select-Object -Unique
+    $existingReviews = $ExistingProtection.required_pull_request_reviews
+    $restrictions = if ($null -eq $ExistingProtection -or $null -eq $ExistingProtection.restrictions) {
+        $null
+    }
+    else {
+        [ordered]@{
+            users = @($ExistingProtection.restrictions.users)
+            teams = @($ExistingProtection.restrictions.teams)
+            apps  = @($ExistingProtection.restrictions.apps)
+        }
+    }
+
     return [ordered]@{
-        required_status_checks        = [ordered]@{
-            strict   = $true
-            contexts = @($Contexts)
+        required_status_checks        = if ($allContexts.Count -eq 0) {
+            $null
+        }
+        else {
+            [ordered]@{
+                strict   = $true
+                contexts = @($allContexts)
+            }
         }
         enforce_admins                 = $true
         required_pull_request_reviews  = [ordered]@{
             required_approving_review_count = 1
-            dismiss_stale_reviews           = $false
-            require_code_owner_reviews      = $RequireCodeOwnerReviews
+            dismiss_stale_reviews           = [bool]$existingReviews.dismiss_stale_reviews
+            require_code_owner_reviews      = $RequireCodeOwnerReviews -or [bool]$existingReviews.require_code_owner_reviews
+            require_last_push_approval      = [bool]$existingReviews.require_last_push_approval
         }
-        restrictions                   = $null
-        required_linear_history        = $false
-        allow_force_pushes             = $false
-        allow_deletions                = $false
+        restrictions                   = $restrictions
+        required_linear_history        = Get-ProtectionFlag -Protection $ExistingProtection -Name 'required_linear_history'
+        allow_force_pushes             = Get-ProtectionFlag -Protection $ExistingProtection -Name 'allow_force_pushes'
+        allow_deletions                = Get-ProtectionFlag -Protection $ExistingProtection -Name 'allow_deletions'
+        required_conversation_resolution = Get-ProtectionFlag -Protection $ExistingProtection -Name 'required_conversation_resolution'
+        block_creations                = Get-ProtectionFlag -Protection $ExistingProtection -Name 'block_creations'
+        required_signatures            = Get-ProtectionFlag -Protection $ExistingProtection -Name 'required_signatures'
+        lock_branch                    = Get-ProtectionFlag -Protection $ExistingProtection -Name 'lock_branch'
+        allow_fork_syncing             = Get-ProtectionFlag -Protection $ExistingProtection -Name 'allow_fork_syncing'
     }
 }
 
@@ -95,7 +152,8 @@ foreach ($repoName in $Repos) {
     $contexts = @($contexts | Select-Object -Unique)
 
     $defaultBranch = Get-DefaultBranch -OwnerName $Owner -RepoName $repoName
-    $payload = New-ProtectionPayload -Contexts $contexts -RequireCodeOwnerReviews $RequireCodeOwnerReviews.IsPresent
+    $existingProtection = Get-CurrentProtection -OwnerName $Owner -RepoName $repoName -BranchName $defaultBranch
+    $payload = New-ProtectionPayload -Contexts $contexts -RequireCodeOwnerReviews $RequireCodeOwnerReviews.IsPresent -ExistingProtection $existingProtection
     $payloadJson = $payload | ConvertTo-Json -Depth 6
 
     Write-Host ("Repo: {0}/{1}  Default branch: {2}" -f $Owner, $repoName, $defaultBranch)

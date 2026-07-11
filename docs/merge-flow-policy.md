@@ -130,7 +130,7 @@ direct-push path into root) with the mechanism already proven on the
 sub-repos.
 
 Applied via the same as-code mechanism as the sub-repos —
-`scripts/apply-branch-protection.ps1 -Owner OgeonX-Ai -Repos cas-workstation`
+`scripts/apply-branch-protection.ps1 -Owner OgeonX-Ai -Repos cas-workstation -SkipEligibilityCheck -RequireCodeOwnerReviews`
 — no bespoke root logic. `CODEOWNERS` at root assigns `*` to `@OgeonX-Ai`
 (the operator identity, not an authoring agent), so required review always
 resolves to a real non-agent reviewer.
@@ -140,7 +140,9 @@ resolves to a real non-agent reviewer.
 PR #7 ("Enforce branch approvals and track provenance across the
 portfolio"). Plan 38-03 verified the live state via `gh api
 repos/OgeonX-Ai/cas-workstation/branches/master/protection` and codified it
-(CODEOWNERS + this section + the as-code script run) rather than
+(CODEOWNERS + this section + the as-code script run). The script preserves
+existing branch-protection controls when it applies the requested baseline rather than
+replacing unrelated controls. This codifies rather than
 re-applying a decision that was already in effect — satisfied-by-live-state.
 
 Break-glass for the solo admin who is also the sole reviewer: the

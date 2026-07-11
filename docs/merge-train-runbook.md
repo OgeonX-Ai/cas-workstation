@@ -41,16 +41,17 @@ action.
 
 ```powershell
 $repo = "Coding-Autopilot-System/<name>"
+$branch = gh api "repos/$repo" --jq .default_branch
 # 1. Verify CI green on the PR
 gh pr checks <num> --repo $repo
 # 2a. Reviewed PR (or dependabot): normal merge
 gh pr merge <num> --repo $repo --squash --delete-branch
 # 2b. Self-authored + blocked: temp-relax enforce_admins (re-enable IMMEDIATELY after)
-gh api -X DELETE "repos/$repo/branches/main/protection/enforce_admins"
+gh api -X DELETE "repos/$repo/branches/$branch/protection/enforce_admins"
 gh pr merge <num> --repo $repo --squash --delete-branch --admin
-gh api -X POST "repos/$repo/branches/main/protection/enforce_admins"
+gh api -X POST "repos/$repo/branches/$branch/protection/enforce_admins"
 # 3. Confirm protection restored
-gh api "repos/$repo/branches/main/protection/enforce_admins" --jq .enabled   # must be true
+gh api "repos/$repo/branches/$branch/protection/enforce_admins" --jq .enabled   # must be true
 ```
 
 ## After the train
