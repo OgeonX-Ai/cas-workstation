@@ -25,5 +25,5 @@
 
 ## Future Milestones (seeded 2026-07-08 — see [milestones/vNEXT-SEEDS.md](milestones/vNEXT-SEEDS.md))
 
-- **v1.6 Trust Depth & Self-Measurement** — Phases 43–47: signed commits/SLSA-lite/SBOM, secret-scanning + token rotation, DORA + token-economics dashboard from traces.jsonl, mutation + property-based testing, audit.
-- **v1.7 Product & Scale** — Phases 48–51: clean-machine bootstrap product, marketing-as-code showcase live (Phase 37 strategy: [37-CONTEXT](phases/37-marketing-and-adoption/37-CONTEXT.md), backlog M1–M3), disaster-restore drill, cloud readiness (**gated on operator lifting the NO-AZURE deploy lock**).
+- **v1.6 Continuity & Self-Measurement** — Phases 43–47 (reseeded v3, 2026-07-11): Continuity First (bootstrap+backup+incident runbook+SHA-gate+AI-lease), Identity & Access (PAT rotation, SSH signing, model-policy gate; secret scanning verified already-on), Self-Measurement (traces schema v2 THEN DORA/token dashboard + spend caps), Test Depth (suite-health fix THEN narrowed mutation + FailureState property tests), audit. SLSA/SBOM deferred with trigger.
+- **v1.7 Product & Scale** — Phases 48–51 (v3): product bundle (gate: 43), marketing live (gate: operator confirms brand/adoption goal; strategy: [37-CONTEXT](phases/37-marketing-and-adoption/37-CONTEXT.md)), disaster drill (gate: 43+48), cloud readiness (gate: NO-AZURE lock lifted).
