@@ -276,4 +276,87 @@ Describe 'workspace-health.ps1 sweep' {
             }
         }
     }
+
+    Context 'Multi-AI coordination lease (A2)' {
+
+        Context 'Stale lease (RED fixture)' {
+            BeforeAll {
+                $script:Fixture11 = New-WhFixture -Suffix 'leasestale'
+                $staleSince = (Get-Date).ToUniversalTime().AddHours(-6).ToString('yyyy-MM-ddTHH:mm:ssZ')
+                $lease = [ordered]@{
+                    agent     = 'claude'
+                    session   = 'wh-test-stale'
+                    since     = $staleSince
+                    ttl_hours = 4
+                }
+                $lease | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $script:Fixture11 '.cas-lease.json') -Encoding ASCII
+            }
+            AfterAll {
+                Remove-WhFixture -Path $script:Fixture11
+            }
+            It 'reports a stale-lease finding naming the agent/session and ttl' {
+                $findings = Invoke-Wh -Root $script:Fixture11
+                $stale = @($findings | Where-Object { $_.Check -eq 'stale-lease' -and $_.Repo -eq 'root' })
+                $stale.Count | Should -Be 1
+                $stale[0].Detail | Should -Match "claude/wh-test-stale"
+                $stale[0].Detail | Should -Match '\(ttl 4h\)'
+            }
+        }
+
+        Context 'Fresh lease (no false positive)' {
+            BeforeAll {
+                $script:Fixture12 = New-WhFixture -Suffix 'leasefresh'
+                $freshSince = (Get-Date).ToUniversalTime().AddHours(-1).ToString('yyyy-MM-ddTHH:mm:ssZ')
+                $lease = [ordered]@{
+                    agent     = 'claude'
+                    session   = 'wh-test-fresh'
+                    since     = $freshSince
+                    ttl_hours = 4
+                }
+                $lease | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $script:Fixture12 '.cas-lease.json') -Encoding ASCII
+                Set-Content -LiteralPath (Join-Path $script:Fixture12 'wip.txt') -Value 'wip' -Encoding ASCII
+            }
+            AfterAll {
+                Remove-WhFixture -Path $script:Fixture12
+            }
+            It 'reports neither stale-lease nor unleased-dirty when a fresh lease covers a dirty tree' {
+                $findings = Invoke-Wh -Root $script:Fixture12
+                $checks = @($findings | ForEach-Object { $_.Check })
+                $checks | Should -Not -Contain 'stale-lease'
+                $checks | Should -Not -Contain 'unleased-dirty'
+                $checks | Should -Contain 'dirty'
+            }
+        }
+
+        Context 'Dirty tree with no lease (advisory RED fixture)' {
+            BeforeAll {
+                $script:Fixture13 = New-WhFixture -Suffix 'leaseunleased'
+                Set-Content -LiteralPath (Join-Path $script:Fixture13 'wip.txt') -Value 'wip' -Encoding ASCII
+            }
+            AfterAll {
+                Remove-WhFixture -Path $script:Fixture13
+            }
+            It 'reports an unleased-dirty finding when the tree is dirty and no lease file exists' {
+                $findings = Invoke-Wh -Root $script:Fixture13
+                $checks = @($findings | ForEach-Object { $_.Check })
+                $checks | Should -Contain 'unleased-dirty'
+                $checks | Should -Contain 'dirty'
+            }
+        }
+
+        Context 'Unparseable lease file' {
+            BeforeAll {
+                $script:Fixture14 = New-WhFixture -Suffix 'leasebroken'
+                Set-Content -LiteralPath (Join-Path $script:Fixture14 '.cas-lease.json') -Value '{ not valid json' -Encoding ASCII
+            }
+            AfterAll {
+                Remove-WhFixture -Path $script:Fixture14
+            }
+            It 'reports a stale-lease finding for an unparseable lease file' {
+                $findings = Invoke-Wh -Root $script:Fixture14
+                $checks = @($findings | ForEach-Object { $_.Check })
+                $checks | Should -Contain 'stale-lease'
+            }
+        }
+    }
 }

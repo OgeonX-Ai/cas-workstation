@@ -7,6 +7,13 @@ param(
 $ErrorActionPreference = 'Continue'
 $findings = New-Object System.Collections.Generic.List[object]
 
+# A1 SHA-reachability gate: per-run caches so a SHA/repo pair pinned in
+# multiple workflow files (or multiple lines) only costs one `gh api` call.
+# WL_SKIP_GH lets offline/CI-less callers (e.g. Pester runs without a `gh`
+# auth session) opt out of the network-dependent check entirely.
+$script:DefaultBranchCache = @{}
+$script:ShaReachabilityCache = @{}
+
 function Add-Finding {
     param([string]$File, [string]$Check, [string]$Detail)
     $findings.Add([pscustomobject]@{ File = $File; Check = $Check; Detail = $Detail })
@@ -15,6 +22,81 @@ function Add-Finding {
 function Test-IsShaPin {
     param([string]$Ref)
     return $Ref -match '^[0-9a-f]{40}$'
+}
+
+function Get-UsesOwnerRepo {
+    param([string]$Ref)
+    # Ref is the part before '@', e.g. 'actions/checkout' or
+    # 'OgeonX-Ai/.github/.github/workflows/release-please.yml'
+    if ($Ref -match '^([^/]+)/([^/]+)') {
+        return [pscustomobject]@{ Owner = $matches[1]; Repo = $matches[2] }
+    }
+    return $null
+}
+
+function Get-DefaultBranchForRepo {
+    param([string]$Owner, [string]$Repo)
+    $key = "$Owner/$Repo"
+    if ($script:DefaultBranchCache.ContainsKey($key)) {
+        return $script:DefaultBranchCache[$key]
+    }
+    $branch = $null
+    try {
+        $out = & gh api "repos/$Owner/$Repo" --jq '.default_branch' 2>$null
+        if ($LASTEXITCODE -eq 0 -and $out) {
+            $branch = ($out | Select-Object -First 1).ToString().Trim()
+        }
+    }
+    catch {
+        $branch = $null
+    }
+    $script:DefaultBranchCache[$key] = $branch
+    return $branch
+}
+
+function Test-ShaReachability {
+    # Returns @{ Ok = <bool>; Status = <string> }. Per A1 spec: identical/behind
+    # from the provider's default branch = OK; diverged or a 404 (commit/repo
+    # not found, e.g. an orphaned branch-tip SHA after a squash-merge deleted
+    # the source branch) = FINDING 'unreachable-pin'.
+    param([string]$Owner, [string]$Repo, [string]$Sha)
+
+    $cacheKey = "$Owner/$Repo@$Sha"
+    if ($script:ShaReachabilityCache.ContainsKey($cacheKey)) {
+        return $script:ShaReachabilityCache[$cacheKey]
+    }
+
+    $result = $null
+    $default = Get-DefaultBranchForRepo -Owner $Owner -Repo $Repo
+    if (-not $default) {
+        # Could not resolve the default branch (repo not found, auth issue,
+        # transient error). Do not fail the gate on infrastructure noise.
+        $result = [pscustomobject]@{ Ok = $true; Status = 'default-branch-unresolved' }
+        $script:ShaReachabilityCache[$cacheKey] = $result
+        return $result
+    }
+
+    try {
+        $out = & gh api "repos/$Owner/$Repo/compare/$default...$Sha" --jq '.status' 2>$null
+        $exitCode = $LASTEXITCODE
+        $status = if ($out) { (($out | Select-Object -First 1).ToString()).Trim() } else { $null }
+        if ($exitCode -ne 0 -or -not $status) {
+            $result = [pscustomobject]@{ Ok = $false; Status = '404' }
+        }
+        elseif ($status -eq 'diverged') {
+            $result = [pscustomobject]@{ Ok = $false; Status = 'diverged' }
+        }
+        else {
+            # identical, behind, ahead, or any other status GitHub returns.
+            $result = [pscustomobject]@{ Ok = $true; Status = $status }
+        }
+    }
+    catch {
+        $result = [pscustomobject]@{ Ok = $true; Status = 'error' }
+    }
+
+    $script:ShaReachabilityCache[$cacheKey] = $result
+    return $result
 }
 
 function Invoke-WorkflowLint {
@@ -49,6 +131,16 @@ function Invoke-WorkflowLint {
             $pin = ($pin -split '\s')[0]
             if (-not (Test-IsShaPin -Ref $pin)) {
                 Add-Finding -File $rel -Check 'unpinned-action' -Detail "Line $($i+1): $ref (ref=$pin)"
+            }
+            elseif (-not $env:WL_SKIP_GH -and (Get-Command gh -ErrorAction SilentlyContinue)) {
+                # --- Check 4 (A1): SHA-reachability from the provider's default branch ---
+                $ownerRepo = Get-UsesOwnerRepo -Ref $ref.Substring(0, $atIdx)
+                if ($ownerRepo) {
+                    $reach = Test-ShaReachability -Owner $ownerRepo.Owner -Repo $ownerRepo.Repo -Sha $pin
+                    if (-not $reach.Ok) {
+                        Add-Finding -File $rel -Check 'unreachable-pin' -Detail "Line $($i+1): $ref (sha=$pin owner/repo=$($ownerRepo.Owner)/$($ownerRepo.Repo) status=$($reach.Status))"
+                    }
+                }
             }
         }
     }
