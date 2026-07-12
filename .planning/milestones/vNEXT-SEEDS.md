@@ -1,60 +1,51 @@
-# CAS — Next-Milestones Seed Plan (v1.5 → v1.7)
+# CAS — Next-Milestones Seed Plan v2 (v1.6 → v1.7)
 
-**Authored:** 2026-07-08, operator directive: "make plans until there is nothing to improve — elite enterprise level."
-**Method:** honest gap analysis of current state (post-v1.4 audit) against what a top-tier engineering organization would expect. Each gap becomes a phase with falsifiable requirement seeds. Feed each milestone through `/gsd:new-milestone` when its turn comes.
+**v1 authored:** 2026-07-08. **v2 amended:** 2026-07-11 by closed-loop round 1
+(fact-check: `.planning/research/SEEDS-FACTCHECK-R1.md` — 10 holds / 9 stale / 3 wrong;
+red-team: `.planning/research/ROADMAP-REDTEAM-R1.md` — 9 ADD / 3 CUT / 2 RESEQUENCE).
+Convergence loop continues until a full round yields no material findings.
 
-## The improvement thesis
+## Amendments from round 1 (what changed and why)
 
-v1.4 made the system *governed*: every change is planned, typed, tested, evidenced, reviewed. The remaining distance to "elite" is not more gates — it is **flow, trust depth, and self-measurement**:
+1. **RESEQUENCED (R1/R2 + A4):** continuity (minimal bootstrap + non-git backup + incident runbook) moves to the FRONT of v1.6 — later phases must not keep shipping un-restorable state.
+2. **RESCOPED 44 (fact-check):** GitHub secret-scanning + push protection are already enabled on all 12 org repos (live-verified) — the phase is now PAT inventory/rotation + signing + model-policy review.
+3. **PRECONDITIONED 45 (fact-check WRONG#2):** traces.jsonl cannot feed a DORA/token dashboard (18 rows, no repo/PR/outcome/duration fields, 14/18 zero-token) — schema extension + instrumentation are now explicit first tasks.
+4. **PRECONDITIONED 46 (fact-check new finding):** gsd-orchestrator `dotnet test` fails restore (NETSDK1064) and autogen full-suite pytest has 25 collection errors — a suite-health fix task gates mutation work; mutation scope narrowed to orchestrator core + cas-contracts property tests only (C2).
+5. **CUT/DEFERRED (C1):** SLSA-lite/SBOM deferred until a trigger fires: first real external consumer of a CAS release. Kept as a named deferred item, not silent deletion.
+6. **OPERATOR QUESTION (C3, unresolved):** is public brand/adoption an explicit goal? YES → Phase 37/49 marketing executes in v1.7; NO → marketing reduces to the existing org-profile/wiki layer and 49 is cut. *Blocking only for v1.7 planning.*
+7. **NEW standing guardrails (A1/A2/A7 — schedule as the first v1.6 quick-batch, they are small):**
+   - **A1 SHA-reachability gate** — extend workflow-lint + sweep: every `uses: <repo>@<sha>` must be reachable from the provider's default branch. This failure class hit three times; mechanize per the standing rule.
+   - **A2 multi-AI coordination lease** — a lightweight lockfile/lease convention in GLOBAL_AGENTS.md + sweep check, so Claude/Codex/Gemini sessions declare working-tree ownership instead of colliding by luck.
+   - **A7 model-policy review gate** — engineering-os/models/*.json changes require a PR (they are policy; today they drift as dirty files).
 
-1. **Flow** — 40 PRs waiting on one human is the system's own bottleneck finding. Governance that queues is governance that gets bypassed eventually.
-2. **Trust depth** — controls exist at the workflow layer; the artifact layer (provenance, signatures, SBOM, secrets lifecycle) is thinner.
-3. **Self-measurement** — the system produces evidence but doesn't yet measure itself (DORA-style metrics, token economics, coverage/health trends). Elite orgs manage by measured trend, not by heroic audits.
+## v1.6 — Continuity & Self-Measurement (phases 43–47)
 
----
-
-## v1.5 — Delivery Flow & Release Engineering (phases 38–42)
-
-**Goal:** changes flow from agent to `main` in hours without weakening two-party review, and every repo ships versioned, documented releases.
+**Goal:** the system survives the loss of its one machine, measures itself by trend, and its tests prove their own quality — with continuity FIRST.
 
 | Phase | Scope | Requirement seeds (falsifiable) |
 |---|---|---|
-| 38 Merge Flow | GitHub merge queue + auto-merge policy: dependabot/docs-only PRs auto-merge on green + CODEOWNERS; define a second-reviewer mechanism that keeps two-party review real (operator or review-bot identity with its own credentials — never agent self-approval). Backfill: drain the round-3 queue. REQUIREMENTS.md converted to traceability-table format so `requirements.mark-complete` works. | Median green-PR time-to-merge < 24h over a 2-week window; 0 PRs older than 7 days; every REQ row machine-markable |
-| 39 Release Engineering | Per-repo SemVer tags + generated release notes from conventional commits (release-please or equivalent); cas-contracts schema-version discipline extended org-wide; changelog freshness checked by sweep | Every repo has a tagged release whose notes match `git log` since prior tag; sweep flags repos >30 days since release with merged changes |
-| 40 Pilot Cadence | The four v1.0 pilot scenarios + Phase 28 fault injections re-run on a weekly schedule (local runner via Task Scheduler; results as evidence commits); regression = auto-filed issue | Scheduled run artifacts exist for 2 consecutive weeks; a seeded regression produces an issue within one cycle |
-| 41 Learning Loop | `/gsd:extract-learnings` institutionalized per phase-close; Promptimprover ingests learnings; quarterly backlog re-survey automated (the 2026-07-03 survey as a repeatable job) | Every closed phase has LEARNINGS.md; survey job produces a dated backlog delta |
-| 42 v1.5 Audit | Milestone audit + archive | audit `passed` |
+| 43 Continuity First | Minimal clean-machine bootstrap (setup.ps1 hardened to restore workstation from remotes: clones, scheduled tasks, tool checks); non-git state backup job (scheduler defs, evidence/, secrets INVENTORY — pointers not values); incident-response runbook (who/what acts on a red sweep/pilot alert, escalation, break-glass procedures incl. the enforce_admins dance); gemini-nano adopt-or-quarantine decision executed (A6, operator choice recorded) | Timed restore rehearsal on a throwaway directory: remotes → green sweep + green root suite; backup job produces a dated artifact; runbook exercised against one synthetic alert |
+| 44 Identity & Access | PAT/credential inventory with expiry + rotation runbook; SSH commit signing (lower friction than gitsign on Windows — fact-checked) for operator + agent identities, enforced advisory-first; model-policy PR gate (A7); verify-and-document the already-on secret scanning (evidence, not setup) | `git verify-commit HEAD` passes on new default-branch commits; inventory doc lists every credential with owner+expiry; canary secret blocked (live test) |
+| 45 Self-Measurement | traces.jsonl schema v2 (repo, PR, phase, outcome, duration, tokens) + instrumentation at agent-spawn/close; THEN the DORA+token dashboard (local static, scheduled regen); spend caps with a hard stop per phase (A3); convergence metric (learning-loop opened-vs-closed) with named owner + weekly cadence (A8); retention policy for traces/evidence growth (A9) | Dashboard renders 4 DORA metrics + token spend from ≥2 weeks of v2-schema data that reconciles with gh spot checks; a synthetic over-budget phase triggers the cap stop |
+| 46 Test Depth (narrowed) | FIRST: suite health — fix NETSDK1064 restore in gsd-orchestrator and the 25 pytest collection errors in autogen (these are real defects today); THEN mutation testing on gsd-orchestrator Loop/StateMachine core only (Stryker.NET 4.16 verified compatible) with kill-rate ratchet report-only; property-based tests for cas-contracts schemas only | Both suites healthy from clean clone; mutation baseline recorded + ratcheted; property tests round-trip every published schema |
+| 47 v1.6 Audit | Full verifier stack + audit + archive; LEARNINGS hard-gate | audit `passed` |
 
-## v1.6 — Trust Depth & Self-Measurement (phases 43–47)
-
-**Goal:** artifact-level trust and management-by-trend.
-
-| Phase | Scope | Requirement seeds |
-|---|---|---|
-| 43 Provenance | Signed commits/tags (sigstore/gitsign or SSH signing) for agent + operator identities; SLSA-lite provenance for release artifacts; SBOM (CycloneDX) per release in gsd-orchestrator/autogen/Promptimprover | `git verify-commit HEAD` passes on new default-branch commits; SBOM attached to latest release |
-| 44 Secrets & Identity | Secret-scanning (gitleaks in CI org-wide + push protection), scoped fine-grained PATs inventory + rotation runbook, credential-helper normalization finished | Seeded canary secret is blocked in CI; token inventory doc with expiry dates; sweep credential check clean |
-| 45 CAS Metrics | DORA-style dashboard generated from traces.jsonl + gh data: lead time, deployment(merge) frequency, change-failure rate (reverts/red-CI), MTTR, plus token-spend per phase and coverage/health trends. Local static dashboard (the Promptimprover dashboard pattern), regenerated by scheduled task | Dashboard renders 4 DORA metrics + token economics from real data; numbers reconcile with gh api spot checks |
-| 46 Test Depth | Mutation testing (Stryker.NET / mutmut) on the highest-value modules with kill-rate ratchet; property-based tests for cas-contracts schemas (round-trip/fuzz); coverage exclusion audit | Mutation kill-rate baseline recorded + ratcheted in CI (report-only first); property tests exercise every published schema |
-| 47 v1.6 Audit | Milestone audit + archive | audit `passed` |
-
-## v1.7 — Product & Scale (phases 48–51, gated)
-
-**Goal:** CAS as an adoptable product; cloud when the operator lifts the lock.
+## v1.7 — Product & Scale (phases 48–51, two gates)
 
 | Phase | Scope | Gate |
 |---|---|---|
-| 48 Clean-Machine Product | One-command bootstrap (setup.ps1 hardened): fresh Windows machine → working CAS + passing pilots; versioned "CAS Workstation" release bundle; community files org-wide (LICENSE, SECURITY.md, CONTRIBUTING, CoC) | Timed bootstrap evidence on a clean VM |
-| 49 Marketing Live | Phase 37 executed (showcase site, story pages, LinkedIn drafts) + M2 demo recordings + M3 generated visuals completed | Site live; every claim evidence-linked |
-| 50 Disaster Drill | Full restore drill: workspace reconstruction from remotes only (no local disk), documented RTO; backup policy for the non-git residue (scratch/, evidence/, task scheduler defs) | Drill evidence: fresh clone → green sweep + green suites, timed |
-| 51 Cloud Readiness (LOCKED) | Bicep deploy rehearsal in a sandbox sub, cost guardrails, identity plumbing — **only when the operator lifts the NO-AZURE deploy lock** | Operator unlock recorded in GLOBAL_AGENTS.md |
+| 48 Product Bundle | Full "CAS Workstation" release bundle on top of 43's bootstrap (versioned, documented, community files org-wide) | 43 complete |
+| 49 Marketing Live | Phase 37 strategy executed (showcase site, story pages, LinkedIn drafts, demo assets) | **Operator answers the brand question (amendment 6) YES** |
+| 50 Disaster Drill | Full restore drill from remotes only with measured RTO, building on 43+48 | 43 complete |
+| 51 Cloud Readiness | Bicep deploy rehearsal, cost guardrails, identity plumbing | **Operator lifts the NO-AZURE deploy lock** |
 
-## Standing rules for all future phases
+## Deferred (named, with triggers)
 
-- Every phase closes with LEARNINGS.md and a verified SUMMARY (the audit's live-spot-verification standard is now the bar).
-- Every new failure class found in execution becomes a sweep/CI check the same week (v1.4's proven pattern).
-- Model tiering per docs/wiki/Agent-Hierarchy.md; delegation evidence mandatory.
-- Marketing/docs claims only from audited state.
+- **SLSA-lite provenance + SBOM** — trigger: first external consumer of a CAS release artifact.
+- **Kubernetes/liveness (old REQ-1.4.6)** — trigger: multi-machine milestone.
+- **Cross-machine distributed scheduling** — trigger: operator adds a second machine.
 
-## Definition of "nothing left to improve"
+## Standing rules (unchanged from v1, plus)
 
-There is no such state — and pretending otherwise would violate the system's own truthfulness bar. The honest terminal condition is: **all planned milestones audited `passed`, zero open backlog items above Low severity, and the learning loop (41) generating fewer new findings per cycle than it closes.** That convergence trend is the elite state, and v1.5–v1.7 are the path there.
+- Every failure class found in execution becomes a sweep/CI check the same week — **now including the three-times-hit SHA-reachability class (A1) as the proof case.**
+- Convergence definition: all planned milestones audited `passed`, backlog above Low empty, learning loop closing ≥ opening per cycle — now with an owner and cadence (45/A8).
