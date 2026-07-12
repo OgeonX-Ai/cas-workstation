@@ -1,16 +1,16 @@
-# CAS — Next-Milestones Seed Plan v3 (v1.6 → v1.7)
+# CAS — Next-Milestones Seed Plan v4 (v1.6 → v1.7)
 
 **v1 authored:** 2026-07-08. **v2 amended:** 2026-07-11 by closed-loop round 1
 (fact-check: `.planning/research/SEEDS-FACTCHECK-R1.md` — 10 holds / 9 stale / 3 wrong;
 red-team: `.planning/research/ROADMAP-REDTEAM-R1.md` — 9 ADD / 3 CUT / 2 RESEQUENCE).
-Round 2 critique (SEEDS-CRITIQUE-R2.md): NOT-CONVERGED, 4 material findings (M1-M4) — applied below in v3. Convergence loop continues until a full round yields no material findings.
+Round 2 (SEEDS-CRITIQUE-R2.md): 4 material findings, fixed in v3. Round 3 (SEEDS-CRITIQUE-R3.md): M1-M4 verified FIXED; 1 warning (F1 preamble self-contradiction) fixed in v4. Convergence loop continues until a full round yields no material findings.
 
 ## Amendments from round 1 (what changed and why)
 
 1. **RESEQUENCED (R1/R2 + A4):** continuity (minimal bootstrap + non-git backup + incident runbook) moves to the FRONT of v1.6 — later phases must not keep shipping un-restorable state.
 2. **RESCOPED 44 (fact-check):** GitHub secret-scanning + push protection are already enabled on all 12 org repos (live-verified) — the phase is now PAT inventory/rotation + signing + model-policy review.
 3. **PRECONDITIONED 45 (fact-check WRONG#2):** traces.jsonl cannot feed a DORA/token dashboard (18 rows, no repo/PR/outcome/duration fields, 14/18 zero-token) — schema extension + instrumentation are now explicit first tasks.
-4. **PRECONDITIONED 46 (fact-check new finding):** gsd-orchestrator `dotnet test` fails restore (NETSDK1064) and autogen full-suite pytest has 25 collection errors — a suite-health fix task gates mutation work; mutation scope narrowed to orchestrator core + cas-contracts property tests only (C2).
+4. **PRECONDITIONED 46 (fact-check new finding):** gsd-orchestrator `dotnet test` fails restore (NETSDK1064) and autogen full-suite pytest has 25 collection errors — a suite-health fix task gates mutation work; mutation scope narrowed to orchestrator Loop/StateMachine core, property tests target FailureState + goal-admission contracts in orchestrator core per C2 (cas-contracts round-trips = stretch only; R3/F1 fix).
 5. **CUT/DEFERRED (C1):** SLSA-lite/SBOM deferred until a trigger fires: first real external consumer of a CAS release. Kept as a named deferred item, not silent deletion.
 6. **OPERATOR QUESTION (C3, unresolved):** is public brand/adoption an explicit goal? YES → Phase 37/49 marketing executes in v1.7; NO → marketing reduces to the existing org-profile/wiki layer and 49 is cut. *Blocking only for v1.7 planning.*
 7. **NEW standing guardrails (A1/A2/A7 — schedule as the first v1.6 quick-batch, they are small):**
