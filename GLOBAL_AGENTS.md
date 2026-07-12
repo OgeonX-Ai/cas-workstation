@@ -88,6 +88,49 @@ Do not make direct repo edits outside a GSD workflow unless the user explicitly 
   (`non-ascii-ps1` finding). Keep script source ASCII-only unless a BOM is
   present.
 
+## Working-Tree Lease Protocol
+
+Multiple AI sessions (Claude, Codex, Gemini, ...) can run against this
+workstation concurrently. A primary checkout (the root repo or any
+`portfolio/*` repo's non-worktree working tree) has exactly one writer at a
+time; collisions between two sessions editing the same primary checkout are
+resolved by luck without a coordination signal. The lease convention below
+makes ownership explicit instead.
+
+- **Before mutating a repo's primary checkout**, a session writes a
+  `.cas-lease.json` file at that repo's root:
+  ```json
+  {
+    "agent": "claude",
+    "session": "260711-a1a2-guardrails",
+    "since": "2026-07-11T12:00:00Z",
+    "ttl_hours": 4
+  }
+  ```
+  `agent` identifies the AI tool (`claude`, `codex`, `gemini`, ...); `session`
+  is a short human-readable identifier for the task/branch; `since` is the
+  UTC timestamp the lease was written (ISO 8601); `ttl_hours` is how long the
+  lease is presumed valid (default `4`).
+- **While a live (non-stale) lease exists**, other sessions must not mutate
+  that primary checkout directly — use an isolated `git worktree` instead
+  (see `docs/merge-train-runbook.md` and existing `worktrees/*` precedent).
+- **Stale leases** (current time past `since + ttl_hours`) may be replaced by
+  a new session without asking — the original session is presumed to have
+  ended (crashed, timed out, or forgot to clean up). Overwrite the file with
+  a fresh lease rather than deleting-then-recreating, so a concurrent reader
+  never observes a "no lease" gap.
+- **Release the lease** by deleting `.cas-lease.json` when the mutating
+  session's work is committed/pushed and the checkout is clean again.
+- **Lease files are gitignored** (see `.gitignore`) — they are local
+  coordination state, not tracked history. The root repo's `.gitignore`
+  covers this; sub-repos under `portfolio/*` should adopt the same
+  `.cas-lease.json` gitignore entry in their next hygiene pass (not yet
+  backfilled across all 13 repos as of this writing).
+- **Sweep enforcement**: `scripts/workspace-health.ps1` flags a lease past
+  its TTL (`stale-lease`) and a dirty working tree with no lease file at all
+  (`unleased-dirty`, advisory — it does not block, since not every git user
+  in this workspace is an AI session honoring the convention yet).
+
 ## AI Operating Manual
 
 For all SDLC logic, verification loops, and global constraints, follow the Canonical AI Engineering Operating Contract:

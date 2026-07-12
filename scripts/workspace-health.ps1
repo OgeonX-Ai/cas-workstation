@@ -19,6 +19,9 @@
     11. unclassified housekeeping directories (untracked and not gitignored)
     12. release staleness: latest SemVer tag is >30 days old with commits merged
         since it, or no SemVer tag exists at all (local git only, no gh dependency)
+    13. multi-AI coordination lease (A2 - GLOBAL_AGENTS.md "Working-Tree Lease
+        Protocol"): a .cas-lease.json past its ttl_hours ('stale-lease'), or a
+        dirty working tree with no lease file at all ('unleased-dirty', advisory)
   Emits a findings table and exits non-zero when anything is found, so it can
   gate CI and run under Task Scheduler.
 .EXAMPLE
@@ -181,6 +184,29 @@ foreach ($repo in Get-Repos $Root) {
     $helper = & $gitExe -C $repo.Path config --get credential.helper 2>$null
     if ($helper -match '/mnt/[a-z]/') {
         Add-Finding $repo.Name 'credential-helper-wsl-path' "credential.helper='$helper' uses WSL /mnt/ path; run 'git config credential.helper manager' to normalize to Windows Credential Manager"
+    }
+
+    # 13. Multi-AI coordination lease (A2 - GLOBAL_AGENTS.md "Working-Tree
+    # Lease Protocol"): a lease past its ttl_hours is 'stale-lease' (may be
+    # replaced); a dirty tree with no lease file at all is 'unleased-dirty'
+    # (advisory only - not every writer in this workspace is an AI session
+    # honoring the convention yet, so this must not become a hard blocker).
+    $leasePath = Join-Path $repo.Path '.cas-lease.json'
+    $hasLease = Test-Path -LiteralPath $leasePath -PathType Leaf
+    if ($hasLease) {
+        try {
+            $lease = Get-Content -LiteralPath $leasePath -Raw | ConvertFrom-Json
+            $leaseSince = [DateTimeOffset]::Parse($lease.since)
+            $ttlHours = if ($lease.ttl_hours) { [double]$lease.ttl_hours } else { 4 }
+            $ageHours = ([DateTimeOffset]::UtcNow - $leaseSince).TotalHours
+            if ($ageHours -gt $ttlHours) {
+                Add-Finding $repo.Name 'stale-lease' ("lease by '{0}/{1}' is {2:N1}h old (ttl {3}h) - may be replaced" -f $lease.agent, $lease.session, $ageHours, $ttlHours)
+            }
+        } catch {
+            Add-Finding $repo.Name 'stale-lease' "'.cas-lease.json' exists but could not be parsed as a valid lease: $($_.Exception.Message)"
+        }
+    } elseif ($dirty) {
+        Add-Finding $repo.Name 'unleased-dirty' "working tree has uncommitted changes but no '.cas-lease.json' - advisory: declare a lease before mutating (see GLOBAL_AGENTS.md Working-Tree Lease Protocol)"
     }
 }
 

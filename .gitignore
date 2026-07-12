@@ -53,3 +53,9 @@ scratch/
 # Pester -CI test result output (regenerated on every run)
 testResults.xml
 
+# Multi-AI coordination lease (A2 - GLOBAL_AGENTS.md "Working-Tree Lease
+# Protocol"): local per-session coordination state, never tracked history.
+# Sub-repos under portfolio/* should adopt this same entry in their own
+# .gitignore in a future hygiene pass.
+.cas-lease.json
+
