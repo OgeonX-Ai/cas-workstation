@@ -240,12 +240,15 @@ foreach ($repo in Get-Repos $Root) {
     $firstOffender = $null
     foreach ($f in $psFiles) {
         try {
+            $bytes = [System.IO.File]::ReadAllBytes($f.FullName)
             $text = [System.IO.File]::ReadAllText($f.FullName)
         } catch {
             continue
         }
+        $hasUtf8Bom = $bytes.Length -ge 3 -and
+            $bytes[0] -eq 0xEF -and $bytes[1] -eq 0xBB -and $bytes[2] -eq 0xBF
         $hasNonAscii = [bool]($text.ToCharArray() | Where-Object { [int]$_ -gt 126 } | Select-Object -First 1)
-        if ($hasNonAscii) {
+        if ($hasNonAscii -and -not $hasUtf8Bom) {
             $offenderCount++
             if (-not $firstOffender) { $firstOffender = $f.FullName }
         }
@@ -258,6 +261,12 @@ foreach ($repo in Get-Repos $Root) {
 # 12. Release staleness (local git only, no gh dependency)
 foreach ($repo in Get-Repos $Root) {
     if (-not $gitExe) { continue }
+    $releaseConfig = Join-Path $repo.Path 'release-please-config.json'
+    $releaseManifest = Join-Path $repo.Path '.release-please-manifest.json'
+    if (-not (Test-Path -LiteralPath $releaseConfig) -or
+        -not (Test-Path -LiteralPath $releaseManifest)) {
+        continue
+    }
     $tags = & $gitExe -C $repo.Path tag --list 'v[0-9]*.[0-9]*.[0-9]*' --sort=-version:refname 2>$null
     $latestTag = @($tags) | Where-Object { $_ } | Select-Object -First 1
     if (-not $latestTag) {
