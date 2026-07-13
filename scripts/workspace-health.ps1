@@ -240,12 +240,15 @@ foreach ($repo in Get-Repos $Root) {
     $firstOffender = $null
     foreach ($f in $psFiles) {
         try {
+            $bytes = [System.IO.File]::ReadAllBytes($f.FullName)
             $text = [System.IO.File]::ReadAllText($f.FullName)
         } catch {
             continue
         }
+        $hasUtf8Bom = $bytes.Length -ge 3 -and
+            $bytes[0] -eq 0xEF -and $bytes[1] -eq 0xBB -and $bytes[2] -eq 0xBF
         $hasNonAscii = [bool]($text.ToCharArray() | Where-Object { [int]$_ -gt 126 } | Select-Object -First 1)
-        if ($hasNonAscii) {
+        if ($hasNonAscii -and -not $hasUtf8Bom) {
             $offenderCount++
             if (-not $firstOffender) { $firstOffender = $f.FullName }
         }

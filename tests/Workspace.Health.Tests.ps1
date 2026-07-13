@@ -157,7 +157,7 @@ Describe 'workspace-health.ps1 sweep' {
             $script:Fixture5 = New-WhFixture -Suffix 'nonascii'
             $dash = [char]0x2014
             $content = "# comment with an em-dash $dash character" + [Environment]::NewLine + "Write-Host 'hi'" + [Environment]::NewLine
-            [System.IO.File]::WriteAllText((Join-Path $script:Fixture5 'bad.ps1'), $content, [System.Text.Encoding]::UTF8)
+            [System.IO.File]::WriteAllText((Join-Path $script:Fixture5 'bad.ps1'), $content, (New-Object System.Text.UTF8Encoding($false)))
             & $script:GitExe -C $script:Fixture5 add bad.ps1 2>$null
         }
         AfterAll {
@@ -167,6 +167,18 @@ Describe 'workspace-health.ps1 sweep' {
             $findings = Invoke-Wh -Root $script:Fixture5
             $checks = @($findings | ForEach-Object { $_.Check })
             $checks | Should -Contain 'non-ascii-ps1'
+        }
+
+        It 'allows non-ASCII in a UTF-8 BOM script' {
+            $bomFile = Join-Path $script:Fixture5 'bom-safe.ps1'
+            $dash = [char]0x2014
+            [System.IO.File]::WriteAllText($bomFile, "# BOM-safe $dash comment", (New-Object System.Text.UTF8Encoding($true)))
+            & $script:GitExe -C $script:Fixture5 add bom-safe.ps1 2>$null
+
+            $findings = Invoke-Wh -Root $script:Fixture5
+            $offenders = @($findings | Where-Object { $_.Check -eq 'non-ascii-ps1' })
+            $offenders.Count | Should -Be 1
+            $offenders[0].Detail | Should -Match 'bad\.ps1'
         }
     }
 
