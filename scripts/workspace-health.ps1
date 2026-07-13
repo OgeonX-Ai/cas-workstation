@@ -261,6 +261,12 @@ foreach ($repo in Get-Repos $Root) {
 # 12. Release staleness (local git only, no gh dependency)
 foreach ($repo in Get-Repos $Root) {
     if (-not $gitExe) { continue }
+    $releaseConfig = Join-Path $repo.Path 'release-please-config.json'
+    $releaseManifest = Join-Path $repo.Path '.release-please-manifest.json'
+    if (-not (Test-Path -LiteralPath $releaseConfig) -or
+        -not (Test-Path -LiteralPath $releaseManifest)) {
+        continue
+    }
     $tags = & $gitExe -C $repo.Path tag --list 'v[0-9]*.[0-9]*.[0-9]*' --sort=-version:refname 2>$null
     $latestTag = @($tags) | Where-Object { $_ } | Select-Object -First 1
     if (-not $latestTag) {

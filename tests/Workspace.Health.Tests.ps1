@@ -169,6 +169,12 @@ Describe 'workspace-health.ps1 sweep' {
             $checks | Should -Contain 'non-ascii-ps1'
         }
 
+        function script:Enable-WhReleasePolicy {
+            param([string]$Root)
+            Set-Content -LiteralPath (Join-Path $Root 'release-please-config.json') -Value '{"packages":{".":{"release-type":"simple"}}}' -Encoding ASCII
+            Set-Content -LiteralPath (Join-Path $Root '.release-please-manifest.json') -Value '{".":"0.0.0"}' -Encoding ASCII
+        }
+
         It 'allows non-ASCII in a UTF-8 BOM script' {
             $bomFile = Join-Path $script:Fixture5 'bom-safe.ps1'
             $dash = [char]0x2014
@@ -204,6 +210,7 @@ Describe 'workspace-health.ps1 sweep' {
         Context 'Old tag with commits since it (RED fixture)' {
             BeforeAll {
                 $script:Fixture7 = New-WhFixture -Suffix 'releasestale'
+                Enable-WhReleasePolicy -Root $script:Fixture7
                 $pastDate = (Get-Date).ToUniversalTime().AddDays(-45).ToString('yyyy-MM-ddTHH:mm:ssK')
                 $env:GIT_COMMITTER_DATE = $pastDate
                 $env:GIT_AUTHOR_DATE = $pastDate
@@ -235,6 +242,7 @@ Describe 'workspace-health.ps1 sweep' {
         Context 'Tag on HEAD, zero commits since it (no false positive)' {
             BeforeAll {
                 $script:Fixture8 = New-WhFixture -Suffix 'releasefresh'
+                Enable-WhReleasePolicy -Root $script:Fixture8
                 $pastDate = (Get-Date).ToUniversalTime().AddDays(-90).ToString('yyyy-MM-ddTHH:mm:ssK')
                 $env:GIT_COMMITTER_DATE = $pastDate
                 $env:GIT_AUTHOR_DATE = $pastDate
@@ -258,6 +266,7 @@ Describe 'workspace-health.ps1 sweep' {
         Context 'Recent tag with commits since it (no false positive)' {
             BeforeAll {
                 $script:Fixture9 = New-WhFixture -Suffix 'releaserecent'
+                Enable-WhReleasePolicy -Root $script:Fixture9
                 & $script:GitExe -C $script:Fixture9 tag v0.3.0 2>$null
                 Set-Content -LiteralPath (Join-Path $script:Fixture9 'v2.txt') -Value 'v2' -Encoding ASCII
                 & $script:GitExe -C $script:Fixture9 add v2.txt 2>$null
@@ -276,6 +285,7 @@ Describe 'workspace-health.ps1 sweep' {
         Context 'No SemVer tag at all (never released)' {
             BeforeAll {
                 $script:Fixture10 = New-WhFixture -Suffix 'releasenotag'
+                Enable-WhReleasePolicy -Root $script:Fixture10
             }
             AfterAll {
                 Remove-WhFixture -Path $script:Fixture10
@@ -285,6 +295,19 @@ Describe 'workspace-health.ps1 sweep' {
                 $stale = @($findings | Where-Object { $_.Check -eq 'release-stale' -and $_.Repo -eq 'root' })
                 $stale.Count | Should -Be 1
                 $stale[0].Detail | Should -Match 'no SemVer release tag'
+            }
+        }
+
+        Context 'Repository without a release policy' {
+            BeforeAll {
+                $script:Fixture11 = New-WhFixture -Suffix 'release-unmanaged'
+            }
+            AfterAll {
+                Remove-WhFixture -Path $script:Fixture11
+            }
+            It 'does not require a SemVer tag for an unmanaged repository' {
+                $findings = Invoke-Wh -Root $script:Fixture11
+                @($findings | Where-Object { $_.Check -eq 'release-stale' }).Count | Should -Be 0
             }
         }
     }
